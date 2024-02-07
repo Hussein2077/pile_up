@@ -1,13 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pile_up/features/auth/presentation/forget%20password/change_password.dart';
 import 'package:pile_up/features/auth/presentation/forget%20password/forget_password.dart';
 import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
+import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
+import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
+
+import '../../features/home/presentation/componants/Piles Details/piles_details.dart';
 
 class Routes {
   static const String login = "/login";
@@ -20,6 +22,9 @@ class Routes {
   static const String myApplications = "/myApplications";
   static const String contactUs = "/contactUs";
   static const String onBoarding = "/OnBoarding";
+  static const String pilesDetails = "/pilesDetails";
+  static const String home = "/home";
+  static const String blogComplete = "/BlogComplete";
 }
 
 class RouteGenerator {
@@ -30,12 +35,22 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const MainScreen(),
             transitionsBuilder: customAnimate);
+        case Routes.home:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const HomeScreen(),
+            transitionsBuilder: customAnimate);
       case Routes.login:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
-
+      case Routes.pilesDetails:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+          const PilesDetails(),
+          transitionsBuilder: customAnimate,
+        );
       case Routes.signUp:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
@@ -61,6 +76,12 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const OnBoardingScreen(),
             transitionsBuilder: customAnimate);
+        case Routes.blogComplete:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const BlogComplete(),
+            transitionsBuilder: customAnimate);
+
     }
     return unDefinedRoute();
   }

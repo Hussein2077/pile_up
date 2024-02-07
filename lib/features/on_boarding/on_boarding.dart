@@ -90,27 +90,27 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ), // your preferred effect
                     onDotClicked: (index) {}),
                 const Spacer(),
-                ValueListenableBuilder(
-                    valueListenable: backButton,
-                    builder: (context, show, _) {
-                      return show
-                          ? SizedBox(
-                        width: AppSize.defaultSize! * 8,
-                        height: AppSize.defaultSize! * 4,
-                            child: TextButton(
-                                onPressed: () {
-                                  controller.animateToPage(
-                                      controller.page!.toInt() - 1,
-                                      duration: const Duration(milliseconds: 200),
-                                      curve: Curves.easeIn);
-                                },
-                                child: CustomText(
-                                  text: StringManager.back.tr(),
-                                  color: AppColors.primaryColor,
-                                )),
-                          )
-                          : const SizedBox();
-                    }),
+                // ValueListenableBuilder(
+                //     valueListenable: backButton,
+                //     builder: (context, show, _) {
+                //       return show
+                //           ? SizedBox(
+                //         width: AppSize.defaultSize! * 8,
+                //         height: AppSize.defaultSize! * 4,
+                //             child: TextButton(
+                //                 onPressed: () {
+                //                   controller.animateToPage(
+                //                       controller.page!.toInt() - 1,
+                //                       duration: const Duration(milliseconds: 200),
+                //                       curve: Curves.easeIn);
+                //                 },
+                //                 child: CustomText(
+                //                   text: StringManager.back.tr(),
+                //                   color: AppColors.primaryColor,
+                //                 )),
+                //           )
+                //           : const SizedBox();
+                //     }),
                 ValueListenableBuilder(
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
@@ -124,6 +124,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             curve: Curves.easeIn);
                         if(show){
                           Navigator.pushNamedAndRemoveUntil(context, Routes.main, (route) => false);
+
                         }
                       },
                     );

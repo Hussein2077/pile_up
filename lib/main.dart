@@ -22,9 +22,7 @@ void main() async {
       assetLoader: CodegenLoader(),
       path: 'lib/core/translations/',
       saveLocale: true,
-      child: Builder(builder: (context) {
-        return const MyApp();
-      })));
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

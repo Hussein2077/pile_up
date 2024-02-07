@@ -2,21 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/widgets/cutom_text.dart';
 
-AppBar appBar(BuildContext context, {required String text}) {
+AppBar appBar(BuildContext context, {required String text,void Function()? actionsOnPressed}) {
   return AppBar(
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.primaryColor,
     elevation: 1,
-    title: Text(
-      text,
-      style: TextStyle(fontSize: AppSize.defaultSize! * 1.5),
+    title: CustomText(
+      text: text,
+      fontSize: AppSize.defaultSize!*2.2,
+      color: Colors.white,
+      fontWeight: FontWeight.w600,
     ),
+    actions: [
+      Padding(
+        padding:   EdgeInsets.only(right:AppSize.defaultSize!*1.5 ),
+        child: IconButton(
+          onPressed: actionsOnPressed,
+          icon:Image.asset(AssetPath.notification,
+            width: AppSize.defaultSize!*1.8,
+            height: AppSize.defaultSize!*2.3,
+          ),
+        ),
+      )
+    ],
     centerTitle: true,
     leading: IconButton(
       onPressed: () {
         Navigator.pop(context);
       },
-      icon: const Icon(Icons.arrow_back_ios),
+      icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
+      
     ),
   );
 }

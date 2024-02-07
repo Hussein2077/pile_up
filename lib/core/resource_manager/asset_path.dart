@@ -19,9 +19,14 @@ class AssetPath {
   static const String piles = '$pathImage/piles i\'m in.png';
   static const String pilesI = '$pathImage/ipiles i\'m in.png';
   static const String calendar = '$pathImage/calendar.png';
+  static const String calendarBlue = '$pathImage/calendarb.png';
   static const String calendarI = '$pathImage/icalendar.png';
   static const String home = '$pathImage/home.png';
   static const String homeI = '$pathImage/ihome.png';
+  static const String image = '$pathImage/image@3x.png';
+  static const String kfc = '$pathImage/kfc.png';
+  static const String filter = '$pathImage/filter.png';
+  static const String blog = '$pathImage/burger-king-logo.png';
 
 //Images
   static const String logoLarge = '$pathImage/logo@2x.jpg';

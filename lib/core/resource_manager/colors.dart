@@ -8,6 +8,10 @@ class AppColors {
    static const Color black = Color.fromRGBO(30, 30, 30, 1);
    static const Color green = Color.fromRGBO(3, 188, 164, 1);
    static const Color red = Color.fromRGBO(239, 108, 77, 1);
+
+   static const Color greyLow = Color.fromRGBO(232, 232, 232, 1);
+
+   static const Color orange = Color.fromRGBO(239, 108, 77, 1);
 //########################
    static const Color backGroundColor = Color(0xFFFFFFFF);
   static const Color loginBackGroundColor = Color(0xFFFDFDFD);

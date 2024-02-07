@@ -22,7 +22,20 @@ class StringManager {
   static const String skip = "Skip";
   static const String start = "Start";
   static const String myPiles = "My Piles";
+  static const String ourMerchant = "Our Merchant";
   static const String viewAll = "View all";
+  static const String collected = "Collected: ";
+  static const String collectedFrom = "Collected from ";
+  static const String eventDate = "Event Date";
+  static const String recentUsefulArticles = "Recent Useful Articles";
+  static const String participatedMembers = "Participated Members";
+  static const String seeMore = "See More";
+  static const String seeLess = "See Less";
+  static const String accept = "Accept";
+  static const String merchants = "Merchants";
+  static const String blogs = "Blogs";
+  static const String veryUsefulArticles = "Very Useful Articles";
+  static const String enjoyFantasticDiscounts = "Enjoy Fantastic Discounts";
 
   /////////////////////////////////////////////////////////
   static const String userTokenKey = "User Token Key";
