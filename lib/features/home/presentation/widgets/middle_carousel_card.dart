@@ -22,76 +22,65 @@ class MiddleCarouselCard extends StatefulWidget {
 class _MiddleCarouselCardState extends State<MiddleCarouselCard> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        PersistentNavBarNavigator.pushNewScreen(
-          context,
-          screen: const PilesDetails(),
-          withNavBar: false, // OPTIONAL VALUE. True by default.
-          pageTransitionAnimation: PageTransitionAnimation.fade,
-        );
-
-      },
-      child: Container(
-        width: AppSize.screenWidth! * .8,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(
-              AssetPath.image,
-              height: AppSize.defaultSize! * 10,
-              width: AppSize.defaultSize! * 7,
-            ),
-            SizedBox(
-              width: AppSize.defaultSize! * .5,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: AppSize.screenWidth! * .6,
-                  child: CustomText(
-                    text: widget.text ?? 'Mohamed\'s Birthday',
-                    color: Colors.black,
-                    fontSize: AppSize.defaultSize! * 1.6,
-                    fontWeight: FontWeight.w700,
-                  ),
+    return Container(
+      width: AppSize.screenWidth! * .8,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(AppSize.defaultSize!),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+            AssetPath.image,
+            height: AppSize.defaultSize! * 10,
+            width: AppSize.defaultSize! * 7,
+          ),
+          SizedBox(
+            width: AppSize.defaultSize! * .5,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: AppSize.screenWidth! * .6,
+                child: CustomText(
+                  text: widget.text ?? 'Mohamed\'s Birthday',
+                  color: Colors.black,
+                  fontSize: AppSize.defaultSize! * 1.6,
+                  fontWeight: FontWeight.w700,
                 ),
-                SizedBox(
-                  width: AppSize.screenWidth! * .6,
-                  child: CustomText(
-                    text: widget.description ??
-                        'it\'s Mohamed\'s birthday, so we should make a birthday for her, it\'s Mohamed\'s birthday.',
-                    maxLines: 3,
-                    textAlign: TextAlign.start,
-                    fontSize: AppSize.defaultSize! * 1.4,
-                  ),
+              ),
+              SizedBox(
+                width: AppSize.screenWidth! * .6,
+                child: CustomText(
+                  text: widget.description ??
+                      'it\'s Mohamed\'s birthday, so we should make a birthday for her, it\'s Mohamed\'s birthday.',
+                  maxLines: 3,
+                  textAlign: TextAlign.start,
+                  fontSize: AppSize.defaultSize! * 1.4,
                 ),
-                if (widget.text == null)
-                  Row(
-                    children: [
-                      CustomText(
-                        text: StringManager.collected.tr(),
-                        color: Colors.black,
-                        fontSize: AppSize.defaultSize! * 1.6,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      CustomText(
-                        text: 'EGP 2550',
-                        color: AppColors.green,
-                        fontSize: AppSize.defaultSize! * 1.6,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ],
-                  ),
-              ],
-            )
-          ],
-        ),
+              ),
+              if (widget.text == null)
+                Row(
+                  children: [
+                    CustomText(
+                      text: StringManager.collected.tr(),
+                      color: Colors.black,
+                      fontSize: AppSize.defaultSize! * 1.6,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    CustomText(
+                      text: 'EGP 2550',
+                      color: AppColors.green,
+                      fontSize: AppSize.defaultSize! * 1.6,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ],
+                ),
+            ],
+          )
+        ],
       ),
     );
   }

@@ -27,6 +27,7 @@ class AssetPath {
   static const String kfc = '$pathImage/kfc.png';
   static const String filter = '$pathImage/filter.png';
   static const String blog = '$pathImage/burger-king-logo.png';
+  static const String changePassword = '$pathImage/change_password.png';
 
 //Images
   static const String logoLarge = '$pathImage/logo@2x.jpg';

@@ -8,6 +8,7 @@ import 'package:pile_up/features/home/presentation/componants/blog_details/blog_
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
+import 'package:pile_up/features/profile/presentation/profile_screen.dart';
 
 import '../../features/home/presentation/componants/Piles Details/piles_details.dart';
 
@@ -80,6 +81,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const BlogComplete(),
+            transitionsBuilder: customAnimate);
+        case Routes.profile:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ProfileScreen(),
             transitionsBuilder: customAnimate);
 
     }

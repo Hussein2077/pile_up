@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             StringManager.welcomeBack.tr(),
                             style: TextStyle(
-                              color: AppColors.blackColor,
+                              color: AppColors.greyColor2,
                               fontSize: AppSize.defaultSize! * 1.8,
                               fontWeight: FontWeight.w700,
                             ),
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             StringManager.youHaveBeenMissed.tr(),
                             style: TextStyle(
-                              color: AppColors.blackColor,
+                              color: AppColors.greyColor2,
                               fontSize: AppSize.defaultSize! * 1.2,
                               fontWeight: FontWeight.w400,
                             ),
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Text(
               StringManager.or.tr(),
               style: TextStyle(
-                  color: AppColors.blackColor,
+                  color: AppColors.greyColor2,
                   fontSize: AppSize.defaultSize! * 1.2,
                   fontWeight: FontWeight.w700),
             ),

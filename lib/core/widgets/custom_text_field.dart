@@ -39,20 +39,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.height??AppSize.defaultSize! * 6,
+      height: widget.height??AppSize.defaultSize! * 4,
       width: widget.width?? AppSize.screenWidth! - (AppSize.defaultSize! * 4),
       child: TextFormField(
         onTap: widget.onTap,
 maxLines: widget.maxLines,
         readOnly: widget.readOnly,
+        style: TextStyle(fontSize: AppSize.defaultSize!*1.4),
+
+
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
-          hintStyle: widget.hintStyle,
+          contentPadding:   EdgeInsets.all(AppSize.defaultSize!),
+
+          hintStyle: widget.hintStyle??TextStyle(
+            color: AppColors.greyColor,
+            fontSize: AppSize.defaultSize!*1.4,
+            fontWeight: FontWeight.w400
+          ),
           suffixIcon: widget.suffixIcon,
           labelStyle: TextStyle(
             color: AppColors.primaryColor,
-            fontSize: AppSize.screenHeight! * .02,
+            fontSize: AppSize.defaultSize! * 1.5,
           ),
           prefixIcon: widget.prefixIcon,
             enabledBorder:OutlineInputBorder(

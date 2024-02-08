@@ -1,14 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
-import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
-
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:pile_up/features/home/presentation/componants/drawer/drawer.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
+import 'package:pile_up/features/my_piles/presentation/my_piles.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -24,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _buildScreens() {
     return [
       HomeScreen(),
-      SizedBox(),
+      MyPiles(),
       SizedBox(),
       SizedBox(),
       SizedBox(),
@@ -111,44 +109,48 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
+    return Scaffold(
+      drawer: const HomeDrawer(),
+      drawerScrimColor:AppColors.greyColor,
+      body: PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _buildScreens(),
+        items: _navBarsItems(),
+        confineInSafeArea: true,
 
-      backgroundColor: Colors.black,
-      // Default is Colors.white.
-      handleAndroidBackButtonPress: true,
-      // Default is true.
-      resizeToAvoidBottomInset: true,
-      // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true,
-      // Default is true.
-      hideNavigationBarWhenKeyboardShows: true,
-      // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(AppSize.defaultSize! * 2),
-            topLeft: Radius.circular(AppSize.defaultSize! * 2)),
-        colorBehindNavBar: Colors.white,
+        backgroundColor: Colors.black,
+        // Default is Colors.white.
+        handleAndroidBackButtonPress: true,
+        // Default is true.
+        resizeToAvoidBottomInset: true,
+        // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        stateManagement: true,
+        // Default is true.
+        hideNavigationBarWhenKeyboardShows: true,
+        // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(AppSize.defaultSize! * 2),
+              topLeft: Radius.circular(AppSize.defaultSize! * 2)),
+          colorBehindNavBar: Colors.white,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          // Navigation Bar's items animation properties.
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          // Screen transition animation on change of selected tab.
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle:
+        NavBarStyle.style15, // Choose the nav bar style with this property.
       ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarStyle:
-      NavBarStyle.style15, // Choose the nav bar style with this property.
     );
   }
 }

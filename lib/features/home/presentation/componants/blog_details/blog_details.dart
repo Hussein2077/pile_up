@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
+import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
@@ -45,12 +46,19 @@ class BlogDetails extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(AppSize.defaultSize!),
-                    child: MerchantsStores(
-                      merchants: Merchants(
-                          text: 'BURGER KING INDONESIA',
-                          description:
-                          'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',
-                          image: AssetPath.blog),
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, Routes.blogComplete);
+                      },
+                      child: MerchantsStores(
+                        blog: true,
+                        merchants: Merchants(
+                            text: 'BURGER KING INDONESIA',
+
+                            description:
+                            'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',
+                            image: AssetPath.blog),
+                      ),
                     ),
                   );
                 }),

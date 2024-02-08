@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
@@ -74,10 +75,17 @@ class SecondButton extends StatelessWidget {
           border: Border.all(color: AppColors.primaryColor)
         ),
         child: Center(
-          child: CustomText(
-            text: text,
-            color: textColor??AppColors.primaryColor,
-            fontSize: AppSize.defaultSize! * 1.5,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(AssetPath.changePassword,scale: 1.2,),
+              CustomText(
+                text: text,
+                color: textColor??AppColors.primaryColor,
+                fontSize: AppSize.defaultSize! * 1.5,
+                fontWeight: FontWeight.w700,
+              ),
+            ],
           )
         ),
       ),

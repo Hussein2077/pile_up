@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
+import 'package:pile_up/core/widgets/cutom_text.dart';
 
 class ColumnWithTextField extends StatefulWidget {
   const ColumnWithTextField({
@@ -42,18 +43,17 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
         SizedBox(
           height: AppSize.defaultSize! * 2,
         ),
-        Text(
-          widget.text,
-          style: TextStyle(
-              fontSize: AppSize.defaultSize! * 1.4,
-              fontWeight: FontWeight.w700),
+        CustomText(
+          text:widget.text ,
+          fontSize: AppSize.defaultSize! * 1.5,
         ),
+
         SizedBox(
           height: AppSize.defaultSize! * .3,
         ),
         SizedBox(
             width: widget.width ?? AppSize.screenWidth! * .9,
-            height: widget.height ?? AppSize.defaultSize! * 4.5,
+            height: widget.height ?? AppSize.defaultSize! * 5,
             child: CustomTextField(
               controller: widget.controller,
               readOnly: widget.readOnly,

@@ -10,6 +10,7 @@ class AppColors {
    static const Color red = Color.fromRGBO(239, 108, 77, 1);
 
    static const Color greyLow = Color.fromRGBO(232, 232, 232, 1);
+   static const Color greyColor2 = Color.fromRGBO(68, 68, 68, 1);
 
    static const Color orange = Color.fromRGBO(239, 108, 77, 1);
 //########################
@@ -26,7 +27,6 @@ class AppColors {
   static const Color textFieldBorderColor = Color(0xFFB6B6B6);
   static const Color textFieldTextColor = Color(0xFF808184);
   static const Color forgetPasswordColor = Color.fromRGBO(59, 35, 93, 1);
-  static const Color blackColor = Color.fromRGBO(68, 68, 68, 1);
   static const Color greyColor = Color.fromRGBO(128, 129, 132, 1);
 
 }

@@ -1,15 +1,15 @@
-import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
+import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_details.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int myCurrentIndex = 0;
 
   final myitems = [
-
     MiddleCarouselCard(),
     MiddleCarouselCard(),
     MiddleCarouselCard(),
@@ -37,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
     OurMerchantCard(),
     OurMerchantCard(),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +59,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: AppSize.defaultSize! * 12,
                   child: ListView.builder(
                       itemCount: 10,
-                      scrollDirection: Axis.horizontal ,
-                      itemBuilder: (context,index){
-                    return   Padding(
-                      padding:   EdgeInsets.all(AppSize.defaultSize!*.5),
-                      child: const MiddleCarouselCard(),
-                    );
-                  }),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(AppSize.defaultSize! * .5),
+                          child: InkWell(
+                              onTap: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: const PilesDetails(),
+                                  withNavBar: false,
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.fade,
+                                );
+                              },
+                              child: const MiddleCarouselCard()),
+                        );
+                      }),
                 ),
                 SizedBox(
                   height: AppSize.defaultSize!,
@@ -89,36 +97,48 @@ class _HomeScreenState extends State<HomeScreen> {
                   items: myitems2,
                 ),
                 SizedBox(
-                  height: AppSize.defaultSize!*1.5,
+                  height: AppSize.defaultSize! * 1.5,
                 ),
                 viewRow(
-                    text: StringManager.recentUsefulArticles.tr(), onTap: () {
-                  PersistentNavBarNavigator.pushNewScreen(
-                    context,
-                    screen: const BlogDetails(),
-                    withNavBar: false, // OPTIONAL VALUE. True by default.
-                    pageTransitionAnimation: PageTransitionAnimation.fade,
-                  );
-                }),
+                    text: StringManager.recentUsefulArticles.tr(),
+                    onTap: () {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: const BlogDetails(),
+                        withNavBar: false, // OPTIONAL VALUE. True by default.
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    }),
                 SizedBox(
-                  height: AppSize.defaultSize!*1.5,
+                  height: AppSize.defaultSize! * 1.5,
                 ),
                 SizedBox(
                   height: AppSize.defaultSize! * 12,
                   child: ListView.builder(
                       itemCount: 10,
-                      scrollDirection: Axis.horizontal ,
-                      itemBuilder: (context,index){
-                        return   Padding(
-                          padding:   EdgeInsets.all(AppSize.defaultSize!*.5),
-                          child:   const MiddleCarouselCard(text: 'The most ingenious tecycled homos',),
-
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(AppSize.defaultSize! * .5),
+                          child: InkWell(
+                              onTap: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: const BlogComplete(),
+                                  withNavBar: false,
+                                  // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.fade,
+                                );
+                              },
+                              child: const MiddleCarouselCard(
+                                text: 'The most ingenious tecycled homos',
+                              )),
                         );
                       }),
                 ),
-
                 SizedBox(
-                  height: AppSize.defaultSize!*5,
+                  height: AppSize.defaultSize! * 5,
                 ),
               ],
             )
