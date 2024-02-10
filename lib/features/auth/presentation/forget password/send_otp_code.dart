@@ -1,6 +1,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
@@ -42,6 +43,7 @@ class _SendOTPCodeState extends State<SendOTPCode> {
               maxLines: 4,
               style: TextStyle(
                   fontSize: AppSize.defaultSize! * 1.6,
+
                   fontWeight: FontWeight.w400,
                   overflow: TextOverflow.ellipsis),
             ),
@@ -55,8 +57,9 @@ class _SendOTPCodeState extends State<SendOTPCode> {
                     fontSize: AppSize.defaultSize! * 1.7,
                     fontWeight: FontWeight.w700,
                     decoration:TextDecoration.underline ,
-                    decorationColor: Colors.grey,
+                    decorationColor: AppColors.green,
                     decorationThickness: 2,
+                    color: AppColors.green,
                     overflow: TextOverflow.ellipsis),
               ),
             ),

@@ -81,6 +81,7 @@ class CustomDropdownButton2 extends StatelessWidget {
           ),
         ),
         value: value,
+        style: TextStyle(fontSize: AppSize.defaultSize!*1.2,color: AppColors.greyColor2),
         items: dropdownItems
             .map((String item) => DropdownMenuItem<String>(
           value: item,
@@ -92,6 +93,7 @@ class CustomDropdownButton2 extends StatelessWidget {
               maxLines: 1,
               style:   TextStyle(
                 fontSize: AppSize.defaultSize!*1.4,
+                color: AppColors.greyColor2,
               ),
             ),
           ),
@@ -100,28 +102,28 @@ class CustomDropdownButton2 extends StatelessWidget {
         onChanged: onChanged,
         selectedItemBuilder: selectedItemBuilder,
         buttonStyleData: ButtonStyleData(
-          height: buttonHeight ?? AppSize.defaultSize!*4,
-          width: buttonWidth ?? AppSize.defaultSize!*14,
+          height: buttonHeight ?? AppSize.defaultSize!*5,
+          width: buttonWidth ?? AppSize.screenWidth! * .9,
           padding: buttonPadding ??   EdgeInsets.only(left: AppSize.defaultSize!*1.4, right: AppSize.defaultSize!*1.4),
           decoration: buttonDecoration ??
               BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.defaultSize!*1.4),
+                borderRadius: BorderRadius.circular(AppSize.defaultSize!),
                 border: Border.all(
-                  color: Colors.black45,
+                  color: AppColors.borderColor.withOpacity(.4),
                 ),
               ),
           elevation: buttonElevation,
         ),
         iconStyleData: IconStyleData(
-          icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
-          iconSize: iconSize ?? AppSize.defaultSize! * 3,
+          icon: icon??const Icon(Icons.arrow_drop_down) ,
+          iconSize: iconSize ?? AppSize.defaultSize! * 4,
           iconEnabledColor: iconEnabledColor,
           iconDisabledColor: iconDisabledColor,
         ),
         dropdownStyleData: DropdownStyleData(
           //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
           maxHeight: dropdownHeight ?? AppSize.defaultSize!*20,
-          width: dropdownWidth ?? AppSize.defaultSize!*14,
+          width: dropdownWidth ?? AppSize.screenWidth! * .9,
           padding: dropdownPadding,
           decoration: dropdownDecoration ??
               BoxDecoration(

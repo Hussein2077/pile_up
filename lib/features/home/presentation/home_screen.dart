@@ -11,6 +11,7 @@ import 'package:pile_up/core/widgets/cutom_text.dart';
 import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_details.dart';
+import 'package:pile_up/features/home/presentation/componants/drawer/drawer.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/top_carousel.dart';
@@ -40,7 +41,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(context),
+      appBar: homeAppBar(context,leadingOnPressed: () {
+        Scaffold.of(context).openDrawer();
+      }),
+
+      drawer: Builder(
+        builder: (context) {
+          return const HomeDrawer();
+        }
+      ),
+      drawerScrimColor:AppColors.greyColor,
       body: SingleChildScrollView(
         child: Column(
           children: [

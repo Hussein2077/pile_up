@@ -78,7 +78,8 @@ class SecondButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(AssetPath.changePassword,scale: 1.2,),
+
+              // Image.asset(AssetPath.changePassword,scale: 1.2,),
               CustomText(
                 text: text,
                 color: textColor??AppColors.primaryColor,

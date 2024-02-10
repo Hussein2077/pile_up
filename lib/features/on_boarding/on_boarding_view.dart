@@ -22,7 +22,7 @@ class OnboardingView extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
 
-                  Navigator.pushNamedAndRemoveUntil(context, Routes.main, (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false);
 
 
                 },

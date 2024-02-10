@@ -123,7 +123,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             duration: const Duration(milliseconds: 200),
                             curve: Curves.easeIn);
                         if(show){
-                          Navigator.pushNamedAndRemoveUntil(context, Routes.main, (route) => false);
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false);
 
                         }
                       },

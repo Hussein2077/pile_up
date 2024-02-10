@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/translations/translations.dart';
@@ -48,9 +49,11 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: Routes.onBoarding,
         theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor:AppColors.green,primaryContainer: Colors.white),
+            cardColor: Colors.white,
             useMaterial3: true,
-            scaffoldBackgroundColor: const Color.fromRGBO(250, 250, 250, 1)),
+            // primaryColor: Colors.white,
+            scaffoldBackgroundColor:AppColors.scaffoldBackground),
       ),
     );
   }

@@ -7,7 +7,7 @@ class ColumnWithTextField extends StatefulWidget {
   const ColumnWithTextField({
     super.key,
     required this.text,
-      this.controller,
+    this.controller,
     this.width,
     this.height,
     this.readOnly = false,
@@ -16,6 +16,8 @@ class ColumnWithTextField extends StatefulWidget {
     this.hintText,
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
+    this.requiredInput = false,
+    this.dropDown, this.maxLine, this. obscureText=false, this.prefixIcon,
   });
 
   final String text;
@@ -23,8 +25,13 @@ class ColumnWithTextField extends StatefulWidget {
   final String? hintText;
   final double? width;
   final double? height;
+  final int? maxLine;
   final bool readOnly;
+  final bool? obscureText;
+  final bool requiredInput;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final Widget? dropDown;
   final void Function()? onTap;
   final TextInputType keyboardType;
 
@@ -43,26 +50,40 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
         SizedBox(
           height: AppSize.defaultSize! * 2,
         ),
-        CustomText(
-          text:widget.text ,
-          fontSize: AppSize.defaultSize! * 1.5,
+        Row(
+          children: [
+            CustomText(
+              text: widget.text,
+              fontSize: AppSize.defaultSize! * 1.5,
+            ),
+            if (widget.requiredInput)
+              CustomText(
+                text: ' *',
+                fontSize: AppSize.defaultSize! * 1.5,
+                color: Colors.red,
+              ),
+          ],
         ),
-
         SizedBox(
           height: AppSize.defaultSize! * .3,
         ),
-        SizedBox(
-            width: widget.width ?? AppSize.screenWidth! * .9,
-            height: widget.height ?? AppSize.defaultSize! * 5,
-            child: CustomTextField(
-              controller: widget.controller,
-              readOnly: widget.readOnly,
-              onTap: widget.onTap,
-              labelText: widget.labelText,
-              hintText: widget.hintText,
-              suffixIcon: widget.suffixIcon,
-              keyboardType: widget.keyboardType,
-            )),
+        widget.dropDown ??
+            SizedBox(
+                width: widget.width ?? AppSize.screenWidth! * .9,
+                height: widget.height?? AppSize.defaultSize! * 5,
+                child: CustomTextField(
+                  controller: widget.controller,
+                  readOnly: widget.readOnly,
+                  onTap: widget.onTap,
+
+                  labelText: widget.labelText,
+                  prefixIcon:widget.prefixIcon ,
+                  hintText: widget.hintText,
+                  suffixIcon: widget.suffixIcon,
+                  keyboardType: widget.keyboardType,
+                  obscureText: widget.obscureText!,
+                  maxLines:widget.obscureText!?1: widget.maxLine,
+                )),
       ],
     );
   }

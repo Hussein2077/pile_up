@@ -32,7 +32,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context,text: StringManager.forgetPassword.tr()),
+      appBar: authAppBar(context,text: StringManager.forgetPassword.tr()),
       body: Padding(
         padding: EdgeInsets.all(AppSize.defaultSize! * 2),
         child: Column(
@@ -48,6 +48,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ColumnWithTextField(
               text:  StringManager.enterYourMobile.tr(),
               controller: phoneController,
+              keyboardType: TextInputType.phone,
             ),
             SizedBox(
               height: AppSize.defaultSize!*4,

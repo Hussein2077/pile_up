@@ -52,6 +52,8 @@ dependencies:
   flutter_animate: ^4.5.0
   smooth_page_indicator: ^1.1.0
   percent_indicator: ^4.2.3
+  animated_float_action_button: ^1.0.4
+  table_calendar: ^3.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

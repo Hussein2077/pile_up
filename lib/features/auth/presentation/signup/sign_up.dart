@@ -60,43 +60,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, text: StringManager.signUp.tr()),
+      appBar: authAppBar(context, text: StringManager.signUp.tr()),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: AppSize.defaultSize! * 4.8,
-                decoration: const BoxDecoration(
-                  color: AppColors.containerColor,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      StringManager.youAlready.tr(),
-                      style: TextStyle(
-                          color: AppColors.greyColor,
-                          fontSize: AppSize.defaultSize! * 1.4,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.login);
-                      },
-                      child: Text(
-                        StringManager.signIn.tr(),
-                        style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: AppSize.defaultSize! * 1.5,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               Row(
                 children: [
                   ColumnWithTextField(
@@ -121,68 +92,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: emailController,
               ),
               ColumnWithTextField(
-                text: StringManager.dateOfBirth.tr(),
-                readOnly: true,
-                hintText: selectedDate.toString().substring(0, 10),
-                suffixIcon: const Icon(Icons.calendar_month_outlined),
+                text: StringManager.password.tr(),
+                controller: passwordController,
+              ),
+              ColumnWithTextField(
+                text: StringManager.confirmPassword.tr(),
+                controller: passwordConfirmController,
+              ),
+              SizedBox(
+                height: AppSize.defaultSize! * 3,
+              ),
+              MainButton(
+                text: StringManager.signUp.tr(),
                 onTap: () {
-                  _selectDate(context);
+                  if (validation()) {
+                    BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
+                        .add(SignUpWithEmailAndPasswordEvent(
+                      phone: phoneController.text,
+                      password: passwordController.text,
+                      major: majorController.text,
+                      university: universityController.text,
+                      name:
+                          '${firstNameController.text} ${lastNameController.text}',
+                      email: emailController.text,
+                    ));
+                  } else {
+                    errorSnackBar(
+                        context, StringManager.pleaseCompleteYourData.tr());
+                  }
                 },
               ),
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     dropDownSignUp(
-              //         text: StringManager.educationLevel.tr(),
-              //         hintText: StringManager.selectEdu.tr()),
-              //     dropDownSignUp(
-              //         text: StringManager.graduationYear.tr(),
-              //         hintText: StringManager.selectGrad.tr()),
-              //   ],
-              // ),
-              // ColumnWithTextField(
-              //   text: StringManager.university.tr(),
-              //   controller: universityController,
-              // ),
-              // ColumnWithTextField(
-              //   text: StringManager.major.tr(),
-              //   controller: majorController,
-              // ),
-              // ColumnWithTextField(
-              //   text: StringManager.password.tr(),
-              //   controller: passwordController,
-              // ),
-              // ColumnWithTextField(
-              //   text: StringManager.confirmPassword.tr(),
-              //   controller: passwordConfirmController,
-              // ),
-              // SizedBox(
-              //   height: AppSize.defaultSize! * 3,
-              // ),
-              // MainButton(
-              //   text: StringManager.signUp.tr(),
-              //   onTap: () {
-              //     if (validation()) {
-              //       BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
-              //           .add(SignUpWithEmailAndPasswordEvent(
-              //         phone: phoneController.text,
-              //         password: passwordController.text,
-              //         major: majorController.text,
-              //         university: universityController.text,
-              //         name:
-              //             '${firstNameController.text} ${lastNameController.text}',
-              //         email: emailController.text,
-              //       ));
-              //     } else {
-              //       errorSnackBar(context, StringManager.pleaseCompleteYourData.tr());
-              //     }
-              //   },
-              // ),
-              SizedBox(
-                height: AppSize.defaultSize! * 3,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    StringManager.youAlready.tr(),
+                    style: TextStyle(
+                        color: AppColors.greyColor,
+                        fontSize: AppSize.defaultSize! * 1.4,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.login);
+                    },
+                    child: Text(
+                      StringManager.signIn.tr(),
+                      style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: AppSize.defaultSize! * 1.5,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -281,12 +246,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return false;
     } else if (passwordConfirmController.text == '') {
       return false;
-    }  else if (selectedValue == '') {
+    } else if (selectedValue == '') {
       return false;
     } else {
       return true;
     }
   }
-
-
 }

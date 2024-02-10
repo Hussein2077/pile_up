@@ -16,6 +16,9 @@ class StringManager {
   static const String description4 =
       '''Enjoy discounts provided by hundreds of brands and shops.
   ''';
+  static const String welcomeBack = "Welcome";
+  static const String pleaseCompleteYourData = "Please complete your data";
+  static const String loginTo = "Login to continue";
 
   static const String next = "Next";
   static const String back = "Back";
@@ -47,6 +50,7 @@ class StringManager {
   static const String login = " Login";
   static const String email = "Email";
   static const String password = "Password";
+  static const String oldPassword = "Old Password";
   static const String changePassword = "Change Password";
   static const String forgetYourPassword = "Forget Your Password ?";
   static const String forgetPassword = "Forget Password";
@@ -56,12 +60,29 @@ class StringManager {
   static const String confirm = "Confirm";
   static const String viewProfile = "View Profile";
   static const String searchFor = "Search for a folder / pile";
+  static const String createFolder = "Create folder";
+  static const String createPile = "Create pile";
+  static const String calender = "Calender";
+  static const String recentNotifications = "Recent Notifications";
+  static const String title = "Title";
+  static const String folder = "Folder";
+  static const String type = "Type";
+  static const String totalAmount = "Total Amount";
+  static const String participatedAmount = "Participated Amount";
+  static const String deadline = "Deadline";
+  static const String description = "Description";
+  static const String addDescription = "add a description";
+  static const String makeTotalCollectedPublic = "Make Total Collected Public";
+  static const String showTotalRequired = "Show Total Required";
+  static const String makePayerListPublic = "Make Payer List Public";
+  static const String exactAmountOrEditable = "Exact Amount Or Editable";
+  static const String allowParticipantsToLeaveMessage = "Allow Participants To Leave Message";
+  static const String create = "Create";
 
   /////////////////////////////////////////////////////////
   static const String userTokenKey = "User Token Key";
   static const String unexpectedError = "Unexpected Error";
   static const String loginSuccessfully = " Login Successfully";
-  static const String welcomeBack = "Welcome Back !";
   static const String youHaveBeenMissed = "You Have Been Missed For Long Time";
 
   static const String confirmPassword = "Confirm password";
