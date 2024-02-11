@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -44,7 +45,10 @@ class OnboardingView extends StatelessWidget {
                 alignment: Alignment.center,
                 height:AppSize.screenHeight!* 0.5,
                 padding:   EdgeInsets.all(AppSize.defaultSize!),
-                child: Image.asset('assets/images/boarding${index + 1}.png'),
+                child: Image.asset('assets/images/boarding${index + 1}.png').animate()
+                    .fadeIn() // uses `Animate.defaultDuration`
+                    .scale() // inherits duration from fadeIn
+                    .move(delay: 300.ms, duration: 600.ms),
               ),
               CustomText(
                 text: onBoardingList[index]['title'],
@@ -53,7 +57,10 @@ class OnboardingView extends StatelessWidget {
                 fontSize: AppSize.defaultSize!*2,
                 maxLines: 2,
                 fontWeight: FontWeight.w500,
-              ),
+              ).animate()
+                  .fadeIn() // uses `Animate.defaultDuration`
+                  .scale() // inherits duration from fadeIn
+                  .move(delay: 300.ms, duration: 600.ms),
                 SizedBox(height: AppSize.defaultSize!*2),
               CustomText(
                 text:  onBoardingList[index]['description'],
@@ -62,7 +69,10 @@ class OnboardingView extends StatelessWidget {
                 height: 1,
                 maxLines: 6,
                 fontSize: AppSize.defaultSize!*1.8,
-              ),
+              ).animate()
+                  .fadeIn() // uses `Animate.defaultDuration`
+                  .scale() // inherits duration from fadeIn
+                  .move(delay: 300.ms, duration: 600.ms),
             ],
           ),
         ),

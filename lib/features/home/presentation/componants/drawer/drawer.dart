@@ -1,14 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
-import 'package:pile_up/core/widgets/drop_down_custom.dart';
-import 'package:pile_up/features/home/presentation/componants/drawer/widgets/drawer-buttons.dart';
 import 'package:pile_up/features/home/presentation/componants/drawer/widgets/user_row.dart';
-import 'package:pile_up/features/main_screen.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});
@@ -33,9 +31,24 @@ class _HomeDrawerState extends State<HomeDrawer> {
           const Divider(
             thickness: 1,
           ),
-          textButtonRow(onPressed: () {  }, text: StringManager.myWallet.tr(), egp: '3000 EGP'),
-          textButtonRow(onPressed: () {  }, text: StringManager.myPiles.tr(), egp: '17'),
-          textButtonRow(onPressed: () {  }, text: StringManager.pilesIAm.tr(), egp: '15'),
+          textButtonRow(
+                  onPressed: () {},
+                  text: StringManager.myWallet.tr(),
+                  egp: '3000 EGP')
+              .animate()
+              .fadeIn() // uses `Animate.defaultDuration`
+              .scale() // inherits duration from fadeIn
+              .move(delay: 300.ms, duration: 600.ms),
+          textButtonRow(
+              onPressed: () {}, text: StringManager.myPiles.tr(), egp: '17').animate()
+              .fadeIn() // uses `Animate.defaultDuration`
+              .scale() // inherits duration from fadeIn
+              .move(delay: 300.ms, duration: 600.ms),
+          textButtonRow(
+              onPressed: () {}, text: StringManager.pilesIAm.tr(), egp: '15').animate()
+              .fadeIn() // uses `Animate.defaultDuration`
+              .scale() // inherits duration from fadeIn
+              .move(delay: 300.ms, duration: 600.ms),
           const Divider(
             thickness: 1,
           ),
@@ -48,7 +61,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: AppSize.defaultSize!*4,),
+                  SizedBox(
+                    width: AppSize.defaultSize! * 4,
+                  ),
                   Icon(
                     Icons.logout,
                     color: AppColors.primaryColor,
@@ -76,25 +91,28 @@ class _HomeDrawerState extends State<HomeDrawer> {
       ),
     );
   }
- Widget textButtonRow({required void Function()? onPressed,
-  required String text,
-  required String egp,
-  }){
-    return TextButton(onPressed:onPressed , child: Row(
-      children: [
-        CustomText(
-          text: '$egp    ',
-          fontSize: AppSize.defaultSize!*1.6,
-          color: AppColors.black,
-          fontWeight: FontWeight.w600,
 
-        ),
-        CustomText(
-          text: text,
-          fontSize: AppSize.defaultSize!*1.6,
-          color: AppColors.greyColor,
-        ),
-      ],
-    ));
+  Widget textButtonRow({
+    required void Function()? onPressed,
+    required String text,
+    required String egp,
+  }) {
+    return TextButton(
+        onPressed: onPressed,
+        child: Row(
+          children: [
+            CustomText(
+              text: '$egp    ',
+              fontSize: AppSize.defaultSize! * 1.6,
+              color: AppColors.black,
+              fontWeight: FontWeight.w600,
+            ),
+            CustomText(
+              text: text,
+              fontSize: AppSize.defaultSize! * 1.6,
+              color: AppColors.greyColor,
+            ),
+          ],
+        ));
   }
 }

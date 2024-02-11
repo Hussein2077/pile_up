@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+
 class TopCarousel extends StatefulWidget {
   const TopCarousel({super.key});
 
@@ -17,6 +19,7 @@ class _TopCarouselState extends State<TopCarousel> {
     carouselController = CarouselController();
     super.initState();
   }
+
   int myCurrentIndex = 0;
 
   final myitems = [
@@ -26,6 +29,7 @@ class _TopCarouselState extends State<TopCarousel> {
     Image.asset('assets/images/Mask group3@3x.png'),
     Image.asset('assets/images/Mask group2@3x.png'),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -35,7 +39,7 @@ class _TopCarouselState extends State<TopCarousel> {
           carouselController: carouselController,
           options: CarouselOptions(
               viewportFraction: 2,
-              height: 300,
+              height: AppSize.screenHeight! * .35,
               onPageChanged: (index, reason) {
                 setState(() {
                   myCurrentIndex = index;
@@ -48,54 +52,58 @@ class _TopCarouselState extends State<TopCarousel> {
         //   children: widget.carouselList.map((e){},
         // ),
         Container(
-          height: AppSize.defaultSize!*10,
+          height: AppSize.defaultSize! * 10,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.transparent,
-                    const Color.fromRGBO(0, 0, 0, 1).withOpacity(.2),
-                    const Color.fromRGBO(0, 0, 0, 1).withOpacity(.4),
-                    const Color.fromRGBO(0, 0, 0, 1).withOpacity(.7),
-                  ])),
+                Colors.transparent,
+                const Color.fromRGBO(0, 0, 0, 1).withOpacity(.2),
+                const Color.fromRGBO(0, 0, 0, 1).withOpacity(.4),
+                const Color.fromRGBO(0, 0, 0, 1).withOpacity(.7),
+              ])),
         ),
         Column(
           children: [
-            Padding(
-              padding:   EdgeInsets.only(bottom: AppSize.defaultSize!),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Shop ',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'TT Norms Pro Bold.otf',
-                        color: Colors.white),
-                  ),
-                  Text('Better, ',
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'TT Norms Pro Bold.otf',
-                          color: Color.fromRGBO(3, 188, 164, 1),
-                          fontWeight: FontWeight.bold)),
-                  Text(
-                    'look',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'TT Norms Pro Bold.otf',
-                        color: Colors.white),
-                  ),
-                  Text(' good',
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'TT Norms Pro Bold.otf',
-                          color: Color.fromRGBO(3, 188, 164, 1),
-                          fontWeight: FontWeight.bold)),
-
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Shop ',
+                  style: TextStyle(
+                      fontSize: AppSize.defaultSize! * 2,
+                      fontFamily: 'TT Norms Pro Bold.otf',
+                      color: Colors.white),
+                ),
+                Text('Better, ',
+                        style: TextStyle(
+                            fontSize: AppSize.defaultSize! * 3,
+                            fontFamily: 'TT Norms Pro Bold.otf',
+                            color: const Color.fromRGBO(3, 188, 164, 1),
+                            fontWeight: FontWeight.bold))
+                    .animate()
+                    .fadeIn() // uses `Animate.defaultDuration`
+                    .scale() // inherits duration from fadeIn
+                    .move(delay: 300.ms, duration: 600.ms),
+                Text(
+                  'look',
+                  style: TextStyle(
+                      fontSize: AppSize.defaultSize! * 2,
+                      fontFamily: 'TT Norms Pro Bold.otf',
+                      color: Colors.white),
+                ),
+                Text(' good',
+                        style: TextStyle(
+                            fontSize: AppSize.defaultSize! * 3,
+                            fontFamily: 'TT Norms Pro Bold.otf',
+                            color: const Color.fromRGBO(3, 188, 164, 1),
+                            fontWeight: FontWeight.bold))
+                    .animate()
+                    .fadeIn() // uses `Animate.defaultDuration`
+                    .scale() // inherits duration from fadeIn
+                    .move(delay: 300.ms, duration: 600.ms),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -103,15 +111,17 @@ class _TopCarouselState extends State<TopCarousel> {
                 return GestureDetector(
                   onTap: () => carouselController.animateToPage(entry.key),
                   child: Container(
-                    width:myCurrentIndex == entry.key? AppSize.defaultSize!*4:AppSize.defaultSize!*1.5,
-                    height: AppSize.defaultSize!*.3,
-                    margin:
-                    const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
+                    width: myCurrentIndex == entry.key
+                        ? AppSize.defaultSize! * 4
+                        : AppSize.defaultSize! * 1.5,
+                    height: AppSize.defaultSize! * .3,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 6.0, horizontal: 4.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppSize.defaultSize!),
                       color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : AppColors.primaryColor)
+                              ? Colors.white
+                              : AppColors.primaryColor)
                           .withOpacity(myCurrentIndex == entry.key ? 1 : 0.4),
                     ),
                   ),
@@ -120,7 +130,6 @@ class _TopCarouselState extends State<TopCarousel> {
             ),
           ],
         ),
-
       ],
     );
   }

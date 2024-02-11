@@ -2,6 +2,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -12,9 +13,11 @@ import 'package:pile_up/features/home/presentation/componants/Piles%20Details/pi
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_details.dart';
 import 'package:pile_up/features/home/presentation/componants/drawer/drawer.dart';
+import 'package:pile_up/features/home/presentation/componants/merchant_details/merchant_details.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/top_carousel.dart';
+import 'package:pile_up/features/main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,7 +64,16 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                viewRow(text: StringManager.myPiles.tr(), onTap: () {}),
+                viewRow(text: StringManager.myPiles.tr(), onTap: () {
+                  MainScreen.mainIndex=1;
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const MainScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation:
+                    PageTransitionAnimation.fade,
+                  );
+                }),
                 SizedBox(
                   height: AppSize.defaultSize!,
                 ),
@@ -83,14 +95,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                       PageTransitionAnimation.fade,
                                 );
                               },
-                              child: const MiddleCarouselCard()),
+                              child: const MiddleCarouselCard() .animate()
+                                  .fadeIn() // uses `Animate.defaultDuration`
+                                  .scale() // inherits duration from fadeIn
+                                  .move(delay: 300.ms, duration: 600.ms),),
                         );
                       }),
                 ),
                 SizedBox(
                   height: AppSize.defaultSize!,
                 ),
-                viewRow(text: StringManager.ourMerchant.tr(), onTap: () {}),
+                viewRow(text: StringManager.ourMerchant.tr(), onTap: () {
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const MerchantDetails(),
+                    withNavBar: false,
+                    pageTransitionAnimation:
+                    PageTransitionAnimation.fade,
+                  );
+                }),
                 SizedBox(
                   height: AppSize.defaultSize!,
                 ),
@@ -143,7 +166,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               child: const MiddleCarouselCard(
                                 text: 'The most ingenious tecycled homos',
-                              )),
+                              ) .animate()
+                                  .fadeIn() // uses `Animate.defaultDuration`
+                                  .scale() // inherits duration from fadeIn
+                                  .move(delay: 300.ms, duration: 600.ms),),
                         );
                       }),
                 ),

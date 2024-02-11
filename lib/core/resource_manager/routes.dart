@@ -7,6 +7,8 @@ import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
+import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_email.dart';
+import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_sms.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
 import 'package:pile_up/features/profile/presentation/profile_screen.dart';
 
@@ -26,6 +28,9 @@ class Routes {
   static const String pilesDetails = "/pilesDetails";
   static const String home = "/home";
   static const String blogComplete = "/BlogComplete";
+  static const String viaEmail = "/viaEmail";
+  static const String viaSMS = "/viaSMS";
+  static const String qrCode = "/qrCode";
 }
 
 class RouteGenerator {
@@ -86,6 +91,16 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ProfileScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.viaEmail:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ViaEmail(),
+            transitionsBuilder: customAnimate);
+        case Routes.viaSMS:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ViaSMS(),
             transitionsBuilder: customAnimate);
 
     }

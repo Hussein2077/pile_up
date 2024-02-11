@@ -1,6 +1,7 @@
 import 'package:animated_float_action_button/animated_floating_action_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
@@ -107,7 +108,7 @@ class _MyPilesState extends State<MyPiles> {
                     PageTransitionAnimation.fade,
                   );
                 },
-              ),
+              ).animate().fade().scale(),
               SizedBox(
                 height: AppSize.defaultSize! * 1.6,
               ),
@@ -122,7 +123,7 @@ class _MyPilesState extends State<MyPiles> {
                     PageTransitionAnimation.fade,
                   );
                 },
-              ),
+              ).animate().fade().scale(),
               SizedBox(
                 height: AppSize.defaultSize! * 1.6,
               ),
@@ -136,7 +137,7 @@ class _MyPilesState extends State<MyPiles> {
                   PageTransitionAnimation.fade,
                 );
               },
-              ),
+              ).animate().fade().scale(),
               SizedBox(
                 height: AppSize.defaultSize! * 6,
               ),

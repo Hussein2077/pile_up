@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
@@ -55,7 +56,10 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
             CustomText(
               text: widget.text,
               fontSize: AppSize.defaultSize! * 1.5,
-            ),
+            ).animate()
+                .fadeIn() // uses `Animate.defaultDuration`
+                .scale() // inherits duration from fadeIn
+                .move(delay: 300.ms, duration: 600.ms),
             if (widget.requiredInput)
               CustomText(
                 text: ' *',

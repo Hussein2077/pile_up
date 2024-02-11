@@ -30,27 +30,6 @@ class AssetPath {
   static const String blog = '$pathImage/burger-king-logo.png';
   static const String changePassword = '$pathImage/change_password.png';
 
-//Images
-  static const String logoLarge = '$pathImage/logo@2x.jpg';
-  static const String illustration = '$pathImage/illustration.jpg';
-  static const String illustrationLarge = '$pathImage/illustration@2x.jpg';
-  static const String nike = '$pathImage/nike.png';
-  static const String slogan = '$pathImage/slogan.jpg';
-  static const String homeBackgroundLarge = '$pathImage/bg@2x.png';
-  static const String location = '$pathImage/locationPNG.png';
-  static const String loginBackground = '$pathImage/background_login.png';
-  static const String js = '$pathImage/JavaScript.png';
-  static const String json = '$pathImage/json.png';
-  static const String dart = '$pathImage/Dart.png';
-  static const String cplus = '$pathImage/cplus.png';
-  static const String react = '$pathImage/react.png';
-  static const String html5 = '$pathImage/html5.png';
-  static const String absolute = '$pathImage/absolute.png';
-  static const String ghtk = '$pathImage/ghtk.jpg';
-  static const String ung = '$pathImage/ung.jpg';
-  static const String human = '$pathImage/human.png';
-  static const String googlePlay = '$pathImage/google play.png';
-  static const String appStore = '$pathImage/app store.png';
-  static const String circles = '$pathImage/circles.png';
+
 
 }

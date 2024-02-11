@@ -78,6 +78,27 @@ class StringManager {
   static const String exactAmountOrEditable = "Exact Amount Or Editable";
   static const String allowParticipantsToLeaveMessage = "Allow Participants To Leave Message";
   static const String create = "Create";
+  static const String active = "Active";
+  static const String participate = "Participate";
+  static const String preview = "Preview";
+  static const String closePile = "Close Pile";
+  static const String redeem = "Redeem";
+  static const String sharePile = "Share Pile";
+  static const String copyLink = "Copy Link";
+  static const String viaEmail = "Via Email";
+  static const String viaSMS = "Via SMS";
+  static const String qRCode = "QR Code";
+  static const String manager = "MANAGERS";
+  static const String reports = "REPORTS";
+  static const String sharedWith = "SHARED WITH";
+  static const String searchForManager = "Search For a Manager";
+  static const String searchForName = "Search For a Name";
+  static const String downloadCSV = "Download CSV";
+  static const String sendMailInvitation = "Send Mail Invitation";
+  static const String sendSMSInvitation = "Send SMS Invitation";
+  static const String messageSubject = "Message Subject";
+  static const String sendInvitation = "Send invitation";
+  static const String sendTo = "Send to";
 
   /////////////////////////////////////////////////////////
   static const String userTokenKey = "User Token Key";

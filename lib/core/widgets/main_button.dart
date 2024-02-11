@@ -12,7 +12,8 @@ class MainButton extends StatelessWidget {
       this.textColor,
       required this.text,
       this.height,
-      this.width});
+      this.width,
+      this.widget});
 
   final void Function()? onTap;
   final Color? color;
@@ -20,6 +21,7 @@ class MainButton extends StatelessWidget {
   final String text;
   final double? height;
   final double? width;
+  final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +35,36 @@ class MainButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSize.defaultSize!),
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: textColor ?? Colors.white,
-              fontSize: AppSize.defaultSize! * 1.5,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (widget != null) widget!,
+              if (widget != null)
+              SizedBox(height: AppSize.defaultSize!*.8,),
+              Text(
+                text,
+                style: TextStyle(
+                  color: textColor ?? Colors.white,
+                  fontSize: AppSize.defaultSize! * 1.5,
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
 class SecondButton extends StatelessWidget {
   const SecondButton(
       {super.key,
-        this.onTap,
-        this.color,
-        this.textColor,
-        required this.text,
-        this.height,
-        this.width});
+      this.onTap,
+      this.color,
+      this.textColor,
+      required this.text,
+      this.height,
+      this.width});
 
   final void Function()? onTap;
   final Color? color;
@@ -70,25 +81,22 @@ class SecondButton extends StatelessWidget {
         height: height ?? AppSize.defaultSize! * 4,
         width: width ?? AppSize.screenWidth! * .9,
         decoration: BoxDecoration(
-          color: color ?? AppColors.backGroundColor,
-          borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-          border: Border.all(color: AppColors.primaryColor)
-        ),
+            color: color ?? AppColors.backGroundColor,
+            borderRadius: BorderRadius.circular(AppSize.defaultSize!),
+            border: Border.all(color: AppColors.primaryColor)),
         child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              // Image.asset(AssetPath.changePassword,scale: 1.2,),
-              CustomText(
-                text: text,
-                color: textColor??AppColors.primaryColor,
-                fontSize: AppSize.defaultSize! * 1.5,
-                fontWeight: FontWeight.w700,
-              ),
-            ],
-          )
-        ),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Image.asset(AssetPath.changePassword,scale: 1.2,),
+            CustomText(
+              text: text,
+              color: textColor ?? AppColors.primaryColor,
+              fontSize: AppSize.defaultSize! * 1.5,
+              fontWeight: FontWeight.w700,
+            ),
+          ],
+        )),
       ),
     );
   }

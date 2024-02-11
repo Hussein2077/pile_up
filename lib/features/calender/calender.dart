@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
@@ -41,7 +42,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
         firstDay: DateTime.utc(2010, 10, 16),
         lastDay: DateTime.utc(2050, 10, 16),
         onDaySelected: _onDaySelected,
-      ),
+      ).animate().fade().scale(),
     );
   }
 }
