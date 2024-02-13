@@ -30,6 +30,7 @@ class OnboardingView extends StatelessWidget {
                 child: CustomText(
                   text: StringManager.skip.tr(),
                   color: AppColors.blackLow,
+                  fontSize: AppSize.defaultSize!*1.5,
                 )),
           ),
         ),
@@ -43,7 +44,7 @@ class OnboardingView extends StatelessWidget {
                 SizedBox(height: AppSize.defaultSize!*2),
               Container(
                 alignment: Alignment.center,
-                height:AppSize.screenHeight!* 0.5,
+                height:AppSize.screenHeight!* 0.4,
                 padding:   EdgeInsets.all(AppSize.defaultSize!),
                 child: Image.asset('assets/images/boarding${index + 1}.png').animate()
                     .fadeIn() // uses `Animate.defaultDuration`
@@ -68,7 +69,7 @@ class OnboardingView extends StatelessWidget {
                 color: AppColors.blackLow,
                 height: 1,
                 maxLines: 6,
-                fontSize: AppSize.defaultSize!*1.8,
+                fontSize: AppSize.defaultSize!*1.7,
               ).animate()
                   .fadeIn() // uses `Animate.defaultDuration`
                   .scale() // inherits duration from fadeIn

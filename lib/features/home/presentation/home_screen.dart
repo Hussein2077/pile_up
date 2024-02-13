@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   options: CarouselOptions(
                       viewportFraction: .3,
                       autoPlay: true,
-                      height: AppSize.screenHeight! * .16,
+                      height: AppSize.screenHeight! * .17,
                       onPageChanged: (index, reason) {
                         setState(() {
                           myCurrentIndex = index;

@@ -29,6 +29,7 @@ class OurMerchantCard extends StatelessWidget {
           padding:   EdgeInsets.all(AppSize.defaultSize!),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
                 child: Image.asset(AssetPath.kfc,
@@ -36,7 +37,7 @@ class OurMerchantCard extends StatelessWidget {
                 height:AppSize.defaultSize!*5 ,
                 ),
               ),
-              SizedBox(height: AppSize.defaultSize!,),
+              // SizedBox(height: AppSize.defaultSize!,),
 
               CustomText(
                 text: 'Fast Food',
@@ -47,7 +48,7 @@ class OurMerchantCard extends StatelessWidget {
                 text: 'KFC',
                 color: AppColors.black,
                 fontWeight: FontWeight.w500,
-                fontSize:AppSize.defaultSize!*1.6 ,
+                fontSize:AppSize.defaultSize!*1.5 ,
               ),
             ],
           ),

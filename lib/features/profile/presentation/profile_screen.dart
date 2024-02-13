@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 elevation: 2,
                 borderRadius: BorderRadius.circular(AppSize.defaultSize!),
                 child: Container(
-                  height: AppSize.screenHeight!*.44,
+                  // height: AppSize.screenHeight!*.5,
                   // width: AppSize.screenWidth!*95,
                   decoration: BoxDecoration(
                     color: Colors.white,

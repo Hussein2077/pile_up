@@ -87,8 +87,11 @@ class _PileOptionsState extends State<PileOptions>
                                       color: AppColors.green2,
                                       borderRadius: BorderRadius.circular(
                                           AppSize.defaultSize!)),
-                                  child: CustomText(
-                                    text: StringManager.active.tr(),
+                                  child: Center(
+                                    child: CustomText(
+                                      text: StringManager.active.tr(),
+                                      fontSize: AppSize.defaultSize!*1.3 ,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
