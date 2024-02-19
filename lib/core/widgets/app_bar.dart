@@ -144,12 +144,13 @@ showNotification(BuildContext context) {
           ),
           child: Dialog(
             alignment: Alignment.topRight,
+            insetPadding: EdgeInsets.only(top: AppSize.defaultSize!*5, right: AppSize.defaultSize!*1.6, left: AppSize.defaultSize!*1.6),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
             ),
             child: Container(
               height: AppSize.screenHeight! * .45,
-              // width: AppSize.screenWidth! * .95,
+              width: AppSize.screenWidth! * .95,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(AppSize.defaultSize!),
