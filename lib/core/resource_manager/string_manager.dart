@@ -55,6 +55,7 @@ class StringManager {
   static const String forgetYourPassword = "Forget Password?";
   static const String forgetPassword = "Forget Password";
   static const String resetPassword = "Reset Password";
+  static const String changeLanguage = "Change Language";
   static const String signUp = "Sign up";
   static const String signIn = "Sign in";
   static const String sendCode = "Send Code";
@@ -64,7 +65,7 @@ class StringManager {
   static const String searchFor = "Search for a folder / pile";
   static const String createFolder = "Create folder";
   static const String createPile = "Create pile";
-  static const String calender = "Calender";
+  static const String calendar = "Calendar";
   static const String recentNotifications = "Recent Notifications";
   static const String title = "Title";
   static const String folder = "Folder";
@@ -131,5 +132,5 @@ class StringManager {
 
   static const String send = "Send";
   static const String contactUs = "Contact us";
-  static const String profile = "Profile";
+  static const String myProfile = "My Profile";
 }

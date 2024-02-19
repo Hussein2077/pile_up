@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pile_up/core/resource_manager/asset_path.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
@@ -40,7 +40,9 @@ class MainButton extends StatelessWidget {
             children: [
               if (widget != null) widget!,
               if (widget != null)
-              SizedBox(height: AppSize.defaultSize!*.8,),
+                SizedBox(
+                  height: AppSize.defaultSize! * .8,
+                ),
               Text(
                 text,
                 style: TextStyle(
@@ -57,14 +59,19 @@ class MainButton extends StatelessWidget {
 }
 
 class SecondButton extends StatelessWidget {
-  const SecondButton(
-      {super.key,
-      this.onTap,
-      this.color,
-      this.textColor,
-      required this.text,
-      this.height,
-      this.width});
+  const SecondButton({
+    super.key,
+    this.onTap,
+    this.color,
+    this.textColor,
+    required this.text,
+    this.height,
+    this.width,
+    required this.showIcon,
+    this.iconPath,
+    this.iconHeight,
+    this.iconWidth,
+  });
 
   final void Function()? onTap;
   final Color? color;
@@ -72,6 +79,10 @@ class SecondButton extends StatelessWidget {
   final String text;
   final double? height;
   final double? width;
+  final bool showIcon;
+  final String? iconPath;
+  final double? iconHeight;
+  final double? iconWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +99,16 @@ class SecondButton extends StatelessWidget {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            showIcon
+                ? Padding(
+                  padding: EdgeInsets.only(right: AppSize.defaultSize! /2),
+                  child: SvgPicture.asset(
+                      iconPath!,
+                      height: iconHeight,
+                      width: iconWidth,
+                    ),
+                )
+                : Container(),
             // Image.asset(AssetPath.changePassword,scale: 1.2,),
             CustomText(
               text: text,

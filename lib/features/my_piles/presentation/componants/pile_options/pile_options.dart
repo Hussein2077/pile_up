@@ -125,6 +125,7 @@ class _PileOptionsState extends State<PileOptions>
                               width: AppSize.defaultSize! * 10.4,
                             ),
                             SecondButton(
+                              showIcon: false,
                               text: StringManager.closePile.tr(),
                               height: AppSize.defaultSize! * 3.2,
                               width: AppSize.defaultSize! * 10.4,

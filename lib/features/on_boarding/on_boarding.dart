@@ -115,6 +115,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
                     return SecondButton(
+                      showIcon: false,
                       text: show?StringManager.start.tr():StringManager.next.tr(),
                       width: AppSize.defaultSize! * 12.7,
                       height: AppSize.defaultSize! * 4,

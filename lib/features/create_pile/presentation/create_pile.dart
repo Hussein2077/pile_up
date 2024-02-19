@@ -67,7 +67,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                               borderRadius:
                                   BorderRadius.circular(AppSize.defaultSize!)),
                           child: Icon(
-                            Icons.camera_alt,
+                            Icons.add_a_photo,
                             color: Colors.white,
                             size: AppSize.defaultSize! * 7,
                           ),

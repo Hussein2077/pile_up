@@ -29,7 +29,8 @@ class AssetPath {
   static const String filter = '$pathImage/filter.png';
   static const String blog = '$pathImage/burger-king-logo.png';
   static const String changePassword = '$pathImage/change_password.png';
-
+  static const String changePasswordIcon = '$pathImage/changePasswordIcon.SVG';
+  static const String changeLanguageIcon = '$pathImage/changeLanguageIcon.SVG';
 
 
 }

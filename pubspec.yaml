@@ -54,6 +54,7 @@ dependencies:
   percent_indicator: ^4.2.3
   animated_float_action_button: ^1.0.4
   table_calendar: ^3.0.9
+  flutter_svg: ^2.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

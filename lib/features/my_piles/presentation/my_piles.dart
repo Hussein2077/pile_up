@@ -71,18 +71,18 @@ class _MyPilesState extends State<MyPiles> {
             fontSize: AppSize.defaultSize! * 2.4,
             fontWeight: FontWeight.w700,
           )),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: AppSize.defaultSize! * 3),
-        child: AnimatedFloatingActionButton(
-          key: fabKey,
-          fabButtons: <Widget>[
-            image(),
-            inbox(),
-          ],
-          colorStartAnimation: AppColors.green,
-          colorEndAnimation: Colors.red,
-        ),
-      ),
+      // floatingActionButton: Padding(
+      //   padding: EdgeInsets.only(bottom: AppSize.defaultSize! * 3),
+      //   child: AnimatedFloatingActionButton(
+      //     key: fabKey,
+      //     fabButtons: <Widget>[
+      //       image(),
+      //       inbox(),
+      //     ],
+      //     colorStartAnimation: AppColors.green,
+      //     colorEndAnimation: Colors.red,
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: SizedBox(
           width: double.maxFinite,
@@ -98,6 +98,7 @@ class _MyPilesState extends State<MyPiles> {
                 suffixIcon: Icon(
                   Icons.search,
                   color: AppColors.greyColor.withOpacity(.5),
+                  size: AppSize.defaultSize!*3,
                 ),
               ),
               SizedBox(
