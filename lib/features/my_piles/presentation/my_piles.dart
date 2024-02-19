@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
@@ -13,7 +12,6 @@ import 'package:pile_up/core/widgets/cutom_text.dart';
 import 'package:pile_up/features/main_screen.dart';
 import 'package:pile_up/features/my_piles/presentation/componants/pile_options/pile_options.dart';
 import 'package:pile_up/features/my_piles/presentation/widgets/folder.dart';
-import 'package:pile_up/main.dart';
 
 class MyPiles extends StatefulWidget {
   const MyPiles({super.key});

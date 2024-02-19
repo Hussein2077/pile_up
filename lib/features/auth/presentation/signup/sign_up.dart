@@ -57,6 +57,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
+  bool isVisible = false;
+  bool selected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +70,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Row(
                 children: [
                   ColumnWithTextField(
@@ -94,13 +96,87 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ColumnWithTextField(
                 text: StringManager.password.tr(),
                 controller: passwordController,
+                obscureText: isVisible,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
+                  child: Icon(
+                    isVisible ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
               ColumnWithTextField(
                 text: StringManager.confirmPassword.tr(),
                 controller: passwordConfirmController,
+                obscureText: isVisible,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
+                  child: Icon(
+                    isVisible ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
               SizedBox(
-                height: AppSize.defaultSize! * 3,
+                height: AppSize.defaultSize! * 1.5,
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        selected = !selected;
+                      });
+                    },
+                    icon: Icon(
+                      selected
+                          ? Icons.check_circle
+                          : Icons.check_circle_outline,
+                      color: AppColors.primaryColor,
+                      size: AppSize.defaultSize! * 2.5,
+                    ),
+                  ),
+                  Text(
+                    'I agree to ',
+                    style: TextStyle(
+                      color: AppColors.borderColor,
+                      fontSize: AppSize.defaultSize! * 1.4,
+                    ),
+                  ),
+                  Text(
+                    'Privacy Policy ',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.primaryColor,
+                      color: AppColors.primaryColor,
+                      fontSize: AppSize.defaultSize! * 1.4,
+                    ),
+                  ),
+                  Text(
+                    'and ',
+                    style: TextStyle(
+                      color: AppColors.borderColor,
+                      fontSize: AppSize.defaultSize! * 1.4,
+                    ),
+                  ),
+                  Text(
+                    'Terms of Use.',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.primaryColor,
+                      color: AppColors.primaryColor,
+                      fontSize: AppSize.defaultSize! * 1.4,
+                    ),
+                  ),
+                ],
               ),
               MainButton(
                 text: StringManager.signUp.tr(),
