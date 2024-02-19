@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
@@ -49,27 +48,14 @@ class MerchantsStores extends StatelessWidget {
                     CustomText(
                         text: merchants.text,
                         color: AppColors.blackLow,
-                        fontSize: AppSize.defaultSize! * 1.4,
-                        fontWeight: FontWeight.w600),
+                        fontSize: AppSize.defaultSize! * 1.5,
+                        fontWeight: FontWeight.w700),
                     CustomText(
                         text: merchants.description,
                         color: AppColors.blackLow,
                         maxLines: 4,
                         textAlign: TextAlign.start,
                         fontSize: AppSize.defaultSize! * 1.4),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.blogComplete);
-                      },
-                      child: CustomText(
-                        text: StringManager.seeMore.tr(),
-                        color: AppColors.orange,
-                        textDecoration: TextDecoration.underline,
-                        decorationColor: AppColors.orange,
-                        fontWeight: FontWeight.w600,
-                        fontSize: AppSize.defaultSize! * 1.6,
-                      ),
-                    ),
                   ],
                 ),
               )

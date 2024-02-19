@@ -40,17 +40,28 @@ class _HomeDrawerState extends State<HomeDrawer> {
               .scale() // inherits duration from fadeIn
               .move(delay: 300.ms, duration: 600.ms),
           textButtonRow(
-              onPressed: () {}, text: StringManager.myPiles.tr(), egp: '17').animate()
+                  onPressed: () {}, text: StringManager.myPiles.tr(), egp: '17')
+              .animate()
               .fadeIn() // uses `Animate.defaultDuration`
               .scale() // inherits duration from fadeIn
               .move(delay: 300.ms, duration: 600.ms),
           textButtonRow(
-              onPressed: () {}, text: StringManager.pilesIAm.tr(), egp: '15').animate()
+                  onPressed: () {},
+                  text: StringManager.pilesIAm.tr(),
+                  egp: '15')
+              .animate()
               .fadeIn() // uses `Animate.defaultDuration`
               .scale() // inherits duration from fadeIn
               .move(delay: 300.ms, duration: 600.ms),
           const Divider(
             thickness: 1,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.defaultSize! * 1.6,
+              vertical: AppSize.defaultSize! * 1,
+            ),
+            child: Text('Address Book', style: TextStyle(fontSize: AppSize.defaultSize!*1.7, fontWeight: FontWeight.w600),),
           ),
           const Spacer(),
           InkWell(
