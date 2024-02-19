@@ -51,7 +51,6 @@ class BlogDetails extends StatelessWidget {
                         Navigator.pushNamed(context, Routes.blogComplete);
                       },
                       child: MerchantsStores(
-                        blog: true,
                         merchants: Merchants(
                             text: 'BURGER KING INDONESIA',
 

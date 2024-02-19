@@ -37,6 +37,7 @@ class MerchantDetails extends StatelessWidget {
                   return Padding(
                     padding: EdgeInsets.all(AppSize.defaultSize!),
                     child: MerchantsStores(
+                      blog: true,
                       merchants: Merchants(
                           text: 'BURGER KING INDONESIA',
                           description:

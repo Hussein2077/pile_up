@@ -12,8 +12,7 @@ import 'package:pile_up/core/widgets/cutom_text.dart';
 import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_details.dart';
-import 'package:pile_up/features/home/presentation/componants/drawer/drawer.dart';
-import 'package:pile_up/features/home/presentation/componants/merchant_details/merchant_details.dart';
+import 'package:pile_up/features/home/presentation/componants/merchant_details/merchants_list.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/top_carousel.dart';
@@ -30,15 +29,15 @@ class _HomeScreenState extends State<HomeScreen> {
   int myCurrentIndex = 0;
 
   final myitems = [
-    MiddleCarouselCard(),
-    MiddleCarouselCard(),
-    MiddleCarouselCard(),
+    const MiddleCarouselCard(),
+    const MiddleCarouselCard(),
+    const MiddleCarouselCard(),
   ];
   final myitems2 = [
-    OurMerchantCard(),
-    OurMerchantCard(),
-    OurMerchantCard(),
-    OurMerchantCard(),
+    const OurMerchantCard(),
+    const OurMerchantCard(),
+    const OurMerchantCard(),
+    const OurMerchantCard(),
   ];
 
   @override
