@@ -48,12 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Scaffold.of(context).openDrawer();
       }),
 
-      drawer: Builder(
-        builder: (context) {
-          return const HomeDrawer();
-        }
-      ),
-      drawerScrimColor:AppColors.greyColor,
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -186,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget viewRow({void Function()? onTap, String? text}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2.4),
+      padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
@@ -24,25 +23,11 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      HomeScreen(),
-      MyPiles(),
-      CreatePileScreen(),
-      PileIAmIn(),
-      CalenderScreen(),
-      //   HomeScreen(
-      //     onPressedJob: (){
-      //     MainScreen.mainIndex=2;
-      // Navigator.pushNamed(context, Routes.main);
-      //   },
-      //   onPressedIntern: (){
-      //     MainScreen.mainIndex=1;
-      //     Navigator.pushNamed(context, Routes.main);
-      //   },
-      //   ),
-      //  InternshipScreen(),
-      //  JobsScreen(),
-      //  HomeScreen(),
-      //  HomeScreen(),
+      const HomeScreen(),
+      const MyPiles(),
+      const CreatePileScreen(),
+      const PileIAmIn(),
+      const CalenderScreen(),
     ];
   }
 
@@ -119,7 +104,6 @@ class _MainScreenState extends State<MainScreen> {
             return const HomeDrawer();
           }
       ),
-      drawerScrimColor:AppColors.greyColor,
       body: PersistentTabView(
         context,
         controller: _controller,

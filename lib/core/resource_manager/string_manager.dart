@@ -25,7 +25,7 @@ class StringManager {
   static const String skip = "Skip";
   static const String start = "Start";
   static const String myPiles = "My Piles";
-  static const String ourMerchant = "Our Merchant";
+  static const String ourMerchant = "Our Merchants";
   static const String viewAll = "View all";
   static const String collected = "Collected: ";
   static const String collectedFrom = "Collected from ";
