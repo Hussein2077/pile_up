@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -97,7 +98,80 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             SizedBox(height: AppSize.defaultSize!*3.5),
             MainButton(text:  StringManager.sendCode.tr(),onTap: (){
               Navigator.pushNamed(context, Routes.sendOTPCode);
-            },)
+            },),
+            Text(
+              StringManager.or.tr(),
+              style: TextStyle(
+                  color: AppColors.greyColor2,
+                  fontSize: AppSize.defaultSize! * 1.2,
+                  fontWeight: FontWeight.w700),
+            ),
+            SizedBox(
+              height: AppSize.defaultSize! * 4,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AssetPath.google,
+                  scale: 2.5,
+                ),
+                SizedBox(
+                  width: AppSize.defaultSize! * 2,
+                ),
+                Image.asset(
+                  AssetPath.facebook,
+                  scale: 2.5,
+                ),
+                SizedBox(
+                  width: AppSize.defaultSize! * 2,
+                ),
+                Image.asset(
+                  AssetPath.apple,
+                  scale: 2.5,
+                ),
+                SizedBox(
+                  width: AppSize.defaultSize! * 2,
+                ),
+                Image.asset(
+                  AssetPath.google,
+                  scale: 2.5,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSize.screenHeight! * .1,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  StringManager.doNotHaveAccount.tr(),
+                  style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: AppSize.defaultSize! * 1.4,
+                      fontWeight: FontWeight.w700),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.signUp,
+                    );
+                  },
+                  child: Text(
+                    StringManager.signUp.tr(),
+                    style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: AppSize.defaultSize! * 1.5,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSize.defaultSize! * 4,
+            ),
           ],
         ),
       ),

@@ -52,7 +52,7 @@ class StringManager {
   static const String password = "Password";
   static const String oldPassword = "Old Password";
   static const String changePassword = "Change Password";
-  static const String forgetYourPassword = "Forget Your Password ?";
+  static const String forgetYourPassword = "Forget Password?";
   static const String forgetPassword = "Forget Password";
   static const String resetPassword = "Reset Password";
   static const String signUp = "Sign up";
