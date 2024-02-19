@@ -8,6 +8,7 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
+import 'package:pile_up/core/widgets/social_media_login.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,12 +43,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! *1.6),
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 1.6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: AppSize.defaultSize! * 10,
+                height: AppSize.defaultSize! * 4,
               ),
               Image.asset(
                 AssetPath.logo1,
@@ -80,32 +81,30 @@ class _LoginScreenState extends State<LoginScreen> {
               //           fontSize: AppSize.defaultSize! * 1.2,
               //           fontWeight: FontWeight.w600),
               //     )),
-              Column(
-                children: [
-                  ColumnWithTextField(
-                    text: StringManager.email.tr(),
-                    controller: emailController,
+              ColumnWithTextField(
+                text: StringManager.email.tr(),
+                controller: emailController,
+              ),
+              ColumnWithTextField(
+                text: StringManager.password.tr(),
+                obscureText: isVisible,
+                controller: passwordController,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
+                  child: Icon(
+                    isVisible ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
                   ),
-                  ColumnWithTextField(
-                    text: StringManager.password.tr(),
-                    obscureText: isVisible,
-                    controller: passwordController,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          isVisible = !isVisible;
-                        });
-                      },
-                      child: Icon(
-                        isVisible ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: AppSize.defaultSize! *1.6, bottom: AppSize.defaultSize! *3.2),
+                padding: EdgeInsets.only(
+                    top: AppSize.defaultSize! * 1.6,
+                    bottom: AppSize.defaultSize! * 3.2),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: InkWell(
@@ -114,11 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       StringManager.forgetYourPassword.tr(),
                       style: TextStyle(
-                        color: AppColors.primaryColor,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.primaryColor,
-                        fontSize: AppSize.defaultSize!*1.6
-                      ),
+                          color: AppColors.primaryColor,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.primaryColor,
+                          fontSize: AppSize.defaultSize! * 1.6),
                     ),
                   ),
                 ),
@@ -131,82 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 // width: AppSize.screenWidth! * .9,
               ),
               SizedBox(
-                height: AppSize.defaultSize! * 4,
+                height: AppSize.defaultSize! * 16,
               ),
-              Text(
-                StringManager.or.tr(),
-                style: TextStyle(
-                    color: AppColors.greyColor2,
-                    fontSize: AppSize.defaultSize! * 1.5,
-                    fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: AppSize.defaultSize! * 4,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AssetPath.google,
-                    scale: 4,
-                  ),
-                  SizedBox(
-                    width: AppSize.defaultSize! * 4,
-                  ),
-                  Image.asset(
-                    AssetPath.facebook,
-                    scale: 4,
-                  ),
-                  SizedBox(
-                    width: AppSize.defaultSize! * 4,
-                  ),
-                  Image.asset(
-                    AssetPath.apple,
-                    scale: 4,
-                  ),
-                  SizedBox(
-                    width: AppSize.defaultSize! * 4,
-                  ),
-                  Image.asset(
-                    AssetPath.google,
-                    scale: 4,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: AppSize.screenHeight! * .1,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    StringManager.doNotHaveAccount.tr(),
-                    style: TextStyle(
-                        // color: AppColors.black,
-                        fontSize: AppSize.defaultSize! * 1.6,
-                        // fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        Routes.signUp,
-                      );
-                    },
-                    child: Text(
-                      StringManager.signUp.tr(),
-                      style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: AppSize.defaultSize! * 1.5,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: AppSize.defaultSize! * 4,
-              ),
+              const SocialMediaLogin(),
             ],
           ),
         ),

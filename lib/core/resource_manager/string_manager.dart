@@ -47,7 +47,7 @@ class StringManager {
   static const String secondName = "Last Name";
   static const String phoneNum = "Mobile Number";
   static const String edit = "Edit";
-  static const String login = " Login";
+  static const String login = " LOG IN";
   static const String email = "Email";
   static const String password = "Password";
   static const String oldPassword = "Old Password";
@@ -114,7 +114,7 @@ class StringManager {
       "Don’t worry ! it happens. please enter your e-mail we will send the code in this e-mail.";
   static const String pleaseEnterYOurCode =
       "Please enter the code which sent to";
-  static const String or = "Or sign in with";
+  static const String or = "Or sign in With";
   static const String enterYourEmail = "E-Mail Address";
 
   static const String doNotHaveAccount = "Don't have an account?   ";
