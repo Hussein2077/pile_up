@@ -20,7 +20,7 @@ class _SendOTPCodeState extends State<SendOTPCode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context,text: StringManager.forgetPassword.tr()),
+      appBar: appBar(context,text: StringManager.forgetPassword.tr(), isIcon: true),
       body: Padding(
         padding: EdgeInsets.all(AppSize.defaultSize! * 2),
         child: Column(

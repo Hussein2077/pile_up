@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context,text: StringManager.profile.tr()),
+      appBar: appBar(context,text: StringManager.profile.tr(), isIcon: true),
       body: SingleChildScrollView(
         child: Column(
           children: [

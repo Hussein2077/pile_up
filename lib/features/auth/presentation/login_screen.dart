@@ -8,7 +8,6 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/core/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

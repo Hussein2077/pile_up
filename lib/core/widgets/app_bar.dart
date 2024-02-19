@@ -7,10 +7,9 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/cutom_text.dart';
 import 'package:pile_up/core/widgets/notification_row.dart';
-import 'package:pile_up/features/main_screen.dart';
 
 AppBar appBar(BuildContext context,
-    {required String text, void Function()? actionsOnPressed}) {
+    {required String text, void Function()? actionsOnPressed, required bool isIcon}) {
   return AppBar(
     backgroundColor: AppColors.primaryColor,
     elevation: 1,
@@ -21,7 +20,7 @@ AppBar appBar(BuildContext context,
       fontWeight: FontWeight.w600,
     ),
     actions: [
-      Padding(
+      isIcon ? Padding(
         padding: EdgeInsets.only(right: AppSize.defaultSize! * 1.5),
         child: IconButton(
           onPressed: actionsOnPressed ??
@@ -34,7 +33,7 @@ AppBar appBar(BuildContext context,
             height: AppSize.defaultSize! * 2.3,
           ),
         ),
-      )
+      ) : Container(),
     ],
     centerTitle: true,
     leading: IconButton(
@@ -47,7 +46,8 @@ AppBar appBar(BuildContext context,
       ),
     ),
   );
-}AppBar authAppBar(BuildContext context,
+}
+AppBar authAppBar(BuildContext context,
     {required String text, void Function()? actionsOnPressed}) {
   return AppBar(
     backgroundColor: AppColors.scaffoldBackground,

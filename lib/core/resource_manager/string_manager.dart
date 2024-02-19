@@ -54,10 +54,12 @@ class StringManager {
   static const String changePassword = "Change Password";
   static const String forgetYourPassword = "Forget Your Password ?";
   static const String forgetPassword = "Forget Password";
+  static const String resetPassword = "Reset Password";
   static const String signUp = "Sign up";
   static const String signIn = "Sign in";
   static const String sendCode = "Send Code";
   static const String confirm = "Confirm";
+  static const String reset = "Reset";
   static const String viewProfile = "View Profile";
   static const String searchFor = "Search for a folder / pile";
   static const String createFolder = "Create folder";
@@ -109,11 +111,11 @@ class StringManager {
   static const String confirmPassword = "Confirm password";
 
   static const String weWillSend =
-      "We will send a code to your Mobile No. to verify your Mobile No. to set the new password";
+      "Don’t worry ! it happens. please enter your e-mail we will send the code in this e-mail.";
   static const String pleaseEnterYOurCode =
       "Please enter the code which sent to";
   static const String or = "Or sign in with";
-  static const String enterYourMobile = "Enter Your Mobile No.";
+  static const String enterYourEmail = "E-Mail Address";
 
   static const String doNotHaveAccount = "Don't have an account?   ";
   static const String youAlready = "You Already have an account?   ";

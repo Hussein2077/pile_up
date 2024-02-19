@@ -19,7 +19,7 @@ class _ViaEmailState extends State<ViaEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, text: StringManager.sendMailInvitation.tr()),
+      appBar: appBar(context, text: StringManager.sendMailInvitation.tr(), isIcon: true),
       body: Center(
         child: Column(
           children: [

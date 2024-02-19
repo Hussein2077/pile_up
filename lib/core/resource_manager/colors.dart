@@ -17,10 +17,12 @@ class AppColors {
 
    static const Color orange = Color.fromRGBO(239, 108, 77, 1);
    static const Color orange2 = Color.fromRGBO(249, 196, 183, 1);
-   static const Color scaffoldBackground =    Color.fromRGBO(250, 250, 250, 1);
+   static const Color scaffoldBackground =    Color.fromRGBO(250, 250, 250, 1.0);
    static const Color green2 =    Color.fromRGBO(217, 237, 220, 1);
    static const Color backGroundColor = Color(0xFFFFFFFF);
    static const Color secondaryBackGroundColor = Color(0xFFFAFAFA);
    static const Color borderColor = Color(0xffa9a8a8);
+   static const Color backgroundColor = Color(0xffF6F6F6);
+   static const Color textColorUnselected = Color(0xff929292);
 
 }

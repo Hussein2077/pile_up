@@ -151,13 +151,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontSize: AppSize.defaultSize! * 1.4,
                     ),
                   ),
-                  Text(
-                    'Privacy Policy ',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColor,
-                      color: AppColors.primaryColor,
-                      fontSize: AppSize.defaultSize! * 1.4,
+                  InkWell(
+                    onTap: ()=> Navigator.pushNamed(context, Routes.terms),
+                    child: Text(
+                      'Privacy Policy ',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColor,
+                        color: AppColors.primaryColor,
+                        fontSize: AppSize.defaultSize! * 1.4,
+                      ),
                     ),
                   ),
                   Text(
@@ -167,13 +170,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontSize: AppSize.defaultSize! * 1.4,
                     ),
                   ),
-                  Text(
-                    'Terms of Use.',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColor,
-                      color: AppColors.primaryColor,
-                      fontSize: AppSize.defaultSize! * 1.4,
+                  InkWell(
+                    onTap: ()=> Navigator.pushNamed(context, Routes.terms),
+                    child: Text(
+                      'Terms of Use.',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColor,
+                        color: AppColors.primaryColor,
+                        fontSize: AppSize.defaultSize! * 1.4,
+                      ),
                     ),
                   ),
                 ],

@@ -14,7 +14,7 @@ class MerchantDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, text: StringManager.merchants.tr()),
+      appBar: appBar(context, text: StringManager.merchants.tr(), isIcon: true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

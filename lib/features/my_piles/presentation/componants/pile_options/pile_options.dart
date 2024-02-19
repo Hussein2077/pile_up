@@ -40,7 +40,7 @@ class _PileOptionsState extends State<PileOptions>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, text: 'Mohamed\'s Birthday'),
+      appBar: appBar(context, text: 'Mohamed\'s Birthday', isIcon: true),
       body: Center(
         child: SingleChildScrollView(
           // physics: const NeverScrollableScrollPhysics(),

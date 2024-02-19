@@ -19,7 +19,7 @@ class _ViaSMSState extends State<ViaSMS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, text: StringManager.sendSMSInvitation.tr()),
+      appBar: appBar(context, text: StringManager.sendSMSInvitation.tr(), isIcon: true),
       body: Center(
         child: Column(
           children: [

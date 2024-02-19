@@ -4,6 +4,7 @@ import 'package:pile_up/features/auth/presentation/forget%20password/forget_pass
 import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
+import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
@@ -31,6 +32,7 @@ class Routes {
   static const String viaEmail = "/viaEmail";
   static const String viaSMS = "/viaSMS";
   static const String qrCode = "/qrCode";
+  static const String terms = "/terms";
 }
 
 class RouteGenerator {
@@ -101,6 +103,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ViaSMS(),
+            transitionsBuilder: customAnimate);
+      case Routes.terms:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const TermsAndConditions(),
             transitionsBuilder: customAnimate);
 
     }

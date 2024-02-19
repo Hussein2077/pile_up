@@ -39,7 +39,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context,text: StringManager.forgetPassword.tr()),
+      appBar: appBar(context,text: StringManager.resetPassword.tr(), isIcon: true),
       body: Padding(
         padding: EdgeInsets.all(AppSize.defaultSize! * 2),
         child: Column(
@@ -96,7 +96,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             SizedBox(
               height: AppSize.defaultSize!*4,
             ),
-              MainButton(text: StringManager.confirm.tr(),onTap: (){
+              MainButton(text: StringManager.reset.tr(),onTap: (){
                 Navigator.pushNamedAndRemoveUntil(context, Routes.login, (Route<dynamic> route) => false) ;
               },)
           ],
