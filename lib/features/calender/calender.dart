@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:table_calendar/table_calendar.dart';
 class CalenderScreen extends StatefulWidget {
   const CalenderScreen({super.key});

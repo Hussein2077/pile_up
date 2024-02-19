@@ -8,7 +8,7 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/my_piles/presentation/widgets/folder.dart';
 
@@ -45,6 +45,7 @@ class _PileIAmInState extends State<PileIAmIn> {
               suffixIcon: Icon(
                 Icons.search,
                 color: AppColors.greyColor.withOpacity(.5),
+                size: AppSize.defaultSize!* 3.5,
               ),
             ),
             SizedBox(
@@ -52,6 +53,7 @@ class _PileIAmInState extends State<PileIAmIn> {
             ),
               FolderWidget(
               text: 'On Going Piles',
+              showEditIcon: false,
               onTap: (){
                 PersistentNavBarNavigator.pushNewScreen(
                   context,
@@ -67,6 +69,7 @@ class _PileIAmInState extends State<PileIAmIn> {
             ),
               FolderWidget(
               text: 'History',
+              showEditIcon: false,
               onTap: (){
                 PersistentNavBarNavigator.pushNewScreen(
                   context,

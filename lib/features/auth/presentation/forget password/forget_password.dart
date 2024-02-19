@@ -106,8 +106,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 Navigator.pushNamed(context, Routes.sendOTPCode);
               },
             ),
-            const Spacer(),
-            const SocialMediaLogin(),
+            // const Spacer(),
+            // const SocialMediaLogin(),
           ],
         ),
       ),

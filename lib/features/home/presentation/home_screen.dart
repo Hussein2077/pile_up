@@ -8,7 +8,7 @@ import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
 import 'package:pile_up/features/home/presentation/componants/blog_details/blog_details.dart';
@@ -137,8 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }),
                 SizedBox(
-                  height: AppSize.defaultSize! * 1.5,
-                ),
+                  height: AppSize.defaultSize! * 1.5),
                 SizedBox(
                   height: AppSize.defaultSize! * 12,
                   child: ListView.builder(

@@ -8,7 +8,7 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/main_screen.dart';
 import 'package:pile_up/features/my_piles/presentation/componants/pile_options/pile_options.dart';
 import 'package:pile_up/features/my_piles/presentation/widgets/folder.dart';
@@ -25,11 +25,13 @@ class _MyPilesState extends State<MyPiles> {
 
   Widget image() {
     return FloatActionButtonText(
-      onPressed: (){
-
+      onPressed: () {
         fabKey.currentState?.animate();
       },
-      icon: const Icon(Icons.folder_open,color: AppColors.green,),
+      icon: const Icon(
+        Icons.folder_open,
+        color: AppColors.green,
+      ),
       textLeft: -150,
       text: StringManager.createFolder.tr(),
     );
@@ -37,34 +39,40 @@ class _MyPilesState extends State<MyPiles> {
 
   Widget inbox() {
     return FloatActionButtonText(
-      onPressed: (){
-        MainScreen.mainIndex=2;
+      onPressed: () {
+        MainScreen.mainIndex = 2;
         PersistentNavBarNavigator.pushNewScreen(
           context,
           screen: const MainScreen(),
           withNavBar: false,
-          pageTransitionAnimation:
-          PageTransitionAnimation.fade,
+          pageTransitionAnimation: PageTransitionAnimation.fade,
         );
         // Navigator.pushNamed(context, Routes.main);
         fabKey.currentState?.animate();
       },
-      icon:const Icon(Icons.add_card_outlined,color: AppColors.green,) ,
+      icon: const Icon(
+        Icons.add_card_outlined,
+        color: AppColors.green,
+      ),
       textLeft: -135,
       text: StringManager.createPile.tr(),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(context, bottom: false,leading: false,widget: CustomText(
-        text: StringManager.myPiles.tr(),
-        color: Colors.white,
-        fontSize: AppSize.defaultSize!*2.4,
-        fontWeight: FontWeight.w700,
-      )),
-      floatingActionButton:   Padding(
-        padding:   EdgeInsets.only(bottom: AppSize.defaultSize!*3),
+      appBar: homeAppBar(context,
+          bottom: false,
+          leading: false,
+          widget: CustomText(
+            text: StringManager.myPiles.tr(),
+            color: Colors.white,
+            fontSize: AppSize.defaultSize! * 2.4,
+            fontWeight: FontWeight.w700,
+          )),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: AppSize.defaultSize! * 3),
         child: AnimatedFloatingActionButton(
           key: fabKey,
           fabButtons: <Widget>[
@@ -73,7 +81,7 @@ class _MyPilesState extends State<MyPiles> {
           ],
           colorStartAnimation: AppColors.green,
           colorEndAnimation: Colors.red,
-            ),
+        ),
       ),
       body: SingleChildScrollView(
         child: SizedBox(
@@ -95,46 +103,47 @@ class _MyPilesState extends State<MyPiles> {
               SizedBox(
                 height: AppSize.defaultSize! * 1.6,
               ),
-                FolderWidget(
+              FolderWidget(
                 text: 'Birthday',
-                onTap: (){
+                showEditIcon: true,
+                onTap: () {
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
                     screen: const PileOptions(),
                     withNavBar: false,
-                    pageTransitionAnimation:
-                    PageTransitionAnimation.fade,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
                   );
                 },
               ).animate().fade().scale(),
               SizedBox(
                 height: AppSize.defaultSize! * 1.6,
               ),
-                FolderWidget(
+              FolderWidget(
                 text: 'Donations',
-                onTap: (){
+                showEditIcon: true,
+                onTap: () {
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
                     screen: const PileOptions(),
                     withNavBar: false,
-                    pageTransitionAnimation:
-                    PageTransitionAnimation.fade,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
                   );
                 },
               ).animate().fade().scale(),
               SizedBox(
                 height: AppSize.defaultSize! * 1.6,
               ),
-                FolderWidget(
-                text: 'Farewells',   onTap: (){
-                PersistentNavBarNavigator.pushNewScreen(
-                  context,
-                  screen: const PileOptions(),
-                  withNavBar: false,
-                  pageTransitionAnimation:
-                  PageTransitionAnimation.fade,
-                );
-              },
+              FolderWidget(
+                text: 'Farewells',
+                showEditIcon: true,
+                onTap: () {
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const PileOptions(),
+                    withNavBar: false,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
+                  );
+                },
               ).animate().fade().scale(),
               SizedBox(
                 height: AppSize.defaultSize! * 6,

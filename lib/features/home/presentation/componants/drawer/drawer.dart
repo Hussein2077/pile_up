@@ -5,7 +5,7 @@ import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/home/presentation/componants/drawer/widgets/user_row.dart';
 
 class HomeDrawer extends StatefulWidget {

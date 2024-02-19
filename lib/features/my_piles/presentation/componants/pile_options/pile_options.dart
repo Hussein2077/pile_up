@@ -7,7 +7,7 @@ import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/features/my_piles/presentation/componants/pile_options/widgets/manager_view.dart';
 import 'package:pile_up/features/my_piles/presentation/componants/pile_options/widgets/options_tab_bar.dart';

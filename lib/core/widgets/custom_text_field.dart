@@ -51,7 +51,7 @@ maxLines: widget.maxLines,
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
-          contentPadding:   EdgeInsets.all(AppSize.defaultSize!),
+          contentPadding:   EdgeInsets.all(AppSize.defaultSize!*1.6),
 
           hintStyle: widget.hintStyle??TextStyle(
             color: AppColors.greyColor,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
-import 'package:pile_up/core/widgets/cutom_text.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 class OurMerchantCard extends StatelessWidget {
   const OurMerchantCard({super.key});
 
