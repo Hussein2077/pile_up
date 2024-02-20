@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
@@ -40,6 +40,13 @@ class _PileOptionsState extends State<PileOptions>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () {},
+        backgroundColor: AppColors.green,
+        shape: const CircleBorder(side: BorderSide(color: AppColors.green)),
+        child: Icon(Icons.add,
+            size: AppSize.defaultSize! * 3, color: AppColors.backgroundColor),
+      ),
       appBar: appBar(context, text: 'Mohamed\'s Birthday', isIcon: true),
       body: Center(
         child: SingleChildScrollView(
@@ -67,6 +74,7 @@ class _PileOptionsState extends State<PileOptions>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(width: AppSize.defaultSize! * 1.6),
                             ClipRRect(
@@ -76,7 +84,6 @@ class _PileOptionsState extends State<PileOptions>
                                 width: AppSize.defaultSize! * 7.2,
                                 height: AppSize.defaultSize! * 7.2,
                                 fit: BoxFit.cover,
-
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -94,7 +101,7 @@ class _PileOptionsState extends State<PileOptions>
                                   child: Center(
                                     child: CustomText(
                                       text: StringManager.active.tr(),
-                                      fontSize: AppSize.defaultSize!*1.3 ,
+                                      fontSize: AppSize.defaultSize! * 1.3,
                                     ),
                                   ),
                                 ),
@@ -107,12 +114,31 @@ class _PileOptionsState extends State<PileOptions>
                                     text:
                                         'it\'s Mohamed\'s birthday, so we should make a birthday for him.',
                                     maxLines: 3,
-                                    fontSize: AppSize.defaultSize!,
+                                    fontSize: AppSize.defaultSize! * 1.2,
                                     textAlign: TextAlign.left,
                                   ),
-                                )
+                                ),
                               ],
-                            )
+                            ),
+                            Spacer(),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SvgPicture.asset(AssetPath.editIcon),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                              AppSize.defaultSize! * 1.6),
+                                      child:
+                                          SvgPicture.asset(AssetPath.shareIcon),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         // SizedBox(height: AppSize.defaultSize!*1.6,),
@@ -128,8 +154,9 @@ class _PileOptionsState extends State<PileOptions>
                               text: StringManager.preview.tr(),
                               height: AppSize.defaultSize! * 3.2,
                               width: AppSize.defaultSize! * 10.4,
-                              onTap: (){
-                                Navigator.pushNamed(context, Routes.pilesDetails);
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, Routes.pilesDetails);
                               },
                             ),
                             SecondButton(
@@ -173,10 +200,7 @@ class _PileOptionsState extends State<PileOptions>
                                 fontSize: AppSize.defaultSize! * 2.2,
                                 color: AppColors.green,
                                 fontWeight: FontWeight.w700,
-                              ).animate()
-                                  .fadeIn() // uses `Animate.defaultDuration`
-                                  .scale() // inherits duration from fadeIn
-                                  .move(delay: 300.ms, duration: 600.ms),
+                              ),
                             ],
                           ),
                           MainButton(
@@ -208,12 +232,12 @@ class _PileOptionsState extends State<PileOptions>
                         text: StringManager.copyLink.tr()),
                     shareContainer(
                         icon: Icons.email_outlined,
-                        onTap: (){
+                        onTap: () {
                           Navigator.pushNamed(context, Routes.viaEmail);
                         },
                         text: StringManager.viaEmail.tr()),
                     shareContainer(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pushNamed(context, Routes.viaSMS);
                         },
                         icon: Icons.sms_failed_outlined,

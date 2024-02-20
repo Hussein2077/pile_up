@@ -5,13 +5,18 @@ class StringManager {
   static const String boarding3 = "Send Money with Love";
   static const String boarding4 = "Shops Discounts";
   static const String description1 =
-      '''PileUp is designed to facilitate group money collection for various occasions and events. Create an account or sign up with your social media account. Start by creating a pile and share it with your friends.
+      '''PileUp is designed to facilitate group money collection for various 
+      occasions and events. Create an account or sign up with your social 
+      media account. Start by creating a pile and share it with your friends.
   ''';
   static const String description2 =
-      '''Create a folder that contains your piles. Create a pile and set the occasion, amount, title, description, start, and end date. You can invite others to manage the pile with you.
+      '''Create a folder that contains your piles. 
+      Create a pile and set the occasion, amount, title, description, start, 
+      and end date. You can invite others to manage the pile with you.
   ''';
   static const String description3 =
-      '''When the pile is over, you can redeem or send the amount to the recipient. Share the pile with your friends and invitees via messages, WhatsApp, or a barcode and let each one participate.
+      '''When the pile is over, you can redeem or send the amount to the recipient. 
+      Share the pile with your friends and invitees via messages, WhatsApp, or a barcode and let each one participate.
   ''';
   static const String description4 =
       '''Enjoy discounts provided by hundreds of brands and shops.

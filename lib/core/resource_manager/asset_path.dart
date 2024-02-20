@@ -31,6 +31,7 @@ class AssetPath {
   static const String changePassword = '$pathImage/change_password.png';
   static const String changePasswordIcon = '$pathImage/changePasswordIcon.SVG';
   static const String changeLanguageIcon = '$pathImage/changeLanguageIcon.SVG';
-
+  static const String editIcon = '$pathImage/editIcon.SVG';
+  static const String shareIcon = '$pathImage/shareIcon.SVG';
 
 }

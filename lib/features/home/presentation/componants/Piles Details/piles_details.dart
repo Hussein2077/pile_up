@@ -174,7 +174,7 @@ class _PilesDetailsState extends State<PilesDetails> {
                   SizedBox(
                     height: AppSize.defaultSize! * 2,
                   ),
-                  MainButton(text: StringManager.accept.tr()),
+                  MainButton(text: StringManager.participate.tr()),
                   SizedBox(
                     height: AppSize.defaultSize! * 7,
                   ),
