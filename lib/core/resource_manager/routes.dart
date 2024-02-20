@@ -10,6 +10,7 @@ import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
 import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_email.dart';
 import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_sms.dart';
+import 'package:pile_up/features/my_wallet/presentation/screens/my_wallet_Screen.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
 import 'package:pile_up/features/profile/presentation/profile_screen.dart';
 
@@ -33,6 +34,7 @@ class Routes {
   static const String viaSMS = "/viaSMS";
   static const String qrCode = "/qrCode";
   static const String terms = "/terms";
+  static const String myWallet = "/myWallet";
 }
 
 class RouteGenerator {
@@ -108,6 +110,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const TermsAndConditions(),
+            transitionsBuilder: customAnimate);
+      case Routes.myWallet:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const MyWalletDetails(),
             transitionsBuilder: customAnimate);
 
     }

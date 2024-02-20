@@ -24,5 +24,8 @@ class AppColors {
    static const Color borderColor = Color(0xffa9a8a8);
    static const Color backgroundColor = Color(0xffF6F6F6);
    static const Color textColorUnselected = Color(0xff929292);
+   static const Color myWalledDetailsScreenBackground = Color(0xffEAEAEA);
+   static const Color transactionSuccessColor = Color(0xff03BCA4);
+   static const Color transactionFailedColor = Color(0xffBC0309);
 
 }

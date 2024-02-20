@@ -29,7 +29,7 @@ class _BlogCompleteState extends State<BlogComplete> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: ()=> Navigator.pop(context),
                   icon: const Icon(
                     Icons.arrow_back_ios_new_rounded,
                     color: AppColors.primaryColor,
@@ -86,13 +86,16 @@ class _BlogCompleteState extends State<BlogComplete> {
                     onTap: (){
                       Navigator.pushNamed(context, Routes.blogComplete);
                     },
-                    child: MerchantsStores(
-                      blog: true,
-                      merchants: Merchants(
-                          text: 'BURGER KING INDONESIA',
-                          description:
-                          'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',
-                          image: AssetPath.blog),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: MerchantsStores(
+                        blog: false,
+                        merchants: Merchants(
+                            text: 'BURGER KING INDONESIA',
+                            description:
+                            'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',
+                            image: AssetPath.blog),
+                      ),
                     ),
                   );
                 }),

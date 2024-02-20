@@ -139,4 +139,8 @@ class StringManager {
   static const String send = "Send";
   static const String contactUs = "Contact us";
   static const String myProfile = "My Profile";
+
+  static const String inString = "In";
+  static const String outString = "Out";
+  static const String addressBook = 'Address Book';
 }
