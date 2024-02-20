@@ -68,14 +68,18 @@ class _PileOptionsState extends State<PileOptions>
                       children: [
                         Row(
                           children: [
-                            Image.asset(
-                              AssetPath.image,
-                              width: AppSize.defaultSize! * 7.2,
-                              height: AppSize.defaultSize! * 7.2,
-                            ).animate()
-                                .fadeIn() // uses `Animate.defaultDuration`
-                                .scale() // inherits duration from fadeIn
-                                .move(delay: 300.ms, duration: 600.ms),
+                            SizedBox(width: AppSize.defaultSize! * 1.6),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                AssetPath.image,
+                                width: AppSize.defaultSize! * 7.2,
+                                height: AppSize.defaultSize! * 7.2,
+                                fit: BoxFit.cover,
+
+                              ),
+                            ),
+                            const SizedBox(width: 8),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,6 +108,7 @@ class _PileOptionsState extends State<PileOptions>
                                         'it\'s Mohamed\'s birthday, so we should make a birthday for him.',
                                     maxLines: 3,
                                     fontSize: AppSize.defaultSize!,
+                                    textAlign: TextAlign.left,
                                   ),
                                 )
                               ],
@@ -123,6 +128,9 @@ class _PileOptionsState extends State<PileOptions>
                               text: StringManager.preview.tr(),
                               height: AppSize.defaultSize! * 3.2,
                               width: AppSize.defaultSize! * 10.4,
+                              onTap: (){
+                                Navigator.pushNamed(context, Routes.pilesDetails);
+                              },
                             ),
                             SecondButton(
                               showIcon: false,
