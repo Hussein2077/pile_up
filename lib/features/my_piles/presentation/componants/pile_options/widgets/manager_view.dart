@@ -22,6 +22,7 @@ class _ManagerViewState extends State<ManagerView> {
         children: [
           CustomTextField(
             hintText: StringManager.searchForManager.tr(),
+            suffixIcon: Icon(Icons.search,size: AppSize.defaultSize!*1.9),
             // height: AppSize.defaultSize!*4,
           ),
           SizedBox(height: AppSize.defaultSize!,),

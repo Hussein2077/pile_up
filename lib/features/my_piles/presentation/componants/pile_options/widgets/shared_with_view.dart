@@ -22,6 +22,7 @@ class _SharedWithViewState extends State<SharedWithView> {
         children: [
           CustomTextField(
             hintText: StringManager.searchForName.tr(),
+            suffixIcon: Icon(Icons.search,size: AppSize.defaultSize!*1.9),
             // height: AppSize.defaultSize!*4,
           ),
           SizedBox(height: AppSize.defaultSize!,),

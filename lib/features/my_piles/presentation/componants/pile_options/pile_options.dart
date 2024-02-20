@@ -217,6 +217,7 @@ class _PileOptionsState extends State<PileOptions>
                 Align(
                   alignment: Alignment.centerLeft,
                   child: CustomText(
+                    fontSize: AppSize.defaultSize!*2,
                     text: StringManager.sharePile.tr(),
                     fontWeight: FontWeight.w600,
                   ),
@@ -301,6 +302,7 @@ class _PileOptionsState extends State<PileOptions>
             Icon(
               icon,
               color: AppColors.orange,
+              size: AppSize.defaultSize!*3,
             ),
             CustomText(
               text: text,

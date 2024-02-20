@@ -110,8 +110,8 @@ class _PilesDetailsState extends State<PilesDetails> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MyPilesDateRow(),
-                MyPilesDateRow(),
+                MyPilesDateRow(dateTitle: StringManager.eventDate),
+                MyPilesDateRow(dateTitle: StringManager.eventDeadline),
               ],
             ),
             SizedBox(
@@ -132,7 +132,7 @@ class _PilesDetailsState extends State<PilesDetails> {
                       child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: seeMore ? 10 : 4,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, i) {
                             return const Column(
                               children: [

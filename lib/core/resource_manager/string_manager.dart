@@ -35,6 +35,7 @@ class StringManager {
   static const String collected = "Collected: ";
   static const String collectedFrom = "Collected from ";
   static const String eventDate = "Event Date";
+  static const String eventDeadline = "Deadline";
   static const String recentUsefulArticles = "Recent Useful Articles";
   static const String participatedMembers = "Participated Members";
   static const String seeMore = "See More";
@@ -119,10 +120,10 @@ class StringManager {
   static const String weWillSend =
       "Don’t worry ! it happens. please enter your e-mail we will send the code in this e-mail.";
   static const String pleaseEnterYOurCode =
-      "Please enter the code which sent to";
+      "code has been sent to user@gmail.com enter the code below to continue.";
+  static const String pleaseEnterYourCodeEmailExample =' enter the code below to continue.';
   static const String or = "Or sign in With";
   static const String enterYourEmail = "E-Mail Address";
-
   static const String doNotHaveAccount = "Don't have an account?   ";
   static const String youAlready = "You Already have an account?   ";
   static const String youCanResend =

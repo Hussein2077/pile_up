@@ -40,15 +40,15 @@ class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
   Widget build(BuildContext context) {
     return PinCodeTextField(
       appContext: context,
-      length: 6,
+      length: 4,
       obscureText: false,
       animationType: AnimationType.fade,
       textStyle:     TextStyle(fontSize: AppSize.defaultSize! * 1.8),
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.box,
         borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-        fieldHeight: AppSize.defaultSize! * 4.5,
-        fieldWidth: AppSize.defaultSize! * 4.5,
+        fieldHeight: AppSize.defaultSize! * 6.1,
+        fieldWidth: AppSize.defaultSize! * 4.8,
         activeFillColor: Colors.white,
         disabledColor: Colors.white,
         selectedFillColor: Colors.white,
