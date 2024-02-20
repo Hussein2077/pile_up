@@ -59,7 +59,8 @@ class _MainScreenState extends State<MainScreen> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.add,
-            color: Colors.white, size: AppSize.defaultSize! * 5.6),
+            color: Colors.white,
+            size: AppSize.defaultSize! * 2.4),
         activeColorPrimary: AppColors.green,
 
       ),

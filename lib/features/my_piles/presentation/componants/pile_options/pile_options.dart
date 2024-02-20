@@ -40,13 +40,21 @@ class _PileOptionsState extends State<PileOptions>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.small(
-        onPressed: () {},
-        backgroundColor: AppColors.green,
-        shape: const CircleBorder(side: BorderSide(color: AppColors.green)),
-        child: Icon(Icons.add,
-            size: AppSize.defaultSize! * 3, color: AppColors.backgroundColor),
-      ),
+      floatingActionButton: Container(
+          width: AppSize.defaultSize! * 4.8,
+          height: AppSize.defaultSize! * 4.8,
+          decoration: BoxDecoration(
+            color: AppColors.green,
+            // shape: BoxShape.circle,
+            border: Border.all(color: AppColors.green),
+            borderRadius: BorderRadius.circular(AppSize.defaultSize!*2.4),
+          ),
+          child: Center(
+            child: Icon(Icons.add,
+                size: AppSize.defaultSize! * 3, color: AppColors.backgroundColor),
+          ),
+        ),
+
       appBar: appBar(context, text: 'Mohamed\'s Birthday', isIcon: true),
       body: Center(
         child: SingleChildScrollView(
