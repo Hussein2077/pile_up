@@ -7,6 +7,7 @@ import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/translations/translations.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
+import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<SignUpWithEmailAndPasswordBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetBlogsBloc>(),
         ),
       ],
       child: MaterialApp(

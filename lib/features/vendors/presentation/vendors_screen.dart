@@ -6,15 +6,15 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/home/presentation/componants/merchant_details/merchants_stores.dart';
+import 'package:pile_up/features/vendors/presentation/widgets/vendor_store.dart';
 
-class MerchantDetails extends StatelessWidget {
-  const MerchantDetails({super.key});
+class VendorsScreen extends StatelessWidget {
+  const VendorsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, text: StringManager.merchants.tr(), isIcon: true),
+      appBar: appBar(context, text: StringManager.vendors.tr(), isIcon: true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,9 +36,9 @@ class MerchantDetails extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(AppSize.defaultSize!),
-                    child: MerchantsStores(
+                    child: VendorStore(
                       blog: true,
-                      merchants: Merchants(
+                      vendors: Vendor(
                           text: 'BURGER KING INDONESIA',
                           description:
                               'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',

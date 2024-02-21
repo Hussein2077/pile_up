@@ -5,7 +5,7 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/features/calendar/calendar.dart';
 import 'package:pile_up/features/create_pile/presentation/create_pile.dart';
-import 'package:pile_up/features/home/presentation/componants/drawer/drawer.dart';
+import 'package:pile_up/features/home/presentation/components/drawer/drawer.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/my_piles/presentation/my_piles.dart';
 import 'package:pile_up/features/my_piles/presentation/piles_iam_in.dart';

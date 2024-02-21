@@ -1,14 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/home/presentation/componants/drawer/widgets/user_row.dart';
-import 'package:pile_up/features/my_wallet/presentation/screens/my_wallet_Screen.dart';
+import 'package:pile_up/features/home/presentation/components/drawer/widgets/user_row.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});

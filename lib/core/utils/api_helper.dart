@@ -20,6 +20,15 @@ class DioHelper {
     };
     return headers;
   }
+  Future<Options> options() async {
+    Map<String, String> headers = await DioHelper().header();
+    return Options(
+      receiveDataWhenStatusError: true,
+      sendTimeout: const Duration(milliseconds: 5000),
+      receiveTimeout: const Duration(milliseconds: 5000),
+      headers: headers,
+    );
+  }
 
   String getTypeOfFailure(
     Failure failure,

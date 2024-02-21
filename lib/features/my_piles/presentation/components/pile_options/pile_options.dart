@@ -9,10 +9,10 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/widgets/manager_view.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/widgets/options_tab_bar.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/widgets/reports_view.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/widgets/shared_with_view.dart';
+import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/manager_view.dart';
+import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/options_tab_bar.dart';
+import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/reports_view.dart';
+import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/shared_with_view.dart';
 
 class PileOptions extends StatefulWidget {
   const PileOptions({super.key});

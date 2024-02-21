@@ -9,7 +9,7 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
+import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/my_piles/presentation/widgets/folder.dart';
 
 class PileIAmIn extends StatefulWidget {

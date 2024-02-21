@@ -7,8 +7,8 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/features/home/presentation/componants/Piles%20Details/date_my_piles_row.dart';
-import 'package:pile_up/features/home/presentation/componants/Piles%20Details/participated_members.dart';
+import 'package:pile_up/features/home/presentation/components/Piles%20Details/date_my_piles_row.dart';
+import 'package:pile_up/features/home/presentation/components/Piles%20Details/participated_members.dart';
 
 class PilesDetails extends StatefulWidget {
   const PilesDetails({super.key});

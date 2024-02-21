@@ -1,15 +1,13 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 
-class MerchantsStores extends StatelessWidget {
-  const MerchantsStores(
-      {super.key, required this.merchants, this.blog = false});
+class BlogStoreBuilder extends StatelessWidget {
+  const BlogStoreBuilder(
+      {super.key, required this.stores, this.blog = false});
 
-  final Merchants merchants;
+  final Merchants stores;
   final bool blog;
 
   @override
@@ -30,10 +28,10 @@ class MerchantsStores extends StatelessWidget {
                 child: blog
                     ? CircleAvatar(
                         radius: AppSize.defaultSize! * 2.5,
-                        backgroundImage: AssetImage(merchants.image),
+                        backgroundImage: AssetImage(stores.image),
                       )
                     : Image.asset(
-                        merchants.image,
+                        stores.image,
                         height: AppSize.defaultSize! * 13,
                         width: AppSize.defaultSize! * 12,
                       ),
@@ -46,12 +44,12 @@ class MerchantsStores extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                        text: merchants.text,
+                        text: stores.text,
                         color: AppColors.blackLow,
                         fontSize: AppSize.defaultSize! * 1.5,
                         fontWeight: FontWeight.w700),
                     CustomText(
-                        text: merchants.description,
+                        text: stores.description,
                         color: AppColors.blackLow,
                         maxLines: 4,
                         textAlign: TextAlign.start,

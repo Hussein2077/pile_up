@@ -9,14 +9,15 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/home/presentation/componants/Piles%20Details/piles_details.dart';
-import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
-import 'package:pile_up/features/home/presentation/componants/blog_details/blog_details.dart';
-import 'package:pile_up/features/home/presentation/componants/merchant_details/merchants_list.dart';
+import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
+import 'package:pile_up/features/blogs/presentation/widgets/blog_details.dart';
+import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/top_carousel.dart';
 import 'package:pile_up/features/main_screen.dart';
+import 'package:pile_up/features/merchants/presentation/merchant_details/merchants_list.dart';
+import 'package:pile_up/features/vendors/presentation/vendors_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -126,6 +127,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: AppSize.defaultSize! * 1.5,
                 ),
+                viewRow(text: StringManager.ourVendors.tr(), onTap: () {
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const VendorsScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation:
+                    PageTransitionAnimation.fade,
+                  );
+                }),
+                SizedBox(
+                  height: AppSize.defaultSize!,
+                ),
+                CarouselSlider(
+                  options: CarouselOptions(
+                      viewportFraction: .3,
+                      autoPlay: true,
+                      height: AppSize.screenHeight! * .17,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          myCurrentIndex = index;
+                        });
+                      }),
+                  items: myitems2,
+                ),
+                SizedBox(
+                  height: AppSize.defaultSize! * 1.5,
+                ),
                 viewRow(
                     text: StringManager.recentUsefulArticles.tr(),
                     onTap: () {
@@ -150,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () {
                                 PersistentNavBarNavigator.pushNewScreen(
                                   context,
-                                  screen: const BlogComplete(),
+                                  screen: const BlogScreen(),
                                   withNavBar: false,
                                   // OPTIONAL VALUE. True by default.
                                   pageTransitionAnimation:

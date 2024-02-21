@@ -31,6 +31,7 @@ class StringManager {
   static const String start = "Start";
   static const String myPiles = "My Piles";
   static const String ourMerchant = "Our Merchants";
+  static const String ourVendors = "Our Vendors";
   static const String viewAll = "View all";
   static const String collected = "Collected: ";
   static const String collectedFrom = "Collected from ";
@@ -42,6 +43,7 @@ class StringManager {
   static const String seeLess = "See Less";
   static const String accept = "Accept";
   static const String merchants = "Merchants";
+  static const String vendors = "Vendors";
   static const String blogs = "Blogs";
   static const String veryUsefulArticles = "Very Useful Articles";
   static const String enjoyFantasticDiscounts = "Enjoy Fantastic Discounts";
@@ -143,4 +145,5 @@ class StringManager {
   static const String inString = "In";
   static const String outString = "Out";
   static const String addressBook = 'Address Book';
+  static const String thereIsNo = "There is no items";
 }

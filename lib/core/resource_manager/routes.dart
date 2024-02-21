@@ -5,16 +5,17 @@ import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_co
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
-import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
+import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_email.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_sms.dart';
+import 'package:pile_up/features/my_piles/presentation/components/pile_options/via_email.dart';
+import 'package:pile_up/features/my_piles/presentation/components/pile_options/via_sms.dart';
 import 'package:pile_up/features/my_wallet/presentation/screens/my_wallet_Screen.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
 import 'package:pile_up/features/profile/presentation/profile_screen.dart';
+import 'package:pile_up/features/vendors/presentation/vendors_screen.dart';
 
-import '../../features/home/presentation/componants/Piles Details/piles_details.dart';
+import '../../features/home/presentation/components/Piles Details/piles_details.dart';
 
 class Routes {
   static const String login = "/login";
@@ -35,6 +36,7 @@ class Routes {
   static const String qrCode = "/qrCode";
   static const String terms = "/terms";
   static const String myWallet = "/myWallet";
+  static const String vendorsScreen = "/vendorsScreen";
 }
 
 class RouteGenerator {
@@ -89,7 +91,7 @@ class RouteGenerator {
         case Routes.blogComplete:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const BlogComplete(),
+                const BlogScreen(),
             transitionsBuilder: customAnimate);
         case Routes.profile:
         return PageRouteBuilder(
@@ -116,7 +118,11 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const MyWalletDetails(),
             transitionsBuilder: customAnimate);
-
+      case Routes.vendorsScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const VendorsScreen(),
+            transitionsBuilder: customAnimate);
     }
     return unDefinedRoute();
   }
