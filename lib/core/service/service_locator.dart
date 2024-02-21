@@ -11,6 +11,15 @@ import 'package:pile_up/features/blogs/data/repo_implementation/blogs_repo_imp.d
 import 'package:pile_up/features/blogs/domain/repository/blog_base_repo.dart';
 import 'package:pile_up/features/blogs/domain/use_case/get_blogs_use_case.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/merchants/data/data_source/merchants_remote_data_source.dart';
+import 'package:pile_up/features/merchants/data/repo_implementation/merchants_repo_imp.dart';
+import 'package:pile_up/features/merchants/domain/repository/merchant_base_repo.dart';
+import 'package:pile_up/features/merchants/domain/use_case/get_merchants_use_case.dart';
+import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
+import 'package:pile_up/features/vendors/data/data_source/vendors_remote_data_source.dart';
+import 'package:pile_up/features/vendors/data/repo_implementation/vendors_repo_imp.dart';
+import 'package:pile_up/features/vendors/domain/repository/vendor_base_repo.dart';
+import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -28,6 +37,10 @@ class ServerLocator {
         loginWithEmailAndPasswordUseCase: getIt()));
 
     getIt.registerLazySingleton(() => GetBlogsBloc(getBlogsUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetMerchantsBloc(getMerchantsUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetVendorsBloc(getVendorsUseCase: getIt()));
+
+
 //use_case
     getIt.registerFactory(
         () => LoginWithEmailAndPasswordUseCase(baseRepository: getIt()));
@@ -35,12 +48,22 @@ class ServerLocator {
         () => SignUpWithEmailAndPasswordUseCase(baseRepository: getIt()));
 
     getIt.registerFactory(() => GetBlogsUseCase(baseRepositoryBlogs: getIt()));
+    getIt.registerFactory(() => GetMerchantsUseCase(baseRepositoryMerchants: getIt()));
 
-//remote data source
+    //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
             () => BlogsRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceMerchants>(
+            () => MerchantsRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceVendors>(
+            () => VendorsRemotelyDateSource());
+
     // Repo Implementation
     getIt.registerLazySingleton<BaseRepositoryBlogs>(
             () => BlogsRepositoryImp(baseRemotelyDataSourceBlogs: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryMerchants>(
+            () => MerchantsRepositoryImp(baseRemotelyDataSourceMerchants: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryVendors>(
+            () => VendorsRepositoryImp(baseRemotelyDataSourceVendors: getIt()));
   }
 }

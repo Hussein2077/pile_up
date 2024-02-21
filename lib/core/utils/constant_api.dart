@@ -9,4 +9,6 @@ class ConstantApi {
   static const String password = "password";
 
   static const String getBlogs = "${baseUrl}Blogs";
+  static const String getMerchants = "${baseUrl}Merchants";
+  static const String getVendors = "${baseUrl}Vendors";
 }
