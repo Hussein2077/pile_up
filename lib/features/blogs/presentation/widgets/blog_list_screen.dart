@@ -9,12 +9,13 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/blog_store_builder.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/core/widgets/empty_widget.dart';
-import 'package:pile_up/core/widgets/loading_widget.dart';
+import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 
 class BlogListScreen extends StatefulWidget {
-  const BlogListScreen({super.key});
+  const BlogListScreen({super.key, required this.blogs});
+
+  final List<BlogModel> blogs;
 
   @override
   State<BlogListScreen> createState() => _BlogListScreenState();
@@ -59,39 +60,33 @@ class _BlogListScreenState extends State<BlogListScreen> {
             ),
           ),
           Expanded(
-            child: BlocBuilder<GetBlogsBloc, GetBlogsState>(
-              builder: (context, state) {
-                if (state is GetBlogsSuccessMessageState) {
-                  return ListView.builder(
-                      itemCount: state.internModel.length,
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.all(AppSize.defaultSize!),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.blogDetailsScreen);
-                            },
-                            child: BlogStoreBuilder(
-                              stores: BlogStoreCardInfo(
-                                  text: state.internModel[index].title,
-                                  description:
-                                  state.internModel[index].content,
-                                  image: state.internModel[index].image.toString(),
-                              ),
-                            ),
+            child: ListView.builder(
+                itemCount: widget.blogs.length,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.all(AppSize.defaultSize!),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.blogScreen,
+                          arguments: BlogRoutesArguments(
+                            blog: widget.blogs[index],
+                            blogs: widget.blogs,
                           ),
                         );
-                      });
-                } else if (state is GetBlogsLoadingState) {
-                  return const LoadingWidget();
-                } else if (state is GetBlogsErrorMessageState) {
-                  return ErrorWidget(state.errorMessage);
-                } else {
-                  return const EmptyWidget();
-                }
-              },
-            ),
+                      },
+                      child: BlogStoreBuilder(
+                        stores: BlogStoreCardInfo(
+                          text: widget.blogs[index].title,
+                          description: widget.blogs[index].content,
+                          image: widget.blogs[index].image.toString(),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
           )
         ],
       ),

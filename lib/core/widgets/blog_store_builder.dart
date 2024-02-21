@@ -5,10 +5,11 @@ import 'package:pile_up/core/widgets/custom_text.dart';
 
 class BlogStoreBuilder extends StatelessWidget {
   const BlogStoreBuilder(
-      {super.key, required this.stores, this.blog = false});
+      {super.key, required this.stores, this.blog = false, this.width});
 
   final BlogStoreCardInfo stores;
   final bool blog;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class BlogStoreBuilder extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize!),
+                padding: EdgeInsets.only(right: AppSize.defaultSize!),
                 child: blog
                     ? CircleAvatar(
                         radius: AppSize.defaultSize! * 2.5,

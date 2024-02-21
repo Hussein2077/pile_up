@@ -5,6 +5,7 @@ import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_co
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
+import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
@@ -30,7 +31,7 @@ class Routes {
   static const String onBoarding = "/OnBoarding";
   static const String pilesDetails = "/pilesDetails";
   static const String home = "/home";
-  static const String blogDetailsScreen = "/BlogDetailsScreen";
+  static const String blogScreen = "/BlogDetailsScreen";
   static const String viaEmail = "/viaEmail";
   static const String viaSMS = "/viaSMS";
   static const String qrCode = "/qrCode";
@@ -83,15 +84,19 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ChangePassword(),
             transitionsBuilder: customAnimate);
+
         case Routes.onBoarding:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const OnBoardingScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.blogDetailsScreen:
-        return PageRouteBuilder(
+
+        case Routes.blogScreen:
+          BlogRoutesArguments blogRoutes=settings.arguments as BlogRoutesArguments;
+          return PageRouteBuilder(
+          settings: settings,
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const BlogScreen(),
+                  BlogScreen(blogArguments: blogRoutes),
             transitionsBuilder: customAnimate);
         case Routes.profile:
         return PageRouteBuilder(
@@ -143,4 +148,10 @@ Widget customAnimate(BuildContext context, Animation<double> animation,
     opacity: animation,
     child: child,
   );
+}
+class BlogRoutesArguments{
+final   BlogModel blog;
+ final List<BlogModel> blogs;
+
+BlogRoutesArguments({required this.blogs, required this.blog});
 }
