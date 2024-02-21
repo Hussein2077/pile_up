@@ -7,7 +7,7 @@ class BlogStoreBuilder extends StatelessWidget {
   const BlogStoreBuilder(
       {super.key, required this.stores, this.blog = false});
 
-  final Merchants stores;
+  final BlogStoreCardInfo stores;
   final bool blog;
 
   @override
@@ -65,11 +65,11 @@ class BlogStoreBuilder extends StatelessWidget {
   }
 }
 
-class Merchants {
+class BlogStoreCardInfo {
   final String text;
   final String description;
   final String image;
 
-  Merchants(
+  BlogStoreCardInfo(
       {required this.text, required this.description, required this.image});
 }

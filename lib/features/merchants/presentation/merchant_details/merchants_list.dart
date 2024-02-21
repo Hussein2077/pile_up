@@ -38,7 +38,7 @@ class MerchantDetails extends StatelessWidget {
                     padding: EdgeInsets.all(AppSize.defaultSize!),
                     child: BlogStoreBuilder(
                       blog: true,
-                      stores: Merchants(
+                      stores: BlogStoreCardInfo(
                           text: 'BURGER KING INDONESIA',
                           description:
                               'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',

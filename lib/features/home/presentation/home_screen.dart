@@ -13,7 +13,7 @@ import 'package:pile_up/core/widgets/empty_widget.dart';
 import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
-import 'package:pile_up/features/blogs/presentation/widgets/blog_details.dart';
+import 'package:pile_up/features/blogs/presentation/widgets/blog_list_screen.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
@@ -170,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,
-                        screen: const BlogDetails(),
+                        screen: const BlogListScreen(),
                         withNavBar: false, // OPTIONAL VALUE. True by default.
                         pageTransitionAnimation: PageTransitionAnimation.fade,
                       );

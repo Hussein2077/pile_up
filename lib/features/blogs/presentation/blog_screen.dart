@@ -100,14 +100,14 @@ class _BlogScreenState extends State<BlogScreen> {
                         itemBuilder: (context, i) {
                           return InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, Routes.blogComplete);
+                              Navigator.pushNamed(context, Routes.blogDetailsScreen);
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4.0),
                               child: BlogStoreBuilder(
                                 blog: false,
-                                stores: Merchants(
+                                stores: BlogStoreCardInfo(
                                     text: state.internModel[i].title,
                                     description:
                                     state.internModel[i].content,

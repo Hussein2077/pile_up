@@ -30,7 +30,7 @@ class Routes {
   static const String onBoarding = "/OnBoarding";
   static const String pilesDetails = "/pilesDetails";
   static const String home = "/home";
-  static const String blogComplete = "/BlogComplete";
+  static const String blogDetailsScreen = "/BlogDetailsScreen";
   static const String viaEmail = "/viaEmail";
   static const String viaSMS = "/viaSMS";
   static const String qrCode = "/qrCode";
@@ -88,7 +88,7 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const OnBoardingScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.blogComplete:
+        case Routes.blogDetailsScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const BlogScreen(),
