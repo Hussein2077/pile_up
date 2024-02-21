@@ -1,19 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 
 class MiddleCarouselCard extends StatefulWidget {
-  const MiddleCarouselCard({super.key, this.text, this.description});
+  const MiddleCarouselCard(
+      {super.key, this.text, this.description, this.image});
 
   final String? text;
   final String? description;
+  final String? image;
 
   @override
   State<MiddleCarouselCard> createState() => _MiddleCarouselCardState();
@@ -31,10 +30,17 @@ class _MiddleCarouselCardState extends State<MiddleCarouselCard> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            AssetPath.image,
-            height: AppSize.defaultSize! * 10,
-            width: AppSize.defaultSize! * 7,
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
+            child: Image.asset(
+              fit: BoxFit.cover,
+              widget.image ?? AssetPath.image,
+              height: double.infinity,
+              width: AppSize.defaultSize! * 7,
+            ),
           ),
           SizedBox(
             width: AppSize.defaultSize! * .5,
@@ -49,6 +55,7 @@ class _MiddleCarouselCardState extends State<MiddleCarouselCard> {
                   color: Colors.black,
                   fontSize: AppSize.defaultSize! * 1.6,
                   fontWeight: FontWeight.w700,
+                  textAlign: TextAlign.start,
                 ),
               ),
               SizedBox(

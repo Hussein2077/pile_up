@@ -1,15 +1,18 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
+import 'package:pile_up/core/widgets/empty_widget.dart';
+import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
+import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/blogs/presentation/widgets/blog_details.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
@@ -42,9 +45,17 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    BlocProvider.of<GetBlogsBloc>(context)
+        .add(GetBlogsEvent());
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(context,leadingOnPressed: () {
+      appBar: homeAppBar(context, leadingOnPressed: () {
         Scaffold.of(context).openDrawer();
       }),
 
@@ -60,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 viewRow(text: StringManager.myPiles.tr(), onTap: () {
-                  MainScreen.mainIndex=1;
+                  MainScreen.mainIndex = 1;
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
                     screen: const MainScreen(),
@@ -81,19 +92,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Padding(
                           padding: EdgeInsets.all(AppSize.defaultSize! * .5),
                           child: InkWell(
-                              onTap: () {
-                                PersistentNavBarNavigator.pushNewScreen(
-                                  context,
-                                  screen: const PilesDetails(),
-                                  withNavBar: false,
-                                  pageTransitionAnimation:
-                                      PageTransitionAnimation.fade,
-                                );
-                              },
-                              child: const MiddleCarouselCard() .animate()
-                                  .fadeIn() // uses `Animate.defaultDuration`
-                                  .scale() // inherits duration from fadeIn
-                                  .move(delay: 300.ms, duration: 600.ms),),
+                            onTap: () {
+                              PersistentNavBarNavigator.pushNewScreen(
+                                context,
+                                screen: const PilesDetails(),
+                                withNavBar: false,
+                                pageTransitionAnimation:
+                                PageTransitionAnimation.fade,
+                              );
+                            },
+                            child: const MiddleCarouselCard().animate()
+                                .fadeIn() // uses `Animate.defaultDuration`
+                                .scale() // inherits duration from fadeIn
+                                .move(delay: 300.ms, duration: 600.ms),),
                         );
                       }),
                 ),
@@ -165,34 +176,51 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }),
                 SizedBox(
-                  height: AppSize.defaultSize! * 1.5),
+                    height: AppSize.defaultSize! * 1.5),
                 SizedBox(
                   height: AppSize.defaultSize! * 12,
-                  child: ListView.builder(
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.all(AppSize.defaultSize! * .5),
-                          child: InkWell(
-                              onTap: () {
-                                PersistentNavBarNavigator.pushNewScreen(
-                                  context,
-                                  screen: const BlogScreen(),
-                                  withNavBar: false,
-                                  // OPTIONAL VALUE. True by default.
-                                  pageTransitionAnimation:
+                  child: BlocBuilder<GetBlogsBloc, GetBlogsState>(
+                    builder: (context, state) {
+                      if (state is GetBlogsSuccessMessageState){
+                        return  ListView.builder(
+                            itemCount: state.internModel.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.all(
+                                    AppSize.defaultSize! * .5),
+                                child: InkWell(
+                                  onTap: () {
+                                    PersistentNavBarNavigator.pushNewScreen(
+                                      context,
+                                      screen: const BlogScreen(),
+                                      withNavBar: false,
+                                      // OPTIONAL VALUE. True by default.
+                                      pageTransitionAnimation:
                                       PageTransitionAnimation.fade,
-                                );
-                              },
-                              child: const MiddleCarouselCard(
-                                text: 'The most ingenious tecycled homos',
-                              ) .animate()
-                                  .fadeIn() // uses `Animate.defaultDuration`
-                                  .scale() // inherits duration from fadeIn
-                                  .move(delay: 300.ms, duration: 600.ms),),
-                        );
-                      }),
+                                    );
+                                  },
+                                  child: MiddleCarouselCard(
+                                    text: state.internModel[index].title,
+                                    description: state.internModel[index].content,
+                                    image: state.internModel[index].image,
+                                  ).animate()
+                                      .fadeIn() // uses `Animate.defaultDuration`
+                                      .scale() // inherits duration from fadeIn
+                                      .move(delay: 300.ms, duration: 600.ms),),
+                              );
+                            });
+                      } else if (state is GetBlogsLoadingState) {
+                        return const LoadingWidget();
+                      }
+                      else if(state
+                      is GetBlogsErrorMessageState){
+                        return ErrorWidget(state.errorMessage);
+                      }else {
+                        return const EmptyWidget();
+                      }
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: AppSize.defaultSize! * 5,
