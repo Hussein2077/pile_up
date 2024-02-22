@@ -16,6 +16,7 @@ import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/blogs/presentation/widgets/blog_list_screen.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
+import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/top_carousel.dart';
@@ -48,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     BlocProvider.of<GetBlogsBloc>(context).add(GetBlogsEvent());
-
     super.initState();
   }
 

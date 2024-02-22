@@ -8,6 +8,9 @@ import 'package:pile_up/core/translations/translations.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
+import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
+import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +46,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetBlogsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetMerchantsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetVendorsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetHomeCarouselBloc>(),
         ),
       ],
       child: MaterialApp(
