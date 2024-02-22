@@ -27,5 +27,6 @@ class AppColors {
    static const Color myWalledDetailsScreenBackground = Color(0xffEAEAEA);
    static const Color transactionSuccessColor = Color(0xff03BCA4);
    static const Color transactionFailedColor = Color(0xffBC0309);
+   static const Color textFadedColor = Color(0xff797979);
 
 }

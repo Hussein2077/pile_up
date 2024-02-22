@@ -41,253 +41,265 @@ class _PileOptionsState extends State<PileOptions>
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Container(
-          width: AppSize.defaultSize! * 4.8,
-          height: AppSize.defaultSize! * 4.8,
-          decoration: BoxDecoration(
-            color: AppColors.green,
-            // shape: BoxShape.circle,
-            border: Border.all(color: AppColors.green),
-            borderRadius: BorderRadius.circular(AppSize.defaultSize!*2.4),
-          ),
-          child: Center(
+        width: AppSize.defaultSize! * 4.8,
+        height: AppSize.defaultSize! * 4.8,
+        decoration: BoxDecoration(
+          color: AppColors.green,
+          // shape: BoxShape.circle,
+          border: Border.all(color: AppColors.green),
+          borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2.4),
+        ),
+        child: Center(
+          child: InkWell(
+            onTap: () {},
             child: Icon(Icons.add,
-                size: AppSize.defaultSize! * 3, color: AppColors.backgroundColor),
+                size: AppSize.defaultSize! * 3,
+                color: AppColors.backgroundColor),
           ),
         ),
-
+      ),
       appBar: appBar(context, text: 'Mohamed\'s Birthday', isIcon: true),
-      body: Center(
-        child: SingleChildScrollView(
-          // physics: const NeverScrollableScrollPhysics(),
-          child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 1.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: AppSize.defaultSize! * 1.6,
+      body: SingleChildScrollView(
+        // physics: const NeverScrollableScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.defaultSize! * 1.6,
+            vertical: AppSize.defaultSize! * 1.6,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // SizedBox(
+              //   height: AppSize.defaultSize! * 1.6,
+              // ),
+              Material(
+                elevation: 2,
+                borderRadius: BorderRadius.circular(AppSize.defaultSize!),
+                child: Container(
+                  height: AppSize.defaultSize! * 15,
+                  width: AppSize.screenWidth! * .92,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppSize.defaultSize!),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(width: AppSize.defaultSize! * 1.6),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              AssetPath.image,
+                              width: AppSize.defaultSize! * 7.2,
+                              height: AppSize.defaultSize! * 7.2,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: AppSize.defaultSize! * 7.2,
+                                height: AppSize.defaultSize! * 2.4,
+                                decoration: BoxDecoration(
+                                    color: AppColors.green2,
+                                    borderRadius: BorderRadius.circular(
+                                        AppSize.defaultSize!)),
+                                child: Center(
+                                  child: CustomText(
+                                    text: StringManager.active.tr(),
+                                    fontSize: AppSize.defaultSize! * 1.3,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: AppSize.defaultSize!,
+                              ),
+                              SizedBox(
+                                width: AppSize.defaultSize! * 15,
+                                child: CustomText(
+                                  text:
+                                      'it\'s Mohamed\'s birthday, so we should make a birthday for him.',
+                                  maxLines: 3,
+                                  fontSize: AppSize.defaultSize! * 1.2,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SvgPicture.asset(
+                                    AssetPath.editIcon,
+                                    height: AppSize.defaultSize! * 1.6,
+                                    width: AppSize.defaultSize! * 1.6,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: AppSize.defaultSize! * 1.6),
+                                    child:
+                                        SvgPicture.asset(AssetPath.shareIcon,
+                                          height: AppSize.defaultSize! * 1.6,
+                                          width: AppSize.defaultSize! * 1.6,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      // SizedBox(height: AppSize.defaultSize!*1.6,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          MainButton(
+                            text: StringManager.participate.tr(),
+                            height: AppSize.defaultSize! * 3.2,
+                            width: AppSize.defaultSize! * 10.4,
+                          ),
+                          MainButton(
+                            text: StringManager.preview.tr(),
+                            height: AppSize.defaultSize! * 3.2,
+                            width: AppSize.defaultSize! * 10.4,
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.pilesDetails);
+                            },
+                          ),
+                          SecondButton(
+                            showIcon: false,
+                            text: StringManager.closePile.tr(),
+                            height: AppSize.defaultSize! * 3.2,
+                            width: AppSize.defaultSize! * 10.4,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-                Material(
+              ),
+              SizedBox(
+                height: AppSize.defaultSize!,
+              ),
+              Material(
                   elevation: 2,
                   borderRadius: BorderRadius.circular(AppSize.defaultSize!),
                   child: Container(
-                    height: AppSize.defaultSize! * 15,
+                    height: AppSize.defaultSize! * 7.5,
                     width: AppSize.screenWidth! * .92,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(AppSize.defaultSize!),
                     ),
-                    child: Column(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(width: AppSize.defaultSize! * 1.6),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset(
-                                AssetPath.image,
-                                width: AppSize.defaultSize! * 7.2,
-                                height: AppSize.defaultSize! * 7.2,
-                                fit: BoxFit.cover,
-                              ),
+                            CustomText(
+                              text: 'AVAILABLE TO REDEEM',
+                              fontSize: AppSize.defaultSize! * 1.2,
                             ),
-                            const SizedBox(width: 8),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: AppSize.defaultSize! * 7.2,
-                                  height: AppSize.defaultSize! * 2.4,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.green2,
-                                      borderRadius: BorderRadius.circular(
-                                          AppSize.defaultSize!)),
-                                  child: Center(
-                                    child: CustomText(
-                                      text: StringManager.active.tr(),
-                                      fontSize: AppSize.defaultSize! * 1.3,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: AppSize.defaultSize!,
-                                ),
-                                SizedBox(
-                                  width: AppSize.defaultSize! * 15,
-                                  child: CustomText(
-                                    text:
-                                        'it\'s Mohamed\'s birthday, so we should make a birthday for him.',
-                                    maxLines: 3,
-                                    fontSize: AppSize.defaultSize! * 1.2,
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    SvgPicture.asset(AssetPath.editIcon),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal:
-                                              AppSize.defaultSize! * 1.6),
-                                      child:
-                                          SvgPicture.asset(AssetPath.shareIcon),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            CustomText(
+                              text: 'EGP 750.00',
+                              fontSize: AppSize.defaultSize! * 2.2,
+                              color: AppColors.green,
+                              fontWeight: FontWeight.w700,
                             ),
                           ],
                         ),
-                        // SizedBox(height: AppSize.defaultSize!*1.6,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            MainButton(
-                              text: StringManager.participate.tr(),
-                              height: AppSize.defaultSize! * 3.2,
-                              width: AppSize.defaultSize! * 10.4,
-                            ),
-                            MainButton(
-                              text: StringManager.preview.tr(),
-                              height: AppSize.defaultSize! * 3.2,
-                              width: AppSize.defaultSize! * 10.4,
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, Routes.pilesDetails);
-                              },
-                            ),
-                            SecondButton(
-                              showIcon: false,
-                              text: StringManager.closePile.tr(),
-                              height: AppSize.defaultSize! * 3.2,
-                              width: AppSize.defaultSize! * 10.4,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: AppSize.defaultSize!,
-                ),
-                Material(
-                    elevation: 2,
-                    borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-                    child: Container(
-                      height: AppSize.defaultSize! * 7.5,
-                      width: AppSize.screenWidth! * .92,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.circular(AppSize.defaultSize!),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomText(
-                                text: 'AVAILABLE TO REDEEM',
-                                fontSize: AppSize.defaultSize! * 1.2,
-                              ),
-                              CustomText(
-                                text: 'EGP 750.00',
-                                fontSize: AppSize.defaultSize! * 2.2,
-                                color: AppColors.green,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ],
-                          ),
-                          MainButton(
-                            text: StringManager.redeem.tr(),
-                            height: AppSize.defaultSize! * 4,
-                            width: AppSize.defaultSize! * 13.6,
-                          ),
-                        ],
-                      ),
-                    )),
-                SizedBox(
-                  height: AppSize.defaultSize! * 1.6,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: CustomText(
-                    fontSize: AppSize.defaultSize!*2,
-                    text: StringManager.sharePile.tr(),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(
-                  height: AppSize.defaultSize! * .8,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    shareContainer(
-                        icon: Icons.copy_all,
-                        text: StringManager.copyLink.tr()),
-                    shareContainer(
-                        icon: Icons.email_outlined,
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.viaEmail);
-                        },
-                        text: StringManager.viaEmail.tr()),
-                    shareContainer(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.viaSMS);
-                        },
-                        icon: Icons.sms_failed_outlined,
-                        text: StringManager.viaSMS.tr()),
-                    shareContainer(
-                        icon: Icons.qr_code_2_outlined,
-                        text: StringManager.qRCode.tr()),
-                  ],
-                ),
-                SizedBox(
-                  height: AppSize.defaultSize! * 1.8,
-                ),
-                Container(
-                  height: AppSize.screenHeight! * .5,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-                  ),
-                  child: DefaultTabController(
-                    length: 3,
-                    child: Column(
-                      children: [
-                        OptionsTabBar(
-                          tabController: tabController,
+                        MainButton(
+                          text: StringManager.redeem.tr(),
+                          height: AppSize.defaultSize! * 4,
+                          width: AppSize.defaultSize! * 13.6,
                         ),
-                        SizedBox(
-                          height: AppSize.screenHeight! * .4,
-                          child: TabBarView(
-                              controller: tabController,
-                              children: const [
-                                ManagerView(),
-                                ReportsView(),
-                                SharedWithView(),
-                              ]),
-                        )
                       ],
                     ),
+                  )),
+              SizedBox(
+                height: AppSize.defaultSize!,
+              ),
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: CustomText(
+              //     fontSize: AppSize.defaultSize!*2,
+              //     text: StringManager.sharePile.tr(),
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: AppSize.defaultSize! * .8,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     shareContainer(
+              //         icon: Icons.copy_all,
+              //         text: StringManager.copyLink.tr()),
+              //     shareContainer(
+              //         icon: Icons.email_outlined,
+              //         onTap: () {
+              //           Navigator.pushNamed(context, Routes.viaEmail);
+              //         },
+              //         text: StringManager.viaEmail.tr()),
+              //     shareContainer(
+              //         onTap: () {
+              //           Navigator.pushNamed(context, Routes.viaSMS);
+              //         },
+              //         icon: Icons.sms_failed_outlined,
+              //         text: StringManager.viaSMS.tr()),
+              //     shareContainer(
+              //         icon: Icons.qr_code_2_outlined,
+              //         text: StringManager.qRCode.tr()),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: AppSize.defaultSize! * 1.8,
+              // ),
+              Container(
+                //Changes the card height
+                height: AppSize.screenHeight! * .64,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(AppSize.defaultSize!),
+                ),
+                child: DefaultTabController(
+                  initialIndex: 1,
+                  length: 3,
+                  child: Column(
+                    // mainAxisSize: MainAxisSize.max,
+                    children: [
+                      OptionsTabBar(
+                        tabController: tabController,
+                      ),
+                      SizedBox(
+                        //Changes the tab content height
+                        height: AppSize.screenHeight! * .575,
+                        child: TabBarView(
+                            controller: tabController,
+                            children: const [
+                              ManagerView(),
+                              ReportsView(),
+                              SharedWithView(),
+                            ]),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -310,7 +322,7 @@ class _PileOptionsState extends State<PileOptions>
             Icon(
               icon,
               color: AppColors.orange,
-              size: AppSize.defaultSize!*3,
+              size: AppSize.defaultSize! * 3,
             ),
             CustomText(
               text: text,

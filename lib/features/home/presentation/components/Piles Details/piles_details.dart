@@ -31,49 +31,30 @@ class _PilesDetailsState extends State<PilesDetails> {
               children: [
                 Image.asset(
                   AssetPath.image,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   width: AppSize.screenWidth,
                   height: AppSize.screenHeight! * .32,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(AppSize.defaultSize! * 1.5),
+                  padding: EdgeInsets.all(AppSize.defaultSize! * 1.6),
                   child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                ),
-                Positioned(
-                  top: AppSize.screenHeight! * .27,
-                  left: AppSize.defaultSize! * 3,
-                  child: CustomText(
-                    text: 'Mohamed\'s Birthday',
-                    fontSize: AppSize.defaultSize! * 2.4,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-                Positioned(
-                  top: AppSize.screenHeight! * .25,
-                  child: Container(
-                    height: AppSize.defaultSize! * 10,
-                    width: AppSize.screenWidth!,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.center,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            // Colors.transparent,
-                            const Color.fromRGBO(0, 0, 0, 1).withOpacity(.01),
-                            const Color.fromRGBO(0, 0, 0, 1).withOpacity(.3),
-                            const Color.fromRGBO(0, 0, 0, 1).withOpacity(.3),
-                            const Color.fromRGBO(0, 0, 0, 1).withOpacity(.4),
-                            const Color.fromRGBO(0, 0, 0, 1).withOpacity(.5),
-                          ]),
-                    ),
-                  ),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white)),
                 ),
               ],
+            ),SizedBox(
+              height: AppSize.defaultSize! * 1.6,
+            ),
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: AppSize.defaultSize!*1.6),
+              child: CustomText(
+                text: 'Mohamed\'s Birthday',
+                fontSize: AppSize.defaultSize! * 2.4,
+                fontWeight: FontWeight.w700,
+                // color: Colors.white,
+              ),
             ),
             SizedBox(
               height: AppSize.defaultSize! * 1.7,
@@ -123,10 +104,14 @@ class _PilesDetailsState extends State<PilesDetails> {
               ),
               child: Column(
                 children: [
-                  CustomText(
-                    text: StringManager.participatedMembers.tr(),
-                    color: AppColors.black,
-                    fontSize: AppSize.defaultSize! * 1.6,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: CustomText(
+                      text: StringManager.participatedMembers.tr(),
+                      color: AppColors.black,
+                      fontSize: AppSize.defaultSize! * 1.6,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   SizedBox(
                       child: ListView.builder(
@@ -149,7 +134,7 @@ class _PilesDetailsState extends State<PilesDetails> {
                       },
                       child: CustomText(
                         text: StringManager.seeMore.tr(),
-                        color: AppColors.orange,
+                        color: AppColors.primaryColor,
                         textDecoration: TextDecoration.underline,
                         decorationColor: AppColors.orange,
                         fontWeight: FontWeight.w600,
@@ -174,7 +159,7 @@ class _PilesDetailsState extends State<PilesDetails> {
                   SizedBox(
                     height: AppSize.defaultSize! * 2,
                   ),
-                  MainButton(text: StringManager.participate.tr()),
+                  MainButton(text: StringManager.accept.tr()),
                   SizedBox(
                     height: AppSize.defaultSize! * 7,
                   ),

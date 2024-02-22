@@ -20,9 +20,10 @@ class BlogStoreBuilder extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(AppSize.defaultSize!)),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: EdgeInsets.only(right: AppSize.defaultSize!),
@@ -33,7 +34,7 @@ class BlogStoreBuilder extends StatelessWidget {
                       )
                     : Image.asset(
                         stores.image,
-                        height: AppSize.defaultSize! * 13,
+                        height: AppSize.defaultSize! * 13.1,
                         width: AppSize.defaultSize! * 12,
                       ),
               ),
@@ -44,6 +45,7 @@ class BlogStoreBuilder extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: AppSize.defaultSize! * 1.6),
                     CustomText(
                         text: stores.text,
                         color: AppColors.blackLow,
@@ -52,9 +54,19 @@ class BlogStoreBuilder extends StatelessWidget {
                     CustomText(
                         text: stores.description,
                         color: AppColors.blackLow,
-                        maxLines: 4,
+                        maxLines: 3,
                         textAlign: TextAlign.start,
                         fontSize: AppSize.defaultSize! * 1.4),
+                    !blog ?
+                        CustomText(
+                        text: 'See More',
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.w700,
+                        textAlign: TextAlign.start,
+                        decorationColor: AppColors.primaryColor,
+                        textDecoration: TextDecoration.underline,
+                        fontSize: AppSize.defaultSize! * 1.6):
+                    Container(),
                   ],
                 ),
               )

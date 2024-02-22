@@ -42,8 +42,8 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController controller = PageController(initialPage: 0);
-    ValueNotifier<bool> backButton = ValueNotifier<bool>(false);
-    ValueNotifier<bool> changeToNext = ValueNotifier<bool>(false);
+  ValueNotifier<bool> backButton = ValueNotifier<bool>(false);
+  ValueNotifier<bool> changeToNext = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -52,20 +52,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: [
           SizedBox(
-
             height: AppSize.screenHeight! * 0.8,
             child: PageView(
               controller: controller,
-              onPageChanged: (page){
-                if (page==0) {
+              onPageChanged: (page) {
+                if (page == 0) {
                   backButton.value = false;
-                }else{
+                } else {
                   backButton.value = true;
                 }
-                if(page==3){
-                  changeToNext.value=true;
-                }else{
-                  changeToNext.value=false;
+                if (page == 3) {
+                  changeToNext.value = true;
+                } else {
+                  changeToNext.value = false;
                 }
               },
               children: List.generate(
@@ -74,7 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           SizedBox(height: AppSize.defaultSize! * 4),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 4),
+            padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -83,54 +82,58 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     count: onBoardingList.length,
                     effect: ExpandingDotsEffect(
                       dotHeight: AppSize.defaultSize!,
-                      dotWidth: AppSize.defaultSize! * 1.5,
+                      dotWidth: AppSize.defaultSize!,
                       activeDotColor: AppColors.primaryColor,
                       radius: AppSize.defaultSize! * 10,
                       dotColor: AppColors.primaryColor.withOpacity(.3),
                     ), // your preferred effect
                     onDotClicked: (index) {}),
                 const Spacer(),
-                // ValueListenableBuilder(
-                //     valueListenable: backButton,
-                //     builder: (context, show, _) {
-                //       return show
-                //           ? SizedBox(
-                //         width: AppSize.defaultSize! * 8,
-                //         height: AppSize.defaultSize! * 4,
-                //             child: TextButton(
-                //                 onPressed: () {
-                //                   controller.animateToPage(
-                //                       controller.page!.toInt() - 1,
-                //                       duration: const Duration(milliseconds: 200),
-                //                       curve: Curves.easeIn);
-                //                 },
-                //                 child: CustomText(
-                //                   text: StringManager.back.tr(),
-                //                   color: AppColors.primaryColor,
-                //                 )),
-                //           )
-                //           : const SizedBox();
-                //     }),
+                ValueListenableBuilder(
+                    valueListenable: backButton,
+                    builder: (context, show, _) {
+                      return show
+                          ? SizedBox(
+                        width: AppSize.defaultSize! * 4.4,
+                        height: AppSize.defaultSize! * 2.6,
+                            child: InkWell(
+                                onTap: () {
+                                  controller.animateToPage(
+                                      controller.page!.toInt() - 1,
+                                      duration: const Duration(milliseconds: 200),
+                                      curve: Curves.easeIn);
+                                },
+                                child: CustomText(
+                                  text: StringManager.back.tr(),
+                                  color: AppColors.primaryColor,
+                                  // fontWeight: FontWeight.w500,
+                                  fontSize:AppSize.defaultSize!*2,
+                                )),
+                          )
+                          : const SizedBox();
+                    }),
+                SizedBox(width: AppSize.defaultSize!*2.4),
                 ValueListenableBuilder(
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
-                    return SecondButton(
-                      showIcon: false,
-                      text: show?StringManager.start.tr():StringManager.next.tr(),
-                      width: AppSize.defaultSize! * 12.7,
-                      height: AppSize.defaultSize! * 4,
-                      onTap: () {
-                        controller.animateToPage(controller.page!.toInt() + 1,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn);
-                        if(show){
-                          Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false);
-
-                        }
-                      },
-                    );
-                  }
-                ),
+                      return SecondButton(
+                        showIcon: false,
+                        text: show
+                            ? StringManager.start.tr()
+                            : StringManager.next.tr(),
+                        width: AppSize.defaultSize! * 12.7,
+                        height: AppSize.defaultSize! * 4,
+                        onTap: () {
+                          controller.animateToPage(controller.page!.toInt() + 1,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeIn);
+                          if (show) {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, Routes.login, (route) => false);
+                          }
+                        },
+                      );
+                    }),
               ],
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/widgets/pin_text_field.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/widgets/pin_text_field.dart';
 
 class SendOTPCode extends StatefulWidget {
   const SendOTPCode({super.key});

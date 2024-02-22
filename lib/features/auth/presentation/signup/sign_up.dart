@@ -96,7 +96,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ColumnWithTextField(
                 text: StringManager.password.tr(),
                 controller: passwordController,
-                obscureText: isVisible,
+                prefixIcon: Icon(
+                  Icons.lock_outlined,
+                  color: AppColors.primaryColor,
+                  size: AppSize.defaultSize! * 2,
+                ),
                 suffixIcon: InkWell(
                   onTap: () {
                     setState(() {
@@ -106,13 +110,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Icon(
                     isVisible ? Icons.visibility_off : Icons.visibility,
                     color: Colors.grey,
+                    size: AppSize.defaultSize! * 1.8,
                   ),
                 ),
               ),
               ColumnWithTextField(
                 text: StringManager.confirmPassword.tr(),
                 controller: passwordConfirmController,
-                obscureText: isVisible,
+                prefixIcon: Icon(
+                  Icons.lock_outlined,
+                  color: AppColors.primaryColor,
+                  size: AppSize.defaultSize! * 2,
+                ),
                 suffixIcon: InkWell(
                   onTap: () {
                     setState(() {
@@ -122,6 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Icon(
                     isVisible ? Icons.visibility_off : Icons.visibility,
                     color: Colors.grey,
+                    size: AppSize.defaultSize! * 1.8,
                   ),
                 ),
               ),
@@ -185,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
               MainButton(
-                text: StringManager.signUp.tr(),
+                text: StringManager.signUpCap.tr(),
                 onTap: () {
                   if (validation()) {
                     BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
@@ -222,11 +232,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Navigator.pushNamed(context, Routes.login);
                     },
                     child: Text(
-                      StringManager.signIn.tr(),
+                      StringManager.login.tr(),
                       style: TextStyle(
                           color: AppColors.primaryColor,
                           fontSize: AppSize.defaultSize! * 1.5,
-                          fontWeight: FontWeight.w700),
+                          fontWeight: FontWeight.w700,
+                      decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColor,
+                      ),
                     ),
                   ),
                 ],

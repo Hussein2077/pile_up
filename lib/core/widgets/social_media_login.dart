@@ -82,7 +82,10 @@ class SocialMediaLogin extends StatelessWidget {
                   style: TextStyle(
                       color: AppColors.primaryColor,
                       fontSize: AppSize.defaultSize! * 1.5,
-                      fontWeight: FontWeight.w700),
+                      fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.underline,
+                    decorationColor: AppColors.primaryColor,
+                  ),
                 ),
               ),
             ],

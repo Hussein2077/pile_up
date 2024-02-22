@@ -30,7 +30,7 @@ class _ManagerViewState extends State<ManagerView> {
             child: ListView.builder(
                 itemCount: 20,
                 // physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
+                // shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -43,7 +43,10 @@ class _ManagerViewState extends State<ManagerView> {
                     ],
                   );
                 }),
-          )
+          ),
+          // Align(
+          //     alignment: Alignment.bottomRight,
+          //     child: FloatingActionButton(onPressed: (){})),
         ],
       ),
     );

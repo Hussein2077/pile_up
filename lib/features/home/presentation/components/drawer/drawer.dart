@@ -70,6 +70,33 @@ class _HomeDrawerState extends State<HomeDrawer> {
             ),
           ),
           const Spacer(),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: AppSize.defaultSize! * 4,
+                ),
+                Icon(
+                  Icons.headset_mic_outlined,
+                  color: AppColors.primaryColor,
+                  size: AppSize.defaultSize! * 2,
+                ),
+                SizedBox(
+                  width: AppSize.defaultSize!,
+                ),
+                Text(
+                  StringManager.support.tr(),
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppSize.defaultSize! * 1.6,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: AppSize.defaultSize!*2.4),
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, Routes.login);

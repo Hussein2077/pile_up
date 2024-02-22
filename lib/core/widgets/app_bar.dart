@@ -40,9 +40,10 @@ AppBar appBar(BuildContext context,
       onPressed: () {
         Navigator.pop(context);
       },
-      icon: const Icon(
+      icon: Icon(
         Icons.arrow_back_ios,
         color: Colors.white,
+        size: AppSize.defaultSize! * 1.8,
       ),
     ),
   );
@@ -101,12 +102,15 @@ AppBar homeAppBar(BuildContext context,
             ),
           )
         : const PreferredSize(preferredSize: Size(0, 0), child: SizedBox()),
-    title: widget ??
-        Image.asset(
-          AssetPath.logo,
-          width: AppSize.defaultSize! * 4.2,
-          height: AppSize.defaultSize! * 3.2,
-        ),
+    title: Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: widget ??
+          Image.asset(
+            AssetPath.logo,
+            width: AppSize.defaultSize! * 4.2,
+            height: AppSize.defaultSize! * 3.2,
+          ),
+    ),
     centerTitle: true,
     leading: leading
         ? IconButton(

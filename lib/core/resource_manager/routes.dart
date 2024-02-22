@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/change_password.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/forget_password.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_code.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/change_password.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/forget_password.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';

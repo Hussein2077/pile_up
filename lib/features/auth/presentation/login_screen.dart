@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: AppSize.defaultSize! * 4,
+                height: AppSize.defaultSize! * 5,
               ),
               Image.asset(
                 AssetPath.logo1,
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               MainButton(
-                text: StringManager.login.tr(),
+                text: StringManager.loginCap.tr(),
                 onTap: () {
                   Navigator.pushNamed(context, Routes.main);
                 },
