@@ -10,20 +10,20 @@ abstract class GetUserFoldersState extends Equatable {
   List<Object> get props => [];
 }
 
-class GetBlogsInitial extends GetUserFoldersState {}
+class GetUserFoldersInitial extends GetUserFoldersState {}
 
-class GetBlogsLoadingState extends GetUserFoldersState{
-  const GetBlogsLoadingState();
+class GetUserFoldersLoadingState extends GetUserFoldersState{
+  const GetUserFoldersLoadingState();
 }
 
-class GetBlogsErrorMessageState extends GetUserFoldersState{
+class GetUserFoldersErrorMessageState extends GetUserFoldersState{
   final String errorMessage ;
 
-  const GetBlogsErrorMessageState({required this.errorMessage});
+  const GetUserFoldersErrorMessageState({required this.errorMessage});
 }
 
-class GetBlogsSuccessMessageState extends GetUserFoldersState{
+class GetUserFoldersSuccessMessageState extends GetUserFoldersState{
   final List<UserFolder> internModel ;
 
-  const GetBlogsSuccessMessageState({ required this.internModel});
+  const GetUserFoldersSuccessMessageState({ required this.internModel});
 }

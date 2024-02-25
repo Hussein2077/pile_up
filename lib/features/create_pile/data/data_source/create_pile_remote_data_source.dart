@@ -24,9 +24,6 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
       Map<String, dynamic> jsonData = response.data;
       print(response.data);
        return jsonData;
-      // Map<String, dynamic> jsonData = response.data;
-      // // List<CreatePile>    jsonData = List<CreatePile>.from(
-      // //     (response.data as List).map((e) => CreatePile.toJson(e)));
       // log('$jsonData dddddddddd');
      } on DioException catch (e) {
       throw DioHelper.handleDioError(
