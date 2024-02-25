@@ -12,4 +12,9 @@ class ConstantApi {
   static const String getMerchants = "${baseUrl}Merchants";
   static const String getVendors = "${baseUrl}Vendors";
   static const String getHomeCarousel = "${baseUrl}CarouselSliders";
+  static const String getUserFolders = "${baseUrl}UsersFolders";
+
+
+  //Post
+  static const String createPile = "${baseUrl}Piles";
 }

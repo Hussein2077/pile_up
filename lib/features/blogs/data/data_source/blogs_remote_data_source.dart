@@ -26,7 +26,7 @@ class BlogsRemotelyDateSource extends BaseRemotelyDataSourceBlogs {
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
-          dioError: e, endpointName: "get Internships");
+          dioError: e, endpointName: "get Blogs");
     }
   }
 }

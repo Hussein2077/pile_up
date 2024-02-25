@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
@@ -10,7 +12,14 @@ import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/drop_down_custom.dart';
+import 'package:pile_up/core/widgets/empty_widget.dart';
+import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
+import 'package:pile_up/features/create_pile/data/model/user_folder_model.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_event.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_state.dart';
 
 class CreatePileScreen extends StatefulWidget {
   const CreatePileScreen({super.key});
@@ -20,15 +29,50 @@ class CreatePileScreen extends StatefulWidget {
 }
 
 class _CreatePileScreenState extends State<CreatePileScreen> {
-  DateTime selectedDate = DateTime.now();
-  bool totalCollected = false;
-  bool totalReq = false;
-  bool public = false;
+  late TextEditingController titleController;
+  late TextEditingController amountController;
+  late TextEditingController participatedAmountController;
+  late TextEditingController descriptionController;
+
+  @override
+  void initState() {
+    BlocProvider.of<CreatePileBloc>(context).add(CreatePileEvent());
+    BlocProvider.of<GetUserFoldersBloc>(context).add(GetUserFoldersEvent());
+
+    titleController = TextEditingController();
+    amountController = TextEditingController();
+    participatedAmountController = TextEditingController();
+    descriptionController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    amountController.dispose();
+    participatedAmountController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  DateTime eventDate = DateTime.now();
+  DateTime deadlineDate = DateTime.now();
+  String type = 'Birthday';
+  Map<String, int> typeCategory = {
+    'Birthday': 1,
+    'Party': 2,
+    'Wedding': 3,
+  };
+  bool totalCollectedPublic = false;
+  bool showTotalReq = false;
+  bool payerListPublic = false;
   bool editable = false;
-  bool allow = false;
+  bool allowMsg = false;
 
   @override
   Widget build(BuildContext context) {
+    String? folderName1;
+
     return Scaffold(
       appBar: homeAppBar(context,
           bottom: false,
@@ -80,76 +124,108 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                         ColumnWithTextField(
                           text: StringManager.title.tr(),
                           requiredInput: true,
+                          controller: titleController,
                         ),
-                        ColumnWithTextField(
-                          text: StringManager.folder.tr(),
-                          requiredInput: true,
-                          dropDown: CustomDropdownButton2(
-                            hint: '',
-                            value: 'My Folder 01',
-                            dropdownItems: const [
-                              'My Folder 01',
-                              'My Folder 02',
-                              'My Folder 03',
-                            ],
-                            onChanged: (String? value) {},
-                          ),
+                        BlocBuilder<GetUserFoldersBloc, GetUserFoldersState>(
+                          builder: (context, state) {
+
+                            if (state is GetBlogsSuccessMessageState) {
+                              folderName1=state.internModel[0]. folderName;
+                              return ColumnWithTextField(
+                                text: StringManager.folder.tr(),
+                                requiredInput: true,
+                                dropDown: StatefulBuilder(
+                                  builder: (context,setState) {
+                                    return CustomDropdownButton2(
+                                      hint: 'Select a folder',
+                                      value: folderName1,
+                                      dropdownItems: state.internModel.map((e) => e.folderName).toList(),
+                                      onChanged: (String? newValue) {
+                                        folderName1 = newValue;
+                                        log('${folderName1}folderName1');
+                                        setState(() {
+
+                                        });
+
+
+
+                                      },
+                                    );
+                                  }
+                                ),
+                              );
+                            } else if (state is GetBlogsLoadingState) {
+                              return const LoadingWidget();
+                            } else if (state is GetBlogsErrorMessageState) {
+                              return ErrorWidget(state.errorMessage);
+                            } else {
+                              return const EmptyWidget();
+                            }
+                          },
                         ),
                         ColumnWithTextField(
                           text: StringManager.type.tr(),
                           dropDown: CustomDropdownButton2(
                             hint: '',
-                            value: 'Birthday',
+                            value: type,
                             dropdownItems: const [
                               'Birthday',
                               'Party',
                               'Wedding',
                             ],
-                            onChanged: (String? value) {},
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                type = newValue!;
+                              });
+                            },
                           ),
                         ),
                         ColumnWithTextField(
                           text: StringManager.totalAmount.tr(),
                           keyboardType: TextInputType.phone,
+                          controller: amountController,
                         ),
                         ColumnWithTextField(
                           text: StringManager.participatedAmount.tr(),
                           keyboardType: TextInputType.phone,
+                          controller: participatedAmountController,
                         ),
                         ColumnWithTextField(
                           text: StringManager.deadline.tr(),
                           readOnly: true,
-                          hintText: selectedDate.toString().substring(0, 10),
+                          hintText: deadlineDate.toString().substring(0, 10),
                           suffixIcon: const Icon(Icons.calendar_month_outlined),
                           onTap: () {
-                            _selectDate(context);
+                            _deadlineDate(context);
                           },
                         ),
                         ColumnWithTextField(
                           text: StringManager.eventDate.tr(),
                           readOnly: true,
-                          hintText: selectedDate.toString().substring(0, 10),
+                          hintText: eventDate.toString().substring(0, 10),
                           suffixIcon: const Icon(Icons.calendar_month_outlined),
                           onTap: () {
-                            _selectDate(context);
+                            _eventDate(context);
                           },
                         ),
                         ColumnWithTextField(
                           text: StringManager.description.tr(),
                           maxLine: 15,
+                          controller: descriptionController,
                           height: AppSize.defaultSize! * 15.2,
                         ),
                         SizedBox(height: AppSize.defaultSize! * 2.4),
-                        CustomSwitchRow(text: StringManager.makeTotalCollectedPublic.tr(),
-                            toggle: totalCollected),
+                        CustomSwitchRow(
+                            text: StringManager.makeTotalCollectedPublic.tr(),
+                            toggle: totalCollectedPublic),
                         SizedBox(height: AppSize.defaultSize! * 2.4),
                         CustomSwitchRow(
                             text: StringManager.showTotalRequired.tr(),
-                            toggle: totalReq),
+                            toggle: showTotalReq),
                         SizedBox(height: AppSize.defaultSize! * 2.4),
                         CustomSwitchRow(
                             text: StringManager.makePayerListPublic.tr(),
-                            toggle: public),
+                            toggle: payerListPublic),
                         SizedBox(height: AppSize.defaultSize! * 2.4),
                         CustomSwitchRow(
                             text: StringManager.exactAmountOrEditable.tr(),
@@ -158,11 +234,44 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                         CustomSwitchRow(
                             text: StringManager.allowParticipantsToLeaveMessage
                                 .tr(),
-                            toggle: allow),
+                            toggle: allowMsg),
                         SizedBox(
                           height: AppSize.defaultSize! * 3.5,
                         ),
-                        MainButton(text: StringManager.create.tr()),
+                        MainButton(
+                          text: StringManager.create.tr(),
+                          onTap: () {
+                            BlocProvider.of<CreatePileBloc>(context)
+                                .add(CreatePileEvent(
+                              userId: "d5ee16fe-727c-4446-b962-08dc3265bb1c",
+                              folderId: 1,
+                              pileName: titleController.text,
+                              description: descriptionController.text,
+                              ziad: 'Text by Omar',
+                              eventDate: eventDate,
+                              deadlineDate: deadlineDate,
+                              creationDate: DateTime.now(),
+                              totalAmount: int.parse(amountController.text),
+                              participationAmount:
+                                  int.parse(participatedAmountController.text),
+                              status: true,
+                              pileImage: AssetPath.image,
+                              categoryId: typeCategory[type],
+                              collectedAmount: 0,
+                              totalCollectedPublic: totalCollectedPublic,
+                              showTotalRequired: showTotalReq,
+                              payerListPublic: payerListPublic,
+                              exactAmountOrNot: editable,
+                              allowPayerToLevMsg: allowMsg,
+                            ));
+                            titleController.text = '';
+                            descriptionController.text = '';
+                            amountController.text = '';
+                            participatedAmountController.text = '';
+                            eventDate = DateTime.now();
+                            deadlineDate = DateTime.now();
+                          },
+                        ),
                         SizedBox(
                           height: AppSize.defaultSize! * 2,
                         ),
@@ -181,27 +290,45 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
     );
   }
 
-  _selectDate(BuildContext context) async {
+  _eventDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate, // Refer step 1
+      initialDate: eventDate, // Refer step 1
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != eventDate) {
       setState(() {
-        selectedDate = picked;
+        eventDate = picked;
       });
     }
   }
 
+  _deadlineDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: deadlineDate, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != deadlineDate) {
+      setState(() {
+        deadlineDate = picked;
+      });
+    }
+  }
 }
 
 class CustomSwitchRow extends StatefulWidget {
-  CustomSwitchRow({super.key, required this.text, required this.toggle,});
+  CustomSwitchRow({
+    super.key,
+    required this.text,
+    required this.toggle,
+  });
 
   final String text;
   late bool toggle;
+
   @override
   State<CustomSwitchRow> createState() => _CustomSwitchRowState();
 }
@@ -209,14 +336,18 @@ class CustomSwitchRow extends StatefulWidget {
 class _CustomSwitchRowState extends State<CustomSwitchRow> {
   @override
   Widget build(BuildContext context) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomText(
-            text: widget.text,
-            fontSize: AppSize.defaultSize! * 1.5,
-          ),
-          FlutterSwitch(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomText(
+          text: widget.text,
+          fontSize: AppSize.defaultSize! * 1.5,
+        ),
+        StatefulBuilder(builder: (
+          context,
+          setState,
+        ) {
+          return FlutterSwitch(
             width: AppSize.defaultSize! * 5.6,
             height: AppSize.defaultSize! * 2.4,
             toggleSize: 16,
@@ -232,10 +363,9 @@ class _CustomSwitchRowState extends State<CustomSwitchRow> {
             onToggle: (bool value) {
               setState(() => widget.toggle = value);
             },
-          ),
-        ],
-      );
-    }
+          );
+        }),
+      ],
+    );
   }
-
-
+}

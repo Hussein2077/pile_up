@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -27,7 +29,7 @@ class _TopCarouselState extends State<TopCarousel> {
 
   int myCurrentIndex = 0;
 
-  final List<Widget>myItems = [];
+  final List<Widget> myItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -70,83 +72,87 @@ class _TopCarouselState extends State<TopCarousel> {
                       const Color.fromRGBO(0, 0, 0, 1).withOpacity(.4),
                       const Color.fromRGBO(0, 0, 0, 1).withOpacity(.7),
                     ])),
-          ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Column(
                 children: [
-                  Text(
-                    'Shop ',
-                    style: TextStyle(
-                        fontSize: AppSize.defaultSize! * 2,
-                        fontFamily: 'TT Norms Pro Bold.otf',
-                        color: Colors.white),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Text(
+                      //   'Shop ',
+                      //   style: TextStyle(
+                      //       fontSize: AppSize.defaultSize! * 2,
+                      //       fontFamily: 'TT Norms Pro Bold.otf',
+                      //       color: Colors.white),
+                      // ),
+                      Text(state.internModel[myCurrentIndex].caption,
+                              style: TextStyle(
+                                  fontSize: AppSize.defaultSize! * 3,
+                                  fontFamily: 'TT Norms Pro Bold.otf',
+                                  color: const Color.fromRGBO(3, 188, 164, 1),
+                                  fontWeight: FontWeight.bold))
+                          .animate()
+                          .fadeIn() // uses `Animate.defaultDuration`
+                          .scale() // inherits duration from fadeIn
+                          .move(delay: 300.ms, duration: 600.ms),
+                      // Text(
+                      //   'look',
+                      //   style: TextStyle(
+                      //       fontSize: AppSize.defaultSize! * 2,
+                      //       fontFamily: 'TT Norms Pro Bold.otf',
+                      //       color: Colors.white),
+                      // ),
+                      // Text(' good',
+                      //         style: TextStyle(
+                      //             fontSize: AppSize.defaultSize! * 3,
+                      //             fontFamily: 'TT Norms Pro Bold.otf',
+                      //             color: const Color.fromRGBO(3, 188, 164, 1),
+                      //             fontWeight: FontWeight.bold))
+                      //     .animate()
+                      //     .fadeIn() // uses `Animate.defaultDuration`
+                      //     .scale() // inherits duration from fadeIn
+                      //     .move(delay: 300.ms, duration: 600.ms),
+                    ],
                   ),
-                  Text('Better, ',
-                      style: TextStyle(
-                          fontSize: AppSize.defaultSize! * 3,
-                          fontFamily: 'TT Norms Pro Bold.otf',
-                          color: const Color.fromRGBO(3, 188, 164, 1),
-                          fontWeight: FontWeight.bold))
-                      .animate()
-                      .fadeIn() // uses `Animate.defaultDuration`
-                      .scale() // inherits duration from fadeIn
-                      .move(delay: 300.ms, duration: 600.ms),
-                  Text(
-                    'look',
-                    style: TextStyle(
-                        fontSize: AppSize.defaultSize! * 2,
-                        fontFamily: 'TT Norms Pro Bold.otf',
-                        color: Colors.white),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: myItems.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () =>
+                            carouselController.animateToPage(entry.key),
+                        child: Container(
+                          width: myCurrentIndex == entry.key
+                              ? AppSize.defaultSize! * 4
+                              : AppSize.defaultSize! * 1.5,
+                          height: AppSize.defaultSize! * .3,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(AppSize.defaultSize!),
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : AppColors.primaryColor)
+                                    .withOpacity(
+                                        myCurrentIndex == entry.key ? 1 : 0.4),
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
-                  Text(' good',
-                      style: TextStyle(
-                          fontSize: AppSize.defaultSize! * 3,
-                          fontFamily: 'TT Norms Pro Bold.otf',
-                          color: const Color.fromRGBO(3, 188, 164, 1),
-                          fontWeight: FontWeight.bold))
-                      .animate()
-                      .fadeIn() // uses `Animate.defaultDuration`
-                      .scale() // inherits duration from fadeIn
-                      .move(delay: 300.ms, duration: 600.ms),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: myItems.asMap().entries.map((entry) {
-                  return GestureDetector(
-                    onTap: () => carouselController.animateToPage(entry.key),
-                    child: Container(
-                      width: myCurrentIndex == entry.key
-                          ? AppSize.defaultSize! * 4
-                          : AppSize.defaultSize! * 1.5,
-                      height: AppSize.defaultSize! * .3,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-                        color: (Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : AppColors.primaryColor)
-                            .withOpacity(myCurrentIndex == entry.key ? 1 : 0.4),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
             ],
-          ),
-        ],
-      );
-    } else if (state is GetHomeCarouselLoadingState) {
-      return const LoadingWidget();
-    } else if (state is GetHomeCarouselErrorMessageState) {
-      return ErrorWidget(state.errorMessage);
-    } else {
-      return const EmptyWidget();
-    }
-  },
-);
+          );
+        } else if (state is GetHomeCarouselLoadingState) {
+          return const LoadingWidget();
+        } else if (state is GetHomeCarouselErrorMessageState) {
+          return ErrorWidget(state.errorMessage);
+        } else {
+          return const EmptyWidget();
+        }
+      },
+    );
   }
 }

@@ -11,6 +11,16 @@ import 'package:pile_up/features/blogs/data/repo_implementation/blogs_repo_imp.d
 import 'package:pile_up/features/blogs/domain/repository/blog_base_repo.dart';
 import 'package:pile_up/features/blogs/domain/use_case/get_blogs_use_case.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/create_pile/data/data_source/create_pile_remote_data_source.dart';
+import 'package:pile_up/features/create_pile/data/data_source/user_folder_remote_data_source.dart';
+import 'package:pile_up/features/create_pile/data/repo_implementation/create_pile_repo_imp.dart';
+import 'package:pile_up/features/create_pile/data/repo_implementation/user_folder_repo_imp.dart';
+import 'package:pile_up/features/create_pile/domain/repository/create_pile_base_repo.dart';
+import 'package:pile_up/features/create_pile/domain/repository/user_folders_base_repo.dart';
+import 'package:pile_up/features/create_pile/domain/use_case/create_pile_use_case.dart';
+import 'package:pile_up/features/create_pile/domain/use_case/user_folder_use_case.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/data/data_source/home_carousel_remote_data_source.dart';
 import 'package:pile_up/features/home/data/repo_implementation/home_carousel_repo_imp.dart';
 import 'package:pile_up/features/home/domain/repository/home_carousel_base_repo.dart';
@@ -46,6 +56,8 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetMerchantsBloc(getMerchantsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetVendorsBloc(getVendorsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetHomeCarouselBloc(getHomeCarouselUseCase: getIt()));
+    getIt.registerLazySingleton(() => CreatePileBloc(createPileUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetUserFoldersBloc(getUserFoldersUseCase: getIt()));
 
 
 //use_case
@@ -58,6 +70,8 @@ class ServerLocator {
     getIt.registerFactory(() => GetMerchantsUseCase(baseRepositoryMerchants: getIt()));
     getIt.registerFactory(() => GetVendorsUseCase(baseRepositoryVendors: getIt()));
     getIt.registerFactory(() => GetHomeCarouselUseCase(baseRepositoryHomeCarousel: getIt()));
+    getIt.registerFactory(() => CreatePileUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryUserFolders: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
@@ -68,6 +82,10 @@ class ServerLocator {
             () => VendorsRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceHomeCarousel>(
             () => HomeCarouselRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceCreatePile>(
+            () => CreatePileRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceUserFolders>(
+            () => UserFoldersRemotelyDateSource());
 
     // Repo Implementation
     getIt.registerLazySingleton<BaseRepositoryBlogs>(
@@ -78,5 +96,9 @@ class ServerLocator {
             () => VendorsRepositoryImp(baseRemotelyDataSourceVendors: getIt()));
     getIt.registerLazySingleton<BaseRepositoryHomeCarousel>(
             () => HomeCarouselRepositoryImp(baseRemotelyDataSourceHomeCarousel: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryCreatePile>(
+            () => CreatePileRepositoryImp(baseRemotelyDataSourceCreatePile: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryUserFolders>(
+            () => UserFoldersRepositoryImp(baseRemotelyDataSourceUserFolders: getIt()));
   }
 }
