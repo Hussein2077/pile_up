@@ -5,6 +5,7 @@ class MyProfile {
   final String email;
   final String mobileNumber;
   final String password;
+  final String reminder;
 
   MyProfile({
     required this.userId,
@@ -13,6 +14,7 @@ class MyProfile {
     required this.email,
     required this.mobileNumber,
     required this.password,
+    required this.reminder,
   });
 
   factory MyProfile.fromJson(Map<String, dynamic> json) => MyProfile(
@@ -22,6 +24,7 @@ class MyProfile {
     email: json["email"],
     mobileNumber: json["mobileNumber"],
     password: json["password"],
+    reminder: json["reminder"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -31,5 +34,6 @@ class MyProfile {
     "email": email,
     "mobileNumber": mobileNumber,
     "password": password,
+    'reminder' : reminder,
   };
 }

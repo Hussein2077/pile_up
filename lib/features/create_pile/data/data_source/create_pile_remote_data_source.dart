@@ -24,7 +24,6 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
       Map<String, dynamic> jsonData = response.data;
       print(response.data);
        return jsonData;
-      // log('$jsonData dddddddddd');
      } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "get CreatePile");
