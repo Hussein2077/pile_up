@@ -26,4 +26,14 @@ class MyProfileRepositoryImp extends BaseRepositoryMyProfile {
       return right(DioHelper.buildFailure(e));
     }
   }
+
+  @override
+  Future<Either<Map<String, dynamic>, Failure>> editMyProfile(MyProfile profile) async {
+    try {
+      final result = await baseRemotelyDataSourceMyProfile.editMyProfile(profile);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
 }
