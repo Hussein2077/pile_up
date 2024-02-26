@@ -31,6 +31,11 @@ import 'package:pile_up/features/merchants/data/repo_implementation/merchants_re
 import 'package:pile_up/features/merchants/domain/repository/merchant_base_repo.dart';
 import 'package:pile_up/features/merchants/domain/use_case/get_merchants_use_case.dart';
 import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
+import 'package:pile_up/features/profile/data/data_source/my_profile_remote_data_source.dart';
+import 'package:pile_up/features/profile/data/repo_implementation/my_profile_repo_imp.dart';
+import 'package:pile_up/features/profile/domain/repository/my_profile_base_repo.dart';
+import 'package:pile_up/features/profile/domain/use_case/get_my_profile_use_case.dart';
+import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 import 'package:pile_up/features/vendors/data/data_source/vendors_remote_data_source.dart';
 import 'package:pile_up/features/vendors/data/repo_implementation/vendors_repo_imp.dart';
 import 'package:pile_up/features/vendors/domain/repository/vendor_base_repo.dart';
@@ -58,7 +63,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetHomeCarouselBloc(getHomeCarouselUseCase: getIt()));
     getIt.registerLazySingleton(() => CreatePileBloc(createPileUseCase: getIt()));
     getIt.registerLazySingleton(() => GetUserFoldersBloc(getUserFoldersUseCase: getIt()));
-
+    getIt.registerLazySingleton(() => GetMyProfileBloc(getMyProfileUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(
@@ -72,6 +77,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetHomeCarouselUseCase(baseRepositoryHomeCarousel: getIt()));
     getIt.registerFactory(() => CreatePileUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryUserFolders: getIt()));
+    getIt.registerFactory(() => GetMyProfileUseCase(baseRepositoryMyProfile: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
@@ -86,6 +92,8 @@ class ServerLocator {
             () => CreatePileRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceUserFolders>(
             () => UserFoldersRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceMyProfile>(
+            () => MyProfileRemotelyDateSource());
 
     // Repo Implementation
     getIt.registerLazySingleton<BaseRepositoryBlogs>(
@@ -100,5 +108,7 @@ class ServerLocator {
             () => CreatePileRepositoryImp(baseRemotelyDataSourceCreatePile: getIt()));
     getIt.registerLazySingleton<BaseRepositoryUserFolders>(
             () => UserFoldersRepositoryImp(baseRemotelyDataSourceUserFolders: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryMyProfile>(
+            () => MyProfileRepositoryImp(baseRemotelyDataSourceMyProfile: getIt()));
   }
 }

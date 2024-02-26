@@ -12,6 +12,7 @@ import 'package:pile_up/features/create_pile/presentation/controller/create_pile
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
+import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
 void main() async {
@@ -63,6 +64,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetUserFoldersBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetMyProfileBloc>(),
         ),
       ],
       child: MaterialApp(

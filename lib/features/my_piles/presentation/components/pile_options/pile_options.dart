@@ -286,7 +286,7 @@ class _PileOptionsState extends State<PileOptions>
                       ),
                       SizedBox(
                         //Changes the tab content height
-                        height: AppSize.screenHeight! * .575,
+                        height: AppSize.screenHeight! * .57,
                         child: TabBarView(
                             controller: tabController,
                             children: const [

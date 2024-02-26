@@ -20,6 +20,7 @@ import 'package:pile_up/features/create_pile/presentation/controller/create_pile
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_event.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_state.dart';
+import 'package:pile_up/features/create_pile/presentation/widgets/toggle_row.dart';
 
 class CreatePileScreen extends StatefulWidget {
   const CreatePileScreen({super.key});
@@ -95,7 +96,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
               participatedAmountController.text = '';
               eventDate = DateTime.now();
               deadlineDate = DateTime.now();
-              // successSnackBar(context, 'Pile is created successfully!');
+
             } else if (state is CreatePileErrorMessageState) {
               errorSnackBar(context, 'Pile Error!');
             }
@@ -341,53 +342,4 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
   }
 }
 
-class CustomSwitchRow extends StatefulWidget {
-  CustomSwitchRow({
-    super.key,
-    required this.text,
-    required this.toggle,
-  });
 
-  final String text;
-  late bool toggle;
-
-  @override
-  State<CustomSwitchRow> createState() => _CustomSwitchRowState();
-}
-
-class _CustomSwitchRowState extends State<CustomSwitchRow> {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomText(
-          text: widget.text,
-          fontSize: AppSize.defaultSize! * 1.5,
-        ),
-        StatefulBuilder(builder: (
-          context,
-          setState,
-        ) {
-          return FlutterSwitch(
-            width: AppSize.defaultSize! * 5.6,
-            height: AppSize.defaultSize! * 2.4,
-            toggleSize: 16,
-            borderRadius: 8,
-            showOnOff: false,
-            padding: 1,
-            switchBorder: Border.all(color: AppColors.greyColor),
-            activeToggleColor: AppColors.primaryColor,
-            activeColor: AppColors.orange2,
-            inactiveColor: AppColors.orange2,
-            toggleColor: AppColors.greyColor,
-            value: widget.toggle,
-            onToggle: (bool value) {
-              setState(() => widget.toggle = value);
-            },
-          );
-        }),
-      ],
-    );
-  }
-}
