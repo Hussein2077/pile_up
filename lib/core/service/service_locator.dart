@@ -11,6 +11,11 @@ import 'package:pile_up/features/blogs/data/repo_implementation/blogs_repo_imp.d
 import 'package:pile_up/features/blogs/domain/repository/blog_base_repo.dart';
 import 'package:pile_up/features/blogs/domain/use_case/get_blogs_use_case.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/calendar/data/data_source/calendar_remote_data_source.dart';
+import 'package:pile_up/features/calendar/data/repo_implementation/calendar_repo_imp.dart';
+import 'package:pile_up/features/calendar/domain/repository/calender_base_repo.dart';
+import 'package:pile_up/features/calendar/domain/use_case/calendar_use_case.dart';
+import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/data/data_source/create_pile_remote_data_source.dart';
 import 'package:pile_up/features/create_pile/data/data_source/user_folder_remote_data_source.dart';
 import 'package:pile_up/features/create_pile/data/repo_implementation/create_pile_repo_imp.dart';
@@ -22,9 +27,13 @@ import 'package:pile_up/features/create_pile/domain/use_case/user_folder_use_cas
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/data/data_source/home_carousel_remote_data_source.dart';
+import 'package:pile_up/features/home/data/data_source/notifications_remote_data_source.dart';
 import 'package:pile_up/features/home/data/repo_implementation/home_carousel_repo_imp.dart';
+import 'package:pile_up/features/home/data/repo_implementation/notification_repo_imp.dart';
 import 'package:pile_up/features/home/domain/repository/home_carousel_base_repo.dart';
+import 'package:pile_up/features/home/domain/repository/notification_base_repo.dart';
 import 'package:pile_up/features/home/domain/use_case/get_home_carousel_use_case.dart';
+import 'package:pile_up/features/home/domain/use_case/get_notifications_use_case.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/merchants/data/data_source/merchants_remote_data_source.dart';
 import 'package:pile_up/features/merchants/data/repo_implementation/merchants_repo_imp.dart';
@@ -82,6 +91,8 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetMyWalletBloc(getMyWalletUseCase: getIt()));
     getIt.registerLazySingleton(() => GetFoldersBloc(getFoldersUseCase: getIt()));
     getIt.registerLazySingleton(() => GetPilesImInBloc(getPilesImInUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetPilesImInBloc(getPilesImInUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetCalendarBloc(getCalendarUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(
@@ -99,6 +110,8 @@ class ServerLocator {
     getIt.registerFactory(() => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
     getIt.registerFactory(() => GetFoldersUseCase(baseRepositoryFolders: getIt()));
     getIt.registerFactory(() => GetPilesImInUseCase(baseRepositoryPilesImIn: getIt()));
+    getIt.registerFactory(() => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
+    getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
@@ -121,6 +134,10 @@ class ServerLocator {
             () => FoldersRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourcePilesImIn>(
             () => PilesImInRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceNotifications>(
+            () => NotificationsRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceCalendar>(
+            () => CalendarRemotelyDateSource());
 
     // Repo Implementation
     getIt.registerLazySingleton<BaseRepositoryBlogs>(
@@ -143,5 +160,9 @@ class ServerLocator {
             () => FoldersRepositoryImp(baseRemotelyDataSourceFolders: getIt()));
     getIt.registerLazySingleton<BaseRepositoryPilesImIn>(
             () => PilesImInRepositoryImp(baseRemotelyDataSourcePilesImIn: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryNotifications>(
+            () => NotificationsRepositoryImp(baseRemotelyDataSourceNotifications: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryCalendar>(
+            () => CalendarRepositoryImp(baseRemotelyDataSourceCalendar: getIt()));
   }
 }

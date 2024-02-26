@@ -16,7 +16,7 @@ class MyPile {
   final bool? allowPayerToLevMsg;
   final List<Report>? reports;
   final List<Invitation>? invitations;
-  final List<PilesManager>? pilesManagers;
+  final List<PileManager>? pilesManagers;
 
   MyPile({
     this.pileName,
@@ -154,20 +154,20 @@ class Report {
   };
 }
 
-class PilesManager {
+class PileManager {
   final int? managerId;
   final String? managerName;
   final String? email;
   final DateTime? date;
 
-  PilesManager({
+  PileManager({
     this.managerId,
     this.managerName,
     this.email,
     this.date,
   });
 
-  factory PilesManager.fromJson(Map<String, dynamic> json) => PilesManager(
+  factory PileManager.fromJson(Map<String, dynamic> json) => PileManager(
     managerId: json["managerId"],
     managerName: json["managerName"],
     email: json["email"],

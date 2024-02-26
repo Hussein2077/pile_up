@@ -8,9 +8,11 @@ import 'package:pile_up/core/translations/translations.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_notifications/get_notifications_bloc.dart';
 import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_controller/folders_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
@@ -79,6 +81,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetPilesImInBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetNotificationsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetCalendarBloc>(),
         ),
       ],
       child: MaterialApp(
