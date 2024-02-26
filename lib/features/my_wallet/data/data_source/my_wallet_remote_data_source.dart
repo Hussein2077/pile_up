@@ -4,29 +4,29 @@ import 'package:dio/dio.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
 import 'package:pile_up/core/utils/constant_api.dart';
 import 'package:pile_up/features/blogs/data/model/blog_model.dart';
+import 'package:pile_up/features/my_wallet/data/models/my_wallet_model.dart';
 
-abstract class BaseRemotelyDataSourceBlogs {
-  Future<List<BlogModel>> getBlogs();
+abstract class BaseRemotelyDataSourceMyWallet {
+  Future<MyWalletModel> getMyWallet();
 }
 
 
-class BlogsRemotelyDateSource extends BaseRemotelyDataSourceBlogs {
+class MyWalletRemotelyDateSource extends BaseRemotelyDataSourceMyWallet {
   @override
-  Future<List<BlogModel>> getBlogs() async {
+  Future<MyWalletModel> getMyWallet() async {
     Options options = await DioHelper().options();
 
     try {
       final response = await Dio().get(
-        ConstantApi.getBlogs,
+        ConstantApi.getMyWallet,
         options: options,
       );
-      List<BlogModel>    jsonData = List<BlogModel>.from(
-          (response.data as List).map((e) => BlogModel.fromJson(e)));
+      MyWalletModel jsonData = MyWalletModel.fromJson(response.data);
       log('$jsonData dddddddddd');
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
-          dioError: e, endpointName: "get Blogs");
+          dioError: e, endpointName: "get MyWallet");
     }
   }
 }

@@ -31,6 +31,21 @@ import 'package:pile_up/features/merchants/data/repo_implementation/merchants_re
 import 'package:pile_up/features/merchants/domain/repository/merchant_base_repo.dart';
 import 'package:pile_up/features/merchants/domain/use_case/get_merchants_use_case.dart';
 import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
+import 'package:pile_up/features/my_piles/data/data_source/folders_remote_data_source.dart';
+import 'package:pile_up/features/my_piles/data/data_source/piles_im_in_remote_data_source.dart';
+import 'package:pile_up/features/my_piles/data/repo_implementation/folders_repo_imp.dart';
+import 'package:pile_up/features/my_piles/data/repo_implementation/piles_im_in_repo_imp.dart';
+import 'package:pile_up/features/my_piles/domain/repository/folder_base_repo.dart';
+import 'package:pile_up/features/my_piles/domain/repository/piles_im_in_base_repo.dart';
+import 'package:pile_up/features/my_piles/domain/use_case/get_folders_use_case.dart';
+import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_use_case.dart';
+import 'package:pile_up/features/my_piles/presentation/controller/folders_controller/folders_bloc.dart';
+import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
+import 'package:pile_up/features/my_wallet/data/data_source/my_wallet_remote_data_source.dart';
+import 'package:pile_up/features/my_wallet/data/repo_implementation/blogs_repo_imp.dart';
+import 'package:pile_up/features/my_wallet/domain/repository/MyWallet_base_repo.dart';
+import 'package:pile_up/features/my_wallet/domain/use_case/get_blogs_use_case.dart';
+import 'package:pile_up/features/my_wallet/presentation/controller/controller/my_wallet_bloc.dart';
 import 'package:pile_up/features/profile/data/data_source/my_profile_remote_data_source.dart';
 import 'package:pile_up/features/profile/data/repo_implementation/my_profile_repo_imp.dart';
 import 'package:pile_up/features/profile/domain/repository/my_profile_base_repo.dart';
@@ -64,6 +79,9 @@ class ServerLocator {
     getIt.registerLazySingleton(() => CreatePileBloc(createPileUseCase: getIt()));
     getIt.registerLazySingleton(() => GetUserFoldersBloc(getUserFoldersUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyProfileBloc(getMyProfileUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetMyWalletBloc(getMyWalletUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetFoldersBloc(getFoldersUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetPilesImInBloc(getPilesImInUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(
@@ -78,6 +96,9 @@ class ServerLocator {
     getIt.registerFactory(() => CreatePileUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryUserFolders: getIt()));
     getIt.registerFactory(() => GetMyProfileUseCase(baseRepositoryMyProfile: getIt()));
+    getIt.registerFactory(() => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
+    getIt.registerFactory(() => GetFoldersUseCase(baseRepositoryFolders: getIt()));
+    getIt.registerFactory(() => GetPilesImInUseCase(baseRepositoryPilesImIn: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
@@ -94,6 +115,12 @@ class ServerLocator {
             () => UserFoldersRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceMyProfile>(
             () => MyProfileRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceMyWallet>(
+            () => MyWalletRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourceFolders>(
+            () => FoldersRemotelyDateSource());
+    getIt.registerLazySingleton<BaseRemotelyDataSourcePilesImIn>(
+            () => PilesImInRemotelyDateSource());
 
     // Repo Implementation
     getIt.registerLazySingleton<BaseRepositoryBlogs>(
@@ -110,5 +137,11 @@ class ServerLocator {
             () => UserFoldersRepositoryImp(baseRemotelyDataSourceUserFolders: getIt()));
     getIt.registerLazySingleton<BaseRepositoryMyProfile>(
             () => MyProfileRepositoryImp(baseRemotelyDataSourceMyProfile: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryMyWallet>(
+            () => MyWalletRepositoryImp(baseRemotelyDataSourceMyWallet: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryFolders>(
+            () => FoldersRepositoryImp(baseRemotelyDataSourceFolders: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryPilesImIn>(
+            () => PilesImInRepositoryImp(baseRemotelyDataSourcePilesImIn: getIt()));
   }
 }

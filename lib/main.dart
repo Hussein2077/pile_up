@@ -12,6 +12,9 @@ import 'package:pile_up/features/create_pile/presentation/controller/create_pile
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
+import 'package:pile_up/features/my_piles/presentation/controller/folders_controller/folders_bloc.dart';
+import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
+import 'package:pile_up/features/my_wallet/presentation/controller/controller/my_wallet_bloc.dart';
 import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
@@ -67,6 +70,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetMyProfileBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetMyWalletBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetFoldersBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetPilesImInBloc>(),
         ),
       ],
       child: MaterialApp(

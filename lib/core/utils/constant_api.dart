@@ -14,6 +14,9 @@ class ConstantApi {
   static const String getHomeCarousel = "${baseUrl}CarouselSliders";
   static const String getUserFolders = "${baseUrl}UsersFolders";
   static const String getMyProfile = "${baseUrl}MyProfile";
+  static const String getMyWallet = "${baseUrl}MyWallet";
+  static const String getFolders = "${baseUrl}Folders";
+  static const String getPilesImIn = "${baseUrl}PilesImIn";
 
 
   //Post
