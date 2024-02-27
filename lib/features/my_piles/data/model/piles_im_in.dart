@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class PileImIn {
   final String pileName;
   final String description;
@@ -88,4 +90,11 @@ class Member {
     };
   }
 }
+
+// class PilesImInSearch{
+//   final String pileName;
+// PilesImInSearch({
+//   required this.pileName
+// });
+// }
 

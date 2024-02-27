@@ -19,4 +19,16 @@ class PilesImInRepositoryImp extends BaseRepositoryPilesImIn {
       return right(DioHelper.buildFailure(e));
     }
   }
+
+  @override
+  Future<Either<List<PileImIn>, Failure>> getPilesImInBySearch(String pileName) async{
+   try {
+     final result = await baseRemotelyDataSourcePilesImIn.getPilesImInBySearch(pileName);
+     return left(result);
+   } on Exception catch(e){
+     return right(DioHelper.buildFailure(e));
+   }
+  }
+
+
 }

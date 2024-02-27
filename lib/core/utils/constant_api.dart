@@ -16,7 +16,9 @@ class ConstantApi {
   static const String getMyProfile = "${baseUrl}MyProfile";
   static const String getMyWallet = "${baseUrl}MyWallet";
   static const String getFolders = "${baseUrl}Folders";
+  static const String getFoldersBySearch = "${baseUrl}FoldersBySearch";
   static const String getPilesImIn = "${baseUrl}PilesImIn";
+  static const String getPilesImInBySearch = "${baseUrl}PilesImInBySearch";
   static const String getNotifications = "${baseUrl}Notification";
   static const String getCalendar = "${baseUrl}Calendar";
 

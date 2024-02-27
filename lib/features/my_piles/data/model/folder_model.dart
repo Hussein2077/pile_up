@@ -5,7 +5,6 @@ class FolderModel {
   final String folderName;
   final List<MyPile> myPiles;
 
-
   FolderModel({
     required this.folderId,
     required this.folderName,
@@ -13,14 +12,24 @@ class FolderModel {
   });
 
   factory FolderModel.fromJson(Map<String, dynamic> json) => FolderModel(
-    folderId: json["blogId"],
-    folderName: json["title"],
-    myPiles: json["content"],
-  );
+        folderId: json["blogId"],
+        folderName: json["title"],
+        myPiles: json["content"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "blogId": folderId,
-    "title": folderName,
-    "content": myPiles,
-  };
+        "blogId": folderId,
+        "title": folderName,
+        "content": myPiles,
+      };
 }
+
+// class FolderSearch {
+//   final String? pileName;
+//   final String? folderName;
+//
+//   FolderSearch({
+//     this.pileName,
+//     this.folderName,
+//   });
+// }

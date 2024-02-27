@@ -35,6 +35,7 @@ import 'package:pile_up/features/home/domain/repository/notification_base_repo.d
 import 'package:pile_up/features/home/domain/use_case/get_home_carousel_use_case.dart';
 import 'package:pile_up/features/home/domain/use_case/get_notifications_use_case.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_notifications/get_notifications_bloc.dart';
 import 'package:pile_up/features/merchants/data/data_source/merchants_remote_data_source.dart';
 import 'package:pile_up/features/merchants/data/repo_implementation/merchants_repo_imp.dart';
 import 'package:pile_up/features/merchants/domain/repository/merchant_base_repo.dart';
@@ -46,10 +47,14 @@ import 'package:pile_up/features/my_piles/data/repo_implementation/folders_repo_
 import 'package:pile_up/features/my_piles/data/repo_implementation/piles_im_in_repo_imp.dart';
 import 'package:pile_up/features/my_piles/domain/repository/folder_base_repo.dart';
 import 'package:pile_up/features/my_piles/domain/repository/piles_im_in_base_repo.dart';
+import 'package:pile_up/features/my_piles/domain/use_case/get_folders_by_search_uc.dart';
 import 'package:pile_up/features/my_piles/domain/use_case/get_folders_use_case.dart';
+import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_by_search_uc.dart';
 import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_use_case.dart';
+import 'package:pile_up/features/my_piles/presentation/controller/folders_by_search_controller/folders_by_search_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_controller/folders_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
+import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_search_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_wallet/data/data_source/my_wallet_remote_data_source.dart';
 import 'package:pile_up/features/my_wallet/data/repo_implementation/blogs_repo_imp.dart';
 import 'package:pile_up/features/my_wallet/domain/repository/MyWallet_base_repo.dart';
@@ -90,8 +95,10 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetMyProfileBloc(getMyProfileUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyWalletBloc(getMyWalletUseCase: getIt()));
     getIt.registerLazySingleton(() => GetFoldersBloc(getFoldersUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetFoldersBySearchBloc(getFoldersBySearchUseCase: getIt()));
     getIt.registerLazySingleton(() => GetPilesImInBloc(getPilesImInUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetPilesImInBloc(getPilesImInUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetPilesImInBySearchBloc(getPilesImInBySearchUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetNotificationsBloc(getNotificationsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetCalendarBloc(getCalendarUseCase: getIt()));
 
 //use_case
@@ -109,7 +116,9 @@ class ServerLocator {
     getIt.registerFactory(() => GetMyProfileUseCase(baseRepositoryMyProfile: getIt()));
     getIt.registerFactory(() => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
     getIt.registerFactory(() => GetFoldersUseCase(baseRepositoryFolders: getIt()));
+    getIt.registerFactory(() => GetFoldersBySearchUseCase(baseRepositoryFolders: getIt()));
     getIt.registerFactory(() => GetPilesImInUseCase(baseRepositoryPilesImIn: getIt()));
+    getIt.registerFactory(() => GetPilesImInBySearchUseCase(baseRepositoryPilesImIn: getIt()));
     getIt.registerFactory(() => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
     getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
 

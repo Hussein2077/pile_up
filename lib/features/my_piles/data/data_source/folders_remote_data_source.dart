@@ -8,10 +8,13 @@ import 'package:pile_up/features/my_piles/data/model/my_piles_model.dart';
 
 abstract class BaseRemotelyDataSourceFolders {
   Future<List<FolderModel>> getFolders();
-  Future<Map<String,dynamic>> deletePileManager(PileManager manager);
-  Future<Map<String,dynamic>> addPileManager(PileManager manager);
-}
 
+  Future<Map<String, dynamic>> deletePileManager(PileManager manager);
+
+  Future<Map<String, dynamic>> addPileManager(PileManager manager);
+
+  Future<List<FolderModel>> getFoldersBySearch(String folderSearch);
+}
 
 class FoldersRemotelyDateSource extends BaseRemotelyDataSourceFolders {
   @override
@@ -28,12 +31,12 @@ class FoldersRemotelyDateSource extends BaseRemotelyDataSourceFolders {
       log('$jsonData dddddddddd');
       return jsonData;
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(
-          dioError: e, endpointName: "get Folders");
+      throw DioHelper.handleDioError(dioError: e, endpointName: "get Folders");
     }
   }
+
   @override
-  Future <Map<String,dynamic>> deletePileManager(PileManager manager) async {
+  Future<Map<String, dynamic>> deletePileManager(PileManager manager) async {
     Options options = await DioHelper().options();
     log('${manager.managerName}');
     try {
@@ -50,8 +53,9 @@ class FoldersRemotelyDateSource extends BaseRemotelyDataSourceFolders {
           dioError: e, endpointName: "delete PileManager");
     }
   }
+
   @override
-  Future <Map<String,dynamic>> addPileManager(PileManager manager) async {
+  Future<Map<String, dynamic>> addPileManager(PileManager manager) async {
     Options options = await DioHelper().options();
     log('${manager.managerName}');
     try {
@@ -66,6 +70,28 @@ class FoldersRemotelyDateSource extends BaseRemotelyDataSourceFolders {
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "add PileManager");
+    }
+  }
+
+  @override
+  Future<List<FolderModel>> getFoldersBySearch(
+      String folderSearch) async {
+    Options options = await DioHelper().options();
+
+    final body = {
+      'folderName': folderSearch,
+    };
+    try {
+      final response =
+      await Dio().get(
+        ConstantApi.getFoldersBySearch, options: options, data: body,);
+
+      List<FolderModel> jsonData = List<FolderModel>.from(
+          (response.data as List).map((e) => FolderModel.fromJson(e)));
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "get Folders by search");
     }
   }
 }

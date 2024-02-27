@@ -7,4 +7,5 @@ abstract class BaseRepositoryFolders {
   Future<Either<List<FolderModel>, Failure>> getFolders();
   Future<Either<Map<String, dynamic>, Failure>>deletePileManager(PileManager manager);
   Future<Either<Map<String, dynamic>, Failure>> addPileManager(PileManager manager);
+  Future<Either<List<FolderModel>, Failure>> getFoldersBySearch(String folderName);
 }
