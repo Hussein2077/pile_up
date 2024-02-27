@@ -1,9 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -73,7 +74,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
   @override
   Widget build(BuildContext context) {
     String? folderName1;
-
+    FilePickerResult? result;
     return Scaffold(
       appBar: homeAppBar(context,
           bottom: false,
@@ -123,7 +124,20 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             height: AppSize.defaultSize! * 1.6,
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: ()async{
+                              result = await FilePicker.platform.pickFiles(
+                                type: FileType.custom,
+                                allowedExtensions: ['jpg', 'png', 'jpeg'],
+                              );
+                              setState((){});
+
+                              if (result != null) {
+                                File file = File(result?.files.single.path??"");
+                                print(file);
+                              } else {
+                                print("No file selected");
+                              }
+                            },
                             child: Container(
                               height: AppSize.screenHeight! * .2,
                               width: AppSize.screenWidth! * .84,
@@ -133,7 +147,9 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                                       Border.all(color: AppColors.greyColor4),
                                   borderRadius: BorderRadius.circular(
                                       AppSize.defaultSize!)),
-                              child: Icon(
+                              child: result != null?
+                              Image.network(result.files[0].path!):
+                              Icon(
                                 Icons.add_a_photo,
                                 color: Colors.white,
                                 size: AppSize.defaultSize! * 7,
@@ -279,7 +295,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                                   participationAmount: int.parse(
                                       participatedAmountController.text),
                                   status: true,
-                                  pileImage: AssetPath.image,
+                                  pileImage: result!=null? result!.files[0].path: AssetPath.image,
                                   categoryId: typeCategory[type],
                                   collectedAmount: 0,
                                   totalCollectedPublic: totalCollectedPublic,

@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: AppSize.defaultSize! * 1.5,
                 ),
                 SizedBox(
-                  height: AppSize.defaultSize! * 12,
+                  height: AppSize.defaultSize! * 12.7,
                   child: BlocBuilder<GetBlogsBloc, GetBlogsState>(
                     builder: (context, state) {
                       if (state is GetBlogsSuccessMessageState) {
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         PageTransitionAnimation.fade,
                                   );
                                 }),
-                            SizedBox(height: AppSize.defaultSize! - 6.1),
+                            SizedBox(height: AppSize.defaultSize! - 5),
                             Expanded(
                               child: ListView.builder(
                                   itemCount: state.internModel.length,

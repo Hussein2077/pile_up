@@ -49,7 +49,7 @@ class _MiddleCarouselCardState extends State<MiddleCarouselCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: AppSize.screenWidth! * .6,
+                width: AppSize.screenWidth! * .55,
                 child: CustomText(
                   text: widget.text ?? 'Mohamed\'s Birthday',
                   color: Colors.black,
