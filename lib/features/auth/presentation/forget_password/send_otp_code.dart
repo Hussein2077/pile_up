@@ -20,7 +20,7 @@ class _SendOTPCodeState extends State<SendOTPCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context,
-          text: StringManager.forgetPassword.tr(), isIcon: true),
+          text: StringManager.resetPassword.tr(), isIcon: true),
       body: Padding(
         padding: EdgeInsets.all(AppSize.defaultSize! * 2),
         child: Column(
@@ -31,8 +31,10 @@ class _SendOTPCodeState extends State<SendOTPCode> {
               maxLines: 4,
               style: TextStyle(
                   fontSize: AppSize.defaultSize! * 1.6,
-                  fontWeight: FontWeight.w400,
-                  overflow: TextOverflow.ellipsis),
+                  fontWeight: FontWeight.w500,
+                  overflow: TextOverflow.ellipsis,
+              color: AppColors.textFadedColor
+              ),
             ),
             SizedBox(
               height: AppSize.defaultSize! * 4,
@@ -59,8 +61,8 @@ class _SendOTPCodeState extends State<SendOTPCode> {
                   StringManager.resendCode.tr(),
                   maxLines: 4,
                   style: TextStyle(
-                      fontSize: AppSize.defaultSize! * 1.7,
-                      fontWeight: FontWeight.w700,
+                      fontSize: AppSize.defaultSize! * 1.6,
+                      fontWeight: FontWeight.w600,
                       decoration: TextDecoration.underline,
                       decorationColor: AppColors.primaryColor,
                       decorationThickness: 1,

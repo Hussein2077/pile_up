@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: AppSize.defaultSize! * 5,
+                height: AppSize.defaultSize! * 8.4,
               ),
               Image.asset(
                 AssetPath.logo1,
@@ -84,23 +84,37 @@ class _LoginScreenState extends State<LoginScreen> {
               ColumnWithTextField(
                 text: StringManager.email.tr(),
                 controller: emailController,
-              ),
-              ColumnWithTextField(
-                text: StringManager.password.tr(),
-                obscureText: isVisible,
-                controller: passwordController,
-                suffixIcon: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                  child: Icon(
-                    isVisible ? Icons.visibility_off : Icons.visibility,
-                    color: Colors.grey,
-                  ),
+                fontSize: AppSize.defaultSize!*1.6,
+                fontWeight: FontWeight.w400,
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: AppColors.primaryColor,
+                  size: AppSize.defaultSize! * 2.5,
                 ),
               ),
+            ColumnWithTextField(
+              text: StringManager.password.tr(),
+              controller: passwordController,
+              fontSize: AppSize.defaultSize!*1.6,
+              fontWeight: FontWeight.w400,
+              prefixIcon: Icon(
+                Icons.lock_outlined,
+                color: AppColors.primaryColor,
+                size: AppSize.defaultSize! * 2,
+              ),
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
+                },
+                child: Icon(
+                  isVisible ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.grey,
+                  size: AppSize.defaultSize! * 1.8,
+                ),
+              ),
+            ),
               Padding(
                 padding: EdgeInsets.only(
                     top: AppSize.defaultSize! * 1.6,
@@ -123,6 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               MainButton(
                 text: StringManager.loginCap.tr(),
+                fontSize: AppSize.defaultSize!*1.8,
+                fontWeight: FontWeight.w600,
                 onTap: () {
                   Navigator.pushNamed(context, Routes.main);
                 },

@@ -117,7 +117,7 @@ AppBar homeAppBar(BuildContext context,
             onPressed: leadingOnPressed,
             icon: Image.asset(
               AssetPath.menu,
-              width: AppSize.defaultSize! * 2,
+              width: AppSize.defaultSize! * 2.4,
               height: AppSize.defaultSize! * 2,
             ),
           )

@@ -16,13 +16,33 @@ class ManagerView extends StatefulWidget {
 class _ManagerViewState extends State<ManagerView> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+      floatingActionButton: Container(
+        width: AppSize.defaultSize! * 4.8,
+        height: AppSize.defaultSize! * 4.8,
+        decoration: BoxDecoration(
+          color: AppColors.green,
+          // shape: BoxShape.circle,
+          border: Border.all(color: AppColors.green),
+          borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2.4),
+        ),
+        child: Center(
+          child: InkWell(
+            onTap: () {},
+            child: Icon(Icons.add,
+                size: AppSize.defaultSize! * 3,
+                color: AppColors.backgroundColor),
+          ),
+        ),
+      ),
+      body: Padding(
       padding: EdgeInsets.all(AppSize.defaultSize! * 1.6),
       child: Column(
         children: [
           CustomTextField(
             hintText: StringManager.searchForManager.tr(),
-            suffixIcon: Icon(Icons.search,size: AppSize.defaultSize!*1.9),
+            suffixIcon: Icon(Icons.search,size: AppSize.defaultSize!*1.9, color: AppColors.textSearchHintColor,),
+            hintStyle: const TextStyle(color: AppColors.textSearchHintColor),
             // height: AppSize.defaultSize!*4,
           ),
           SizedBox(height: AppSize.defaultSize!,),
@@ -39,7 +59,7 @@ class _ManagerViewState extends State<ManagerView> {
                           text3: '23/08/2023'
                       ),
                       if(index!=19)
-                      const Divider(),
+                        const Divider(),
                     ],
                   );
                 }),
@@ -49,7 +69,7 @@ class _ManagerViewState extends State<ManagerView> {
           //     child: FloatingActionButton(onPressed: (){})),
         ],
       ),
-    );
+    ),);
   }
 
   Widget managerRow({String?text, String?text2, String?text3,}) {

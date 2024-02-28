@@ -30,7 +30,7 @@ class _MyWalletDetailsState extends State<MyWalletDetails>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.myWalledDetailsScreenBackground,
+      backgroundColor: AppColors.backgroundColor,
       appBar: appBar(context, text: 'My Wallet Details', isIcon: true),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -57,7 +57,7 @@ class _MyWalletDetailsState extends State<MyWalletDetails>
             SizedBox(height: AppSize.defaultSize! * 1.6),
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backGroundColor,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: AppColors.borderColor, width: .5),
               ),

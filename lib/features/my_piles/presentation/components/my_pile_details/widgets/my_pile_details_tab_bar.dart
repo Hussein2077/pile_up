@@ -1,17 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
-class OptionsTabBar extends StatefulWidget {
-  const OptionsTabBar({super.key, required this.tabController});
+class MyPileDetailsTabBar extends StatefulWidget {
+  const MyPileDetailsTabBar({super.key, required this.tabController});
 final TabController tabController;
   @override
-  State<OptionsTabBar> createState() => _OptionsTabBarState();
+  State<MyPileDetailsTabBar> createState() => _MyPileDetailsTabBarState();
 }
 
-class _OptionsTabBarState extends State<OptionsTabBar> {
+class _MyPileDetailsTabBarState extends State<MyPileDetailsTabBar> {
   @override
   Widget build(BuildContext context) {
     return             TabBar(
@@ -25,7 +24,7 @@ class _OptionsTabBarState extends State<OptionsTabBar> {
           fontWeight: FontWeight.w600,
 
         ),
-        padding: EdgeInsets.all(AppSize.defaultSize!),
+        padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
         tabs: [
           Padding(
             padding:   EdgeInsets.only(bottom: AppSize.defaultSize!*.5),

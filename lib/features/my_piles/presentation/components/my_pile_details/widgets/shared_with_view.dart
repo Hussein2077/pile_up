@@ -22,7 +22,8 @@ class _SharedWithViewState extends State<SharedWithView> {
         children: [
           CustomTextField(
             hintText: StringManager.searchForName.tr(),
-            suffixIcon: Icon(Icons.search,size: AppSize.defaultSize!*1.9),
+            suffixIcon: Icon(Icons.search,size: AppSize.defaultSize!*1.9, color: AppColors.textSearchHintColor,),
+            hintStyle: const TextStyle(color: AppColors.textSearchHintColor),
             // height: AppSize.defaultSize!*4,
           ),
           SizedBox(height: AppSize.defaultSize!,),

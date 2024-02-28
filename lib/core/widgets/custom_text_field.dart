@@ -12,6 +12,8 @@ class CustomTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final bool readOnly;
+  final bool? isFilled;
+  final Color? fillColor;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final void Function()? onTap;
@@ -24,6 +26,8 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.readOnly = false,
+    this.fillColor,
+    this.isFilled,
     this.prefixIcon,
     this.suffixIcon,
     this.onTap,
@@ -49,6 +53,8 @@ maxLines: widget.maxLines,
 
 
         decoration: InputDecoration(
+          filled: widget.isFilled,
+          fillColor: widget.fillColor,
           labelText: widget.labelText,
           hintText: widget.hintText,
           contentPadding:   EdgeInsets.all(AppSize.defaultSize!*1.6),

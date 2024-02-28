@@ -10,7 +10,7 @@ import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/main_screen.dart';
-import 'package:pile_up/features/my_piles/presentation/components/pile_options/pile_options.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/my_pile_details.dart';
 import 'package:pile_up/features/my_piles/presentation/widgets/folder.dart';
 
 class MyPiles extends StatefulWidget {
@@ -62,6 +62,7 @@ class _MyPilesState extends State<MyPiles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: homeAppBar(context,
           bottom: false,
           leading: false,
@@ -90,6 +91,8 @@ class _MyPilesState extends State<MyPiles> {
             children: [
               CustomTextField(
                 hintText: StringManager.searchFor.tr(),
+                fillColor: AppColors.white,
+                isFilled: true,
                 height: AppSize.defaultSize! * 5,
                 width: AppSize.screenWidth!,
                 hintStyle: TextStyle(
@@ -110,7 +113,7 @@ class _MyPilesState extends State<MyPiles> {
                 onTap: () {
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
-                    screen: const PileOptions(),
+                    screen: const MyPileDetails(),
                     withNavBar: false,
                     pageTransitionAnimation: PageTransitionAnimation.fade,
                   );
@@ -125,7 +128,7 @@ class _MyPilesState extends State<MyPiles> {
                 onTap: () {
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
-                    screen: const PileOptions(),
+                    screen: const MyPileDetails(),
                     withNavBar: false,
                     pageTransitionAnimation: PageTransitionAnimation.fade,
                   );
@@ -140,7 +143,7 @@ class _MyPilesState extends State<MyPiles> {
                 onTap: () {
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
-                    screen: const PileOptions(),
+                    screen: const MyPileDetails(),
                     withNavBar: false,
                     pageTransitionAnimation: PageTransitionAnimation.fade,
                   );

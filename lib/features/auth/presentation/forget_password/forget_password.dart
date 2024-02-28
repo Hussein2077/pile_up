@@ -53,6 +53,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ),
             ColumnWithTextField(
               text: StringManager.enterYourEmail.tr(),
+              fontSize: AppSize.defaultSize!*1.6,
               controller: emailController,
               keyboardType: TextInputType.phone,
             ),
@@ -102,6 +103,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             SizedBox(height: AppSize.defaultSize! * 3.5),
             MainButton(
               text: StringManager.sendCode.tr(),
+              fontSize: AppSize.defaultSize!*1.8,
+              fontWeight: FontWeight.w600,
               onTap: () {
                 Navigator.pushNamed(context, Routes.sendOTPCode);
               },

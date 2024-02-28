@@ -23,7 +23,7 @@ class GetCalendarErrorMessageState extends GetCalendarState{
 }
 
 class GetCalendarSuccessMessageState extends GetCalendarState{
-  final List<Calendar> internModel ;
+  final List<CalendarEvent> internModel ;
 
   const GetCalendarSuccessMessageState({ required this.internModel});
 }

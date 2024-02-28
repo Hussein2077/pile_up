@@ -107,7 +107,7 @@ class _BlogScreenState extends State<BlogScreen> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4.0),
                           child: BlogStoreBuilder(
-                            blog: false,
+                            imageCircular: false,
                             stores: BlogStoreCardInfo(
                                 text: widget.blogArguments.blogs[i].title,
                                 description:

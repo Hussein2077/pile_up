@@ -17,6 +17,7 @@ final void Function()? onTap;
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(AppSize.defaultSize!),
+        border: Border.all(color: AppColors.borderColor, width: .2),
       ),
       child: Padding(
         padding: EdgeInsets.all(AppSize.defaultSize!),

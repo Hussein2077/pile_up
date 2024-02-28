@@ -44,7 +44,7 @@ class StringManager {
   static const String secondName = "Last Name";
   static const String phoneNum = "Mobile Number";
   static const String edit = "Edit";
-  static const String login = " Login";
+  static const String login = "Login";
   static const String loginCap = " LOG IN";
   static const String email = "E-Mail Address";
   static const String password = "Password";

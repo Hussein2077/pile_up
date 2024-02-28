@@ -76,6 +76,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
     String? folderName1;
     FilePickerResult? result;
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: homeAppBar(context,
           bottom: false,
           leading: false,

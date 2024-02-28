@@ -5,20 +5,25 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton(
-      {super.key,
-      this.onTap,
-      this.color,
-      this.textColor,
-      required this.text,
-      this.height,
-      this.width,
-      this.widget});
+  const MainButton({
+    super.key,
+    this.onTap,
+    this.color,
+    this.textColor,
+    this.fontSize,
+    this.fontWeight,
+    required this.text,
+    this.height,
+    this.width,
+    this.widget,
+  });
 
   final void Function()? onTap;
   final Color? color;
   final Color? textColor;
   final String text;
+  final double? fontSize;
+  final FontWeight? fontWeight;
   final double? height;
   final double? width;
   final Widget? widget;
@@ -47,7 +52,8 @@ class MainButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: textColor ?? Colors.white,
-                  fontSize: AppSize.defaultSize! * 1.5,
+                  fontSize: fontSize?? AppSize.defaultSize! * 1.5,
+                  fontWeight: fontWeight ?? FontWeight.w600,
                 ),
               ),
             ],
@@ -64,6 +70,8 @@ class SecondButton extends StatelessWidget {
     this.onTap,
     this.color,
     this.textColor,
+    this.fontSize,
+    this.fontWeight,
     required this.text,
     this.height,
     this.width,
@@ -77,6 +85,8 @@ class SecondButton extends StatelessWidget {
   final Color? color;
   final Color? textColor;
   final String text;
+  final double? fontSize;
+  final FontWeight? fontWeight;
   final double? height;
   final double? width;
   final bool showIcon;
@@ -92,7 +102,7 @@ class SecondButton extends StatelessWidget {
         height: height ?? AppSize.defaultSize! * 4,
         width: width ?? AppSize.screenWidth! * .9,
         decoration: BoxDecoration(
-            color: color ?? AppColors.backGroundColor,
+            color: color ?? AppColors.white,
             borderRadius: BorderRadius.circular(AppSize.defaultSize!),
             border: Border.all(color: AppColors.primaryColor)),
         child: Center(
@@ -101,20 +111,20 @@ class SecondButton extends StatelessWidget {
           children: [
             showIcon
                 ? Padding(
-                  padding: EdgeInsets.only(right: AppSize.defaultSize! /2),
-                  child: SvgPicture.asset(
+                    padding: EdgeInsets.only(right: AppSize.defaultSize! / 2),
+                    child: SvgPicture.asset(
                       iconPath!,
                       height: iconHeight,
                       width: iconWidth,
                     ),
-                )
+                  )
                 : Container(),
             // Image.asset(AssetPath.changePassword,scale: 1.2,),
             CustomText(
               text: text,
               color: textColor ?? AppColors.primaryColor,
-              fontSize: AppSize.defaultSize! * 1.5,
-              fontWeight: FontWeight.w700,
+              fontSize: fontSize ?? AppSize.defaultSize! * 1.5,
+              fontWeight: fontWeight ?? FontWeight.w700,
             ),
           ],
         )),

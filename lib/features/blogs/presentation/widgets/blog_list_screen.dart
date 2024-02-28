@@ -33,16 +33,15 @@ class _BlogListScreenState extends State<BlogListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context, text: StringManager.blogs.tr(), isIcon: true),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: AppSize.defaultSize!,
-          ),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 1.4),
-            child: Row(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize!*1.6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: AppSize.defaultSize!,
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
@@ -58,15 +57,13 @@ class _BlogListScreenState extends State<BlogListScreen> {
                 )
               ],
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: widget.blogs.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.all(AppSize.defaultSize!),
-                    child: InkWell(
+            SizedBox(height: AppSize.defaultSize!*2),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: widget.blogs.length,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(
                       onTap: () {
                         Navigator.pushNamed(
                           context,
@@ -77,18 +74,21 @@ class _BlogListScreenState extends State<BlogListScreen> {
                           ),
                         );
                       },
-                      child: BlogStoreBuilder(
-                        stores: BlogStoreCardInfo(
-                          text: widget.blogs[index].title,
-                          description: widget.blogs[index].content,
-                          image: widget.blogs[index].image.toString(),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: BlogStoreBuilder(
+                          stores: BlogStoreCardInfo(
+                            text: widget.blogs[index].title,
+                            description: widget.blogs[index].content,
+                            image: widget.blogs[index].image.toString(),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
-          )
-        ],
+                    );
+                  }),
+            )
+          ],
+        ),
       ),
     );
   }

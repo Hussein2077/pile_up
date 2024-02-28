@@ -8,7 +8,7 @@ class GetCalendarUseCase {
 
   GetCalendarUseCase({required this.baseRepositoryCalendar});
 
-  Future<Either<List<Calendar>, Failure>> getCalendars() async {
+  Future<Either<List<CalendarEvent>, Failure>> getCalendars() async {
     final result = await baseRepositoryCalendar.getCalendars();
 
     return result;

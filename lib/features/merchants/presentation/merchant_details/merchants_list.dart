@@ -14,40 +14,44 @@ class MerchantDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: appBar(context, text: StringManager.merchants.tr(), isIcon: true),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: AppSize.defaultSize!,),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 1.4),
-            child: CustomText(
-              text: StringManager.enjoyFantasticDiscounts.tr(),
-              color: AppColors.blackLow,
-              fontSize: AppSize.defaultSize! * 2,
-              fontWeight: FontWeight.w700,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 1.6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: AppSize.defaultSize!*1.4),
+            Padding(
+              padding:
+                  EdgeInsets.only(bottom: AppSize.defaultSize! * 1.6),
+              child: CustomText(
+                text: StringManager.enjoyFantasticDiscounts.tr(),
+                color: AppColors.blackLow,
+                fontSize: AppSize.defaultSize! * 2,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: 15,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.all(AppSize.defaultSize!),
-                    child: BlogStoreBuilder(
-                      blog: true,
-                      stores: BlogStoreCardInfo(
-                          text: 'BURGER KING INDONESIA',
-                          description:
-                              'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',
-                          image: 'assets/images/logo1.png'),
-                    ),
-                  ).animate().fade().scale();
-                }),
-          )
-        ],
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 15,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: AppSize.defaultSize! /2),
+                      child: BlogStoreBuilder(
+                        imageCircular: true,
+                        stores: BlogStoreCardInfo(
+                            text: 'BURGER KING INDONESIA',
+                            description:
+                                'Burger King Corporation is an American multinational chain of hamburger fast food restaurants.',
+                            image: 'assets/images/logo1.png'),
+                      ),
+                    ).animate().fade().scale();
+                  }),
+            )
+          ],
+        ),
       ),
     );
   }

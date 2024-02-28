@@ -32,11 +32,14 @@ class _PileIAmInState extends State<PileIAmIn> {
         fontSize: AppSize.defaultSize!*2.4,
         fontWeight: FontWeight.w700,
       )),
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
             CustomTextField(
               hintText: StringManager.searchFor.tr(),
+              fillColor: AppColors.white,
+              isFilled: true,
               height: AppSize.defaultSize! * 5,
               width: AppSize.screenWidth!,
               hintStyle: TextStyle(

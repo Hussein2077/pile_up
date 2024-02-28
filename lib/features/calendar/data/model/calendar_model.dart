@@ -1,14 +1,14 @@
-class Calendar {
+class CalendarEvent {
   final DateTime eventDate;
   final String eventName;
 
-  Calendar({
+  CalendarEvent({
     required this.eventDate,
     required this.eventName,
 
   });
 
-  factory Calendar.fromJson(Map<String, dynamic> json) => Calendar(
+  factory CalendarEvent.fromJson(Map<String, dynamic> json) => CalendarEvent(
     eventDate: DateTime.parse(json["eventDate"]),
     eventName: json["eventName"],
 

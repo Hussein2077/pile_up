@@ -9,19 +9,19 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/manager_view.dart';
-import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/options_tab_bar.dart';
-import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/reports_view.dart';
-import 'package:pile_up/features/my_piles/presentation/components/pile_options/widgets/shared_with_view.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/manager_view.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/my_pile_details_tab_bar.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/reports_view.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/shared_with_view.dart';
 
-class PileOptions extends StatefulWidget {
-  const PileOptions({super.key});
+class MyPileDetails extends StatefulWidget {
+  const MyPileDetails({super.key});
 
   @override
-  State<PileOptions> createState() => _PileOptionsState();
+  State<MyPileDetails> createState() => _MyPileDetailsState();
 }
 
-class _PileOptionsState extends State<PileOptions>
+class _MyPileDetailsState extends State<MyPileDetails>
     with TickerProviderStateMixin {
   late final TabController tabController;
 
@@ -40,24 +40,7 @@ class _PileOptionsState extends State<PileOptions>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Container(
-        width: AppSize.defaultSize! * 4.8,
-        height: AppSize.defaultSize! * 4.8,
-        decoration: BoxDecoration(
-          color: AppColors.green,
-          // shape: BoxShape.circle,
-          border: Border.all(color: AppColors.green),
-          borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2.4),
-        ),
-        child: Center(
-          child: InkWell(
-            onTap: () {},
-            child: Icon(Icons.add,
-                size: AppSize.defaultSize! * 3,
-                color: AppColors.backgroundColor),
-          ),
-        ),
-      ),
+    backgroundColor: AppColors.backgroundColor,
       appBar: appBar(context, text: 'Mohamed\'s Birthday', isIcon: true),
       body: SingleChildScrollView(
         // physics: const NeverScrollableScrollPhysics(),
@@ -166,11 +149,13 @@ class _PileOptionsState extends State<PileOptions>
                         children: [
                           MainButton(
                             text: StringManager.participate.tr(),
+                            fontWeight: FontWeight.w400,
                             height: AppSize.defaultSize! * 3.2,
                             width: AppSize.defaultSize! * 10.4,
                           ),
                           MainButton(
                             text: StringManager.preview.tr(),
+                            fontWeight: FontWeight.w400,
                             height: AppSize.defaultSize! * 3.2,
                             width: AppSize.defaultSize! * 10.4,
                             onTap: () {
@@ -180,6 +165,7 @@ class _PileOptionsState extends State<PileOptions>
                           SecondButton(
                             showIcon: false,
                             text: StringManager.closePile.tr(),
+                            fontWeight: FontWeight.w400,
                             height: AppSize.defaultSize! * 3.2,
                             width: AppSize.defaultSize! * 10.4,
                           ),
@@ -281,7 +267,7 @@ class _PileOptionsState extends State<PileOptions>
                   child: Column(
                     // mainAxisSize: MainAxisSize.max,
                     children: [
-                      OptionsTabBar(
+                      MyPileDetailsTabBar(
                         tabController: tabController,
                       ),
                       SizedBox(

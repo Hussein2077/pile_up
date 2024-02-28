@@ -47,7 +47,7 @@ class _CustomTextFieldWebState extends State<CustomTextFieldWeb> {
           ),
           focusedBorder: OutlineInputBorder(
               borderSide:
-                  BorderSide(color: AppColors.backGroundColor.withOpacity(.4))),
+                  BorderSide(color: AppColors.white.withOpacity(.4))),
         ),
         controller: widget.controller,
         keyboardType: widget.keyboardType,

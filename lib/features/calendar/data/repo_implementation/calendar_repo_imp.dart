@@ -11,7 +11,7 @@ class CalendarRepositoryImp extends BaseRepositoryCalendar {
   CalendarRepositoryImp({required this.baseRemotelyDataSourceCalendar});
 
   @override
-  Future<Either<List<Calendar>, Failure>> getCalendars() async {
+  Future<Either<List<CalendarEvent>, Failure>> getCalendars() async {
     try {
       final result = await baseRemotelyDataSourceCalendar.getCalendars();
       return Left(result);

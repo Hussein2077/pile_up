@@ -8,6 +8,8 @@ class ColumnWithTextField extends StatefulWidget {
   const ColumnWithTextField({
     super.key,
     required this.text,
+    this.fontSize,
+    this.fontWeight,
     this.controller,
     this.width,
     this.height,
@@ -22,6 +24,8 @@ class ColumnWithTextField extends StatefulWidget {
   });
 
   final String text;
+  final double? fontSize;
+  final FontWeight? fontWeight;
   final String? labelText;
   final String? hintText;
   final double? width;
@@ -55,7 +59,8 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
           children: [
             CustomText(
               text: widget.text,
-              fontSize: AppSize.defaultSize! * 1.5,
+              fontSize: widget.fontSize ??AppSize.defaultSize! * 1.5,
+              fontWeight: widget.fontWeight,
             ).animate()
                 .fadeIn() // uses `Animate.defaultDuration`
                 .scale() // inherits duration from fadeIn
