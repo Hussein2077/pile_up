@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontSize: AppSize.defaultSize!*1.8,
                 fontWeight: FontWeight.w600,
                 onTap: () {
-                  Navigator.pushNamed(context, Routes.main);
+                  Navigator.pushNamed(context, Routes.verifyMobScreen);
                 },
                 // width: AppSize.screenWidth! * .9,
               ),

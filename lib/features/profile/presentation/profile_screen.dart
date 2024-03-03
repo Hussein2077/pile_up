@@ -135,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           hintText: 'Hussein',
                         ),
                         ColumnWithTextField(
-                          text: StringManager.phoneNum.tr(),
+                          text: StringManager.mobileNum.tr(),
                           controller: firstNameController,
                           suffixIcon: const Icon(
                             Icons.phone,

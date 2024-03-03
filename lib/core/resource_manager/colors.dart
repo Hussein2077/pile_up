@@ -30,5 +30,7 @@ class AppColors {
    static const Color transactionFailedColor = Color(0xffBC0309);
    static const Color textFadedColor = Color(0xff797979);
    static const Color textSearchHintColor = Color(0xCCCCCCCC);
+   static const Color welcomeTextVerifyMob = Color(0xCC4D505C);
+   static const Color textVerifyMob = Color(0xCC424242);
 
 }

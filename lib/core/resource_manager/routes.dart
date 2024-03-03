@@ -4,6 +4,8 @@ import 'package:pile_up/features/auth/presentation/forget_password/forget_passwo
 import 'package:pile_up/features/auth/presentation/forget_password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
+import 'package:pile_up/features/auth/presentation/verify_mob/verify_mobile_num.dart';
+import 'package:pile_up/features/auth/presentation/verify_otp/verify_otp_screen.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
 import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
@@ -38,6 +40,8 @@ class Routes {
   static const String terms = "/terms";
   static const String myWallet = "/myWallet";
   static const String vendorsScreen = "/vendorsScreen";
+  static const String verifyMobScreen = "/verifyMobScreen";
+  static const String verifyOTPScreen = "/verifyOTPScreen";
 }
 
 class RouteGenerator {
@@ -127,6 +131,16 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const VendorsScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.verifyMobScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const VerifyMobNumScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.verifyOTPScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const VerifyOTPScreen(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute();

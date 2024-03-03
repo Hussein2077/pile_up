@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
             ColumnWithTextField(
-              text: StringManager.phoneNum.tr(),
+              text: StringManager.mobileNum.tr(),
               controller: phoneController,
               fontSize: AppSize.defaultSize!*1.6,
               fontWeight: FontWeight.w400,

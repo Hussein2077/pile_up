@@ -9,6 +9,7 @@ class ColumnWithTextField extends StatefulWidget {
     super.key,
     required this.text,
     this.fontSize,
+    this.fontColor,
     this.fontWeight,
     this.controller,
     this.width,
@@ -25,6 +26,7 @@ class ColumnWithTextField extends StatefulWidget {
 
   final String text;
   final double? fontSize;
+  final Color? fontColor;
   final FontWeight? fontWeight;
   final String? labelText;
   final String? hintText;
@@ -61,6 +63,7 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
               text: widget.text,
               fontSize: widget.fontSize ??AppSize.defaultSize! * 1.5,
               fontWeight: widget.fontWeight,
+              color: widget.fontColor,
             ).animate()
                 .fadeIn() // uses `Animate.defaultDuration`
                 .scale() // inherits duration from fadeIn

@@ -13,6 +13,7 @@ class StringManager {
   static const String welcomeBack = "Welcome";
   static const String pleaseCompleteYourData = "Please complete your data";
   static const String loginTo = "Login to continue";
+  static const String typeUrMobNum = "Type your Mobile Number to continue";
 
   static const String next = "Next";
   static const String back = "Back";
@@ -42,7 +43,7 @@ class StringManager {
   static const String pilesIAm = "Piles I'm in";
   static const String firstName = "First Name";
   static const String secondName = "Last Name";
-  static const String phoneNum = "Mobile Number";
+  static const String mobileNum = "Mobile Number";
   static const String edit = "Edit";
   static const String login = "Login";
   static const String loginCap = " LOG IN";
@@ -54,6 +55,7 @@ class StringManager {
   static const String forgetYourPassword = "Forget Password?";
   static const String forgetPassword = "Forget Password";
   static const String resetPassword = "Reset Password";
+  static const String verifyOTP = "Verify OTP";
   static const String changeLanguage = "Change Language";
   static const String signUpCap = "SIGN UP";
   static const String signUp = "Sign Up";
@@ -114,7 +116,9 @@ class StringManager {
   static const String weWillSend =
       "Don’t worry ! it happens. please enter your e-mail we will send the code in this e-mail.";
   static const String pleaseEnterYOurCode =
-      "code has been sent to user@gmail.com enter the code below to continue.";
+      "Code has been sent to user@gmail.com enter the code below to continue.";
+  static const String codeSendToMobNum =
+      "Code has been sent to +201045789832 enter the code below to continue.";
   static const String pleaseEnterYourCodeEmailExample =' enter the code below to continue.';
   static const String or = "Or sign in With";
   static const String enterYourEmail = "E-Mail Address";
@@ -139,4 +143,5 @@ class StringManager {
   static const String outString = "Out";
   static const String addressBook = 'Address Book';
   static const String thereIsNo = "There is no items";
+  static const String continueScreen = "CONTINUE";
 }
