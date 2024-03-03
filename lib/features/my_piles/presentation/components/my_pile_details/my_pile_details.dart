@@ -164,6 +164,7 @@ class _MyPileDetailsState extends State<MyPileDetails>
                           ),
                           SecondButton(
                             showIcon: false,
+                            showIconAsset: false,
                             text: StringManager.closePile.tr(),
                             fontWeight: FontWeight.w400,
                             height: AppSize.defaultSize! * 3.2,

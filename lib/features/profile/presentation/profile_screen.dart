@@ -156,7 +156,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SecondButton(
               text: StringManager.changePassword.tr(),
-              showIcon: true,
+              showIcon: false,
+              showIconAsset: true,
               iconPath: AssetPath.changePasswordIcon,
               iconHeight: AppSize.defaultSize! * 3,
               iconWidth: AppSize.defaultSize! * 3,
@@ -169,7 +170,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SecondButton(
               text: StringManager.changeLanguage.tr(),
-              showIcon: true,
+              showIconAsset: true,
+              showIcon: false,
               iconPath: AssetPath.changeLanguageIcon,
               iconHeight: AppSize.defaultSize! * 3,
               iconWidth: AppSize.defaultSize! * 3,

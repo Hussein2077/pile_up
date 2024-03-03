@@ -9,6 +9,7 @@ import 'package:pile_up/features/auth/presentation/verify_otp/verify_otp_screen.
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
 import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
+import 'package:pile_up/features/home/presentation/components/drawer/address_book_screen.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
 import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/via_email.dart';
@@ -42,6 +43,7 @@ class Routes {
   static const String vendorsScreen = "/vendorsScreen";
   static const String verifyMobScreen = "/verifyMobScreen";
   static const String verifyOTPScreen = "/verifyOTPScreen";
+  static const String addressBook = "/addressBook";
 }
 
 class RouteGenerator {
@@ -141,6 +143,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const VerifyOTPScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.addressBook:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const AddressBookScreen(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute();

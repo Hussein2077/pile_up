@@ -23,9 +23,9 @@ class AppColors {
    static const Color secondaryBackGroundColor = Color(0xFFFAFAFA);
    static const Color borderColor = Color(0xffa9a8a8);
    static const Color cardBorderColor = Color(0xffD3D3D3);
-   // static const Color backgroundColor = Color(0xffF6F6F6);
+   static const Color backgroundColor = Color(0xffF6F6F6);
    static const Color textColorUnselected = Color(0xff929292);
-   static const Color backgroundColor = Color(0xffEAEAEA);
+   // static const Color backgroundColor = Color(0xffEAEAEA);
    static const Color transactionSuccessColor = Color(0xff03BCA4);
    static const Color transactionFailedColor = Color(0xffBC0309);
    static const Color textFadedColor = Color(0xff797979);

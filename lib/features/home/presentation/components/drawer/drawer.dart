@@ -61,11 +61,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
               horizontal: AppSize.defaultSize! * 1.6,
               vertical: AppSize.defaultSize! * 1,
             ),
-            child: Text(
-              StringManager.addressBook.tr(),
-              style: TextStyle(
-                fontSize: AppSize.defaultSize! * 1.7,
-                fontWeight: FontWeight.w600,
+            child: InkWell(
+              onTap: ()=> Navigator.pushNamed(context, Routes.addressBook),
+              child: Text(
+                StringManager.addressBook.tr(),
+                style: TextStyle(
+                  fontSize: AppSize.defaultSize! * 1.7,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),

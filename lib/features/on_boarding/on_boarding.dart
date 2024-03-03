@@ -117,6 +117,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
                       return SecondButton(
+                        showIconAsset: false,
                         showIcon: false,
                         text: show
                             ? StringManager.start.tr()

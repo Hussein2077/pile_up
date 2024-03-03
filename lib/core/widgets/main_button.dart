@@ -75,10 +75,13 @@ class SecondButton extends StatelessWidget {
     required this.text,
     this.height,
     this.width,
+    required this.showIconAsset,
     required this.showIcon,
+    this.icon,
     this.iconPath,
     this.iconHeight,
     this.iconWidth,
+    this.iconColor,
   });
 
   final void Function()? onTap;
@@ -89,10 +92,13 @@ class SecondButton extends StatelessWidget {
   final FontWeight? fontWeight;
   final double? height;
   final double? width;
+  final bool showIconAsset;
   final bool showIcon;
+  final IconData? icon;
   final String? iconPath;
   final double? iconHeight;
   final double? iconWidth;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +115,7 @@ class SecondButton extends StatelessWidget {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            showIcon
+            showIconAsset
                 ? Padding(
                     padding: EdgeInsets.only(right: AppSize.defaultSize! / 2),
                     child: SvgPicture.asset(
@@ -118,6 +124,14 @@ class SecondButton extends StatelessWidget {
                       width: iconWidth,
                     ),
                   )
+                : Container(),
+            showIcon? Padding(
+              padding: EdgeInsets.only(right: AppSize.defaultSize! / 2),
+              child: Icon(icon,
+                size: iconHeight,
+                color: iconColor,
+              ),
+            )
                 : Container(),
             // Image.asset(AssetPath.changePassword,scale: 1.2,),
             CustomText(

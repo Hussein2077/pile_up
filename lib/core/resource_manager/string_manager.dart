@@ -35,6 +35,7 @@ class StringManager {
   static const String merchants = "Merchants";
   static const String vendors = "Vendors";
   static const String blogs = "Blogs";
+  static const String addContact = "Add Contact";
   static const String veryUsefulArticles = "Very Useful Articles";
   static const String enjoyFantasticDiscounts = "Enjoy Fantastic Discounts";
   static const String theMost = "The most ingenious recycled homes";
