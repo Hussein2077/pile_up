@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: [
           SizedBox(
-            height: AppSize.screenHeight! * 0.8,
+            height: AppSize.screenHeight! * 0.85,
             child: PageView(
               controller: controller,
               onPageChanged: (page) {
@@ -84,7 +84,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       dotHeight: AppSize.defaultSize!,
                       dotWidth: AppSize.defaultSize!,
                       activeDotColor: AppColors.primaryColor,
-                      radius: AppSize.defaultSize! * 10,
+                      radius: AppSize.defaultSize! * 5,
                       dotColor: AppColors.primaryColor.withOpacity(.3),
                     ), // your preferred effect
                     onDotClicked: (index) {}),
@@ -93,23 +93,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     valueListenable: backButton,
                     builder: (context, show, _) {
                       return show
-                          ? SizedBox(
-                        width: AppSize.defaultSize! * 4.4,
-                        height: AppSize.defaultSize! * 2.6,
-                            child: InkWell(
-                                onTap: () {
-                                  controller.animateToPage(
-                                      controller.page!.toInt() - 1,
-                                      duration: const Duration(milliseconds: 200),
-                                      curve: Curves.easeIn);
-                                },
-                                child: CustomText(
-                                  text: StringManager.back.tr(),
-                                  color: AppColors.primaryColor,
-                                  // fontWeight: FontWeight.w500,
-                                  fontSize:AppSize.defaultSize!*2,
-                                )),
-                          )
+                          ? InkWell(
+                              onTap: () {
+                                controller.animateToPage(
+                                    controller.page!.toInt() - 1,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeIn);
+                              },
+                              child: CustomText(
+                                text: StringManager.back.tr(),
+                                color: AppColors.primaryColor,
+                                // fontWeight: FontWeight.w500,
+                                fontSize:AppSize.defaultSize!*2,
+                              ))
                           : const SizedBox();
                     }),
                 SizedBox(width: AppSize.defaultSize!*2.4),

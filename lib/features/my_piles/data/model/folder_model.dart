@@ -12,15 +12,15 @@ class FolderModel {
   });
 
   factory FolderModel.fromJson(Map<String, dynamic> json) => FolderModel(
-        folderId: json["blogId"],
-        folderName: json["title"],
-        myPiles: json["content"],
+        folderId: json["folderId"],
+        folderName: json["folderName"],
+        myPiles: json["myPiles"],
       );
 
   Map<String, dynamic> toJson() => {
-        "blogId": folderId,
-        "title": folderName,
-        "content": myPiles,
+        "folderId": folderId,
+        "folderName": folderName,
+        "myPiles": myPiles,
       };
 }
 

@@ -34,34 +34,35 @@ class SocialMediaLogin extends StatelessWidget {
             children: [
               Image.asset(
                 AssetPath.google,
-                scale: 4,
+                scale: 3,
               ),
               SizedBox(
                 width: AppSize.defaultSize! * 4,
               ),
               Image.asset(
                 AssetPath.facebook,
-                scale: 4,
+                scale: 3,
               ),
               SizedBox(
                 width: AppSize.defaultSize! * 4,
               ),
               Image.asset(
                 AssetPath.apple,
-                scale: 4,
+                scale: 3,
               ),
               SizedBox(
                 width: AppSize.defaultSize! * 4,
               ),
               Image.asset(
                 AssetPath.google,
-                scale: 4,
+                scale: 3,
               ),
             ],
           ),
-          SizedBox(
-            height: AppSize.defaultSize! * 8,
-          ),
+          // SizedBox(
+          //   height: AppSize.defaultSize! * 8,
+          // ),
+          Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -90,6 +91,7 @@ class SocialMediaLogin extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: AppSize.defaultSize!*3),
         ],
       ),
     );

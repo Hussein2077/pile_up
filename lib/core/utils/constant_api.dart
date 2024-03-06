@@ -15,12 +15,13 @@ class ConstantApi {
   static const String getUserFolders = "${baseUrl}UsersFolders";
   static const String getMyProfile = "${baseUrl}MyProfile";
   static const String getMyWallet = "${baseUrl}MyWallet";
-  static const String getFolders = "${baseUrl}Folders";
+  static const String getFolders = "${baseUrl}Pile/GetAllPiles";
   static const String getFoldersBySearch = "${baseUrl}FoldersBySearch";
   static const String getPilesImIn = "${baseUrl}PilesImIn";
   static const String getPilesImInBySearch = "${baseUrl}PilesImInBySearch";
   static const String getNotifications = "${baseUrl}Notification";
   static const String getCalendar = "${baseUrl}Calendar";
+  static const String getPileManagers = "${baseUrl}PilesManagers";
 
 
   //Post

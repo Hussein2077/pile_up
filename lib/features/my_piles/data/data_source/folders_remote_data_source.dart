@@ -13,6 +13,8 @@ abstract class BaseRemotelyDataSourceFolders {
 
   Future<Map<String, dynamic>> addPileManager(PileManager manager);
 
+  Future<List<PileManager>> getPileManagers();
+
   Future<List<FolderModel>> getFoldersBySearch(String folderSearch);
 }
 
@@ -32,6 +34,22 @@ class FoldersRemotelyDateSource extends BaseRemotelyDataSourceFolders {
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: "get Folders");
+    }
+  }
+  Future<List<PileManager>> getPileManagers() async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getPileManagers,
+        options: options,
+      );
+      List<PileManager> jsonData = List<PileManager>.from(
+          (response.data as List).map((e) => PileManager.fromJson(e)));
+      log('$jsonData dddddddddd');
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: "get PileManagers");
     }
   }
 

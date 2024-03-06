@@ -21,27 +21,28 @@ class OnboardingView extends StatelessWidget {
           right: AppSize.defaultSize! * 1.6,
           child: Padding(
             padding: EdgeInsets.all(AppSize.defaultSize! * 2),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, Routes.login, (route) => false);
-                },
-                child: CustomText(
-                  text: StringManager.skip.tr(),
-                  color: AppColors.blackLow,
-                  fontSize: AppSize.defaultSize! * 2,
-                  fontWeight: FontWeight.w600,
-                )),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.login, (route) => false);
+              },
+                  child: CustomText(
+                    text: StringManager.skip.tr(),
+                    color: AppColors.blackLow,
+                    fontSize: AppSize.defaultSize! * 2,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
           ),
-        ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.5),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: AppSize.defaultSize! * 2),
               Container(
+                height: AppSize.screenHeight!*.48,
                 alignment: Alignment.center,
                 width: double.infinity,
                 padding: EdgeInsets.all(AppSize.defaultSize!),
@@ -63,14 +64,15 @@ class OnboardingView extends StatelessWidget {
                   .fadeIn() // uses `Animate.defaultDuration`
                   .scale() // inherits duration from fadeIn
                   .move(delay: 300.ms, duration: 600.ms),
-              SizedBox(height: AppSize.defaultSize! * 2),
+              SizedBox(height: AppSize.defaultSize! * 1.2),
               CustomText(
                 text: onBoardingList[index]['description'],
                 textAlign: TextAlign.start,
                 color: AppColors.blackLow,
                 height: 1,
-                maxLines: 6,
-                fontSize: AppSize.defaultSize! * 1.8,
+                overflow: TextOverflow.ellipsis,
+                maxLines:6,
+                fontSize: AppSize.defaultSize! * 1.6,
               )
                   .animate()
                   .fadeIn() // uses `Animate.defaultDuration`

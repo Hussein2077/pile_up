@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: AppSize.defaultSize! * 8.4,
+                height: AppSize.defaultSize! * 7.4,
               ),
               Image.asset(
                 AssetPath.logo1,
@@ -58,10 +58,12 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomText(
                 text: StringManager.welcomeBack.tr(),
                 fontSize: AppSize.defaultSize! * 2,
+                fontWeight: FontWeight.w700,
+                color: AppColors.welcomeTextVerifyMob,
               ),
               CustomText(
                 text: StringManager.loginTo.tr(),
-                fontSize: AppSize.defaultSize! * 1.2,
+                fontSize: AppSize.defaultSize! * 1.4,
                 color: AppColors.greyColor,
               ),
               // TextButton(
@@ -115,10 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+              //Forget Password
               Padding(
                 padding: EdgeInsets.only(
-                    top: AppSize.defaultSize! * 1.6,
-                    bottom: AppSize.defaultSize! * 3.2),
+                    top: AppSize.defaultSize! * 1,
+                    bottom: AppSize.defaultSize! * 3,
+                right: 10),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: InkWell(
@@ -145,9 +149,90 @@ class _LoginScreenState extends State<LoginScreen> {
                 // width: AppSize.screenWidth! * .9,
               ),
               SizedBox(
-                height: AppSize.defaultSize! * 16,
+                height: AppSize.defaultSize! * 1.6
               ),
-              const SocialMediaLogin(),
+              //Social Media Sign In
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  StringManager.or.tr(),
+                  style: TextStyle(
+                      color: AppColors.greyColor2,
+                      fontSize: AppSize.defaultSize! * 1.5,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              SizedBox(
+                height: AppSize.defaultSize! * 1.6,
+              ),
+              SizedBox(
+                width: double.infinity,
+              height: AppSize.defaultSize!*70,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        AssetPath.google,
+                        scale: 3,
+                      ),
+                      SizedBox(
+                        width: AppSize.defaultSize! * 4,
+                      ),
+                      Image.asset(
+                        AssetPath.facebook,
+                        scale: 3,
+                      ),
+                      SizedBox(
+                        width: AppSize.defaultSize! * 4,
+                      ),
+                      Image.asset(
+                        AssetPath.apple,
+                        scale: 3,
+                      ),
+                      SizedBox(
+                        width: AppSize.defaultSize! * 4,
+                      ),
+                      Image.asset(
+                        AssetPath.google,
+                        scale: 3,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: AppSize.defaultSize),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        StringManager.doNotHaveAccount.tr(),
+                        style: TextStyle(
+                          // color: AppColors.black,
+                          fontSize: AppSize.defaultSize! * 1.6,
+                          // fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.signUp);
+                        },
+                        child: Text(
+                          StringManager.signUp.tr(),
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: AppSize.defaultSize! * 1.5,
+                            fontWeight: FontWeight.w700,
+                            decoration: TextDecoration.underline,
+                            decorationColor: AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              ),
+              SizedBox(height: AppSize.defaultSize!),
             ],
           ),
         ),
