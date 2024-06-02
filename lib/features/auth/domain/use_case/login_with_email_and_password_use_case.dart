@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:pile_up/core/base_use_case/base_use_case.dart';
 import 'package:pile_up/core/error/failure.dart';
@@ -20,8 +22,12 @@ class LoginWithEmailAndPasswordUseCase
 
 class AuthModel {
   final String email;
-  final String password;
+  final String? password;
+  final String? socialID;
 
-  AuthModel({required this.email, required this.password});
+  AuthModel({
+    required this.email,
+    this.password,
+    this.socialID,
+  });
 }
-

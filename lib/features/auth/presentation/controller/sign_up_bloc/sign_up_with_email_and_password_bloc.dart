@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
@@ -7,18 +8,27 @@ import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_
 
 class SignUpWithEmailAndPasswordBloc extends Bloc<
     BaseSignUpWithEmailAndPasswordEvent, SignUpWithEmailAndPasswordState> {
-  SignUpWithEmailAndPasswordUseCase loginWithEmailAndPasswordUseCase;
+  SignUpWithEmailAndPasswordUseCase signUpWithEmailAndPasswordUseCase;
 
   SignUpWithEmailAndPasswordBloc(
-      {required this.loginWithEmailAndPasswordUseCase})
+      {required this.signUpWithEmailAndPasswordUseCase})
       : super(SignUpWithEmailAndPasswordInitial()) {
     on<SignUpWithEmailAndPasswordEvent>((event, emit) async {
       emit(const SignUpWithEmailAndPasswordLoadingState());
-      final result = await loginWithEmailAndPasswordUseCase
-          .call(SignUpModel(email: event.phone, password: event.password,eduLevel: event.eduLevel));
+      final result = await signUpWithEmailAndPasswordUseCase.call(SignUpModel(
+        email: event.email,
+        password: event.password,
+        phone: event.phone,
+        name: event.name,
+        major: event.major,
+        eduLevel: event.eduLevel,
+        graduationYear: event.graduationYear,
+        lastName: event.lastName,
+        confirmPassword: event.confirmPassword,
+      ));
       result.fold(
-          (l) => emit(const SignUpWithEmailAndPasswordSuccessMessageState(
-              successMessage: StringManager.loginSuccessfully)),
+          (l) => emit(SignUpWithEmailAndPasswordSuccessMessageState(
+              successMessage: StringManager.loginSuccessfully.tr())),
           (r) => emit(SignUpWithEmailAndPasswordErrorMessageState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });

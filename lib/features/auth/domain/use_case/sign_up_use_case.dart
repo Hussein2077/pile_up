@@ -5,13 +5,14 @@ import 'package:pile_up/core/models/my_data_model.dart';
 import 'package:pile_up/features/auth/domain/repo/base_repo.dart';
 
 class SignUpWithEmailAndPasswordUseCase
-    extends BaseUseCase<MyDataModel, SignUpModel> {
+    extends BaseUseCase<Map<String, dynamic>, SignUpModel> {
   BaseRepository baseRepository;
 
   SignUpWithEmailAndPasswordUseCase({required this.baseRepository});
 
   @override
-  Future<Either<MyDataModel, Failure>> call(SignUpModel parameter) async {
+  Future<Either<Map<String, dynamic>, Failure>> call(
+      SignUpModel parameter) async {
     final result = await baseRepository.signUpWithEmailAndPassword(parameter);
 
     return result;
@@ -19,25 +20,29 @@ class SignUpWithEmailAndPasswordUseCase
 }
 
 class SignUpModel {
-  final String email;
-  final String password;
-  final String? name;
   final String? phone;
-  final String? dateOfBirth;
-  final String? eduLevel;
-  final String? gradLevel;
-  final String? university;
+  final String? email;
+  final String? password;
+  final String? confirmPassword;
+  final String? name;
+  final String? lastName;
   final String? major;
+  final String? eduLevel;
+  final String? graduationYear;
+  final String? universityID;
+  final String? code;
 
-  SignUpModel({
-    required this.email,
-    required this.password,
-    this.name,
+  const SignUpModel({
     this.phone,
-    this.dateOfBirth,
-    this.eduLevel,
-    this.gradLevel,
-    this.university,
+    this.email,
+    this.password,
+    this.name,
+    this.lastName,
     this.major,
+    this.eduLevel,
+    this.graduationYear,
+    this.universityID,
+    this.code,
+    this.confirmPassword,
   });
 }

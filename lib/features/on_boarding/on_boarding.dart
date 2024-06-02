@@ -42,8 +42,8 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController controller = PageController(initialPage: 0);
-    ValueNotifier<bool> backButton = ValueNotifier<bool>(false);
-    ValueNotifier<bool> changeToNext = ValueNotifier<bool>(false);
+  ValueNotifier<bool> backButton = ValueNotifier<bool>(false);
+  ValueNotifier<bool> changeToNext = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -52,20 +52,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: [
           SizedBox(
-
             height: AppSize.screenHeight! * 0.8,
             child: PageView(
               controller: controller,
-              onPageChanged: (page){
-                if (page==0) {
+              onPageChanged: (page) {
+                if (page == 0) {
                   backButton.value = false;
-                }else{
+                } else {
                   backButton.value = true;
                 }
-                if(page==3){
-                  changeToNext.value=true;
-                }else{
-                  changeToNext.value=false;
+                if (page == 3) {
+                  changeToNext.value = true;
+                } else {
+                  changeToNext.value = false;
                 }
               },
               children: List.generate(
@@ -114,22 +113,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ValueListenableBuilder(
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
-                    return SecondButton(
-                      text: show?StringManager.start.tr():StringManager.next.tr(),
-                      width: AppSize.defaultSize! * 12.7,
-                      height: AppSize.defaultSize! * 4,
-                      onTap: () {
-                        controller.animateToPage(controller.page!.toInt() + 1,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn);
-                        if(show){
-                          Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false);
-
-                        }
-                      },
-                    );
-                  }
-                ),
+                      return SecondButton(
+                        text: show
+                            ? StringManager.start.tr()
+                            : StringManager.next.tr(),
+                        width: AppSize.defaultSize! * 12.7,
+                        height: AppSize.defaultSize! * 4,
+                        onTap: () {
+                          controller.animateToPage(controller.page!.toInt() + 1,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeIn);
+                          if (show) {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, Routes.login, (route) => false);
+                          }
+                        },
+                      );
+                    }),
               ],
             ),
           ),

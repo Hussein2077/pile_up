@@ -15,3 +15,6 @@ class ConnectionTimeoutException implements Exception {}
 class UnauthorizedException implements Exception {}
 
 class InternetException implements Exception {}
+class SiginGoogleException implements Exception {}
+
+class SiginApplexception implements Exception {}

@@ -11,6 +11,25 @@ class RepositoryImp extends BaseRepository {
   final BaseRemotelyDataSource baseRemotelyDataSource;
 
   RepositoryImp({required this.baseRemotelyDataSource});
+  @override
+  Future<Either<AuthWithGoogleModel, Failure>> signWithGoogle() async {
+    try {
+      final result = await baseRemotelyDataSource.sigInWithGoogle();
+      return Left(result);
+    } on Exception catch (e) {
+      return Right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<AuthWithAppleModel, Failure>> sigInWithApple() async {
+    try {
+      final result = await baseRemotelyDataSource.sigInWithApple();
+      return Left(result);
+    } on Exception catch (e) {
+      return Right(DioHelper.buildFailure(e));
+    }
+  }
 
   @override
   Future<Either<Map<String, dynamic>, Failure>> loginWithEmailAndPassword(AuthModel authModel) async {
@@ -24,7 +43,7 @@ class RepositoryImp extends BaseRepository {
   }
 
   @override
-  Future<Either<MyDataModel, Failure>> signUpWithEmailAndPassword(SignUpModel signUpModel) async{
+  Future<Either<Map<String, dynamic>, Failure>> signUpWithEmailAndPassword(SignUpModel signUpModel) async{
     try {
       final result =
           await baseRemotelyDataSource.signUpWithEmailAndPassword(signUpModel);
@@ -33,4 +52,39 @@ class RepositoryImp extends BaseRepository {
       return right(DioHelper.buildFailure(e));
     }
   }
+
+  @override
+  Future<Either<Map<String, dynamic>, Failure>> resetPassword(SignUpModel signUpModel) async{
+    try {
+      final result =
+      await baseRemotelyDataSource.resetPassword(signUpModel);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either< String, Failure>> sendCode(SignUpModel signUpModel)async{
+    try {
+      final result =
+      await baseRemotelyDataSource.sendCode(signUpModel);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Map<String, dynamic>, Failure>> verifyCode(SignUpModel signUpModel) async{
+    try {
+      final result =
+      await baseRemotelyDataSource.verifyCode(signUpModel);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+
 }

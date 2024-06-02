@@ -193,7 +193,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       phone: phoneController.text,
                       password: passwordController.text,
                       major: majorController.text,
-                      university: universityController.text,
                       name:
                           '${firstNameController.text} ${lastNameController.text}',
                       email: emailController.text,

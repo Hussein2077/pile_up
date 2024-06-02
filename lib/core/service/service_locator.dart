@@ -20,7 +20,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => LoginWithEmailAndPasswordBloc(
         loginWithEmailAndPasswordUseCase: getIt()));
     getIt.registerLazySingleton(() => SignUpWithEmailAndPasswordBloc(
-        loginWithEmailAndPasswordUseCase: getIt()));
+        signUpWithEmailAndPasswordUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(

@@ -18,7 +18,10 @@ class ColumnWithTextField extends StatefulWidget {
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
     this.requiredInput = false,
-    this.dropDown, this.maxLine, this. obscureText=false, this.prefixIcon,
+    this.dropDown,
+    this.maxLine,
+    this.obscureText = false,
+    this.prefixIcon,
   });
 
   final String text;
@@ -56,10 +59,7 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
             CustomText(
               text: widget.text,
               fontSize: AppSize.defaultSize! * 1.5,
-            ).animate()
-                .fadeIn() // uses `Animate.defaultDuration`
-                .scale() // inherits duration from fadeIn
-                .move(delay: 300.ms, duration: 600.ms),
+            ),
             if (widget.requiredInput)
               CustomText(
                 text: ' *',
@@ -74,19 +74,18 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
         widget.dropDown ??
             SizedBox(
                 width: widget.width ?? AppSize.screenWidth! * .9,
-                height: widget.height?? AppSize.defaultSize! * 5,
+                height: widget.height ?? AppSize.defaultSize! * 5,
                 child: CustomTextField(
                   controller: widget.controller,
                   readOnly: widget.readOnly,
                   onTap: widget.onTap,
-
                   labelText: widget.labelText,
-                  prefixIcon:widget.prefixIcon ,
+                  prefixIcon: widget.prefixIcon,
                   hintText: widget.hintText,
                   suffixIcon: widget.suffixIcon,
                   keyboardType: widget.keyboardType,
                   obscureText: widget.obscureText!,
-                  maxLines:widget.obscureText!?1: widget.maxLine,
+                  maxLines: widget.obscureText! ? 1 : widget.maxLine,
                 )),
       ],
     );

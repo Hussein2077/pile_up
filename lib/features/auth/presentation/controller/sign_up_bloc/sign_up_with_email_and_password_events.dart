@@ -9,27 +9,25 @@ abstract class BaseSignUpWithEmailAndPasswordEvent extends Equatable {
 
 class SignUpWithEmailAndPasswordEvent
     extends BaseSignUpWithEmailAndPasswordEvent {
-  final String phone;
-  final String email;
-
-  final String password;
-
+  final String? phone;
+  final String? email;
+  final String? password;
+  final String? confirmPassword;
   final String? name;
-  final String? dateOfBirth;
-  final String? eduLevel;
-  final String? gradLevel;
-  final String? university;
+  final String? lastName;
   final String? major;
+  final String? eduLevel;
+  final String? graduationYear;
 
-  const SignUpWithEmailAndPasswordEvent({
-    required this.phone,
-    required this.email,
-    required this.password,
-    this.name,
-    this.dateOfBirth,
-    this.eduLevel,
-    this.gradLevel,
-    this.university,
-    this.major,
+  const SignUpWithEmailAndPasswordEvent( {
+      this.phone,
+      this.email,
+     this.password,
+     this.name,
+     this.lastName,
+     this.major,
+     this.eduLevel,
+     this.graduationYear,
+     this.confirmPassword,
   });
 }
