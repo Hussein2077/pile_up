@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/change_password.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/forget_password.dart';
-import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_code.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/change_password.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/forget_password.dart';
+import 'package:pile_up/features/auth/presentation/forget_password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
+import 'package:pile_up/features/auth/presentation/verify_mob/verify_mobile_num.dart';
+import 'package:pile_up/features/auth/presentation/verify_otp/verify_otp_screen.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
-import 'package:pile_up/features/home/presentation/componants/blog_details/blog_complete.dart';
+import 'package:pile_up/features/blogs/data/model/blog_model.dart';
+import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
+import 'package:pile_up/features/home/presentation/components/drawer/address_book_screen.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_email.dart';
-import 'package:pile_up/features/my_piles/presentation/componants/pile_options/via_sms.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/via_email.dart';
+import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/via_sms.dart';
+import 'package:pile_up/features/my_wallet/presentation/screens/my_wallet_Screen.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
 import 'package:pile_up/features/profile/presentation/profile_screen.dart';
+import 'package:pile_up/features/vendors/presentation/vendors_screen.dart';
 
-import '../../features/home/presentation/componants/Piles Details/piles_details.dart';
+import '../../features/home/presentation/components/Piles Details/piles_details.dart';
 
 class Routes {
   static const String login = "/login";
@@ -28,11 +34,16 @@ class Routes {
   static const String onBoarding = "/OnBoarding";
   static const String pilesDetails = "/pilesDetails";
   static const String home = "/home";
-  static const String blogComplete = "/BlogComplete";
+  static const String blogScreen = "/BlogDetailsScreen";
   static const String viaEmail = "/viaEmail";
   static const String viaSMS = "/viaSMS";
   static const String qrCode = "/qrCode";
   static const String terms = "/terms";
+  static const String myWallet = "/myWallet";
+  static const String vendorsScreen = "/vendorsScreen";
+  static const String verifyMobScreen = "/verifyMobScreen";
+  static const String verifyOTPScreen = "/verifyOTPScreen";
+  static const String addressBook = "/addressBook";
 }
 
 class RouteGenerator {
@@ -79,15 +90,19 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ChangePassword(),
             transitionsBuilder: customAnimate);
+
         case Routes.onBoarding:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const OnBoardingScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.blogComplete:
-        return PageRouteBuilder(
+
+        case Routes.blogScreen:
+          BlogRoutesArguments blogRoutes=settings.arguments as BlogRoutesArguments;
+          return PageRouteBuilder(
+          settings: settings,
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const BlogComplete(),
+                  BlogScreen(blogArguments: blogRoutes),
             transitionsBuilder: customAnimate);
         case Routes.profile:
         return PageRouteBuilder(
@@ -109,7 +124,31 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const TermsAndConditions(),
             transitionsBuilder: customAnimate);
-
+      case Routes.myWallet:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const MyWalletDetails(),
+            transitionsBuilder: customAnimate);
+      case Routes.vendorsScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const VendorsScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.verifyMobScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const VerifyMobNumScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.verifyOTPScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const VerifyOTPScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.addressBook:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const AddressBookScreen(),
+            transitionsBuilder: customAnimate);
     }
     return unDefinedRoute();
   }
@@ -130,4 +169,10 @@ Widget customAnimate(BuildContext context, Animation<double> animation,
     opacity: animation,
     child: child,
   );
+}
+class BlogRoutesArguments{
+final   BlogModel blog;
+ final List<BlogModel> blogs;
+
+BlogRoutesArguments({required this.blogs, required this.blog});
 }

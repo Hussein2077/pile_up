@@ -1,0 +1,4 @@
+<svg id="down" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect id="bg" width="48" height="48" rx="24" fill="#bc0309" opacity="0.15"/>
+  <path id="icon" d="M23.438,10.574l-10-10a2.068,2.068,0,0,0-2.841,0l-10,10A2.009,2.009,0,0,0,3.43,13.416l6.583-6.6V22a2,2,0,0,0,4,0V6.813l6.583,6.6a2.009,2.009,0,1,0,2.841-2.841Z" transform="translate(23.996 40.981) rotate(-135)" fill="#bc0309"/>
+</svg>

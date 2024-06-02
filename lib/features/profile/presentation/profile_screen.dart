@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -7,6 +8,7 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -39,15 +41,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
     lastNameController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context,text: StringManager.profile.tr(), isIcon: true),
+      appBar: appBar(context, text: StringManager.myProfile.tr(), isIcon: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Send Reminder Before',
+                  style: TextStyle(
+                    fontSize: AppSize.defaultSize! * 1.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.remove_circle_outline,
+                    color: AppColors.primaryColor,
+                    size: AppSize.defaultSize! * 4,
+                  ),
+                ),
+                Text(
+                  '4',
+                  style: TextStyle(
+                    fontSize: AppSize.defaultSize! * 1.8,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.add_circle_outline,
+                    color: AppColors.primaryColor,
+                    size: AppSize.defaultSize! * 4,
+                  ),
+                ),
+                Text(
+                  'Days',
+                  style: TextStyle(
+                    fontSize: AppSize.defaultSize! * 1.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding:   EdgeInsets.all(AppSize.defaultSize!*2),
+              padding: EdgeInsets.all(AppSize.defaultSize! * 2),
               child: Material(
                 elevation: 2,
                 borderRadius: BorderRadius.circular(AppSize.defaultSize!),
@@ -55,11 +100,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // height: AppSize.screenHeight!*.5,
                   // width: AppSize.screenWidth!*95,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppSize.defaultSize!)
-                  ),
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.circular(AppSize.defaultSize!)),
                   child: Padding(
-                    padding:   EdgeInsets.all(AppSize.defaultSize!),
+                    padding: EdgeInsets.all(AppSize.defaultSize!),
                     child: Column(
                       children: [
                         Row(
@@ -83,29 +128,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           text: StringManager.email.tr(),
                           controller: firstNameController,
                           keyboardType: TextInputType.emailAddress,
-        
-                          suffixIcon: const Icon(Icons.mail_outline,color: AppColors.greyColor,),
-                          hintText: 'Hussein',
-                        ), ColumnWithTextField(
-                          text: StringManager.phoneNum.tr(),
-                          controller: firstNameController,
-                          suffixIcon: const Icon(Icons.phone,color: AppColors.greyColor,),
-                          keyboardType: TextInputType.phone,
-        
+                          suffixIcon: const Icon(
+                            Icons.mail_outline,
+                            color: AppColors.greyColor,
+                          ),
                           hintText: 'Hussein',
                         ),
-                    SizedBox(height: AppSize.defaultSize!*2.5,),
-                    MainButton(text: StringManager.edit.tr())
-        
+                        ColumnWithTextField(
+                          text: StringManager.mobileNum.tr(),
+                          controller: firstNameController,
+                          suffixIcon: const Icon(
+                            Icons.phone,
+                            color: AppColors.greyColor,
+                          ),
+                          keyboardType: TextInputType.phone,
+                          hintText: 'Hussein',
+                        ),
+                        SizedBox(
+                          height: AppSize.defaultSize! * 2.5,
+                        ),
+                        MainButton(text: StringManager.edit.tr())
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            SecondButton(text: StringManager.changePassword.tr(),onTap: (){
-              Navigator.pushNamed(context, Routes.changePassword);
-            },)
+            SecondButton(
+              text: StringManager.changePassword.tr(),
+              showIcon: false,
+              showIconAsset: true,
+              iconPath: AssetPath.changePasswordIcon,
+              iconHeight: AppSize.defaultSize! * 3,
+              iconWidth: AppSize.defaultSize! * 3,
+              onTap: () {
+                Navigator.pushNamed(context, Routes.changePassword);
+              },
+            ),
+            SizedBox(
+              height: AppSize.defaultSize! * 2.5,
+            ),
+            SecondButton(
+              text: StringManager.changeLanguage.tr(),
+              showIconAsset: true,
+              showIcon: false,
+              iconPath: AssetPath.changeLanguageIcon,
+              iconHeight: AppSize.defaultSize! * 3,
+              iconWidth: AppSize.defaultSize! * 3,
+              onTap: () {},
+            ),
           ],
         ),
       ),

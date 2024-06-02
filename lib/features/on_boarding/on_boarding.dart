@@ -52,7 +52,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: [
           SizedBox(
+<<<<<<< HEAD
             height: AppSize.screenHeight! * 0.8,
+=======
+            height: AppSize.screenHeight! * 0.85,
+>>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
             child: PageView(
               controller: controller,
               onPageChanged: (page) {
@@ -73,7 +77,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           SizedBox(height: AppSize.defaultSize! * 4),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 4),
+            padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -82,38 +86,42 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     count: onBoardingList.length,
                     effect: ExpandingDotsEffect(
                       dotHeight: AppSize.defaultSize!,
-                      dotWidth: AppSize.defaultSize! * 1.5,
+                      dotWidth: AppSize.defaultSize!,
                       activeDotColor: AppColors.primaryColor,
-                      radius: AppSize.defaultSize! * 10,
+                      radius: AppSize.defaultSize! * 5,
                       dotColor: AppColors.primaryColor.withOpacity(.3),
                     ), // your preferred effect
                     onDotClicked: (index) {}),
                 const Spacer(),
-                // ValueListenableBuilder(
-                //     valueListenable: backButton,
-                //     builder: (context, show, _) {
-                //       return show
-                //           ? SizedBox(
-                //         width: AppSize.defaultSize! * 8,
-                //         height: AppSize.defaultSize! * 4,
-                //             child: TextButton(
-                //                 onPressed: () {
-                //                   controller.animateToPage(
-                //                       controller.page!.toInt() - 1,
-                //                       duration: const Duration(milliseconds: 200),
-                //                       curve: Curves.easeIn);
-                //                 },
-                //                 child: CustomText(
-                //                   text: StringManager.back.tr(),
-                //                   color: AppColors.primaryColor,
-                //                 )),
-                //           )
-                //           : const SizedBox();
-                //     }),
+                ValueListenableBuilder(
+                    valueListenable: backButton,
+                    builder: (context, show, _) {
+                      return show
+                          ? InkWell(
+                              onTap: () {
+                                controller.animateToPage(
+                                    controller.page!.toInt() - 1,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeIn);
+                              },
+                              child: CustomText(
+                                text: StringManager.back.tr(),
+                                color: AppColors.primaryColor,
+                                // fontWeight: FontWeight.w500,
+                                fontSize:AppSize.defaultSize!*2,
+                              ))
+                          : const SizedBox();
+                    }),
+                SizedBox(width: AppSize.defaultSize!*2.4),
                 ValueListenableBuilder(
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
                       return SecondButton(
+<<<<<<< HEAD
+=======
+                        showIconAsset: false,
+                        showIcon: false,
+>>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
                         text: show
                             ? StringManager.start.tr()
                             : StringManager.next.tr(),

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pile_up/core/resource_manager/string_manager.dart';
 
 
 class CodegenLoader extends AssetLoader {

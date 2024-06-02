@@ -11,42 +11,43 @@ import 'package:pile_up/features/on_boarding/on_boarding.dart';
 class OnboardingView extends StatelessWidget {
   const OnboardingView(this.index, {Key? key}) : super(key: key);
   final int index;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
-
       children: [
-        Align(
-          alignment: Alignment.topRight,
+        Positioned(
+          top: AppSize.defaultSize! * 1.6,
+          right: AppSize.defaultSize! * 1.6,
           child: Padding(
-            padding:   EdgeInsets.all(AppSize.defaultSize!*2),
-            child: TextButton(
-                onPressed: () {
-
-                  Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false);
-
-
-                },
-                child: CustomText(
-                  text: StringManager.skip.tr(),
-                  color: AppColors.blackLow,
-                  fontSize: AppSize.defaultSize!*1.5,
-                )),
+            padding: EdgeInsets.all(AppSize.defaultSize! * 2),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.login, (route) => false);
+              },
+                  child: CustomText(
+                    text: StringManager.skip.tr(),
+                    color: AppColors.blackLow,
+                    fontSize: AppSize.defaultSize! * 2,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
           ),
-        ),
-
         Padding(
-          padding:   EdgeInsets.symmetric(horizontal: AppSize.defaultSize!*3.5),
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.5),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                SizedBox(height: AppSize.defaultSize!*2),
+              SizedBox(height: AppSize.defaultSize! * 2),
               Container(
+                height: AppSize.screenHeight!*.48,
                 alignment: Alignment.center,
-                height:AppSize.screenHeight!* 0.4,
-                padding:   EdgeInsets.all(AppSize.defaultSize!),
-                child: Image.asset('assets/images/boarding${index + 1}.png').animate()
+                width: double.infinity,
+                padding: EdgeInsets.all(AppSize.defaultSize!),
+                child: Image.asset('assets/images/boarding${index + 1}.png')
+                    .animate()
                     .fadeIn() // uses `Animate.defaultDuration`
                     .scale() // inherits duration from fadeIn
                     .move(delay: 300.ms, duration: 600.ms),
@@ -55,22 +56,25 @@ class OnboardingView extends StatelessWidget {
                 text: onBoardingList[index]['title'],
                 textAlign: TextAlign.start,
                 color: AppColors.primaryColor,
-                fontSize: AppSize.defaultSize!*2,
+                fontSize: AppSize.defaultSize! * 2.2,
                 maxLines: 2,
                 fontWeight: FontWeight.w500,
-              ).animate()
+              )
+                  .animate()
                   .fadeIn() // uses `Animate.defaultDuration`
                   .scale() // inherits duration from fadeIn
                   .move(delay: 300.ms, duration: 600.ms),
-                SizedBox(height: AppSize.defaultSize!*2),
+              SizedBox(height: AppSize.defaultSize! * 1.2),
               CustomText(
-                text:  onBoardingList[index]['description'],
+                text: onBoardingList[index]['description'],
                 textAlign: TextAlign.start,
                 color: AppColors.blackLow,
                 height: 1,
-                maxLines: 6,
-                fontSize: AppSize.defaultSize!*1.7,
-              ).animate()
+                overflow: TextOverflow.ellipsis,
+                maxLines:6,
+                fontSize: AppSize.defaultSize! * 1.6,
+              )
+                  .animate()
                   .fadeIn() // uses `Animate.defaultDuration`
                   .scale() // inherits duration from fadeIn
                   .move(delay: 300.ms, duration: 600.ms),
@@ -81,4 +85,3 @@ class OnboardingView extends StatelessWidget {
     );
   }
 }
-
