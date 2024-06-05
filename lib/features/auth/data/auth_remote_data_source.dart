@@ -40,8 +40,6 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     final body = {
       'email': authModel.email,
       "password": authModel.password,
-      "socialID": authModel.socialID,
-      "userRole": "User",
     };
 
     try {
@@ -51,7 +49,7 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
       );
       Map<String, dynamic> jsonData = response.data;
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      await Methods.instance.saveUserToken(authToken: jsonData['token']);
+      await Methods.instance.saveUserToken(authToken: jsonData['data']['token']);
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -152,14 +150,10 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     final body = {
       ConstantApi.email: signUpModel.email,
       ConstantApi.password: signUpModel.password,
-      'firstName': signUpModel.name,
-      'lastName': signUpModel.lastName,
-      'phonenumber': signUpModel.phone,
-      'confirmPassword': signUpModel.password,
-      'educationLevel': signUpModel.phone,
-      'graduationYear': signUpModel.phone,
-      'majorID': signUpModel.phone,
-      'universityID': signUpModel.phone,
+      'first_name': signUpModel.name,
+      'last_name': signUpModel.lastName,
+      'phone_number': signUpModel.phone,
+      'fcm_token': 'fcm_token',
     };
 
     try {
@@ -168,8 +162,8 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
       );
       Map<String, dynamic> jsonData = response.data;
-      await Methods.instance.saveUserToken(authToken: jsonData['token']);
-      if (jsonData['token'] == null) {
+      await Methods.instance.saveUserToken(authToken: jsonData['data']['token']);
+      if (jsonData['data']['token'] == null) {
         DioException? e;
         throw DioHelper.handleDioError(
             dioError: e, endpointName: "signUpWithEmailAndPassword");

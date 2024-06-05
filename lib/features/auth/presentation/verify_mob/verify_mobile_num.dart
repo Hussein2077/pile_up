@@ -64,8 +64,6 @@ class _VerifyMobNumScreenState extends State<VerifyMobNumScreen> {
               text: StringManager.mobileNum.tr(),
               controller: mobileController,
               fontSize: AppSize.defaultSize!*1.4,
-              fontWeight: FontWeight.w500,
-              fontColor: AppColors.textVerifyMob,
             ),
             SizedBox(height: AppSize.defaultSize!*1.6),
             MainButton(

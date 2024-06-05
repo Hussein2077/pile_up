@@ -20,11 +20,7 @@ class SignUpWithEmailAndPasswordBloc extends Bloc<
         password: event.password,
         phone: event.phone,
         name: event.name,
-        major: event.major,
-        eduLevel: event.eduLevel,
-        graduationYear: event.graduationYear,
         lastName: event.lastName,
-        confirmPassword: event.confirmPassword,
       ));
       result.fold(
           (l) => emit(SignUpWithEmailAndPasswordSuccessMessageState(

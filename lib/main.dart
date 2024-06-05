@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/service/service_locator.dart';
@@ -22,12 +24,15 @@ import 'package:pile_up/features/my_wallet/presentation/controller/controller/my
 import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await ServerLocator().init();
   await EasyLocalization.ensureInitialized();
-
   runApp(EasyLocalization(
       fallbackLocale: const Locale('en'),
       supportedLocales: const [
@@ -38,6 +43,7 @@ void main() async {
       path: 'lib/core/translations/',
       saveLocale: true,
       child: const MyApp()));
+
 }
 
 class MyApp extends StatelessWidget {
@@ -104,6 +110,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: Routes.onBoarding,
+        builder: EasyLoading.init(),
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor:AppColors.green,primaryContainer: Colors.white),
             cardColor: Colors.white,

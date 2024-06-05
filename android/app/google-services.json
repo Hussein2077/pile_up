@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "906563288209",
+    "project_id": "pile-up-e7446",
+    "storage_bucket": "pile-up-e7446.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906563288209:android:44260fcef16a1cd8d79330",
+        "android_client_info": {
+          "package_name": "com.example.pile_up"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2FZ_dqHnqAR8_lViQkSJXxVnefw9FpfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

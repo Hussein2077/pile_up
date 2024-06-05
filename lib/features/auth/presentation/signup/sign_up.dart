@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -11,6 +14,7 @@ import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/snack_bar.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_events.dart';
+import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_states.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -56,216 +60,221 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: authAppBar(context, text: StringManager.signUp.tr()),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+    return BlocListener<SignUpWithEmailAndPasswordBloc,
+        SignUpWithEmailAndPasswordState>(
+      listener: (context, state) {
+        if (state is SignUpWithEmailAndPasswordSuccessMessageState) {
+          EasyLoading.dismiss();
+
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.main,
+            (route) => false,
+          );
+        } else if (state is SignUpWithEmailAndPasswordErrorMessageState) {
+          EasyLoading.dismiss();
+          EasyLoading.showError(state.errorMessage);
+        } else if (state is SignUpWithEmailAndPasswordLoadingState) {
+          EasyLoading.show(status: 'loading...');
+        }
+      },
+      child: Scaffold(
+        appBar: authAppBar(context, text: StringManager.signUp.tr()),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ColumnWithTextField(
-                  text: StringManager.firstName.tr(),
-                  controller: firstNameController,
-                  width: AppSize.screenWidth! * .4,
-                  fontSize: AppSize.defaultSize!*1.6,
-                  fontWeight: FontWeight.w400,
-                ),
-                const Spacer(),
-                ColumnWithTextField(
-                  text: StringManager.secondName.tr(),
-                  controller: lastNameController,
-                  width: AppSize.screenWidth! * .4,
-                  fontSize: AppSize.defaultSize!*1.6,
-                  fontWeight: FontWeight.w400,
-                ),
-              ],
-            ),
-            ColumnWithTextField(
-              text: StringManager.mobileNum.tr(),
-              controller: phoneController,
-              fontSize: AppSize.defaultSize!*1.6,
-              fontWeight: FontWeight.w400,
-            ),
-            ColumnWithTextField(
-              text: StringManager.email.tr(),
-              controller: emailController,
-              fontSize: AppSize.defaultSize!*1.6,
-              fontWeight: FontWeight.w400,
-            ),
-            ColumnWithTextField(
-              text: StringManager.password.tr(),
-              controller: passwordController,
-              fontSize: AppSize.defaultSize!*1.6,
-              fontWeight: FontWeight.w400,
-              prefixIcon: Icon(
-                Icons.lock_outlined,
-                color: AppColors.primaryColor,
-                size: AppSize.defaultSize! * 2,
-              ),
-              suffixIcon: InkWell(
-                onTap: () {
-<<<<<<< HEAD
-                  if (validation()) {
-                    BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
-                        .add(SignUpWithEmailAndPasswordEvent(
-                      phone: phoneController.text,
-                      password: passwordController.text,
-                      major: majorController.text,
-                      name:
-                          '${firstNameController.text} ${lastNameController.text}',
-                      email: emailController.text,
-                    ));
-                  } else {
-                    errorSnackBar(
-                        context, StringManager.pleaseCompleteYourData.tr());
-                  }
-=======
-                  setState(() {
-                    isVisible = !isVisible;
-                  });
->>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
-                },
-                child: Icon(
-                  isVisible ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.grey,
-                  size: AppSize.defaultSize! * 1.8,
-                ),
-              ),
-            ),
-            ColumnWithTextField(
-              text: StringManager.confirmPassword.tr(),
-              controller: passwordConfirmController,
-              fontSize: AppSize.defaultSize!*1.6,
-              fontWeight: FontWeight.w400,
-              prefixIcon: Icon(
-                Icons.lock_outlined,
-                color: AppColors.primaryColor,
-                size: AppSize.defaultSize! * 2,
-              ),
-              suffixIcon: InkWell(
-                onTap: () {
-                  setState(() {
-                    isVisible = !isVisible;
-                  });
-                },
-                child: Icon(
-                  isVisible ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.grey,
-                  size: AppSize.defaultSize! * 1.8,
-                ),
-              ),
-            ),
-            SizedBox(height: AppSize.defaultSize! * 1.5),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      selected = !selected;
-                    });
-                  },
-                  icon: Icon(
-                    selected
-                        ? Icons.check_circle
-                        : Icons.check_circle_outline,
-                    color: AppColors.primaryColor,
-                    size: AppSize.defaultSize! * 2.5,
-                  ),
-                ),
-                Text(
-                  'I agree to ',
-                  style: TextStyle(
-                    color: AppColors.borderColor,
-                    fontSize: AppSize.defaultSize! * 1.4,
-                  ),
-                ),
-                InkWell(
-                  onTap: ()=> Navigator.pushNamed(context, Routes.terms),
-                  child: Text(
-                    'Privacy Policy ',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColor,
-                      color: AppColors.primaryColor,
-                      fontSize: AppSize.defaultSize! * 1.4,
-                    ),
-                  ),
-                ),
-                Text(
-                  'and ',
-                  style: TextStyle(
-                    color: AppColors.borderColor,
-                    fontSize: AppSize.defaultSize! * 1.4,
-                  ),
-                ),
-                InkWell(
-                  onTap: ()=> Navigator.pushNamed(context, Routes.terms),
-                  child: Text(
-                    'Terms of Use.',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColor,
-                      color: AppColors.primaryColor,
-                      fontSize: AppSize.defaultSize! * 1.4,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: AppSize.defaultSize! * 1.5),
-            MainButton(
-              text: StringManager.signUpCap.tr(),
-              fontSize: AppSize.defaultSize!*1.8,
-              fontWeight: FontWeight.w600,
-              onTap: () {
-                if (validation()) {
-                  BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
-                      .add(SignUpWithEmailAndPasswordEvent(
-                    phone: phoneController.text,
-                    password: passwordController.text,
-                    name:
-                        '${firstNameController.text} ${lastNameController.text}',
-                    email: emailController.text,
-                  ));
-                } else {
-                  errorSnackBar(
-                      context, StringManager.pleaseCompleteYourData.tr());
-                }
-              },
-            ),
-            const Expanded(child: Spacer()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  StringManager.youAlready.tr(),
-                  style: TextStyle(
-                      // color: AppColors.greyColor,
+                Row(
+                  children: [
+                    ColumnWithTextField(
+                      text: StringManager.firstName.tr(),
+                      controller: firstNameController,
+                      width: AppSize.screenWidth! * .4,
                       fontSize: AppSize.defaultSize! * 1.6,
-                      // fontWeight: FontWeight.w700,
+                    ),
+                    const Spacer(),
+                    ColumnWithTextField(
+                      text: StringManager.secondName.tr(),
+                      controller: lastNameController,
+                      width: AppSize.screenWidth! * .4,
+                      fontSize: AppSize.defaultSize! * 1.6,
+                    ),
+                  ],
+                ),
+                ColumnWithTextField(
+                  text: StringManager.mobileNum.tr(),
+                  controller: phoneController,
+                  keyboardType: TextInputType.phone,
+                  fontSize: AppSize.defaultSize! * 1.6,
+                ),
+                ColumnWithTextField(
+                  text: StringManager.email.tr(),
+                  controller: emailController,
+                  fontSize: AppSize.defaultSize! * 1.6,
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                    color: AppColors.primaryColor,
+                    size: AppSize.defaultSize! * 2,
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.login);
-                  },
-                  child: Text(
-                    StringManager.login.tr(),
-                    style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: AppSize.defaultSize! * 1.5,
-                        fontWeight: FontWeight.w700,
-                    decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColor,
+                ColumnWithTextField(
+                  text: StringManager.password.tr(),
+                  controller: passwordController,
+                  fontSize: AppSize.defaultSize! * 1.6,
+                  prefixIcon: Icon(
+                    Icons.lock_outlined,
+                    color: AppColors.primaryColor,
+                    size: AppSize.defaultSize! * 2,
+                  ),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
+                    child: Icon(
+                      isVisible ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.grey,
+                      size: AppSize.defaultSize! * 1.8,
                     ),
                   ),
                 ),
+                ColumnWithTextField(
+                  text: StringManager.confirmPassword.tr(),
+                  controller: passwordConfirmController,
+                  fontSize: AppSize.defaultSize! * 1.6,
+                  prefixIcon: Icon(
+                    Icons.lock_outlined,
+                    color: AppColors.primaryColor,
+                    size: AppSize.defaultSize! * 2,
+                  ),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
+                    child: Icon(
+                      isVisible ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.grey,
+                      size: AppSize.defaultSize! * 1.8,
+                    ),
+                  ),
+                ),
+                SizedBox(height: AppSize.defaultSize! * 1.5),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          selected = !selected;
+                        });
+                      },
+                      icon: Icon(
+                        selected
+                            ? Icons.check_circle
+                            : Icons.check_circle_outline,
+                        color: AppColors.primaryColor,
+                        size: AppSize.defaultSize! * 2.5,
+                      ),
+                    ),
+                    Text(
+                      'I agree to ',
+                      style: TextStyle(
+                        color: AppColors.borderColor,
+                        fontSize: AppSize.defaultSize! * 1.4,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.pushNamed(context, Routes.terms),
+                      child: Text(
+                        'Privacy Policy ',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.primaryColor,
+                          color: AppColors.primaryColor,
+                          fontSize: AppSize.defaultSize! * 1.4,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'and ',
+                      style: TextStyle(
+                        color: AppColors.borderColor,
+                        fontSize: AppSize.defaultSize! * 1.4,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.pushNamed(context, Routes.terms),
+                      child: Text(
+                        'Terms of Use.',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.primaryColor,
+                          color: AppColors.primaryColor,
+                          fontSize: AppSize.defaultSize! * 1.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: AppSize.defaultSize! * 1.5),
+                MainButton(
+                  text: StringManager.signUpCap.tr(),
+                  fontSize: AppSize.defaultSize! * 1.8,
+                  fontWeight: FontWeight.w600,
+                  onTap: () {
+                    if (validation()) {
+                      BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
+                          .add(SignUpWithEmailAndPasswordEvent(
+                        phone: phoneController.text,
+                        password: passwordController.text,
+                        name: firstNameController.text,
+                        lastName: lastNameController.text,
+                        email: emailController.text,
+                      ));
+                    } else {
+                      errorSnackBar(
+                          context, StringManager.pleaseCompleteYourData.tr());
+                    }
+                  },
+                ),
+                SizedBox(height: AppSize.defaultSize! * 1.5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      StringManager.youAlready.tr(),
+                      style: TextStyle(
+                        // color: AppColors.greyColor,
+                        fontSize: AppSize.defaultSize! * 1.6,
+                        // fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.login);
+                      },
+                      child: Text(
+                        StringManager.login.tr(),
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: AppSize.defaultSize! * 1.5,
+                          fontWeight: FontWeight.w700,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: AppSize.defaultSize! * 5.5),
               ],
             ),
-            SizedBox(height: AppSize.defaultSize!*5.5),
-          ],
+          ),
         ),
       ),
     );

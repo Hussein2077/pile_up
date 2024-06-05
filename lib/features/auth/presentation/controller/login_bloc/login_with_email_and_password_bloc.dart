@@ -21,10 +21,7 @@ class LoginWithEmailAndPasswordBloc extends Bloc<
       result.fold(
         (l) => emit(
           LoginWithEmailAndPasswordSuccessMessageState(
-            successMessage: StringManager.loginSuccessfully.tr(), isCompleted: l['isCompleted'],
-            completion: l['complition'],
-            userId: l['userId'],
-
+            successMessage: StringManager.loginSuccessfully.tr(),
           ),
         ),
         (r) => emit(

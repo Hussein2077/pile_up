@@ -14,7 +14,8 @@ class StringManager {
   static const String pleaseCompleteYourData = "Please complete your data";
   static const String loginTo = "Login to continue";
   static const String typeUrMobNum = "Type your Mobile Number to continue";
-
+  static const String fillAllFields = "Fill All Fields";
+  static const String pleaseEnterPasswordAndEmail  = "Please enter password and email";
   static const String next = "Next";
   static const String back = "Back";
   static const String skip = "Skip";

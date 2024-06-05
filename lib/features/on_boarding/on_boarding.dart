@@ -52,11 +52,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: [
           SizedBox(
-<<<<<<< HEAD
             height: AppSize.screenHeight! * 0.8,
-=======
-            height: AppSize.screenHeight! * 0.85,
->>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
+
             child: PageView(
               controller: controller,
               onPageChanged: (page) {
@@ -117,11 +114,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     valueListenable: changeToNext,
                     builder: (context, show, _) {
                       return SecondButton(
-<<<<<<< HEAD
-=======
                         showIconAsset: false,
                         showIcon: false,
->>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
+
                         text: show
                             ? StringManager.start.tr()
                             : StringManager.next.tr(),

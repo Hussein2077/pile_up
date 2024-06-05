@@ -1,18 +1,16 @@
 class ConstantApi {
   static const String baseUrl =
-      'http://pileup.hmeitsolutions.com/api/';
+      'https://pileup.hmeitsolutions.com/api/pileup/';
 
   static const String login = "${baseUrl}login";
   static const String myData = "${baseUrl}my-data";
   static const String email = "email";
-  static const String signUp = "sign-up";
-<<<<<<< HEAD
+  static const String signUp = "${baseUrl}register";
   static const String sendCode = "${baseUrl}Auth/generate-otp";
   static const String verifyCode = "${baseUrl}Auth/validate-otp";
   static const String resetPassword  = "${baseUrl}Auth/reset-password-with-otp";
   static const String changePassword  = "${baseUrl}Auth/Change-password";
-=======
->>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
+
   static const String password = "password";
 
   static const String getBlogs = "${baseUrl}Blogs";

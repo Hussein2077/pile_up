@@ -8,9 +8,6 @@ class ColumnWithTextField extends StatefulWidget {
   const ColumnWithTextField({
     super.key,
     required this.text,
-    this.fontSize,
-    this.fontColor,
-    this.fontWeight,
     this.controller,
     this.width,
     this.height,
@@ -24,13 +21,10 @@ class ColumnWithTextField extends StatefulWidget {
     this.dropDown,
     this.maxLine,
     this.obscureText = false,
-    this.prefixIcon,
+    this.prefixIcon, this.fontSize,
   });
 
   final String text;
-  final double? fontSize;
-  final Color? fontColor;
-  final FontWeight? fontWeight;
   final String? labelText;
   final String? hintText;
   final double? width;
@@ -44,7 +38,7 @@ class ColumnWithTextField extends StatefulWidget {
   final Widget? dropDown;
   final void Function()? onTap;
   final TextInputType keyboardType;
-
+  final double? fontSize;
   final TextEditingController? controller;
 
   @override
@@ -64,18 +58,8 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
           children: [
             CustomText(
               text: widget.text,
-<<<<<<< HEAD
-              fontSize: AppSize.defaultSize! * 1.5,
+              fontSize:widget.fontSize ?? AppSize.defaultSize! * 1.5,
             ),
-=======
-              fontSize: widget.fontSize ??AppSize.defaultSize! * 1.5,
-              fontWeight: widget.fontWeight,
-              color: widget.fontColor,
-            ).animate()
-                .fadeIn() // uses `Animate.defaultDuration`
-                .scale() // inherits duration from fadeIn
-                .move(delay: 300.ms, duration: 600.ms),
->>>>>>> 8824b7b286d5084aa8e7d8c727b9403da6708c4d
             if (widget.requiredInput)
               CustomText(
                 text: ' *',
