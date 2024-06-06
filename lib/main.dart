@@ -1,10 +1,17 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
+import 'package:pile_up/core/service/navigate_from_notification.dart';
+import 'package:pile_up/core/service/notification_service.dart';
 import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/translations/translations.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
@@ -25,12 +32,77 @@ import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc
 import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
 import 'firebase_options.dart';
+final navigatorKey = GlobalKey<NavigatorState>();
 
+// function to listen to background changes
+// Future _firebaseBackgroundMessage(RemoteMessage message) async {
+//   if (message.notification != null) {
+//     print("Some notification Received in background...");
+//   }
+// }
+
+// to handle notification on foreground on web platform
+void showNotification({required String title, required String body}) {
+  showDialog(
+    context: navigatorKey.currentContext!,
+    builder: (context) => AlertDialog(
+      title: Text(title),
+      content: Text(body),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Ok"))
+      ],
+    ),
+  );
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await PushNotifications.init();
+  await PushNotifications.localNotiInit();
+
+  // on background notification tapped
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //   if (message.notification != null) {
+  //     print("Background Notification Tapped");
+  //     navigatorKey.currentState!.pushNamed("/message", arguments: message);
+  //   }
+  // });
+
+// to handle foreground notifications
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    String payloadData = jsonEncode(message.data);
+    print("Got a message in foreground");
+    if (message.notification != null) {
+
+        PushNotifications.showSimpleNotification(
+            title: message.notification!.title!,
+            body: message.notification!.body!,
+            payload: payloadData);
+      }
+
+  });
+
+  // for handling in terminated state
+  final RemoteMessage? message =
+  await FirebaseMessaging.instance.getInitialMessage();
+  if (message != null) {
+    log("herrrrreeeeeeeeeeee");
+    navigateFromNotification(message);
+    log("herrrrreeeeeeeeeeee22222222222");
+  }
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    navigateFromNotification(message);
+  });
+
+  FirebaseMessaging.onBackgroundMessage((message) async {
+    navigateFromNotification(message);
+  });
   await ServerLocator().init();
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
@@ -111,6 +183,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: Routes.onBoarding,
         builder: EasyLoading.init(),
+        navigatorKey: navigatorKey,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor:AppColors.green,primaryContainer: Colors.white),
             cardColor: Colors.white,
