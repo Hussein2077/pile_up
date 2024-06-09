@@ -9,13 +9,13 @@ import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/notification_row.dart';
 
 AppBar appBar(BuildContext context,
-    {required String text, void Function()? actionsOnPressed, required bool isIcon}) {
+    {required String text, void Function()? actionsOnPressed, required bool isIcon ,  bool leading = true}) {
   return AppBar(
     backgroundColor: AppColors.primaryColor,
     elevation: 1,
     title: CustomText(
       text: text,
-      fontSize: AppSize.defaultSize! * 2.2,
+      fontSize: AppSize.defaultSize! *2,
       color: Colors.white,
       fontWeight: FontWeight.w600,
     ),
@@ -36,7 +36,8 @@ AppBar appBar(BuildContext context,
       ) : Container(),
     ],
     centerTitle: true,
-    leading: IconButton(
+    automaticallyImplyLeading: leading,
+    leading: leading?IconButton(
       onPressed: () {
         Navigator.pop(context);
       },
@@ -45,7 +46,8 @@ AppBar appBar(BuildContext context,
         color: Colors.white,
         size: AppSize.defaultSize! * 1.8,
       ),
-    ),
+    ):null,
+
   );
 }
 AppBar authAppBar(BuildContext context,

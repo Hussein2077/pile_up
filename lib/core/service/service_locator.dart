@@ -3,9 +3,7 @@ import 'package:pile_up/features/auth/data/auth_remote_data_source.dart';
 import 'package:pile_up/features/auth/data/repo_imp.dart';
 import 'package:pile_up/features/auth/domain/repo/base_repo.dart';
 import 'package:pile_up/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
-import 'package:pile_up/features/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
-import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/blogs/data/data_source/blogs_remote_data_source.dart';
 import 'package:pile_up/features/blogs/data/repo_implementation/blogs_repo_imp.dart';
 import 'package:pile_up/features/blogs/domain/repository/blog_base_repo.dart';
@@ -17,11 +15,8 @@ import 'package:pile_up/features/calendar/domain/repository/calender_base_repo.d
 import 'package:pile_up/features/calendar/domain/use_case/calendar_use_case.dart';
 import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/data/data_source/create_pile_remote_data_source.dart';
-import 'package:pile_up/features/create_pile/data/data_source/user_folder_remote_data_source.dart';
 import 'package:pile_up/features/create_pile/data/repo_implementation/create_pile_repo_imp.dart';
-import 'package:pile_up/features/create_pile/data/repo_implementation/user_folder_repo_imp.dart';
 import 'package:pile_up/features/create_pile/domain/repository/create_pile_base_repo.dart';
-import 'package:pile_up/features/create_pile/domain/repository/user_folders_base_repo.dart';
 import 'package:pile_up/features/create_pile/domain/use_case/create_pile_use_case.dart';
 import 'package:pile_up/features/create_pile/domain/use_case/user_folder_use_case.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
@@ -83,8 +78,7 @@ class ServerLocator {
         () => RepositoryImp(baseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton(() => LoginWithEmailAndPasswordBloc(
         loginWithEmailAndPasswordUseCase: getIt()));
-    getIt.registerLazySingleton(() => SignUpWithEmailAndPasswordBloc(
-        signUpWithEmailAndPasswordUseCase: getIt()));
+
 
     getIt.registerLazySingleton(() => GetBlogsBloc(getBlogsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMerchantsBloc(getMerchantsUseCase: getIt()));
@@ -104,15 +98,13 @@ class ServerLocator {
 //use_case
     getIt.registerFactory(
         () => LoginWithEmailAndPasswordUseCase(baseRepository: getIt()));
-    getIt.registerFactory(
-        () => SignUpWithEmailAndPasswordUseCase(baseRepository: getIt()));
+
 
     getIt.registerFactory(() => GetBlogsUseCase(baseRepositoryBlogs: getIt()));
     getIt.registerFactory(() => GetMerchantsUseCase(baseRepositoryMerchants: getIt()));
     getIt.registerFactory(() => GetVendorsUseCase(baseRepositoryVendors: getIt()));
     getIt.registerFactory(() => GetHomeCarouselUseCase(baseRepositoryHomeCarousel: getIt()));
     getIt.registerFactory(() => CreatePileUseCase(baseRepositoryCreatePile: getIt()));
-    getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryUserFolders: getIt()));
     getIt.registerFactory(() => GetMyProfileUseCase(baseRepositoryMyProfile: getIt()));
     getIt.registerFactory(() => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
     getIt.registerFactory(() => GetFoldersUseCase(baseRepositoryFolders: getIt()));
@@ -121,6 +113,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetPilesImInBySearchUseCase(baseRepositoryPilesImIn: getIt()));
     getIt.registerFactory(() => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
     getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
+    getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryCreatePile: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
@@ -133,8 +126,6 @@ class ServerLocator {
             () => HomeCarouselRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceCreatePile>(
             () => CreatePileRemotelyDateSource());
-    getIt.registerLazySingleton<BaseRemotelyDataSourceUserFolders>(
-            () => UserFoldersRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceMyProfile>(
             () => MyProfileRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceMyWallet>(
@@ -159,8 +150,6 @@ class ServerLocator {
             () => HomeCarouselRepositoryImp(baseRemotelyDataSourceHomeCarousel: getIt()));
     getIt.registerLazySingleton<BaseRepositoryCreatePile>(
             () => CreatePileRepositoryImp(baseRemotelyDataSourceCreatePile: getIt()));
-    getIt.registerLazySingleton<BaseRepositoryUserFolders>(
-            () => UserFoldersRepositoryImp(baseRemotelyDataSourceUserFolders: getIt()));
     getIt.registerLazySingleton<BaseRepositoryMyProfile>(
             () => MyProfileRepositoryImp(baseRemotelyDataSourceMyProfile: getIt()));
     getIt.registerLazySingleton<BaseRepositoryMyWallet>(

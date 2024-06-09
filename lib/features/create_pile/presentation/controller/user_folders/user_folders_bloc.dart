@@ -6,7 +6,6 @@ import 'package:pile_up/features/create_pile/presentation/controller/user_folder
 
 class GetUserFoldersBloc extends Bloc<BaseGetUserFoldersEvent, GetUserFoldersState> {
   GetUserFoldersUseCase getUserFoldersUseCase;
-  // List<UserFolder>? userFolder;
   GetUserFoldersBloc({required this.getUserFoldersUseCase}) : super(GetUserFoldersInitial()) {
     on<BaseGetUserFoldersEvent>((event, emit) async {
       emit(const GetUserFoldersLoadingState());
@@ -14,17 +13,10 @@ class GetUserFoldersBloc extends Bloc<BaseGetUserFoldersEvent, GetUserFoldersSta
       result.fold(
               (l) {
                 emit(GetUserFoldersSuccessMessageState(internModel: l));
-                // userFolder=l;
               },
               (r) => emit(GetUserFoldersErrorMessageState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });
   }
-  // String?fileName;
-  // toggle(int index){
-  //   fileName=userFolder?[index].folderName;
-  //       // for(int i =0;i<userFolder!.length;i++){
-  //       //
-  //       // }
-  // }
+
 }

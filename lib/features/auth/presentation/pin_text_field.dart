@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
@@ -7,7 +6,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class CustomPinCodeTextField extends StatefulWidget {
   const CustomPinCodeTextField({super.key});
-
+  static String otp = "";
   @override
   State<CustomPinCodeTextField> createState() => _CustomPinCodeTextFieldState();
 }
@@ -41,14 +40,15 @@ class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
     return PinCodeTextField(
       appContext: context,
       length: 4,
+      keyboardType: TextInputType.phone,
       obscureText: false,
       animationType: AnimationType.fade,
       textStyle:     TextStyle(fontSize: AppSize.defaultSize! * 1.8),
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.box,
         borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-        fieldHeight: AppSize.defaultSize! * 6.1,
-        fieldWidth: AppSize.defaultSize! * 4.8,
+        fieldHeight: AppSize.defaultSize! * 4.5,
+        fieldWidth: AppSize.defaultSize! * 4.5,
         activeFillColor: Colors.white,
         disabledColor: Colors.white,
         selectedFillColor: Colors.white,
@@ -63,11 +63,14 @@ class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
       controller: controller,
       onCompleted: (v) {
         print("Completed");
+        CustomPinCodeTextField.otp = v;
       },
       onChanged: (value) {
         print(value);
         setState(() {
           currentText = value;
+          CustomPinCodeTextField.otp = value;
+
         });
       },
       beforeTextPaste: (text) {

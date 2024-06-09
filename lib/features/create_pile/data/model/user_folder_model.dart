@@ -1,7 +1,7 @@
 class UserFolder {
   final int folderId;
   final String folderName;
-  final String fkUserid;
+  final int fkUserid;
   // final String? fkUser;
   // final List<Pile> piles;
 
@@ -14,8 +14,8 @@ class UserFolder {
 
   factory UserFolder.fromJson(Map<String, dynamic> json) => UserFolder(
     folderId: json["id"],
-    folderName: json["folderName"],
-    fkUserid: json["fkUserid"],
+    folderName: json["name"],
+    fkUserid: json["user_id"],
 
   );
 

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pile_up/features/auth/presentation/forget_password/change_password.dart';
-import 'package:pile_up/features/auth/presentation/forget_password/forget_password.dart';
-import 'package:pile_up/features/auth/presentation/forget_password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
-import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
-import 'package:pile_up/features/auth/presentation/verify_mob/verify_mobile_num.dart';
-import 'package:pile_up/features/auth/presentation/verify_otp/verify_otp_screen.dart';
+import 'package:pile_up/features/auth/presentation/complete_data.dart';
+import 'package:pile_up/features/auth/presentation/send_otp_code.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
 import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
@@ -24,8 +20,7 @@ import '../../features/home/presentation/components/Piles Details/piles_details.
 class Routes {
   static const String login = "/login";
   static const String main = "/main";
-  static const String signUp = "/signUp";
-  static const String forgetPassword = "/forgetPassword";
+  static const String completeData = "/completeData";
   static const String sendOTPCode = "/sendOTPCode";
   static const String changePassword = "/changePassword";
   static const String profile = "/profile";
@@ -70,26 +65,19 @@ class RouteGenerator {
           const PilesDetails(),
           transitionsBuilder: customAnimate,
         );
-      case Routes.signUp:
+      case Routes.completeData:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SignUpScreen(),
+                const CompleteDataScreen(),
             transitionsBuilder: customAnimate);
-      case Routes.forgetPassword:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const ForgetPassword(),
-            transitionsBuilder: customAnimate);
+
       case Routes.sendOTPCode:
+        String phone = settings.arguments as String;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SendOTPCode(),
+                  SendOTPCode(phoneNumber: phone,),
             transitionsBuilder: customAnimate);
-      case Routes.changePassword:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const ChangePassword(),
-            transitionsBuilder: customAnimate);
+
 
         case Routes.onBoarding:
         return PageRouteBuilder(
@@ -134,16 +122,8 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const VendorsScreen(),
             transitionsBuilder: customAnimate);
-      case Routes.verifyMobScreen:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-            const VerifyMobNumScreen(),
-            transitionsBuilder: customAnimate);
-      case Routes.verifyOTPScreen:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-            const VerifyOTPScreen(),
-            transitionsBuilder: customAnimate);
+
+
       case Routes.addressBook:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>

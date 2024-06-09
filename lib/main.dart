@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -14,8 +12,8 @@ import 'package:pile_up/core/service/navigate_from_notification.dart';
 import 'package:pile_up/core/service/notification_service.dart';
 import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/translations/translations.dart';
+import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
-import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
@@ -34,12 +32,6 @@ import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.da
 import 'firebase_options.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
-// function to listen to background changes
-// Future _firebaseBackgroundMessage(RemoteMessage message) async {
-//   if (message.notification != null) {
-//     print("Some notification Received in background...");
-//   }
-// }
 
 // to handle notification on foreground on web platform
 void showNotification({required String title, required String body}) {
@@ -53,7 +45,7 @@ void showNotification({required String title, required String body}) {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Ok"))
+            child: const Text("Ok"))
       ],
     ),
   );
@@ -65,19 +57,9 @@ void main() async {
   );
   await PushNotifications.init();
   await PushNotifications.localNotiInit();
-
-  // on background notification tapped
-  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-  //   if (message.notification != null) {
-  //     print("Background Notification Tapped");
-  //     navigatorKey.currentState!.pushNamed("/message", arguments: message);
-  //   }
-  // });
-
 // to handle foreground notifications
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     String payloadData = jsonEncode(message.data);
-    print("Got a message in foreground");
     if (message.notification != null) {
 
         PushNotifications.showSimpleNotification(
@@ -124,13 +106,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    AppSize().init(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => getIt<LoginWithEmailAndPasswordBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<SignUpWithEmailAndPasswordBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt<GetBlogsBloc>(),
@@ -181,7 +161,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.onBoarding,
+        initialRoute: Routes.main,
         builder: EasyLoading.init(),
         navigatorKey: navigatorKey,
         theme: ThemeData(

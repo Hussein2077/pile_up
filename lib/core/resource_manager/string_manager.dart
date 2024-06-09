@@ -6,18 +6,22 @@ class StringManager {
   static const String boarding4 = "Shops Discounts";
   static const String description1 =
       "PileUp is designed to facilitate group money collection for various occasions and events. Create an account or sign up with your social media account. Start by creating a pile and share it with your friends.";
-  static const String description2 ="Create a folder that contains your piles. Create a pile and set the occasion, amount, title, description, start, and end date. You can invite others to manage the pile with you.";
+  static const String description2 =
+      "Create a folder that contains your piles. Create a pile and set the occasion, amount, title, description, start, and end date. You can invite others to manage the pile with you.";
   static const String description3 =
       "When the pile is over, you can redeem or send the amount to the recipient. Share the pile with your friends and invitees via messages, WhatsApp, or a barcode and let each one participate.";
-  static const String description4 ="Enjoy discounts provided by hundreds of brands and shops.";
+  static const String description4 =
+      "Enjoy discounts provided by hundreds of brands and shops.";
   static const String welcomeBack = "Welcome";
   static const String pleaseCompleteYourData = "Please complete your data";
+  static const String completeYourData = "Complete your data";
   static const String loginTo = "Login to continue";
   static const String typeUrMobNum = "Type your Mobile Number to continue";
   static const String fillAllFields = "Fill All Fields";
-  static const String pleaseEnterPasswordAndEmail  = "Please enter password and email";
+  static const String enterPhoneNumber = "Please enter your phone number";
   static const String next = "Next";
   static const String back = "Back";
+  static const String phone = "Phone Number";
   static const String skip = "Skip";
   static const String start = "Start";
   static const String myPiles = "My Piles";
@@ -40,7 +44,8 @@ class StringManager {
   static const String veryUsefulArticles = "Very Useful Articles";
   static const String enjoyFantasticDiscounts = "Enjoy Fantastic Discounts";
   static const String theMost = "The most ingenious recycled homes";
-  static const String anotherRecommendedArticles = "Another Recommended Articles";
+  static const String anotherRecommendedArticles =
+      "Another Recommended Articles";
   static const String myWallet = "My Wallet";
   static const String pilesIAm = "Piles I'm in";
   static const String firstName = "First Name";
@@ -64,6 +69,7 @@ class StringManager {
   static const String signIn = "Sign in";
   static const String sendCode = "SEND CODE";
   static const String confirm = "CONFIRM";
+  static const String confirmPhoneNumber = "Confirm Phone Number";
   static const String reset = "Reset";
   static const String viewProfile = "View Profile";
   static const String searchFor = "Search for a folder / pile";
@@ -83,7 +89,8 @@ class StringManager {
   static const String showTotalRequired = "Show Total Required";
   static const String makePayerListPublic = "Make Payer List Public";
   static const String exactAmountOrEditable = "Exact Amount Or Editable";
-  static const String allowParticipantsToLeaveMessage = "Allow Participants To Leave Message";
+  static const String allowParticipantsToLeaveMessage =
+      "Allow Participants To Leave Message";
   static const String create = "Create";
   static const String active = "Active";
   static const String participate = "Participate";
@@ -117,11 +124,12 @@ class StringManager {
 
   static const String weWillSend =
       "Don’t worry ! it happens. please enter your e-mail we will send the code in this e-mail.";
-  static const String pleaseEnterYOurCode =
-      "Code has been sent to user@gmail.com enter the code below to continue.";
+  static   String pleaseEnterYOurCode (String phone)=>
+      "Code has been sent to $phone enter the code below to continue.";
   static const String codeSendToMobNum =
       "Code has been sent to +201045789832 enter the code below to continue.";
-  static const String pleaseEnterYourCodeEmailExample =' enter the code below to continue.';
+  static const String pleaseEnterYourCodeEmailExample =
+      ' enter the code below to continue.';
   static const String or = "Or sign in With";
   static const String enterYourEmail = "E-Mail Address";
   static const String doNotHaveAccount = "Don't have an account?   ";

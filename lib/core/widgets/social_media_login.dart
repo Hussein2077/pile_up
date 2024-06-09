@@ -76,7 +76,7 @@ class SocialMediaLogin extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, Routes.signUp);
+                  Navigator.pushNamed(context, Routes.completeData);
                 },
                 child: Text(
                   StringManager.signUp.tr(),

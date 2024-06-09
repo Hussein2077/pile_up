@@ -21,6 +21,7 @@ import 'package:pile_up/features/create_pile/presentation/controller/create_pile
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_event.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_state.dart';
+import 'package:pile_up/features/create_pile/presentation/widgets/folders_drop_down.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/toggle_row.dart';
 
 class CreatePileScreen extends StatefulWidget {
@@ -38,8 +39,6 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<CreatePileBloc>(context).add(CreatePileEvent());
-    BlocProvider.of<GetUserFoldersBloc>(context).add(GetUserFoldersEvent());
 
     titleController = TextEditingController();
     amountController = TextEditingController();
@@ -73,7 +72,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String? folderName1;
+
     FilePickerResult? result;
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
@@ -162,39 +161,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             requiredInput: true,
                             controller: titleController,
                           ),
-                          BlocBuilder<GetUserFoldersBloc, GetUserFoldersState>(
-                            builder: (context, state) {
-                              if (state is GetUserFoldersSuccessMessageState) {
-                                folderName1 = state.internModel[0].folderName;
-                                return ColumnWithTextField(
-                                  text: StringManager.folder.tr(),
-                                  requiredInput: true,
-                                  dropDown: StatefulBuilder(
-                                      builder: (context, setState) {
-                                    return CustomDropdownButton2(
-                                      hint: 'Select a folder',
-                                      value: folderName1,
-                                      dropdownItems: state.internModel
-                                          .map((e) => e.folderName)
-                                          .toList(),
-                                      onChanged: (String? newValue) {
-                                        folderName1 = newValue;
-                                        log('${folderName1}folderName1');
-                                        setState(() {});
-                                      },
-                                    );
-                                  }),
-                                );
-                              } else if (state is GetUserFoldersLoadingState) {
-                                return const LoadingWidget();
-                              } else if (state
-                                  is GetUserFoldersErrorMessageState) {
-                                return ErrorWidget(state.errorMessage);
-                              } else {
-                                return const EmptyWidget();
-                              }
-                            },
-                          ),
+                        FoldersDropDown(),
                           ColumnWithTextField(
                             text: StringManager.type.tr(),
                             dropDown: CustomDropdownButton2(
