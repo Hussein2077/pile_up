@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -19,25 +21,20 @@ class CreatePileBloc extends Bloc<BaseCreatePileEvent, CreatePileState> {
       emit(const CreatePileLoadingState());
       final result = await createPileUseCase.createPile(
         CreatePile(
-          userId: event.userId,
+          image: event.image,
           folderId: event.folderId,
           pileName: event.pileName,
           description: event.description,
-          ziad: event.ziad,
           eventDate: event.eventDate,
           deadlineDate: event.deadlineDate,
-          creationDate: event.creationDate,
           totalAmount: event.totalAmount,
           participationAmount: event.participationAmount,
-          status: event.status,
-          pileImage: event.pileImage,
-          categoryId: event.categoryId,
-          collectedAmount: event.collectedAmount,
           totalCollectedPublic: event.totalCollectedPublic,
           showTotalRequired: event.showTotalRequired,
           payerListPublic: event.payerListPublic,
           exactAmountOrNot: event.exactAmountOrNot,
           allowPayerToLevMsg: event.allowPayerToLevMsg,
+          typeId: event.typeId,
         ),
       );
       result.fold(

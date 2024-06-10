@@ -29,5 +29,13 @@ class CreatePileRepositoryImp extends BaseRepositoryCreatePile{
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
     }
+  } @override
+  Future<Either<List<UserFolder>, Failure>> getTypes() async {
+    try {
+      final result = await baseRemotelyDataSourceCreatePile.getTypes();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
   }
 }

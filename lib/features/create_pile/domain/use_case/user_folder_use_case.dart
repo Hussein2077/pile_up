@@ -14,3 +14,14 @@ class GetUserFoldersUseCase {
     return result;
   }
 }
+class GetTypesUseCase {
+  final BaseRepositoryCreatePile baseRepositoryCreatePile;
+
+  GetTypesUseCase({required this.baseRepositoryCreatePile});
+
+  Future<Either<List<UserFolder>, Failure>> getTypes() async {
+    final result = await baseRepositoryCreatePile.getTypes();
+
+    return result;
+  }
+}

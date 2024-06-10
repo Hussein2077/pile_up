@@ -33,10 +33,10 @@ class _CustomSwitchRowState extends State<CustomSwitchRow> {
             setState,
             ) {
           return FlutterSwitch(
-            width: AppSize.defaultSize! * 5.6,
+            width: AppSize.defaultSize! * 4.5,
             height: AppSize.defaultSize! * 2.4,
-            toggleSize: 16,
-            borderRadius: 8,
+            toggleSize: AppSize.defaultSize!*1.6,
+            borderRadius: AppSize.defaultSize!,
             showOnOff: false,
             padding: 1,
             switchBorder: Border.all(color: AppColors.greyColor),

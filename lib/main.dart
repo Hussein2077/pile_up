@@ -17,6 +17,7 @@ import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_w
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_notifications/get_notifications_bloc.dart';
@@ -138,6 +139,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetFoldersBloc>(),
+        ), BlocProvider(
+          create: (context) => getIt<GetTypesBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt<GetFoldersBySearchBloc>(),

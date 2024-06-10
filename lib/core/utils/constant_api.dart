@@ -10,6 +10,7 @@ class ConstantApi {
   static const String getVendors = "${baseUrl}Vendors";
   static const String getHomeCarousel = "${baseUrl}CarouselSliders";
   static const String getUserFolders = "${baseUrl}folder";
+  static const String getType = "${baseUrl}type";
   static const String getMyProfile = "${baseUrl}MyProfile";
   static const String getMyWallet = "${baseUrl}MyWallet";
   static const String getFolders = "${baseUrl}Pile/GetAllPiles";

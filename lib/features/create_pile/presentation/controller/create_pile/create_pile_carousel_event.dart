@@ -6,45 +6,37 @@ abstract class BaseCreatePileEvent {}
 class InitEvent extends BaseCreatePileEvent {}
 
 class CreatePileEvent extends BaseCreatePileEvent {
-  final String? userId;
-  final int? folderId;
-  final String? pileName;
-  final String? description;
-  final String? ziad;
-  final DateTime? eventDate;
-  final DateTime? deadlineDate;
-  final DateTime? creationDate;
-  final int? totalAmount;
-  final int? participationAmount;
-  final bool? status;
-  final String? pileImage;
-  final int? categoryId;
-  final int? collectedAmount;
-  final bool? totalCollectedPublic;
-  final bool? showTotalRequired;
-  final bool? payerListPublic;
-  final bool? exactAmountOrNot;
-  final bool? allowPayerToLevMsg;
+  final int folderId;
+  final String pileName;
+  final String description;
+  final File image;
+  final String eventDate;
+  final String deadlineDate;
+  final String totalAmount;
+  final String participationAmount;
+  final int typeId;
+  final bool totalCollectedPublic;
+  final bool showTotalRequired;
+  final bool payerListPublic;
+  final bool exactAmountOrNot;
+  final bool allowPayerToLevMsg;
 
   CreatePileEvent({
-    this.userId,
-    this.folderId,
-    this.pileName,
-    this.description,
-    this.ziad,
-    this.eventDate,
-    this.deadlineDate,
-    this.creationDate,
-    this.totalAmount,
-    this.participationAmount,
-    this.status,
-    this.pileImage,
-    this.categoryId,
-    this.collectedAmount,
-    this.totalCollectedPublic,
-    this.showTotalRequired,
-    this.payerListPublic,
-    this.exactAmountOrNot,
-    this.allowPayerToLevMsg,
+
+   required  this.folderId,
+  required  this.pileName,
+  required  this.description,
+  required  this.image,
+  required  this.eventDate,
+  required  this.deadlineDate,
+  required  this.totalAmount,
+  required  this.participationAmount,
+
+  required  this.typeId,
+  required  this.totalCollectedPublic,
+  required  this.showTotalRequired,
+  required  this.payerListPublic,
+  required  this.exactAmountOrNot,
+  required  this.allowPayerToLevMsg,
   });
 }

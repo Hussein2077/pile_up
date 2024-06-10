@@ -124,7 +124,8 @@ class StringManager {
 
   static const String weWillSend =
       "Don’t worry ! it happens. please enter your e-mail we will send the code in this e-mail.";
-  static   String pleaseEnterYOurCode (String phone)=>
+
+  static String pleaseEnterYOurCode(String phone) =>
       "Code has been sent to $phone enter the code below to continue.";
   static const String codeSendToMobNum =
       "Code has been sent to +201045789832 enter the code below to continue.";
@@ -154,4 +155,10 @@ class StringManager {
   static const String addressBook = 'Address Book';
   static const String thereIsNo = "There is no items";
   static const String continueScreen = "CONTINUE";
+  static const String pleaseEnterTitle = "Please Enter Title";
+  static const String pleaseEnterTotalAmount = "Please Enter Total Amount";
+
+  static const String pleaseEnterParticipatedAmount =
+      "Please Enter Participated Amount";
+  static const String pleaseEnterDescription = "Please Enter Description";
 }

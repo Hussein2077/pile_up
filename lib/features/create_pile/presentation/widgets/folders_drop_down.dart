@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pile_up/core/models/common_type.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/drop_down_custom.dart';
@@ -13,7 +14,7 @@ import 'package:pile_up/features/create_pile/presentation/controller/user_folder
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_state.dart';
 class FoldersDropDown extends StatefulWidget {
   const FoldersDropDown({super.key});
-
+static  CommonType? folderValue;
   @override
   State<FoldersDropDown> createState() => _FoldersDropDownState();
 }
@@ -25,42 +26,53 @@ class _FoldersDropDownState extends State<FoldersDropDown> {
 
     super.initState();
   }
-  String? folderName1;
+
   @override
   Widget build(BuildContext context) {
     return
     BlocBuilder<GetUserFoldersBloc, GetUserFoldersState>(
       builder: (context, state) {
+        List<CommonType>? dropdownItems = [];
         if (state is GetUserFoldersSuccessMessageState) {
-          if(state.internModel.isNotEmpty) {
-            folderName1 = state.internModel[0].folderName;
-          }
+          dropdownItems = state.internModel.map((e) => CommonType(
+              nameEn: e.name,
+              id: e.id
+          )).toList() ?? [];
+
           return ColumnWithTextField(
             text: StringManager.folder.tr(),
             requiredInput: true,
-            dropDown: StatefulBuilder(
-                builder: (context, setState) {
-              return CustomDropdownButton2(
-                hint: 'Select a folder',
-                value: folderName1,
-                dropdownItems: state.internModel
-                    .map((e) => e.folderName)
-                    .toList(),
-                onChanged: (String? newValue) {
-                  folderName1 = newValue;
-                  log('${folderName1}folderName1');
-                  setState(() {});
-                },
-              );
-            }),
+            dropDown: CustomDropdownButton2(
+              hint: 'Select a folder',
+              value:FoldersDropDown. folderValue,
+              dropdownItems:dropdownItems  ,
+              onChanged: (CommonType? newValue) {
+                FoldersDropDown.  folderValue = newValue;
+                log('${FoldersDropDown.folderValue}folderName1');
+              setState(() {
+
+              });
+              },
+            ),
           );
         } else if (state is GetUserFoldersLoadingState) {
-          return const LoadingWidget();
+          return ColumnWithTextField(
+            text: StringManager.folder.tr(),
+            requiredInput: true,
+            dropDown: CustomDropdownButton2(
+              hint: 'Select a folder',
+              value:null,
+              dropdownItems:const []  ,
+              onChanged: (CommonType? newValue) {
+
+              },
+            ),
+          );
         } else if (state
             is GetUserFoldersErrorMessageState) {
           return ErrorWidget(state.errorMessage);
         } else {
-          return const EmptyWidget();
+          return const SizedBox();
         }
       },
     );

@@ -30,7 +30,6 @@ class FoldersRemotelyDateSource extends BaseRemotelyDataSourceFolders {
       );
       List<FolderModel> jsonData = List<FolderModel>.from(
           (response.data as List).map((e) => FolderModel.fromJson(e)));
-      log('$jsonData dddddddddd');
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: "get Folders");

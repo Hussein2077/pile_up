@@ -1,10 +1,8 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -12,17 +10,13 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/core/widgets/drop_down_custom.dart';
-import 'package:pile_up/core/widgets/empty_widget.dart';
-import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/core/widgets/snack_bar.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
-import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
-import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_event.dart';
-import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_state.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/folders_drop_down.dart';
+import 'package:pile_up/features/create_pile/presentation/widgets/pile_image.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/toggle_row.dart';
+import 'package:pile_up/features/create_pile/presentation/widgets/type_drop_down.dart';
 
 class CreatePileScreen extends StatefulWidget {
   const CreatePileScreen({super.key});
@@ -39,7 +33,6 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
 
   @override
   void initState() {
-
     titleController = TextEditingController();
     amountController = TextEditingController();
     participatedAmountController = TextEditingController();
@@ -58,12 +51,6 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
 
   DateTime eventDate = DateTime.now();
   DateTime deadlineDate = DateTime.now();
-  String type = 'Birthday';
-  Map<String, int> typeCategory = {
-    'Birthday': 1,
-    'Party': 2,
-    'Wedding': 3,
-  };
   bool totalCollectedPublic = false;
   bool showTotalReq = false;
   bool payerListPublic = false;
@@ -72,8 +59,6 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    FilePickerResult? result;
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: homeAppBar(context,
@@ -89,17 +74,20 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
         child: BlocListener<CreatePileBloc, CreatePileState>(
           listener: (context, state) {
             if (state is CreatePileSuccessMessageState) {
-              // successSnackBar(context, state.internModel['userId'].toString());
-              successSnackBar(context, 'Pile is created Successfully!');
+              EasyLoading.dismiss();
+              EasyLoading.showSuccess('Pile Created Successfully');
               titleController.text = '';
               descriptionController.text = '';
               amountController.text = '';
               participatedAmountController.text = '';
               eventDate = DateTime.now();
               deadlineDate = DateTime.now();
-
             } else if (state is CreatePileErrorMessageState) {
-              errorSnackBar(context, 'Pile Error!');
+              EasyLoading.dismiss();
+              EasyLoading.showError(state.errorMessage);
+            }
+            else if (state is CreatePileLoadingState) {
+            EasyLoading.show();
             }
           },
           child: Column(
@@ -123,62 +111,14 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                           SizedBox(
                             height: AppSize.defaultSize! * 1.6,
                           ),
-                          InkWell(
-                            onTap: ()async{
-                              result = await FilePicker.platform.pickFiles(
-                                type: FileType.custom,
-                                allowedExtensions: ['jpg', 'png', 'jpeg'],
-                              );
-                              setState((){});
-
-                              if (result != null) {
-                                File file = File(result?.files.single.path??"");
-                                print(file);
-                              } else {
-                                print("No file selected");
-                              }
-                            },
-                            child: Container(
-                              height: AppSize.screenHeight! * .2,
-                              width: AppSize.screenWidth! * .84,
-                              decoration: BoxDecoration(
-                                  color: AppColors.greyColor3,
-                                  border:
-                                      Border.all(color: AppColors.greyColor4),
-                                  borderRadius: BorderRadius.circular(
-                                      AppSize.defaultSize!)),
-                              child: result != null?
-                              Image.network(result.files[0].path!):
-                              Icon(
-                                Icons.add_a_photo,
-                                color: Colors.white,
-                                size: AppSize.defaultSize! * 7,
-                              ),
-                            ),
-                          ),
+                          const PileImage(),
                           ColumnWithTextField(
                             text: StringManager.title.tr(),
                             requiredInput: true,
                             controller: titleController,
                           ),
-                        FoldersDropDown(),
-                          ColumnWithTextField(
-                            text: StringManager.type.tr(),
-                            dropDown: CustomDropdownButton2(
-                              hint: '',
-                              value: type,
-                              dropdownItems: const [
-                                'Birthday',
-                                'Party',
-                                'Wedding',
-                              ],
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  type = newValue!;
-                                });
-                              },
-                            ),
-                          ),
+                          const FoldersDropDown(),
+                          const TypesDropDown(),
                           ColumnWithTextField(
                             text: StringManager.totalAmount.tr(),
                             keyboardType: TextInputType.phone,
@@ -243,39 +183,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                           MainButton(
                             text: StringManager.create.tr(),
                             onTap: () {
-                              if (titleController.text.isNotEmpty ||
-                                  amountController.text.isNotEmpty ||
-                                  participatedAmountController
-                                      .text.isNotEmpty ||
-                                  descriptionController.text.isNotEmpty) {
-                                BlocProvider.of<CreatePileBloc>(context)
-                                    .add(CreatePileEvent(
-                                  userId:
-                                      "d5ee16fe-727c-4446-b962-08dc3265bb1c",
-                                  folderId: 1,
-                                  pileName: titleController.text,
-                                  description: descriptionController.text,
-                                  ziad: 'Text by Omar',
-                                  eventDate: eventDate,
-                                  deadlineDate: deadlineDate,
-                                  creationDate: DateTime.now(),
-                                  totalAmount: int.parse(amountController.text),
-                                  participationAmount: int.parse(
-                                      participatedAmountController.text),
-                                  status: true,
-                                  pileImage: result!=null? result!.files[0].path: AssetPath.image,
-                                  categoryId: typeCategory[type],
-                                  collectedAmount: 0,
-                                  totalCollectedPublic: totalCollectedPublic,
-                                  showTotalRequired: showTotalReq,
-                                  payerListPublic: payerListPublic,
-                                  exactAmountOrNot: editable,
-                                  allowPayerToLevMsg: allowMsg,
-                                ));
-                              } else {
-                                errorSnackBar(context,
-                                    StringManager.pleaseCompleteYourData.tr());
-                              }
+                              validation();
                             },
                           ),
                           SizedBox(
@@ -295,6 +203,44 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
         ),
       ),
     );
+  }
+
+  validation() {
+    if (titleController.text.isNotEmpty &&
+        amountController.text.isNotEmpty &&
+        participatedAmountController.text.isNotEmpty &&
+        descriptionController.text.isNotEmpty &&
+        PileImage.imageFile != null) {
+      BlocProvider.of<CreatePileBloc>(context).add(CreatePileEvent(
+        folderId: FoldersDropDown.folderValue!.id,
+        pileName: titleController.text,
+        description: descriptionController.text,
+        image: PileImage.imageFile!,
+        eventDate: eventDate.toString(),
+        deadlineDate: deadlineDate.toString(),
+        totalAmount:amountController.text,
+        participationAmount:participatedAmountController.text,
+        typeId: TypesDropDown.typesValue!.id,
+        totalCollectedPublic: totalCollectedPublic,
+        showTotalRequired: showTotalReq,
+        payerListPublic: payerListPublic,
+        exactAmountOrNot: editable,
+        allowPayerToLevMsg: allowMsg,
+      ));
+    } else if (titleController.text.isEmpty) {
+      errorSnackBar(context, StringManager.pleaseEnterTitle.tr());
+    } else if (amountController.text.isEmpty) {
+      errorSnackBar(context, StringManager.pleaseEnterTotalAmount.tr());
+    } else if (participatedAmountController.text.isEmpty) {
+      errorSnackBar(context, StringManager.pleaseEnterParticipatedAmount.tr());
+    } else if (descriptionController.text.isEmpty) {
+      errorSnackBar(context, StringManager.pleaseEnterDescription.tr());
+    } else if (titleController.text.isEmpty &&
+        amountController.text.isEmpty &&
+        participatedAmountController.text.isEmpty &&
+        descriptionController.text.isEmpty &&
+        PileImage.imageFile == null) {}
+    return false;
   }
 
   _eventDate(BuildContext context) async {
@@ -325,5 +271,3 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
     }
   }
 }
-
-

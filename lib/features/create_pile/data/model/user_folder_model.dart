@@ -1,27 +1,25 @@
 class UserFolder {
-  final int folderId;
-  final String folderName;
-  final int fkUserid;
-  // final String? fkUser;
-  // final List<Pile> piles;
+  final int id;
+  final String name;
+
 
   UserFolder({
-   required this.folderId,
-    required this.folderName,
-    required this.fkUserid,
+   required this.id,
+    required this.name,
+
 
   });
 
   factory UserFolder.fromJson(Map<String, dynamic> json) => UserFolder(
-    folderId: json["id"],
-    folderName: json["name"],
-    fkUserid: json["user_id"],
+    id: json["id"],
+    name: json["name"]??"",
+
 
   );
 
   Map<String, dynamic> toJson() => {
-    "id": folderId,
-    "folderName": folderName,
-    "fkUserid": fkUserid,
+    "id": id,
+    "folderName": name,
+
   };
 }

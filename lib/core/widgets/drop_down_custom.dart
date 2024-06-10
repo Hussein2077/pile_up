@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:pile_up/core/models/common_type.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 
@@ -35,9 +36,9 @@ class CustomDropdownButton2 extends StatelessWidget {
     super.key, this.dropdownColor,
   });
   final String hint;
-  final String? value;
-  final List<String> dropdownItems;
-  final ValueChanged<String?>? onChanged;
+  final CommonType? value;
+  final List<CommonType> dropdownItems;
+  final ValueChanged<CommonType?>? onChanged;
   final DropdownButtonBuilder? selectedItemBuilder;
   final Alignment? hintAlignment;
   final Alignment? valueAlignment;
@@ -64,7 +65,7 @@ class CustomDropdownButton2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2<String>(
+      child: DropdownButton2<CommonType>(
         //To avoid long text overflowing.
         isExpanded: true,
         hint: Container(
@@ -74,8 +75,9 @@ class CustomDropdownButton2 extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: TextStyle(
-                fontSize: AppSize.defaultSize!*1.6,
-                fontWeight: FontWeight.w600,
+                fontSize: AppSize.defaultSize!*1.4,
+                fontWeight: FontWeight.w400,
+
                 color: AppColors.blackLow.withOpacity(.8)
             ),
           ),
@@ -83,12 +85,12 @@ class CustomDropdownButton2 extends StatelessWidget {
         value: value,
         style: TextStyle(fontSize: AppSize.defaultSize!*1.2,color: AppColors.greyColor2),
         items: dropdownItems
-            .map((String item) => DropdownMenuItem<String>(
+            .map((CommonType item) => DropdownMenuItem<CommonType>(
           value: item,
           child: Container(
             alignment: valueAlignment,
             child: Text(
-              item,
+              item.nameEn,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style:   TextStyle(

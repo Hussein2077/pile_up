@@ -20,6 +20,7 @@ import 'package:pile_up/features/create_pile/domain/repository/create_pile_base_
 import 'package:pile_up/features/create_pile/domain/use_case/create_pile_use_case.dart';
 import 'package:pile_up/features/create_pile/domain/use_case/user_folder_use_case.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/data/data_source/home_carousel_remote_data_source.dart';
 import 'package:pile_up/features/home/data/data_source/notifications_remote_data_source.dart';
@@ -94,6 +95,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetPilesImInBySearchBloc(getPilesImInBySearchUseCase: getIt()));
     getIt.registerLazySingleton(() => GetNotificationsBloc(getNotificationsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetCalendarBloc(getCalendarUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetTypesBloc(getTypesUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(
@@ -114,6 +116,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
     getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
     getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(() => GetTypesUseCase(baseRepositoryCreatePile: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
