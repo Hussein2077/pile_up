@@ -17,13 +17,14 @@ import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_w
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_event.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_notifications/get_notifications_bloc.dart';
 import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_by_search_controller/folders_by_search_bloc.dart';
-import 'package:pile_up/features/my_piles/presentation/controller/folders_controller/folders_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_search_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_wallet/presentation/controller/controller/my_wallet_bloc.dart';
@@ -59,10 +60,9 @@ void main() async {
   await PushNotifications.init();
   await PushNotifications.localNotiInit();
 // to handle foreground notifications
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     String payloadData = jsonEncode(message.data);
     if (message.notification != null) {
-
         PushNotifications.showSimpleNotification(
             title: message.notification!.title!,
             body: message.notification!.body!,
@@ -138,7 +138,7 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<GetMyWalletBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetFoldersBloc>(),
+          create: (context) => getIt<GetFoldersBloc>()..add(GetFoldersEvent()),
         ), BlocProvider(
           create: (context) => getIt<GetTypesBloc>(),
         ),

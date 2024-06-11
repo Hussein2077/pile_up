@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:pile_up/features/my_piles/data/model/folder_model.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 
 @immutable
 abstract class GetFoldersState extends Equatable {
@@ -23,7 +23,7 @@ class GetFoldersErrorMessageState extends GetFoldersState{
 }
 
 class GetFoldersSuccessMessageState extends GetFoldersState{
-  final List<FolderModel> internModel ;
+  final List<FolderModel> folderModel ;
 
-  const GetFoldersSuccessMessageState({ required this.internModel});
+  const GetFoldersSuccessMessageState({ required this.folderModel});
 }

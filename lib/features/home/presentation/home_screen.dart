@@ -15,6 +15,9 @@ import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
 import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/blogs/presentation/widgets/blog_list_screen.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_state.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/widgets/merchant_card.dart';
 import 'package:pile_up/features/home/presentation/widgets/middle_carousel_card.dart';
@@ -33,11 +36,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int myCurrentIndex = 0;
 
-  final myitems = [
-    const MiddleCarouselCard(),
-    const MiddleCarouselCard(),
-    const MiddleCarouselCard(),
-  ];
+
   final myitems2 = [
     const OurMerchantCard(),
     const OurMerchantCard(),
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const TopCarousel(),
+            // const TopCarousel(),
             SizedBox(
               height: AppSize.defaultSize! * 1.5,
             ),
@@ -81,32 +80,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: AppSize.defaultSize!,
                 ),
-                SizedBox(
-                  height: AppSize.defaultSize! * 12,
-                  child: ListView.builder(
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.all(AppSize.defaultSize! * .5),
-                          child: InkWell(
-                            onTap: () {
-                              PersistentNavBarNavigator.pushNewScreen(
-                                context,
-                                screen: const PilesDetails(),
-                                withNavBar: false,
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.fade,
-                              );
-                            },
-                            child: const MiddleCarouselCard()
-                                .animate()
-                                .fadeIn() // uses `Animate.defaultDuration`
-                                .scale() // inherits duration from fadeIn
-                                .move(delay: 300.ms, duration: 600.ms),
-                          ),
-                        );
-                      }),
+                BlocBuilder<GetFoldersBloc, GetFoldersState>(
+                  builder: (context, state) {
+                    if (state is GetFoldersSuccessMessageState) {
+                      List<Pile> getAllPiles(List<FolderModel> folders) {
+                        return folders.expand((folder) => folder.piles).toList();
+                      }
+                      List<Pile> allPiles = getAllPiles(state.folderModel);
+                      return SizedBox(
+                      height: AppSize.defaultSize! * 12,
+                      child: ListView.builder(
+                          itemCount: allPiles.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.all(
+                                  AppSize.defaultSize! * .5),
+                              child: InkWell(
+                                // onTap: () {
+                                //   PersistentNavBarNavigator.pushNewScreen(
+                                //     context,
+                                //     screen:   PilesDetails(pile: Pile(
+                                //
+                                //     ),),
+                                //     withNavBar: false,
+                                //     pageTransitionAnimation:
+                                //         PageTransitionAnimation.fade,
+                                //   );
+                                // },
+                                child:   MiddleCarouselCard(pile:allPiles[index] ,)
+                                    .animate()
+                                    .fadeIn() // uses `Animate.defaultDuration`
+                                    .scale() // inherits duration from fadeIn
+                                    .move(delay: 300.ms, duration: 600.ms),
+                              ),
+                            );
+                          }),
+                    );
+                    }
+                    else if (state is GetFoldersLoadingState) {
+                      return const LoadingWidget();
+                    } else if (state is GetFoldersErrorMessageState) {
+                      return ErrorWidget(state.errorMessage);
+                    } else {
+                      return const EmptyWidget();
+                    }
+                  },
                 ),
                 SizedBox(
                   height: AppSize.defaultSize!,
@@ -185,53 +204,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                     withNavBar: false,
                                     // OPTIONAL VALUE. True by default.
                                     pageTransitionAnimation:
-                                        PageTransitionAnimation.fade,
+                                    PageTransitionAnimation.fade,
                                   );
                                 }),
                             SizedBox(height: AppSize.defaultSize! - 5),
-                            Expanded(
-                              child: ListView.builder(
-                                  itemCount: state.internModel.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: EdgeInsets.all(
-                                          AppSize.defaultSize! * .5),
-                                      child: InkWell(
-                                        onTap: () {
-                                          PersistentNavBarNavigator
-                                              .pushNewScreen(
-                                            context,
-                                            screen: BlogScreen(
-                                              blogArguments:
-                                                  BlogRoutesArguments(
-                                                blog:
-                                                    state.internModel[index],
-                                                blogs: state.internModel,
-                                              ),
-                                            ),
-                                            withNavBar: false,
-                                            // OPTIONAL VALUE. True by default.
-                                            pageTransitionAnimation:
-                                                PageTransitionAnimation.fade,
-                                          );
-                                        },
-                                        child: MiddleCarouselCard(
-                                          text: state.internModel[index].title,
-                                          description:
-                                              state.internModel[index].content,
-                                          image: state.internModel[index].image,
-                                        )
-                                            .animate()
-                                            .fadeIn() // uses `Animate.defaultDuration`
-                                            .scale() // inherits duration from fadeIn
-                                            .move(
-                                                delay: 300.ms,
-                                                duration: 600.ms),
-                                      ),
-                                    );
-                                  }),
-                            ),
+                            // Expanded(
+                            //   child: ListView.builder(
+                            //       itemCount: state.internModel.length,
+                            //       scrollDirection: Axis.horizontal,
+                            //       itemBuilder: (context, index) {
+                            //         return Padding(
+                            //           padding: EdgeInsets.all(
+                            //               AppSize.defaultSize! * .5),
+                            //           child: InkWell(
+                            //             onTap: () {
+                            //               PersistentNavBarNavigator
+                            //                   .pushNewScreen(
+                            //                 context,
+                            //                 screen: BlogScreen(
+                            //                   blogArguments:
+                            //                   BlogRoutesArguments(
+                            //                     blog:
+                            //                     state.internModel[index],
+                            //                     blogs: state.internModel,
+                            //                   ),
+                            //                 ),
+                            //                 withNavBar: false,
+                            //                 // OPTIONAL VALUE. True by default.
+                            //                 pageTransitionAnimation:
+                            //                 PageTransitionAnimation.fade,
+                            //               );
+                            //             },
+                            //             child: MiddleCarouselCard(
+                            //               text: state.internModel[index].title,
+                            //               description:
+                            //               state.internModel[index].content,
+                            //               image: state.internModel[index].image,
+                            //             )
+                            //                 .animate()
+                            //                 .fadeIn() // uses `Animate.defaultDuration`
+                            //                 .scale() // inherits duration from fadeIn
+                            //                 .move(
+                            //                 delay: 300.ms,
+                            //                 duration: 600.ms),
+                            //           ),
+                            //         );
+                            //       }),
+                            // ),
                           ],
                         );
                       } else if (state is GetBlogsLoadingState) {

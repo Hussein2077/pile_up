@@ -1,22 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
+import 'package:pile_up/core/widgets/cached_network_image.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/manager_view.dart';
-import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/my_pile_details_tab_bar.dart';
-import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/reports_view.dart';
-import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/widgets/shared_with_view.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/manager_view.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/my_pile_details_tab_bar.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/reports_view.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/shared_with_view.dart';
+import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 
 class MyPileDetails extends StatefulWidget {
-  const MyPileDetails({super.key});
-
+  const MyPileDetails({super.key, required this.pile});
+  final Pile pile;
   @override
   State<MyPileDetails> createState() => _MyPileDetailsState();
 }
@@ -41,7 +44,7 @@ class _MyPileDetailsState extends State<MyPileDetails>
   Widget build(BuildContext context) {
     return Scaffold(
     backgroundColor: AppColors.backgroundColor,
-      appBar: appBar(context, text: 'Mohamed\'s Birthday', isIcon: true),
+      appBar: appBar(context, text: widget.pile.title??"", isIcon: true),
       body: SingleChildScrollView(
         // physics: const NeverScrollableScrollPhysics(),
         child: Padding(
@@ -73,14 +76,10 @@ class _MyPileDetailsState extends State<MyPileDetails>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(width: AppSize.defaultSize! * 1.6),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              AssetPath.image,
-                              width: AppSize.defaultSize! * 7.2,
-                              height: AppSize.defaultSize! * 7.2,
-                              fit: BoxFit.cover,
-                            ),
+                          CachedNetworkCustom(
+                            url: widget.pile.banner??"",
+                            height: AppSize.defaultSize! * 8.5,
+                            width: AppSize.defaultSize! * 8.5,
                           ),
                           const SizedBox(width: 8),
                           Column(
@@ -96,7 +95,7 @@ class _MyPileDetailsState extends State<MyPileDetails>
                                         AppSize.defaultSize!)),
                                 child: Center(
                                   child: CustomText(
-                                    text: StringManager.active.tr(),
+                                    text: widget.pile.pileStatus,
                                     fontSize: AppSize.defaultSize! * 1.3,
                                   ),
                                 ),
@@ -108,7 +107,7 @@ class _MyPileDetailsState extends State<MyPileDetails>
                                 width: AppSize.defaultSize! * 15,
                                 child: CustomText(
                                   text:
-                                      'it\'s Mohamed\'s birthday, so we should make a birthday for him.',
+                                      widget.pile.description??"",
                                   maxLines: 3,
                                   fontSize: AppSize.defaultSize! * 1.2,
                                   textAlign: TextAlign.left,
@@ -159,7 +158,15 @@ class _MyPileDetailsState extends State<MyPileDetails>
                             height: AppSize.defaultSize! * 3.2,
                             width: AppSize.defaultSize! * 10.4,
                             onTap: () {
-                              Navigator.pushNamed(context, Routes.pilesDetails);
+
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen:   PilesDetails(pile: widget.pile,),
+                                  withNavBar: false,
+                                  pageTransitionAnimation:
+                                  PageTransitionAnimation.fade,
+                                );
+
                             },
                           ),
                           SecondButton(
@@ -200,7 +207,7 @@ class _MyPileDetailsState extends State<MyPileDetails>
                               fontSize: AppSize.defaultSize! * 1.2,
                             ),
                             CustomText(
-                              text: 'EGP 750.00',
+                              text: widget.pile.collectedAmount.toString(),
                               fontSize: AppSize.defaultSize! * 2.2,
                               color: AppColors.green,
                               fontWeight: FontWeight.w700,

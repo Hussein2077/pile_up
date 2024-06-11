@@ -1,19 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/widgets/cached_network_image.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 
 class MyPileCard extends StatefulWidget {
-  const MyPileCard({super.key, this.text, this.description});
+  const MyPileCard({super.key, required this.pile});
 
-  final String? text;
-  final String? description;
+ final  Pile pile;
 
   @override
   State<MyPileCard> createState() => _MyPileCardState();
@@ -25,10 +23,9 @@ class _MyPileCardState extends State<MyPileCard> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(
-          AssetPath.boarding1,
-          height: AppSize.defaultSize! * 7.2,
-          width: AppSize.defaultSize! * 7.2,
+        CachedNetworkCustom(url: widget.pile.banner??"",
+          width: AppSize.defaultSize! * 7,
+          height: AppSize.defaultSize! * 7,
         ),
         SizedBox(
           width: AppSize.defaultSize! * .5,
@@ -41,14 +38,14 @@ class _MyPileCardState extends State<MyPileCard> {
               child: Row(
                 children: [
                   CustomText(
-                    text: widget.text ?? 'Mohamed\'s Birthday',
+                    text: widget.pile.title ,
                     color: Colors.black,
                     textAlign: TextAlign.start,
                     fontSize: AppSize.defaultSize! * 1.4,
                     fontWeight: FontWeight.w700,
                   ),
                   CustomText(
-                    text: '  (Running)',
+                    text: '  (${widget.pile.pileStatus})',
                     color: AppColors.green,
                     textAlign: TextAlign.start,
                     fontSize: AppSize.defaultSize! * 1.2,
@@ -60,14 +57,14 @@ class _MyPileCardState extends State<MyPileCard> {
             SizedBox(
               width: AppSize.screenWidth! * .6,
               child: CustomText(
-                text: widget.description ??
+                text: widget.pile.description ??
                     'it\'s Mohamed\'s birthday, so we should make a birthday for her, it\'s Mohamed\'s birthday.',
                 maxLines: 3,
                 textAlign: TextAlign.start,
                 fontSize: AppSize.defaultSize! * 1.2,
               ),
             ), SizedBox(height: AppSize.defaultSize!*.6,),
-            if (widget.text == null)
+            // if (widget.pile.title == null)
               Row(
                 children: [
                   CustomText(
@@ -77,7 +74,7 @@ class _MyPileCardState extends State<MyPileCard> {
                     fontWeight: FontWeight.w700,
                   ),
                   CustomText(
-                    text: 'EGP 2550',
+                    text: widget.pile.collectedAmount.toString(),
                     color: AppColors.green,
                     fontSize: AppSize.defaultSize! * 1.4,
                     fontWeight: FontWeight.w700,

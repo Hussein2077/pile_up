@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:pile_up/features/my_piles/data/model/folder_model.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 
 @immutable
 abstract class GetFoldersBySearchState extends Equatable {

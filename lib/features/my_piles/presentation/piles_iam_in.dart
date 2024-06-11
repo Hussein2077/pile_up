@@ -10,7 +10,7 @@ import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
-import 'package:pile_up/features/my_piles/presentation/widgets/folder.dart';
+import 'package:pile_up/features/create_pile/presentation/widgets/folder.dart';
 
 class PileIAmIn extends StatefulWidget {
   const PileIAmIn({super.key});
@@ -51,42 +51,7 @@ class _PileIAmInState extends State<PileIAmIn> {
                 size: AppSize.defaultSize!* 3.5,
               ),
             ),
-            SizedBox(
-              height: AppSize.defaultSize! * 1.6,
-            ),
-              FolderWidget(
-              text: 'On Going Piles',
-              showEditIcon: false,
-              onTap: (){
-                PersistentNavBarNavigator.pushNewScreen(
-                  context,
-                  screen: const PilesDetails(),
-                  withNavBar: false,
-                  pageTransitionAnimation:
-                  PageTransitionAnimation.fade,
-                );
-              },
-            ).animate().fade().scale(),
-            SizedBox(
-              height: AppSize.defaultSize! * 1.6,
-            ),
-              FolderWidget(
-              text: 'History',
-              showEditIcon: false,
-              onTap: (){
-                PersistentNavBarNavigator.pushNewScreen(
-                  context,
-                  screen: const PilesDetails(),
-                  withNavBar: false,
-                  pageTransitionAnimation:
-                  PageTransitionAnimation.fade,
-                );
-              },
-            ).animate().fade().scale(),
 
-            SizedBox(
-              height: AppSize.defaultSize! * 6,
-            ),
           ],
         ),
       ),

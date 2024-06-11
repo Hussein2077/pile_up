@@ -5,11 +5,12 @@ import 'package:pile_up/features/auth/presentation/send_otp_code.dart';
 import 'package:pile_up/features/auth/terms_and_conditions/terms_conditions_screen.dart';
 import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/blogs/presentation/blog_screen.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/via_email.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/via_sms.dart';
 import 'package:pile_up/features/home/presentation/components/drawer/address_book_screen.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/main_screen.dart';
-import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/via_email.dart';
-import 'package:pile_up/features/my_piles/presentation/components/my_pile_details/via_sms.dart';
 import 'package:pile_up/features/my_wallet/presentation/screens/my_wallet_Screen.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
 import 'package:pile_up/features/profile/presentation/profile_screen.dart';
@@ -60,9 +61,10 @@ class RouteGenerator {
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
       case Routes.pilesDetails:
+         Pile pile = settings.arguments as Pile;
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-          const PilesDetails(),
+            PilesDetails(pile: pile,),
           transitionsBuilder: customAnimate,
         );
       case Routes.completeData:

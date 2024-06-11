@@ -18,8 +18,10 @@ import 'package:pile_up/features/create_pile/data/data_source/create_pile_remote
 import 'package:pile_up/features/create_pile/data/repo_implementation/create_pile_repo_imp.dart';
 import 'package:pile_up/features/create_pile/domain/repository/create_pile_base_repo.dart';
 import 'package:pile_up/features/create_pile/domain/use_case/create_pile_use_case.dart';
+import 'package:pile_up/features/create_pile/domain/use_case/pile_by_folder_uc.dart';
 import 'package:pile_up/features/create_pile/domain/use_case/user_folder_use_case.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/data/data_source/home_carousel_remote_data_source.dart';
@@ -48,7 +50,6 @@ import 'package:pile_up/features/my_piles/domain/use_case/get_folders_use_case.d
 import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_by_search_uc.dart';
 import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_use_case.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_by_search_controller/folders_by_search_bloc.dart';
-import 'package:pile_up/features/my_piles/presentation/controller/folders_controller/folders_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_search_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_wallet/data/data_source/my_wallet_remote_data_source.dart';
@@ -117,6 +118,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
     getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetTypesUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(() => GetPileFoldersUseCase(baseRepositoryCreatePile: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
