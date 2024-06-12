@@ -8,7 +8,7 @@ import 'package:pile_up/features/create_pile/presentation/create_pile.dart';
 import 'package:pile_up/features/home/presentation/components/drawer/drawer.dart';
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_piles.dart';
-import 'package:pile_up/features/my_piles/presentation/piles_iam_in.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/piles_iam_in.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

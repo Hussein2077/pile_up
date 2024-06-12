@@ -9,4 +9,6 @@ abstract class BaseRepositoryCreatePile {
   Future<Either<List<UserFolder>, Failure>> getUserFolders();
   Future<Either<List<UserFolder>, Failure>> getTypes();
   Future<Either<List<FolderModel>, Failure>> getFolders();
+  Future<Either<List<Pile>, Failure>> getPilesImIn();
+
 }

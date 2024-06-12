@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 import 'package:pile_up/features/my_piles/data/model/piles_im_in.dart';
 
 @immutable
@@ -23,7 +24,7 @@ class GetPilesImInErrorMessageState extends GetPilesImInState{
 }
 
 class GetPilesImInSuccessMessageState extends GetPilesImInState{
-  final List<PileImIn> internModel ;
+  final List<Pile> internModel ;
 
   const GetPilesImInSuccessMessageState({ required this.internModel});
 }

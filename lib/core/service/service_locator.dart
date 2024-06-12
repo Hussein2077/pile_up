@@ -22,6 +22,7 @@ import 'package:pile_up/features/create_pile/domain/use_case/pile_by_folder_uc.d
 import 'package:pile_up/features/create_pile/domain/use_case/user_folder_use_case.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/data/data_source/home_carousel_remote_data_source.dart';
@@ -48,9 +49,8 @@ import 'package:pile_up/features/my_piles/domain/repository/piles_im_in_base_rep
 import 'package:pile_up/features/my_piles/domain/use_case/get_folders_by_search_uc.dart';
 import 'package:pile_up/features/my_piles/domain/use_case/get_folders_use_case.dart';
 import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_by_search_uc.dart';
-import 'package:pile_up/features/my_piles/domain/use_case/piles_im_in_use_case.dart';
+import 'package:pile_up/features/create_pile/domain/use_case/piles_im_in_use_case.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_by_search_controller/folders_by_search_bloc.dart';
-import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_search_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_wallet/data/data_source/my_wallet_remote_data_source.dart';
 import 'package:pile_up/features/my_wallet/data/repo_implementation/blogs_repo_imp.dart';
@@ -112,7 +112,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
     getIt.registerFactory(() => GetFoldersUseCase(baseRepositoryFolders: getIt()));
     getIt.registerFactory(() => GetFoldersBySearchUseCase(baseRepositoryFolders: getIt()));
-    getIt.registerFactory(() => GetPilesImInUseCase(baseRepositoryPilesImIn: getIt()));
+    getIt.registerFactory(() => GetPilesImInUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetPilesImInBySearchUseCase(baseRepositoryPilesImIn: getIt()));
     getIt.registerFactory(() => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
     getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));

@@ -3,6 +3,8 @@ class ConstantApi {
       'https://pileup.hmeitsolutions.com/api/pileup/';
   static const String login = "${baseUrl}login";
   static const String getFolders = "${baseUrl}folder";
+  static const String getPilesImIn = "${baseUrl}user/pilesImIn";
+
 /////////////////////////////////////
   static const String myData = "${baseUrl}my-data";
   static const String verifyCode = "${baseUrl}Auth/validate-otp";
@@ -16,7 +18,6 @@ class ConstantApi {
   static const String getMyWallet = "${baseUrl}MyWallet";
 
   static const String getFoldersBySearch = "${baseUrl}FoldersBySearch";
-  static const String getPilesImIn = "${baseUrl}PilesImIn";
   static const String getPilesImInBySearch = "${baseUrl}PilesImInBySearch";
   static const String getNotifications = "${baseUrl}Notification";
   static const String getCalendar = "${baseUrl}Calendar";

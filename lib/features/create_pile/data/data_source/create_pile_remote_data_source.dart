@@ -15,6 +15,8 @@ abstract class BaseRemotelyDataSourceCreatePile {
 
   Future<List<UserFolder>> getTypes();
   Future<List<FolderModel>> getFolders();
+  Future<List<Pile>> getPilesImIn();
+
 }
 
 class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
@@ -105,6 +107,24 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: "get Folders");
+    }
+  }
+  @override
+  Future<List<Pile>> getPilesImIn() async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getPilesImIn,
+        options: options,
+      );
+      List<Pile> jsonData = List<Pile>.from(
+          (response.data['data'] as List).map((e) => Pile.fromJson(e)));
+      log('$jsonData dddddddddd');
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "get PilesImIn");
     }
   }
 }
