@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
+
+import '../../features/create_pile/presentation/widgets/create_folder.dart';
 
 class ColumnWithTextField extends StatefulWidget {
   const ColumnWithTextField({
     super.key,
     required this.text,
     this.controller,
+    this.text1,
     this.width,
     this.height,
     this.readOnly = false,
@@ -21,10 +24,12 @@ class ColumnWithTextField extends StatefulWidget {
     this.dropDown,
     this.maxLine,
     this.obscureText = false,
-    this.prefixIcon, this.fontSize,
+    this.prefixIcon,
+    this.fontSize,
   });
 
   final String text;
+  final String? text1;
   final String? labelText;
   final String? hintText;
   final double? width;
@@ -58,7 +63,7 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
           children: [
             CustomText(
               text: widget.text,
-              fontSize:widget.fontSize ?? AppSize.defaultSize! * 1.5,
+              fontSize: widget.fontSize ?? AppSize.defaultSize! * 1.5,
             ),
             if (widget.requiredInput)
               CustomText(
@@ -66,6 +71,24 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
                 fontSize: AppSize.defaultSize! * 1.5,
                 color: Colors.red,
               ),
+            const Spacer(),
+            InkWell(
+              onTap: () {
+                PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const CreateFolder(),
+                  withNavBar: false,
+                  pageTransitionAnimation: PageTransitionAnimation.fade,
+                );
+              },              child: Text(
+                widget.text1 ?? '',
+                style: TextStyle(
+                  fontSize: AppSize.defaultSize! * 1.8,
+                  color: Colors.deepOrangeAccent,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
           ],
         ),
         SizedBox(

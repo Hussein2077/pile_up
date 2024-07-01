@@ -117,7 +117,13 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             requiredInput: true,
                             controller: titleController,
                           ),
+
+
+
                           const FoldersDropDown(),
+
+
+
                           const TypesDropDown(),
                           ColumnWithTextField(
                             text: StringManager.totalAmount.tr(),

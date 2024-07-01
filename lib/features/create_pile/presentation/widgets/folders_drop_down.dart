@@ -42,6 +42,8 @@ class _FoldersDropDownState extends State<FoldersDropDown> {
           return ColumnWithTextField(
             text: StringManager.folder.tr(),
             requiredInput: true,
+            text1: 'Create',
+
             dropDown: CustomDropdownButton2(
               hint: 'Select a folder',
               value:FoldersDropDown. folderValue,
@@ -56,6 +58,10 @@ class _FoldersDropDownState extends State<FoldersDropDown> {
             ),
           );
         } else if (state is GetUserFoldersLoadingState) {
+
+
+
+
           return ColumnWithTextField(
             text: StringManager.folder.tr(),
             requiredInput: true,
