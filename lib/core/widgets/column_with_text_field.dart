@@ -3,7 +3,6 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-
 import '../../features/create_pile/presentation/widgets/create_folder.dart';
 
 class ColumnWithTextField extends StatefulWidget {
@@ -51,6 +50,7 @@ class ColumnWithTextField extends StatefulWidget {
 }
 
 class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -72,6 +72,8 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
                 color: Colors.red,
               ),
             const Spacer(),
+
+
             InkWell(
               onTap: () {
                 PersistentNavBarNavigator.pushNewScreen(
@@ -80,13 +82,13 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
                   withNavBar: false,
                   pageTransitionAnimation: PageTransitionAnimation.fade,
                 );
-              },              child: Text(
+              },
+              child: Text(
                 widget.text1 ?? '',
                 style: TextStyle(
-                  fontSize: AppSize.defaultSize! * 1.8,
-                  color: Colors.deepOrangeAccent,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontSize: AppSize.defaultSize! * 1.8,
+                    color: Colors.deepOrangeAccent,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ],

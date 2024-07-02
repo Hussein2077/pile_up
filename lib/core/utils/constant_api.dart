@@ -24,4 +24,5 @@ class ConstantApi {
   static const String getPileManagers = "${baseUrl}PilesManagers";
   //Post
   static const String createPile = "${baseUrl}pile";
+  static const String createFolder = "${baseUrl}folder";
 }

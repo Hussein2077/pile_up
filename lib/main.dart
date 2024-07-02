@@ -31,6 +31,7 @@ import 'package:pile_up/features/my_wallet/presentation/controller/controller/my
 import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
+import 'features/create_pile/presentation/controller/create_folder/create_folder_bloc.dart';
 import 'firebase_options.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -110,6 +111,9 @@ class MyApp extends StatelessWidget {
     AppSize().init(context);
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => getIt<AddFolderBloc>(),
+        ),
         BlocProvider(
           create: (context) => getIt<LoginWithEmailAndPasswordBloc>(),
         ),

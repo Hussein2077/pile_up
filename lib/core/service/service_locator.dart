@@ -68,6 +68,9 @@ import 'package:pile_up/features/vendors/domain/repository/vendor_base_repo.dart
 import 'package:pile_up/features/vendors/domain/use_case/get_vendors_use_case.dart';
 import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
+import '../../features/create_pile/domain/use_case/create_folder_uc.dart';
+import '../../features/create_pile/presentation/controller/create_folder/create_folder_bloc.dart';
+
 final getIt = GetIt.instance;
 
 class ServerLocator {
@@ -81,91 +84,122 @@ class ServerLocator {
     getIt.registerLazySingleton(() => LoginWithEmailAndPasswordBloc(
         loginWithEmailAndPasswordUseCase: getIt()));
 
-
     getIt.registerLazySingleton(() => GetBlogsBloc(getBlogsUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetMerchantsBloc(getMerchantsUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetVendorsBloc(getVendorsUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetHomeCarouselBloc(getHomeCarouselUseCase: getIt()));
-    getIt.registerLazySingleton(() => CreatePileBloc(createPileUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetUserFoldersBloc(getUserFoldersUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetMyProfileBloc(getMyProfileUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetMyWalletBloc(getMyWalletUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetFoldersBloc(getFoldersUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetFoldersBySearchBloc(getFoldersBySearchUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetPilesImInBloc(getPilesImInUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetPilesImInBySearchBloc(getPilesImInBySearchUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetNotificationsBloc(getNotificationsUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetCalendarBloc(getCalendarUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetMerchantsBloc(getMerchantsUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetVendorsBloc(getVendorsUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetHomeCarouselBloc(getHomeCarouselUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => CreatePileBloc(createPileUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetUserFoldersBloc(getUserFoldersUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetMyProfileBloc(getMyProfileUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetMyWalletBloc(getMyWalletUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetFoldersBloc(getFoldersUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetFoldersBySearchBloc(getFoldersBySearchUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetPilesImInBloc(getPilesImInUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetPilesImInBySearchBloc(getPilesImInBySearchUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetNotificationsBloc(getNotificationsUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => GetCalendarBloc(getCalendarUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTypesBloc(getTypesUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => AddFolderBloc(createFolderUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(
         () => LoginWithEmailAndPasswordUseCase(baseRepository: getIt()));
 
-
     getIt.registerFactory(() => GetBlogsUseCase(baseRepositoryBlogs: getIt()));
-    getIt.registerFactory(() => GetMerchantsUseCase(baseRepositoryMerchants: getIt()));
-    getIt.registerFactory(() => GetVendorsUseCase(baseRepositoryVendors: getIt()));
-    getIt.registerFactory(() => GetHomeCarouselUseCase(baseRepositoryHomeCarousel: getIt()));
-    getIt.registerFactory(() => CreatePileUseCase(baseRepositoryCreatePile: getIt()));
-    getIt.registerFactory(() => GetMyProfileUseCase(baseRepositoryMyProfile: getIt()));
-    getIt.registerFactory(() => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
-    getIt.registerFactory(() => GetFoldersUseCase(baseRepositoryFolders: getIt()));
-    getIt.registerFactory(() => GetFoldersBySearchUseCase(baseRepositoryFolders: getIt()));
-    getIt.registerFactory(() => GetPilesImInUseCase(baseRepositoryCreatePile: getIt()));
-    getIt.registerFactory(() => GetPilesImInBySearchUseCase(baseRepositoryPilesImIn: getIt()));
-    getIt.registerFactory(() => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
-    getIt.registerFactory(() => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
-    getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryCreatePile: getIt()));
-    getIt.registerFactory(() => GetTypesUseCase(baseRepositoryCreatePile: getIt()));
-    getIt.registerFactory(() => GetPileFoldersUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(
+        () => GetMerchantsUseCase(baseRepositoryMerchants: getIt()));
+    getIt.registerFactory(
+        () => GetVendorsUseCase(baseRepositoryVendors: getIt()));
+    getIt.registerFactory(
+        () => GetHomeCarouselUseCase(baseRepositoryHomeCarousel: getIt()));
+    getIt.registerFactory(
+        () => CreatePileUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(
+        () => GetMyProfileUseCase(baseRepositoryMyProfile: getIt()));
+    getIt.registerFactory(
+        () => GetMyWalletUseCase(baseRepositoryMyWallet: getIt()));
+    getIt.registerFactory(
+        () => GetFoldersUseCase(baseRepositoryFolders: getIt()));
+    getIt.registerFactory(
+        () => GetFoldersBySearchUseCase(baseRepositoryFolders: getIt()));
+    getIt.registerFactory(
+        () => GetPilesImInUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(
+        () => GetPilesImInBySearchUseCase(baseRepositoryPilesImIn: getIt()));
+    getIt.registerFactory(
+        () => GetNotificationsUseCase(baseRepositoryNotifications: getIt()));
+    getIt.registerFactory(
+        () => GetCalendarUseCase(baseRepositoryCalendar: getIt()));
+    getIt.registerFactory(
+        () => GetUserFoldersUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(
+        () => GetTypesUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(
+        () => GetPileFoldersUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(
+        () => CreateFolderUseCase(baseRepositoryCreateFolder: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceBlogs>(
-            () => BlogsRemotelyDateSource());
+        () => BlogsRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceMerchants>(
-            () => MerchantsRemotelyDateSource());
+        () => MerchantsRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceVendors>(
-            () => VendorsRemotelyDateSource());
+        () => VendorsRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceHomeCarousel>(
-            () => HomeCarouselRemotelyDateSource());
+        () => HomeCarouselRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceCreatePile>(
-            () => CreatePileRemotelyDateSource());
+        () => CreatePileRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceMyProfile>(
-            () => MyProfileRemotelyDateSource());
+        () => MyProfileRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceMyWallet>(
-            () => MyWalletRemotelyDateSource());
+        () => MyWalletRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceFolders>(
-            () => FoldersRemotelyDateSource());
+        () => FoldersRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourcePilesImIn>(
-            () => PilesImInRemotelyDateSource());
+        () => PilesImInRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceNotifications>(
-            () => NotificationsRemotelyDateSource());
+        () => NotificationsRemotelyDateSource());
     getIt.registerLazySingleton<BaseRemotelyDataSourceCalendar>(
-            () => CalendarRemotelyDateSource());
+        () => CalendarRemotelyDateSource());
 
     // Repo Implementation
     getIt.registerLazySingleton<BaseRepositoryBlogs>(
-            () => BlogsRepositoryImp(baseRemotelyDataSourceBlogs: getIt()));
+        () => BlogsRepositoryImp(baseRemotelyDataSourceBlogs: getIt()));
     getIt.registerLazySingleton<BaseRepositoryMerchants>(
-            () => MerchantsRepositoryImp(baseRemotelyDataSourceMerchants: getIt()));
+        () => MerchantsRepositoryImp(baseRemotelyDataSourceMerchants: getIt()));
     getIt.registerLazySingleton<BaseRepositoryVendors>(
-            () => VendorsRepositoryImp(baseRemotelyDataSourceVendors: getIt()));
-    getIt.registerLazySingleton<BaseRepositoryHomeCarousel>(
-            () => HomeCarouselRepositoryImp(baseRemotelyDataSourceHomeCarousel: getIt()));
-    getIt.registerLazySingleton<BaseRepositoryCreatePile>(
-            () => CreatePileRepositoryImp(baseRemotelyDataSourceCreatePile: getIt()));
+        () => VendorsRepositoryImp(baseRemotelyDataSourceVendors: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryHomeCarousel>(() =>
+        HomeCarouselRepositoryImp(baseRemotelyDataSourceHomeCarousel: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryCreatePile>(() =>
+        CreatePileRepositoryImp(baseRemotelyDataSourceCreatePile: getIt()));
     getIt.registerLazySingleton<BaseRepositoryMyProfile>(
-            () => MyProfileRepositoryImp(baseRemotelyDataSourceMyProfile: getIt()));
+        () => MyProfileRepositoryImp(baseRemotelyDataSourceMyProfile: getIt()));
     getIt.registerLazySingleton<BaseRepositoryMyWallet>(
-            () => MyWalletRepositoryImp(baseRemotelyDataSourceMyWallet: getIt()));
+        () => MyWalletRepositoryImp(baseRemotelyDataSourceMyWallet: getIt()));
     getIt.registerLazySingleton<BaseRepositoryFolders>(
-            () => FoldersRepositoryImp(baseRemotelyDataSourceFolders: getIt()));
+        () => FoldersRepositoryImp(baseRemotelyDataSourceFolders: getIt()));
     getIt.registerLazySingleton<BaseRepositoryPilesImIn>(
-            () => PilesImInRepositoryImp(baseRemotelyDataSourcePilesImIn: getIt()));
-    getIt.registerLazySingleton<BaseRepositoryNotifications>(
-            () => NotificationsRepositoryImp(baseRemotelyDataSourceNotifications: getIt()));
+        () => PilesImInRepositoryImp(baseRemotelyDataSourcePilesImIn: getIt()));
+    getIt.registerLazySingleton<BaseRepositoryNotifications>(() =>
+        NotificationsRepositoryImp(
+            baseRemotelyDataSourceNotifications: getIt()));
     getIt.registerLazySingleton<BaseRepositoryCalendar>(
-            () => CalendarRepositoryImp(baseRemotelyDataSourceCalendar: getIt()));
+        () => CalendarRepositoryImp(baseRemotelyDataSourceCalendar: getIt()));
   }
 }

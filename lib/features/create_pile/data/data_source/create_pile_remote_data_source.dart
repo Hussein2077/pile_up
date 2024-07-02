@@ -8,8 +8,11 @@ import 'package:pile_up/features/create_pile/data/model/user_folder_model.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 
+import '../model/create_folder_model.dart';
+
 abstract class BaseRemotelyDataSourceCreatePile {
   Future<Map<String, dynamic>> createPile(CreatePile pile);
+  Future<Map<String, dynamic>> addCreateFolder(CreateFolderModel folder);
 
   Future<List<UserFolder>> getUserFolders();
 
@@ -127,4 +130,25 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
           dioError: e, endpointName: "get PilesImIn");
     }
   }
+
+
+@override
+Future<Map<String, dynamic>> addCreateFolder(CreateFolderModel folder) async {
+  Options options = await DioHelper().options();
+  log(folder.folderName);
+  try {
+    final Response response = await Dio().delete(
+      ConstantApi.createPile,
+      options: options,
+      data: folder.toJson(),
+    );
+    Map<String, dynamic> jsonData = response.data;
+    print(response.data);
+    return jsonData;
+  } on DioException catch (e) {
+    throw DioHelper.handleDioError(
+        dioError: e, endpointName: "Create Folder");
+  }
+}
+
 }

@@ -112,12 +112,12 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             height: AppSize.defaultSize! * 1.6,
                           ),
                           const PileImage(),
+
                           ColumnWithTextField(
                             text: StringManager.title.tr(),
                             requiredInput: true,
                             controller: titleController,
                           ),
-
 
 
                           const FoldersDropDown(),

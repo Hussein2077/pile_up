@@ -19,6 +19,7 @@ class StringManager {
   static const String typeUrMobNum = "Type your Mobile Number to continue";
   static const String fillAllFields = "Fill All Fields";
   static const String enterPhoneNumber = "Please enter your phone number";
+  static const String enterFolderName = "Please enter Folder Name";
   static const String next = "Next";
   static const String back = "Back";
   static const String phone = "Phone Number";
