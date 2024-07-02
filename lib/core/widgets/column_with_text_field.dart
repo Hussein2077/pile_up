@@ -10,7 +10,6 @@ class ColumnWithTextField extends StatefulWidget {
     super.key,
     required this.text,
     this.controller,
-    this.text1,
     this.width,
     this.height,
     this.readOnly = false,
@@ -28,7 +27,6 @@ class ColumnWithTextField extends StatefulWidget {
   });
 
   final String text;
-  final String? text1;
   final String? labelText;
   final String? hintText;
   final double? width;
@@ -50,7 +48,6 @@ class ColumnWithTextField extends StatefulWidget {
 }
 
 class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -71,26 +68,6 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
                 fontSize: AppSize.defaultSize! * 1.5,
                 color: Colors.red,
               ),
-            const Spacer(),
-
-
-            InkWell(
-              onTap: () {
-                PersistentNavBarNavigator.pushNewScreen(
-                  context,
-                  screen: const CreateFolder(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.fade,
-                );
-              },
-              child: Text(
-                widget.text1 ?? '',
-                style: TextStyle(
-                    fontSize: AppSize.defaultSize! * 1.8,
-                    color: Colors.deepOrangeAccent,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
           ],
         ),
         SizedBox(

@@ -54,7 +54,7 @@ class _CreateFolderState extends State<CreateFolder> {
         }
       },
       child: AlertDialog(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: const Text('Create Folder'),
         content: Form(
           child: Column(

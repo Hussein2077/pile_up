@@ -9,17 +9,20 @@ import 'package:http_parser/http_parser.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 
 import '../model/create_folder_model.dart';
+import '../model/create_folder_model.dart';
 
 abstract class BaseRemotelyDataSourceCreatePile {
   Future<Map<String, dynamic>> createPile(CreatePile pile);
+
   Future<Map<String, dynamic>> addCreateFolder(CreateFolderModel folder);
 
   Future<List<UserFolder>> getUserFolders();
 
   Future<List<UserFolder>> getTypes();
-  Future<List<FolderModel>> getFolders();
-  Future<List<Pile>> getPilesImIn();
 
+  Future<List<FolderModel>> getFolders();
+
+  Future<List<Pile>> getPilesImIn();
 }
 
 class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
@@ -95,6 +98,7 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
       throw DioHelper.handleDioError(dioError: e, endpointName: "  getTypes");
     }
   }
+
   @override
   Future<List<FolderModel>> getFolders() async {
     Options options = await DioHelper().options();
@@ -112,6 +116,7 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
       throw DioHelper.handleDioError(dioError: e, endpointName: "get Folders");
     }
   }
+
   @override
   Future<List<Pile>> getPilesImIn() async {
     Options options = await DioHelper().options();
@@ -131,24 +136,27 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
     }
   }
 
+  @override
+  Future<Map<String, dynamic>> addCreateFolder(CreateFolderModel folder) async {
+    Options options = await DioHelper().options();
 
-@override
-Future<Map<String, dynamic>> addCreateFolder(CreateFolderModel folder) async {
-  Options options = await DioHelper().options();
-  log(folder.folderName);
-  try {
-    final Response response = await Dio().delete(
-      ConstantApi.createPile,
-      options: options,
-      data: folder.toJson(),
-    );
-    Map<String, dynamic> jsonData = response.data;
-    print(response.data);
-    return jsonData;
-  } on DioException catch (e) {
-    throw DioHelper.handleDioError(
-        dioError: e, endpointName: "Create Folder");
+    FormData formData = FormData.fromMap({
+      'folder name': folder.folderName,
+    });
+
+    log(folder.folderName);
+    try {
+      final Response response = await Dio().post(
+        ConstantApi.createPile,
+        options: options,
+        data: folder.toJson(),
+      );
+      Map<String, dynamic> jsonData = response.data;
+      print(response.data);
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "Create Folder");
+    }
   }
-}
-
 }

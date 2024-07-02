@@ -1,8 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
-
-import '../../../data/model/create_folder_model.dart';
+import 'package:flutter/cupertino.dart';
 
 @immutable
 abstract class AddFolderState extends Equatable {
@@ -14,18 +11,18 @@ abstract class AddFolderState extends Equatable {
 
 class AddFolderInitial extends AddFolderState {}
 
-class AddFolderLoadingState extends AddFolderState{
+class AddFolderLoadingState extends AddFolderState {
   const AddFolderLoadingState();
 }
 
-class AddFolderErrorMessageState extends AddFolderState{
-  final String errorMessage ;
+class AddFolderErrorMessageState extends AddFolderState {
+  final String errorMessage;
 
   const AddFolderErrorMessageState({required this.errorMessage});
 }
 
-class AddFolderSuccessMessageState extends AddFolderState{
-  final List<CreateFolderModel> folderInternModel ;
+class AddFolderSuccessMessageState extends AddFolderState {
+  final Map<String, dynamic> folderInternModel;
 
-  const AddFolderSuccessMessageState({ required this.folderInternModel});
+  const AddFolderSuccessMessageState({required this.folderInternModel});
 }

@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -13,6 +14,7 @@ import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/core/widgets/snack_bar.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/widgets/create_folder.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/folders_drop_down.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/pile_image.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/toggle_row.dart';
@@ -85,9 +87,8 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
             } else if (state is CreatePileErrorMessageState) {
               EasyLoading.dismiss();
               EasyLoading.showError(state.errorMessage);
-            }
-            else if (state is CreatePileLoadingState) {
-            EasyLoading.show();
+            } else if (state is CreatePileLoadingState) {
+              EasyLoading.show();
             }
           },
           child: Column(
@@ -112,18 +113,38 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             height: AppSize.defaultSize! * 1.6,
                           ),
                           const PileImage(),
-
                           ColumnWithTextField(
                             text: StringManager.title.tr(),
                             requiredInput: true,
                             controller: titleController,
                           ),
-
-
-                          const FoldersDropDown(),
-
-
-
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: 'Folder',
+                                fontSize: AppSize.defaultSize! * 1.5,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  PersistentNavBarNavigator.pushNewScreen(
+                                    context,
+                                    screen: const CreateFolder(),
+                                    withNavBar: false,
+                                    pageTransitionAnimation:
+                                        PageTransitionAnimation.fade,
+                                  );
+                                },
+                                child: Text(
+                                  'Create',
+                                  style: TextStyle(
+                                      fontSize: AppSize.defaultSize! * 1.8,
+                                      color: Colors.deepOrangeAccent,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
                           const TypesDropDown(),
                           ColumnWithTextField(
                             text: StringManager.totalAmount.tr(),
@@ -224,8 +245,8 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
         image: PileImage.imageFile!,
         eventDate: eventDate.toString(),
         deadlineDate: deadlineDate.toString(),
-        totalAmount:amountController.text,
-        participationAmount:participatedAmountController.text,
+        totalAmount: amountController.text,
+        participationAmount: participatedAmountController.text,
         typeId: TypesDropDown.typesValue!.id,
         totalCollectedPublic: totalCollectedPublic,
         showTotalRequired: showTotalReq,

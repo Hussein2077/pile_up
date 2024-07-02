@@ -38,7 +38,7 @@ class CreatePileBloc extends Bloc<BaseCreatePileEvent, CreatePileState> {
         ),
       );
       result.fold(
-          (l) => emit(CreatePileSuccessMessageState(internModel: l)),
+          (l) => emit(CreatePileSuccessMessageState(internModel:  l['massage'])),
           (r) => emit(CreatePileErrorMessageState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });
