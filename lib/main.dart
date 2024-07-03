@@ -160,7 +160,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.main,
+        initialRoute: Routes.onBoarding,
         builder: EasyLoading.init(),
         navigatorKey: navigatorKey,
         theme: ThemeData(
