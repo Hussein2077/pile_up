@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
 import 'package:pile_up/core/utils/constant_api.dart';
-import 'package:pile_up/features/blogs/data/model/blog_model.dart';
 import 'package:pile_up/features/my_wallet/data/models/my_wallet_model.dart';
 
 abstract class BaseRemotelyDataSourceMyWallet {

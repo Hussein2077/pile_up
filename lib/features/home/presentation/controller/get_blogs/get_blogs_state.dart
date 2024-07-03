@@ -1,6 +1,7 @@
-part of 'get_blogs_bloc.dart';
 
-@immutable
+import 'package:equatable/equatable.dart';
+import 'package:pile_up/features/home/data/model/blog_model.dart';
+
 abstract class GetBlogsState extends Equatable {
 const GetBlogsState();
 

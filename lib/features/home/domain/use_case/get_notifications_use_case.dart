@@ -2,15 +2,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:pile_up/core/error/failure.dart';
 import 'package:pile_up/features/home/data/model/notifications_model.dart';
-import 'package:pile_up/features/home/domain/repository/notification_base_repo.dart';
+import 'package:pile_up/features/home/domain/repository/home_carousel_base_repo.dart';
 
 class GetNotificationsUseCase {
-  final BaseRepositoryNotifications baseRepositoryNotifications;
+  final BaseRepositoryHomeCarousel baseRepositoryHomeCarousel;
 
-  GetNotificationsUseCase({required this.baseRepositoryNotifications});
+  GetNotificationsUseCase({required this.baseRepositoryHomeCarousel});
 
-  Future<Either<List<Notification>, Failure>> getNotifications() async {
-    final result = await baseRepositoryNotifications.getNotifications();
+  Future<Either<List<NotificationModel>, Failure>> getNotifications() async {
+    final result = await baseRepositoryHomeCarousel.getNotifications();
 
     return result;
   }

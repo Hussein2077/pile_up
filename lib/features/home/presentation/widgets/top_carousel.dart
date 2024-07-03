@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/empty_widget.dart';
 import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
@@ -57,9 +58,6 @@ class _TopCarouselState extends State<TopCarousel> {
             items: myItems,
           ),
           // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: widget.carouselList.map((e){},
-          // ),
           Container(
             height: AppSize.defaultSize! * 10,
             decoration: BoxDecoration(
@@ -78,40 +76,46 @@ class _TopCarouselState extends State<TopCarousel> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Text(
-                      //   'Shop ',
-                      //   style: TextStyle(
-                      //       fontSize: AppSize.defaultSize! * 2,
-                      //       fontFamily: 'TT Norms Pro Bold.otf',
-                      //       color: Colors.white),
-                      // ),
-                      Text(state.internModel[myCurrentIndex].caption,
-                              style: TextStyle(
+                      Padding(
+                        padding:   EdgeInsets.only(top: AppSize.defaultSize! ),
+                        child: CustomText(
+                     text:     'Shop ',
+
+                              fontSize: AppSize.defaultSize! * 1.5,
+                              fontFamily: 'TT Norms Pro Bold.otf',
+                              color: Colors.white
+                        ),
+                      ),
+                      CustomText(text: 'better, ',
+
                                   fontSize: AppSize.defaultSize! * 3,
                                   fontFamily: 'TT Norms Pro Bold.otf',
                                   color: const Color.fromRGBO(3, 188, 164, 1),
-                                  fontWeight: FontWeight.bold))
+                                  fontWeight: FontWeight.bold)
                           .animate()
                           .fadeIn() // uses `Animate.defaultDuration`
                           .scale() // inherits duration from fadeIn
                           .move(delay: 300.ms, duration: 600.ms),
-                      // Text(
-                      //   'look',
-                      //   style: TextStyle(
-                      //       fontSize: AppSize.defaultSize! * 2,
-                      //       fontFamily: 'TT Norms Pro Bold.otf',
-                      //       color: Colors.white),
-                      // ),
-                      // Text(' good',
-                      //         style: TextStyle(
-                      //             fontSize: AppSize.defaultSize! * 3,
-                      //             fontFamily: 'TT Norms Pro Bold.otf',
-                      //             color: const Color.fromRGBO(3, 188, 164, 1),
-                      //             fontWeight: FontWeight.bold))
-                      //     .animate()
-                      //     .fadeIn() // uses `Animate.defaultDuration`
-                      //     .scale() // inherits duration from fadeIn
-                      //     .move(delay: 300.ms, duration: 600.ms),
+                      Padding(
+                        padding:   EdgeInsets.only(top: AppSize.defaultSize! ),
+                        child: CustomText(
+                          text: 'look',
+
+                              fontSize: AppSize.defaultSize! * 1.5,
+                              fontFamily: 'TT Norms Pro Bold.otf',
+                              color: Colors.white
+                        ),
+                      ),
+                      CustomText(text: ' good',
+
+                                  fontSize: AppSize.defaultSize! * 3,
+                                  fontFamily: 'TT Norms Pro Bold.otf',
+                                  color: const Color.fromRGBO(3, 188, 164, 1),
+                                  fontWeight: FontWeight.bold)
+                          .animate()
+                          .fadeIn() // uses `Animate.defaultDuration`
+                          .scale() // inherits duration from fadeIn
+                          .move(delay: 300.ms, duration: 600.ms),
                     ],
                   ),
                   Row(

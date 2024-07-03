@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/features/profile/data/model/my_profile_model.dart';
 
 class UserRowDrawer extends StatelessWidget {
   const UserRowDrawer({super.key});
@@ -20,21 +21,25 @@ class UserRowDrawer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              width: AppSize.defaultSize! * 3.5,
+              width: AppSize.defaultSize! * 1,
             ),
             CircleAvatar(
               radius: AppSize.defaultSize! * 2,
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.person,
+                size: AppSize.defaultSize! * 3.5,
+              ),
             ),
             SizedBox(
-              width: AppSize.defaultSize! * 2,
+              width: AppSize.defaultSize! * 1,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Mohamed Ahmed',
+                  '${MyProfile.getInstance().firstName} ${MyProfile.getInstance().lastName}',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: AppSize.defaultSize! * 1.4,

@@ -8,9 +8,17 @@ class EditMyProfileUseCase {
 
   EditMyProfileUseCase({required this.baseRepositoryMyProfile});
 
-  Future<Either<Map<String, dynamic>, Failure>> editMyProfile(MyProfile profile) async {
+  Future<Either<String, Failure>> editMyProfile(EditProfileParams profile) async {
     final result = await baseRepositoryMyProfile.editMyProfile(profile);
 
     return result;
   }
+}
+class EditProfileParams {
+  final String firstName;
+  final String lastName;
+  final String email;
+final int reminder;
+  EditProfileParams({ required this.firstName, required this.lastName, required this.email,required this.reminder});
+
 }

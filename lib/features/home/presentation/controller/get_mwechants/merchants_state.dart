@@ -1,6 +1,7 @@
-part of 'merchants_bloc.dart';
 
-@immutable
+import 'package:equatable/equatable.dart';
+import 'package:pile_up/features/home/data/model/merchant_model.dart';
+
 abstract class GetMerchantsState extends Equatable {
   const GetMerchantsState();
 

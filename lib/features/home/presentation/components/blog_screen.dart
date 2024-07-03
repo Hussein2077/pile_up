@@ -7,7 +7,8 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/blog_store_builder.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_event.dart';
 
 class BlogScreen extends StatefulWidget {
   const BlogScreen({super.key, required this.blogArguments});

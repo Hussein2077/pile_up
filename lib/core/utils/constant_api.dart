@@ -4,6 +4,9 @@ class ConstantApi {
   static const String login = "${baseUrl}login";
   static const String getFolders = "${baseUrl}folder";
   static const String getPilesImIn = "${baseUrl}user/pilesImIn";
+  static const String getMyProfile = "${baseUrl}user";
+  static const String updateMyProfile  = "${baseUrl}user/update";
+  static const String getHomeCarousel = "${baseUrl}banners";
 
 /////////////////////////////////////
   static const String myData = "${baseUrl}my-data";
@@ -11,10 +14,8 @@ class ConstantApi {
   static const String getBlogs = "${baseUrl}Blogs";
   static const String getMerchants = "${baseUrl}Merchants";
   static const String getVendors = "${baseUrl}Vendors";
-  static const String getHomeCarousel = "${baseUrl}CarouselSliders";
   static const String getUserFolders = "${baseUrl}folder";
   static const String getType = "${baseUrl}type";
-  static const String getMyProfile = "${baseUrl}MyProfile";
   static const String getMyWallet = "${baseUrl}MyWallet";
 
   static const String getFoldersBySearch = "${baseUrl}FoldersBySearch";

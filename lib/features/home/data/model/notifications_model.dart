@@ -1,14 +1,14 @@
-class Notification {
+class NotificationModel {
   final String text;
   final String image;
 
-  Notification({
+  NotificationModel({
     required this.text,
     required this.image,
   });
 
-  factory Notification.fromJson(Map<String, dynamic> json) {
-    return Notification(
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    return NotificationModel(
       text: json['text'],
       image: json['image'],
     );

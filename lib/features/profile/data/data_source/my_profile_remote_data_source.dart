@@ -4,16 +4,17 @@ import 'package:dio/dio.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
 import 'package:pile_up/core/utils/constant_api.dart';
 import 'package:pile_up/features/profile/data/model/my_profile_model.dart';
+import 'package:pile_up/features/profile/domain/use_case/edit_my_profile_use_case.dart';
 
 abstract class BaseRemotelyDataSourceMyProfile {
-  Future<List<MyProfile>> getMyProfile();
-  Future <Map<String,dynamic>> editMyProfile(MyProfile profile);
+  Future<MyProfile> getMyProfile();
+  Future <String> editMyProfile(EditProfileParams profile);
 }
 
 
 class MyProfileRemotelyDateSource extends BaseRemotelyDataSourceMyProfile {
   @override
-  Future<List<MyProfile>> getMyProfile() async {
+  Future<MyProfile> getMyProfile() async {
     Options options = await DioHelper().options();
 
     try {
@@ -21,9 +22,7 @@ class MyProfileRemotelyDateSource extends BaseRemotelyDataSourceMyProfile {
         ConstantApi.getMyProfile,
         options: options,
       );
-      List<MyProfile>    jsonData = List<MyProfile>.from(
-          (response.data as List).map((e) => MyProfile.fromJson(e)));
-      log('$jsonData dddddddddd');
+      MyProfile jsonData = MyProfile.fromJson(response.data["data"]);
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -31,21 +30,24 @@ class MyProfileRemotelyDateSource extends BaseRemotelyDataSourceMyProfile {
     }
   }
   @override
-  Future <Map<String,dynamic>> editMyProfile(MyProfile profile) async {
+  Future <String> editMyProfile(EditProfileParams profile) async {
     Options options = await DioHelper().options();
-    log('${profile.firstName}');
+   final data={
+     'first_name': profile.firstName,
+     'last_name': profile.lastName,
+     'email': profile.email,
+     'pile_reminder'  : profile.reminder,
+   };
     try {
-      final Response response = await Dio().put(
-        ConstantApi.createPile,
+      final Response response = await Dio().post(
+        ConstantApi.updateMyProfile,
         options: options,
-        data: profile.toJson(),
+        data: data,
       );
-      Map<String, dynamic> jsonData = response.data;
-      print(response.data);
-      return jsonData;
+      return 'Success';
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
-          dioError: e, endpointName: "get CreatePile");
+          dioError: e, endpointName: "edit MyProfile");
     }
   }
 }

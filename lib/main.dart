@@ -14,7 +14,6 @@ import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/translations/translations.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
-import 'package:pile_up/features/blogs/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
@@ -22,14 +21,14 @@ import 'package:pile_up/features/create_pile/presentation/controller/folders_con
 import 'package:pile_up/features/create_pile/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_mwechants/merchants_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_notifications/get_notifications_bloc.dart';
-import 'package:pile_up/features/merchants/presentation/controller/merchants_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_by_search_controller/folders_by_search_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/piles_im_in_search_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/my_wallet/presentation/controller/controller/my_wallet_bloc.dart';
 import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
-import 'package:pile_up/features/vendors/presentation/controller/vendors_bloc.dart';
 
 import 'firebase_options.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -120,9 +119,6 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<GetMerchantsBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetVendorsBloc>(),
-        ),
-        BlocProvider(
           create: (context) => getIt<GetHomeCarouselBloc>(),
         ),
         BlocProvider(
@@ -132,7 +128,7 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<GetUserFoldersBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetMyProfileBloc>(),
+          create: (context) => getIt<GetMyProfileBloc>()..add(GetMyProfileEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<GetMyWalletBloc>(),

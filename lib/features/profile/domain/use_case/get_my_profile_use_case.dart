@@ -8,7 +8,7 @@ class GetMyProfileUseCase {
 
   GetMyProfileUseCase({required this.baseRepositoryMyProfile});
 
-  Future<Either<List<MyProfile>, Failure>> getMyProfile() async {
+  Future<Either<MyProfile ,Failure>> getMyProfile() async {
     final result = await baseRepositoryMyProfile.getMyProfile();
 
     return result;

@@ -21,7 +21,7 @@ class GetNotificationsErrorMessageState extends GetNotificationsState{
 }
 
 class GetNotificationsSuccessMessageState extends GetNotificationsState{
-  final List<Notification> internModel ;
+  final List<NotificationModel> internModel ;
 
   const GetNotificationsSuccessMessageState({ required this.internModel});
 }

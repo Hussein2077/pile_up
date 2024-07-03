@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:pile_up/core/error/failure.dart';
-import 'package:pile_up/features/merchants/data/model/merchant_model.dart';
-import 'package:pile_up/features/merchants/domain/repository/merchant_base_repo.dart';
+import 'package:pile_up/features/home/data/model/merchant_model.dart';
+import 'package:pile_up/features/home/domain/repository/home_carousel_base_repo.dart';
 
 class GetMerchantsUseCase {
-  final BaseRepositoryMerchants baseRepositoryMerchants;
+  final BaseRepositoryHomeCarousel baseRepositoryMerchants;
 
   GetMerchantsUseCase({required this.baseRepositoryMerchants});
 

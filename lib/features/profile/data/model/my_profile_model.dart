@@ -1,39 +1,120 @@
 class MyProfile {
-  final String userId;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String mobileNumber;
-  final String password;
-  final String reminder;
+  int? userId;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? mobileNumber;
+  int? reminder;
+  int? myPiles;
 
-  MyProfile({
+  int? myWallet;
+  int? pilesIAmIn;
+  static MyProfile? _instance;
+
+  MyProfile._internal({
     required this.userId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.mobileNumber,
-    required this.password,
-    required this.reminder,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.mobileNumber,
+    this.reminder,
+    this.myPiles,
+    this.myWallet,
+    this.pilesIAmIn,
   });
 
-  factory MyProfile.fromJson(Map<String, dynamic> json) => MyProfile(
-    userId: json["userId"],
-    firstName: json["firstName"],
-    lastName: json["lastName"],
-    email: json["email"],
-    mobileNumber: json["mobileNumber"],
-    password: json["password"],
-    reminder: json["reminder"],
-  );
+  factory MyProfile({
+    int? userId,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? mobileNumber,
+    int? reminder,
+    int? myPiles,
+    int? myWallet,
+    int? pilesIAmIn,
+  }) {
+    if (_instance == null) {
+      _instance = MyProfile._internal(
+        userId: userId,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        mobileNumber: mobileNumber,
+        reminder: reminder,
+        myPiles: myPiles,
+        myWallet: myWallet,
+        pilesIAmIn: pilesIAmIn,
 
-  Map<String, dynamic> toJson() => {
-    "userId": userId,
-    "firstName": firstName,
-    "lastName": lastName,
-    "email": email,
-    "mobileNumber": mobileNumber,
-    "password": password,
-    'reminder' : reminder,
-  };
+      );
+    } else {
+      _instance?.updateProfile(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        mobileNumber: mobileNumber,
+        reminder: reminder,
+        myPiles: myPiles,
+        myWallet: myWallet,
+        pilesIAmIn: pilesIAmIn,
+      );
+    }
+    return _instance!;
+  }
+
+  void updateProfile({
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? mobileNumber,
+    int? reminder,
+    int? myPiles,
+    int? myWallet,
+    int? pilesIAmIn,
+  }) {
+    this.firstName = firstName ?? this.firstName;
+    this.lastName = lastName ?? this.lastName;
+    this.email = email ?? this.email;
+    this.mobileNumber = mobileNumber ?? this.mobileNumber;
+    this.reminder = reminder ?? this.reminder;
+    this.myPiles = myPiles ?? this.myPiles;
+    this.myWallet = myWallet ?? this.myWallet;
+    this.pilesIAmIn = pilesIAmIn ?? this.pilesIAmIn;
+  }
+
+  void clearObject() {
+    _instance = null;
+  }
+
+  factory MyProfile.fromJson(Map<String, dynamic> json) {
+    if (_instance == null) {
+      _instance = MyProfile._internal(
+        userId: json["id"],
+        firstName: json["first_name"] ?? "",
+        lastName: json["last_name"] ?? "",
+        email: json["email"] ?? "",
+        mobileNumber: json["phone_number"],
+        reminder: json["pile_reminder"] ?? 0,
+        myPiles: json["my_piles"] ?? 0,
+        myWallet: json["my_wallet"] ?? 0,
+        pilesIAmIn: json["piles_i_am_in"] ?? 0,
+      );
+    } else {
+      _instance?.updateProfile(
+        firstName: json["first_name"] ?? "",
+        lastName: json["last_name"] ?? "",
+        email: json["email"] ?? "",
+        mobileNumber: json["phone_number"],
+        reminder: json["pile_reminder"] ?? 0,
+        myPiles: json["my_piles"] ?? 0,
+        myWallet: json["my_wallet"] ?? 0,
+        pilesIAmIn: json["piles_i_am_in"] ?? 0,
+      );
+    }
+    return _instance!;
+  }
+
+  static MyProfile getInstance() {
+    return _instance ?? MyProfile();
+  }
 }

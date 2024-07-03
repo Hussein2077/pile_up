@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
-import 'package:pile_up/features/blogs/data/model/blog_model.dart';
-import 'package:pile_up/features/blogs/domain/use_case/get_blogs_use_case.dart';
+import 'package:pile_up/features/home/domain/use_case/get_blogs_use_case.dart';
+import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_event.dart';
+import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_state.dart';
 
-part 'get_blogs_event.dart';
-part 'get_blogs_state.dart';
+
 
 class GetBlogsBloc extends Bloc<BaseGetBlogsEvent, GetBlogsState> {
   GetBlogsUseCase getBlogsUseCase;
