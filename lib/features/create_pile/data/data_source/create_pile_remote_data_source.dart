@@ -136,18 +136,17 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
     }
   }
 
+
+
   @override
   Future<Map<String, dynamic>> addCreateFolder(CreateFolderModel folder) async {
     Options options = await DioHelper().options();
 
-    FormData formData = FormData.fromMap({
-      'folder name': folder.folderName,
-    });
 
     log(folder.folderName);
     try {
       final Response response = await Dio().post(
-        ConstantApi.createPile,
+        ConstantApi.createFolder,
         options: options,
         data: folder.toJson(),
       );

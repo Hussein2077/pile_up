@@ -10,7 +10,7 @@ class CreateFolderUseCase {
 
   CreateFolderUseCase({required this.baseRepositoryCreateFolder});
 
-  Future<Either<Map<String, dynamic>, Failure>> addCreateFolder( CreateFolderModel folder) async {
+  Future<Either<Map<String, dynamic>, Failure>> addCreateFolder(CreateFolderModel folder) async {
     final result = await baseRepositoryCreateFolder.addCreateFolder(folder);
 
     return result;

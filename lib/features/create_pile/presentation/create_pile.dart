@@ -20,6 +20,12 @@ import 'package:pile_up/features/create_pile/presentation/widgets/pile_image.dar
 import 'package:pile_up/features/create_pile/presentation/widgets/toggle_row.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/type_drop_down.dart';
 
+import '../../../core/resource_manager/routes.dart';
+import '../../../core/widgets/custom_text_field.dart';
+import 'controller/create_folder/create_folder_bloc.dart';
+import 'controller/create_folder/create_folder_event.dart';
+import 'controller/create_folder/create_folder_state.dart';
+
 class CreatePileScreen extends StatefulWidget {
   const CreatePileScreen({super.key});
 
@@ -32,6 +38,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
   late TextEditingController amountController;
   late TextEditingController participatedAmountController;
   late TextEditingController descriptionController;
+  late TextEditingController folderController;
 
   @override
   void initState() {
@@ -39,6 +46,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
     amountController = TextEditingController();
     participatedAmountController = TextEditingController();
     descriptionController = TextEditingController();
+    folderController = TextEditingController();
     super.initState();
   }
 
@@ -48,6 +56,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
     amountController.dispose();
     participatedAmountController.dispose();
     descriptionController.dispose();
+    folderController.dispose();
     super.dispose();
   }
 
@@ -73,24 +82,45 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
             fontWeight: FontWeight.w700,
           )),
       body: SingleChildScrollView(
-        child: BlocListener<CreatePileBloc, CreatePileState>(
-          listener: (context, state) {
-            if (state is CreatePileSuccessMessageState) {
-              EasyLoading.dismiss();
-              EasyLoading.showSuccess('Pile Created Successfully');
-              titleController.text = '';
-              descriptionController.text = '';
-              amountController.text = '';
-              participatedAmountController.text = '';
-              eventDate = DateTime.now();
-              deadlineDate = DateTime.now();
-            } else if (state is CreatePileErrorMessageState) {
-              EasyLoading.dismiss();
-              EasyLoading.showError(state.errorMessage);
-            } else if (state is CreatePileLoadingState) {
-              EasyLoading.show();
-            }
-          },
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<CreatePileBloc, CreatePileState>(
+              listener: (context, state) {
+                if (state is CreatePileSuccessMessageState) {
+                  EasyLoading.dismiss();
+                  EasyLoading.showSuccess('Pile Created Successfully');
+                  titleController.text = '';
+                  descriptionController.text = '';
+                  amountController.text = '';
+                  participatedAmountController.text = '';
+                  eventDate = DateTime.now();
+                  deadlineDate = DateTime.now();
+                } else if (state is CreatePileErrorMessageState) {
+                  EasyLoading.dismiss();
+                  EasyLoading.showError(state.errorMessage);
+                } else if (state is CreatePileLoadingState) {
+                  EasyLoading.show();
+                }
+              },
+            ),
+            BlocListener<AddFolderBloc, AddFolderState>(
+              listener: (context, state) {
+                if (state is AddFolderSuccessMessageState) {
+                  EasyLoading.dismiss();
+                  EasyLoading.showSuccess('Folder Created Successfully');
+                  folderController.text = '';
+                  // Navigator.pushNamed(context, Routes.pilesDetails);
+                } else if (state is AddFolderErrorMessageState) {
+                  EasyLoading.dismiss();
+                  EasyLoading.showError(state.errorMessage);
+                } else if (state is AddFolderLoadingState) {
+                  EasyLoading.show(status: 'loading...');
+                } else {
+                  EasyLoading.dismiss();
+                }
+              },
+            ),
+          ],
           child: Column(
             children: [
               Padding(
@@ -118,6 +148,9 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             requiredInput: true,
                             controller: titleController,
                           ),
+                          SizedBox(
+                            height: AppSize.defaultSize! * 1.6,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -127,13 +160,99 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  PersistentNavBarNavigator.pushNewScreen(
-                                    context,
-                                    screen: const CreateFolder(),
-                                    withNavBar: false,
-                                    pageTransitionAnimation:
-                                        PageTransitionAnimation.fade,
-                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            actionsOverflowAlignment:
+                                                OverflowBarAlignment.start,
+                                            actions: [
+                                              Column(
+                                                children: [
+                                                  SizedBox(
+                                                      height:
+                                                          AppSize.defaultSize! *
+                                                              2),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        'Create Folder',
+                                                        style: TextStyle(
+                                                            fontSize: AppSize
+                                                                    .defaultSize! *
+                                                                2.5,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      InkWell(
+                                                          onTap: () =>
+                                                              Navigator.pop(
+                                                                  context),
+                                                          child: const Icon(
+                                                            Icons.close,
+                                                            color: AppColors
+                                                                .primaryColor,
+                                                          )),
+                                                    ],
+                                                  ),
+                                                  Form(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        ColumnWithTextField(
+                                                          requiredInput: true,
+
+                                                          controller:
+                                                              folderController,
+                                                          text: StringManager
+                                                              .folderName
+                                                              .tr(),
+                                                          hintText:
+                                                              'My Folder 01',
+                                                        ),
+                                                        SizedBox(
+                                                          height: AppSize
+                                                                  .defaultSize! *
+                                                              2,
+                                                        ),
+                                                        MainButton(
+                                                          text: StringManager
+                                                              .create
+                                                              .tr(),
+                                                          onTap: () {
+                                                            if (validation()) {
+                                                              errorSnackBar(
+                                                                  context,
+                                                                  StringManager
+                                                                      .enterFolderName
+                                                                      .tr());
+                                                            } else {
+                                                              BlocProvider.of<
+                                                                          AddFolderBloc>(
+                                                                      context)
+                                                                  .add(
+                                                                      AddFolderEvent(
+                                                                folderName:
+                                                                    folderController.text,
+                                                              ));
+                                                            }
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+
+                                            contentPadding: EdgeInsets.all(
+                                                AppSize.defaultSize! * 2),
+                                            //
+                                          ));
                                 },
                                 child: Text(
                                   'Create',
@@ -256,6 +375,8 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
       ));
     } else if (titleController.text.isEmpty) {
       errorSnackBar(context, StringManager.pleaseEnterTitle.tr());
+    } else if (folderController.text.isEmpty) {
+      errorSnackBar(context, StringManager.pleaseEnterFolder.tr());
     } else if (amountController.text.isEmpty) {
       errorSnackBar(context, StringManager.pleaseEnterTotalAmount.tr());
     } else if (participatedAmountController.text.isEmpty) {

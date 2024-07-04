@@ -82,6 +82,7 @@ class StringManager {
   static const String folder = "Folder";
   static const String type = "Type";
   static const String totalAmount = "Total Amount";
+  static const String folderName = "Folder name";
   static const String participatedAmount = "Participated Amount";
   static const String deadline = "Deadline";
   static const String description = "Description";
@@ -157,6 +158,7 @@ class StringManager {
   static const String thereIsNo = "There is no items";
   static const String continueScreen = "CONTINUE";
   static const String pleaseEnterTitle = "Please Enter Title";
+  static const String pleaseEnterFolder = "Please Enter Folder";
   static const String pleaseEnterTotalAmount = "Please Enter Total Amount";
 
   static const String pleaseEnterParticipatedAmount =
