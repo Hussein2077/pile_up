@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -11,6 +14,8 @@ import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/empty_widget.dart';
 import 'package:pile_up/core/widgets/loading_widget.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_event.dart';
+import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:pile_up/features/home/presentation/components/blog_list_screen.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
@@ -45,14 +50,31 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
   }
+  final _refreshIndicatorKey = GlobalKey<LiquidPullToRefreshState>();
 
+  Future<void> _handleRefresh() async {
+    final Completer<void> completer = Completer<void>();
+    Timer(const Duration(milliseconds: 600), () {
+      completer.complete();
+    });
+
+    return completer.future.then<void>((_) {
+    BlocProvider.of<GetFoldersBloc>(context).add(GetFoldersEvent());
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar(context, leadingOnPressed: () {
         Scaffold.of(context).openDrawer();
       }),
-      body: SingleChildScrollView(
+      body: LiquidPullToRefresh(
+    key: _refreshIndicatorKey,
+    showChildOpacityTransition: false,
+    color: AppColors.primaryColor,
+    onRefresh: _handleRefresh,
+    child: SingleChildScrollView(
         child: Column(
           children: [
             const TopCarousel(),
@@ -93,17 +115,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: EdgeInsets.all(
                                   AppSize.defaultSize! * .5),
                               child: InkWell(
-                                // onTap: () {
-                                //   PersistentNavBarNavigator.pushNewScreen(
-                                //     context,
-                                //     screen:   PilesDetails(pile: Pile(
-                                //
-                                //     ),),
-                                //     withNavBar: false,
-                                //     pageTransitionAnimation:
-                                //         PageTransitionAnimation.fade,
-                                //   );
-                                // },
+                                onTap: () {
+                                  PersistentNavBarNavigator.pushNewScreen(
+                                    context,
+                                    screen:   PilesDetails(pile:allPiles[index],),
+                                    withNavBar: false,
+                                    pageTransitionAnimation:
+                                        PageTransitionAnimation.fade,
+                                  );
+                                },
                                 child:   MiddleCarouselCard(pile:allPiles[index] ,)
                                     .animate()
                                     .fadeIn() // uses `Animate.defaultDuration`
@@ -151,34 +171,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       }),
                   items: myitems2,
                 ),
-                // SizedBox(
-                //   height: AppSize.defaultSize! * 1.5,
-                // ),
-                // viewRow(
-                //     text: StringManager.ourVendors.tr(),
-                //     onTap: () {
-                //       PersistentNavBarNavigator.pushNewScreen(
-                //         context,
-                //         screen: const VendorsScreen(),
-                //         withNavBar: false,
-                //         pageTransitionAnimation: PageTransitionAnimation.fade,
-                //       );
-                //     }),
-                // SizedBox(
-                //   height: AppSize.defaultSize!,
-                // ),
-                // CarouselSlider(
-                //   options: CarouselOptions(
-                //       viewportFraction: .3,
-                //       autoPlay: true,
-                //       height: AppSize.screenHeight! * .17,
-                //       onPageChanged: (index, reason) {
-                //         setState(() {
-                //           myCurrentIndex = index;
-                //         });
-                //       }),
-                //   items: myitems2,
-                // ),
                 SizedBox(
                   height: AppSize.defaultSize! * 1.5,
                 ),
@@ -266,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-      ),
+      )),
     );
   }
 

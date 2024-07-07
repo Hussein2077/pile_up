@@ -32,9 +32,10 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         ConstantApi.login,
         data: body,
       );
-      Map<String, dynamic> jsonData = response.data;
+      log('${response.data}cddddddddddddddddddd');
+      Map<String, dynamic> jsonData = response.data['data'];
 
-      await Methods.instance.saveUserToken(authToken: jsonData['data']['token']);
+      await Methods.instance.saveUserToken(authToken: jsonData['token']);
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

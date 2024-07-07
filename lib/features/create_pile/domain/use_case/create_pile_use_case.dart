@@ -8,7 +8,7 @@ class CreatePileUseCase {
 
   CreatePileUseCase({required this.baseRepositoryCreatePile});
 
-  Future<Either<Map<String, dynamic>, Failure>> createPile(CreatePile pile) async {
+  Future<Either<Map<String, dynamic>, Failure>> createPile(CreateOrUpdatePile pile) async {
     final result = await baseRepositoryCreatePile.createPile(pile);
 
     return result;

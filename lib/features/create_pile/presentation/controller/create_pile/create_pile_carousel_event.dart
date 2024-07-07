@@ -40,3 +40,40 @@ class CreatePileEvent extends BaseCreatePileEvent {
   required  this.allowPayerToLevMsg,
   });
 }
+class EditPileEvent extends BaseCreatePileEvent {
+  final int? folderId;
+  final String? pileName;
+  final String? description;
+  final File? image;
+  final String? eventDate;
+  final String? deadlineDate;
+  final String? totalAmount;
+  final String? participationAmount;
+  final int? typeId;
+  final bool? totalCollectedPublic;
+  final bool? showTotalRequired;
+  final bool? payerListPublic;
+  final bool? exactAmountOrNot;
+  final bool? allowPayerToLevMsg;
+  final int pileId;
+  final String? pileStatus;
+  EditPileEvent({
+    required this.pileId,
+      this.pileStatus,
+     this.folderId,
+    this.pileName,
+    this.description,
+    this.image,
+    this.eventDate,
+    this.deadlineDate,
+    this.totalAmount,
+    this.participationAmount,
+
+    this.typeId,
+    this.totalCollectedPublic,
+    this.showTotalRequired,
+    this.payerListPublic,
+    this.exactAmountOrNot,
+    this.allowPayerToLevMsg,
+  });
+}

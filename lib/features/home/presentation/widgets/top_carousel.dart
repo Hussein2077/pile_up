@@ -10,6 +10,8 @@ import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/empty_widget.dart';
 import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_event.dart';
+import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_state.dart';
 
 class TopCarousel extends StatefulWidget {
   const TopCarousel({super.key});
@@ -23,7 +25,6 @@ class _TopCarouselState extends State<TopCarousel> {
 
   @override
   void initState() {
-    BlocProvider.of<GetHomeCarouselBloc>(context).add(GetHomeCarouseEvent());
     carouselController = CarouselController();
     super.initState();
   }

@@ -7,8 +7,9 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 
 class MyPilesDateRow extends StatefulWidget {
-  const MyPilesDateRow({super.key, required this.dateTitle});
+  const MyPilesDateRow({super.key, required this.dateTitle, required this.dateValue});
   final String dateTitle;
+  final String dateValue;
   @override
   State<MyPilesDateRow> createState() => _MyPilesDateRowState();
 }
@@ -36,7 +37,7 @@ class _MyPilesDateRowState extends State<MyPilesDateRow> {
             fontSize: AppSize.defaultSize! * 1.4,
           ),
           CustomText(
-            text: '1st December 2023',
+            text: widget.dateValue ,
             color: AppColors.black,
             fontSize: AppSize.defaultSize! * 1.6,
             fontWeight: FontWeight.w700,

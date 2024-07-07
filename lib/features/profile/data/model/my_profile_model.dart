@@ -95,9 +95,9 @@ class MyProfile {
         email: json["email"] ?? "",
         mobileNumber: json["phone_number"],
         reminder: json["pile_reminder"] ?? 0,
-        myPiles: json["my_piles"] ?? 0,
+        myPiles: json["piles_count"] ?? 0,
         myWallet: json["my_wallet"] ?? 0,
-        pilesIAmIn: json["piles_i_am_in"] ?? 0,
+        pilesIAmIn: json["piles_im_in_count"] ?? 0,
       );
     } else {
       _instance?.updateProfile(
@@ -106,9 +106,9 @@ class MyProfile {
         email: json["email"] ?? "",
         mobileNumber: json["phone_number"],
         reminder: json["pile_reminder"] ?? 0,
-        myPiles: json["my_piles"] ?? 0,
+        myPiles: json["piles_count"] ?? 0,
         myWallet: json["my_wallet"] ?? 0,
-        pilesIAmIn: json["piles_i_am_in"] ?? 0,
+        pilesIAmIn: json["piles_im_in_count"] ?? 0,
       );
     }
     return _instance!;

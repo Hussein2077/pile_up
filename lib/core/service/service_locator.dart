@@ -1,9 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:pile_up/core/service/navigator_services.dart';
 import 'package:pile_up/features/auth/data/auth_remote_data_source.dart';
 import 'package:pile_up/features/auth/data/repo_imp.dart';
 import 'package:pile_up/features/auth/domain/repo/base_repo.dart';
 import 'package:pile_up/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
+import 'package:pile_up/features/create_pile/domain/use_case/edit_pile_uc.dart';
 
 import 'package:pile_up/features/home/domain/use_case/get_blogs_use_case.dart';
 import 'package:pile_up/features/calendar/data/data_source/calendar_remote_data_source.dart';
@@ -74,7 +76,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetBlogsBloc(getBlogsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMerchantsBloc(getMerchantsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetHomeCarouselBloc(getHomeCarouselUseCase: getIt()));
-    getIt.registerLazySingleton(() => CreatePileBloc(createPileUseCase: getIt()));
+    getIt.registerLazySingleton(() => CreatePileBloc(createPileUseCase: getIt(),editPileUseCase: getIt()));
     getIt.registerLazySingleton(() => GetUserFoldersBloc(getUserFoldersUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyProfileBloc(getMyProfileUseCase: getIt(), editMyProfileUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyWalletBloc(getMyWalletUseCase: getIt()));
@@ -106,6 +108,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetUserFoldersUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetTypesUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetPileFoldersUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(() => EditPileUseCase(baseRepositoryCreatePile: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceHomeCarousel>(
@@ -140,5 +143,7 @@ class ServerLocator {
 
     getIt.registerLazySingleton<BaseRepositoryCalendar>(
             () => CalendarRepositoryImp(baseRemotelyDataSourceCalendar: getIt()));
+    getIt.registerLazySingleton(() => NavigationService());
+
   }
 }

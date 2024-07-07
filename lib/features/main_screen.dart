@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
@@ -9,6 +10,7 @@ import 'package:pile_up/features/home/presentation/components/drawer/drawer.dart
 import 'package:pile_up/features/home/presentation/home_screen.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_piles.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/piles_iam_in.dart';
+import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -93,6 +95,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    BlocProvider.of<GetMyProfileBloc>(context).add(GetMyProfileEvent());
+
     _controller = PersistentTabController(initialIndex: MainScreen.mainIndex);
     super.initState();
   }

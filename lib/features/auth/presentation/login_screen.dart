@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -151,6 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: AppSize.defaultSize! * 1.8,
                   fontWeight: FontWeight.w600,
                   onTap: () {
+                    log('${phoneNumber}vvvvvvvvvvvvvvvvvvvvvvvv');
                     if (phoneNumber.length != 10) {
                       errorSnackBar(
                           context, StringManager.enterPhoneNumber.tr());

@@ -13,8 +13,9 @@ import 'package:pile_up/features/create_pile/presentation/controller/user_folder
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_event.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_state.dart';
 class FoldersDropDown extends StatefulWidget {
-  const FoldersDropDown({super.key});
+  const FoldersDropDown({super.key, this.initialFolderId});
 static  CommonType? folderValue;
+final int ?initialFolderId;
   @override
   State<FoldersDropDown> createState() => _FoldersDropDownState();
 }
@@ -38,7 +39,14 @@ class _FoldersDropDownState extends State<FoldersDropDown> {
               nameEn: e.name,
               id: e.id
           )).toList() ?? [];
+if(widget.initialFolderId!=null){
 
+  for (var element in dropdownItems) {
+    if(element.id == widget.initialFolderId){
+      FoldersDropDown.  folderValue = element;
+    }
+  }
+}
           return ColumnWithTextField(
             text: StringManager.folder.tr(),
             requiredInput: true,

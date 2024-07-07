@@ -14,9 +14,17 @@ class CreatePileRepositoryImp extends BaseRepositoryCreatePile{
   CreatePileRepositoryImp({required this.baseRemotelyDataSourceCreatePile});
 
   @override
-  Future<Either<Map<String, dynamic>, Failure>> createPile(CreatePile pile) async {
+  Future<Either<Map<String, dynamic>, Failure>> createPile(CreateOrUpdatePile pile) async {
     try {
       final result = await baseRemotelyDataSourceCreatePile.createPile(pile);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  } @override
+  Future<Either<Map<String, dynamic>, Failure>> editPile(CreateOrUpdatePile pile) async {
+    try {
+      final result = await baseRemotelyDataSourceCreatePile.editPile(pile);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

@@ -29,7 +29,6 @@ class HomeCarouselRemotelyDateSource extends BaseRemotelyDataSourceHomeCarousel 
       );
       List<HomeCarousel>    jsonData = List<HomeCarousel>.from(
           (response.data["data"] as List).map((e) => HomeCarousel.fromJson(e)));
-      log('$jsonData dddddddddd');
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

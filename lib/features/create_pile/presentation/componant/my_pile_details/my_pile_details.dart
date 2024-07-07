@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -11,6 +12,7 @@ import 'package:pile_up/core/widgets/cached_network_image.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
+import 'package:pile_up/features/create_pile/presentation/componant/edit_pile.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/manager_view.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/my_pile_details_tab_bar.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/reports_view.dart';
@@ -122,10 +124,30 @@ class _MyPileDetailsState extends State<MyPileDetails>
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SvgPicture.asset(
-                                    AssetPath.editIcon,
-                                    height: AppSize.defaultSize! * 1.6,
-                                    width: AppSize.defaultSize! * 1.6,
+                                  InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          // barrierDismissible: false,
+                                          builder: (context) {
+                                            return CupertinoDialogAction(
+                                              // alignment: Alignment.topRight,
+                                              // backgroundColor: Colors.transparent,
+                                              // shape: RoundedRectangleBorder(
+                                              //   borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
+                                              // ),
+                                              child: EditPileScreen(
+                                              pile:   widget.pile,
+                                              ),
+                                            );
+                                          });
+
+                                    },
+                                    child: SvgPicture.asset(
+                                      AssetPath.editIcon,
+                                      height: AppSize.defaultSize! * 1.6,
+                                      width: AppSize.defaultSize! * 1.6,
+                                    ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.symmetric(

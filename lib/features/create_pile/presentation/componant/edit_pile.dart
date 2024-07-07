@@ -1,44 +1,61 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:pile_up/core/resource_manager/asset_path.dart';
-import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
-import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
-import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
-import 'package:pile_up/core/widgets/snack_bar.dart';
+import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_event.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/folders_drop_down.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/pile_image.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/toggle_row.dart';
 import 'package:pile_up/features/create_pile/presentation/widgets/type_drop_down.dart';
 import 'package:pile_up/features/main_screen.dart';
 
-class CreatePileScreen extends StatefulWidget {
-  const CreatePileScreen({super.key});
+class EditPileScreen extends StatefulWidget {
+  const EditPileScreen({super.key, required this.pile});
+
+  final Pile pile;
 
   @override
-  State<CreatePileScreen> createState() => _CreatePileScreenState();
+  State<EditPileScreen> createState() => _EditPileScreenState();
 }
 
-class _CreatePileScreenState extends State<CreatePileScreen> {
+class _EditPileScreenState extends State<EditPileScreen> {
   late TextEditingController titleController;
   late TextEditingController amountController;
   late TextEditingController participatedAmountController;
   late TextEditingController descriptionController;
-
+  late bool totalCollectedPublic ;
+  late bool showTotalReq ;
+  late bool payerListPublic ;
+  late bool editable ;
+  late bool allowMsg ;
   @override
   void initState() {
     titleController = TextEditingController();
     amountController = TextEditingController();
     participatedAmountController = TextEditingController();
     descriptionController = TextEditingController();
+    titleController.text = widget.pile.title;
+    amountController.text = widget.pile.totalAmount.toString();
+    participatedAmountController.text =
+        widget.pile.amountPerParticipant.toString();
+    descriptionController.text = widget.pile.description;
+    eventDate = DateTime.parse(widget.pile.eventDate);
+    deadlineDate = DateTime.parse(widget.pile.deadline);
+    totalCollectedPublic = widget.pile.totalCollectedPublic == 1 ? true : false;
+
+    showTotalReq = widget.pile.totalRequiredPublic == 1 ? true : false;
+    payerListPublic = widget.pile.payerListPublic == 1 ? true : false;
+    editable = widget.pile.amountPerParticipantEditable == 1 ? true : false;
+    allowMsg = widget.pile.messagesAllowed == 1 ? true : false;
+
     super.initState();
   }
 
@@ -53,45 +70,27 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
 
   DateTime eventDate = DateTime.now();
   DateTime deadlineDate = DateTime.now();
-  bool totalCollectedPublic = false;
-  bool showTotalReq = false;
-  bool payerListPublic = false;
-  bool editable = false;
-  bool allowMsg = false;
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: homeAppBar(context,
-          bottom: false,
-          leading: false,
-          widget: CustomText(
-            text: StringManager.createPile.tr(),
-            color: Colors.white,
-            fontSize: AppSize.defaultSize! * 2.4,
-            fontWeight: FontWeight.w700,
-          )),
-      body: SingleChildScrollView(
+    return SizedBox(
+      height: AppSize.screenHeight! * .85,
+      width: AppSize.screenWidth!,
+      child: SingleChildScrollView(
         child: BlocListener<CreatePileBloc, CreatePileState>(
           listener: (context, state) {
-            if (state is CreatePileSuccessMessageState) {
+            if (state is EditPileSuccessMessageState) {
               EasyLoading.dismiss();
-              EasyLoading.showSuccess('Pile Created Successfully');
-              titleController.text = '';
-              descriptionController.text = '';
-              amountController.text = '';
-              participatedAmountController.text = '';
-              eventDate = DateTime.now();
-              deadlineDate = DateTime.now();
+              EasyLoading.showSuccess('Pile Edit Successfully');
+              BlocProvider.of<GetFoldersBloc>(context).add(GetFoldersEvent());
               MainScreen.mainIndex = 1;
               Navigator.pushNamed(context, Routes.main);
-            } else if (state is CreatePileErrorMessageState) {
+            } else if (state is EditPileErrorMessageState) {
               EasyLoading.dismiss();
               EasyLoading.showError(state.errorMessage);
-            }
-            else if (state is CreatePileLoadingState) {
-            EasyLoading.show();
+            } else if (state is EditPileLoadingState) {
+              EasyLoading.show();
             }
           },
           child: Column(
@@ -115,14 +114,20 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                           SizedBox(
                             height: AppSize.defaultSize! * 1.6,
                           ),
-                          const PileImage(),
+                          PileImage(
+                            imagePath: widget.pile.banner,
+                          ),
                           ColumnWithTextField(
                             text: StringManager.title.tr(),
                             requiredInput: true,
                             controller: titleController,
                           ),
-                          const FoldersDropDown(),
-                          const TypesDropDown(),
+                          FoldersDropDown(
+                            initialFolderId: widget.pile.folderId,
+                          ),
+                          TypesDropDown(
+                            initialFolderId: widget.pile.typeId,
+                          ),
                           ColumnWithTextField(
                             text: StringManager.totalAmount.tr(),
                             keyboardType: TextInputType.phone,
@@ -185,7 +190,7 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
                             height: AppSize.defaultSize! * 3.5,
                           ),
                           MainButton(
-                            text: StringManager.create.tr(),
+                            text: StringManager.edit.tr(),
                             onTap: () {
                               validation();
                             },
@@ -210,40 +215,29 @@ class _CreatePileScreenState extends State<CreatePileScreen> {
   }
 
   validation() {
-    if (titleController.text.isNotEmpty &&
-        amountController.text.isNotEmpty &&
-        participatedAmountController.text.isNotEmpty &&
-        descriptionController.text.isNotEmpty &&
-        PileImage.imageFile != null) {
-      BlocProvider.of<CreatePileBloc>(context).add(CreatePileEvent(
-        folderId: FoldersDropDown.folderValue!.id,
-        pileName: titleController.text,
-        description: descriptionController.text,
-        image: PileImage.imageFile!,
-        eventDate: eventDate.toString(),
-        deadlineDate: deadlineDate.toString(),
-        totalAmount:amountController.text,
-        participationAmount:participatedAmountController.text,
-        typeId: TypesDropDown.typesValue!.id,
-        totalCollectedPublic: totalCollectedPublic,
-        showTotalRequired: showTotalReq,
-        payerListPublic: payerListPublic,
-        exactAmountOrNot: editable,
-        allowPayerToLevMsg: allowMsg,
-      ));
-    } else if (titleController.text.isEmpty) {
-      errorSnackBar(context, StringManager.pleaseEnterTitle.tr());
-    } else if (amountController.text.isEmpty) {
-      errorSnackBar(context, StringManager.pleaseEnterTotalAmount.tr());
-    } else if (participatedAmountController.text.isEmpty) {
-      errorSnackBar(context, StringManager.pleaseEnterParticipatedAmount.tr());
-    } else if (descriptionController.text.isEmpty) {
-      errorSnackBar(context, StringManager.pleaseEnterDescription.tr());
-    } else if (titleController.text.isEmpty &&
-        amountController.text.isEmpty &&
-        participatedAmountController.text.isEmpty &&
-        descriptionController.text.isEmpty &&
-        PileImage.imageFile == null) {}
+    BlocProvider.of<CreatePileBloc>(context).add(EditPileEvent(
+      pileId: widget.pile.id,
+      pileStatus: widget.pile.pileStatus,
+      folderId: FoldersDropDown.folderValue?.id,
+      pileName: titleController.text.isEmpty
+          ? widget.pile.title
+          : titleController.text,
+      description: descriptionController.text.isEmpty
+          ? widget.pile.description
+          : descriptionController.text,
+      image: PileImage.imageFile,
+      eventDate: eventDate.toString(),
+      deadlineDate: deadlineDate.toString(),
+      totalAmount: amountController.text,
+      participationAmount: participatedAmountController.text,
+      typeId: TypesDropDown.typesValue?.id,
+      totalCollectedPublic: totalCollectedPublic,
+      showTotalRequired: showTotalReq,
+      payerListPublic: payerListPublic,
+      exactAmountOrNot: editable,
+      allowPayerToLevMsg: allowMsg,
+    ));
+
     return false;
   }
 

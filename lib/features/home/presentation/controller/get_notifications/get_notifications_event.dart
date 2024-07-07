@@ -5,4 +5,3 @@ abstract class BaseGetNotificationsEvent {}
 
 class InitEvent extends BaseGetNotificationsEvent {}
 
-class GetHomeCarouseEvent extends BaseGetNotificationsEvent {}

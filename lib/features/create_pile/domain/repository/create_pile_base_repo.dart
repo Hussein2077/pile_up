@@ -5,7 +5,8 @@ import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 import 'package:pile_up/features/create_pile/data/model/user_folder_model.dart';
 
 abstract class BaseRepositoryCreatePile {
-  Future <Either<Map<String, dynamic>, Failure>> createPile(CreatePile pile);
+  Future <Either<Map<String, dynamic>, Failure>> createPile(CreateOrUpdatePile pile);
+  Future <Either<Map<String, dynamic>, Failure>> editPile(CreateOrUpdatePile pile);
   Future<Either<List<UserFolder>, Failure>> getUserFolders();
   Future<Either<List<UserFolder>, Failure>> getTypes();
   Future<Either<List<FolderModel>, Failure>> getFolders();

@@ -17,8 +17,8 @@ class EditMyProfileUseCase {
 class EditProfileParams {
   final String firstName;
   final String lastName;
-  final String email;
-final int reminder;
+  final String? email;
+final int? reminder;
   EditProfileParams({ required this.firstName, required this.lastName, required this.email,required this.reminder});
 
 }

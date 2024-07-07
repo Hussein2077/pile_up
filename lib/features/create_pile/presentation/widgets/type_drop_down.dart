@@ -12,9 +12,10 @@ import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_state.dart';
 
 class TypesDropDown extends StatefulWidget {
-  const TypesDropDown({super.key});
+  const TypesDropDown({super.key, this.initialFolderId});
 
   static CommonType? typesValue;
+  final int ?initialFolderId;
 
   @override
   State<TypesDropDown> createState() => _TypesDropDownState();
@@ -38,6 +39,14 @@ class _TypesDropDownState extends State<TypesDropDown> {
                   .map((e) => CommonType(nameEn: e.name, id: e.id))
                   .toList() ??
               [];
+          if(widget.initialFolderId!=null){
+
+            for (var element in dropdownItems) {
+              if(element.id == widget.initialFolderId){
+                TypesDropDown.  typesValue = element;
+              }
+            }
+          }
 
           return ColumnWithTextField(
             text: StringManager.type.tr(),
@@ -58,7 +67,7 @@ class _TypesDropDownState extends State<TypesDropDown> {
           );
         } else if (state is GetTypesLoadingState) {
           return ColumnWithTextField(
-            text: StringManager.folder.tr(),
+            text: StringManager.type.tr(),
             requiredInput: true,
             dropDown: CustomDropdownButton2(
               hint: 'Select a folder',

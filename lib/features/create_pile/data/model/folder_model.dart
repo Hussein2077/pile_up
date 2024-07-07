@@ -54,8 +54,8 @@ class Pile extends Equatable {
   final String? banner;
   final int totalAmount;
   final int amountPerParticipant;
-  final DateTime deadline;
-  final DateTime eventDate;
+  final String deadline;
+  final String eventDate;
   final String description;
   final int totalCollectedPublic;
   final int totalRequiredPublic;
@@ -99,8 +99,8 @@ class Pile extends Equatable {
       banner: json['banner'],
       totalAmount: json['total_amount'] ?? 0,
       amountPerParticipant: json['amount_per_participant'] ?? 0,
-      deadline: DateTime.parse(json['deadline'] ?? DateTime.now().toIso8601String()),
-      eventDate: DateTime.parse(json['event_date'] ?? DateTime.now().toIso8601String()),
+      deadline:json['deadline'] ,
+      eventDate: json['event_date'] ,
       description: json['description'] ?? '',
       totalCollectedPublic: json['total_collected_public'] ?? 0,
       totalRequiredPublic: json['total_required_public'] ?? 0,
@@ -124,8 +124,8 @@ class Pile extends Equatable {
       'banner': banner,
       'total_amount': totalAmount,
       'amount_per_participant': amountPerParticipant,
-      'deadline': deadline.toIso8601String(),
-      'event_date': eventDate.toIso8601String(),
+      'deadline': deadline,
+      'event_date': eventDate,
       'description': description,
       'total_collected_public': totalCollectedPublic,
       'total_required_public': totalRequiredPublic,

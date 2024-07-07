@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -5,6 +7,7 @@ import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/widgets/cached_network_image.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
@@ -20,9 +23,13 @@ class PilesDetails extends StatefulWidget {
 
 class _PilesDetailsState extends State<PilesDetails> {
   bool seeMore = false;
-
+@override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+  print(widget.pile.id.toString()+'sss');
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -30,9 +37,8 @@ class _PilesDetailsState extends State<PilesDetails> {
           children: [
             Stack(
               children: [
-                Image.asset(
-                  AssetPath.image,
-                  fit: BoxFit.cover,
+                CachedNetworkCustom(
+                  url: widget.pile.banner??'',
                   width: AppSize.screenWidth,
                   height: AppSize.screenHeight! * .32,
                 ),
@@ -51,7 +57,7 @@ class _PilesDetailsState extends State<PilesDetails> {
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: AppSize.defaultSize!*1.6),
               child: CustomText(
-                text: 'Mohamed\'s Birthday',
+                text: widget.pile.title??'' ,
                 fontSize: AppSize.defaultSize! * 2.4,
                 fontWeight: FontWeight.w700,
                 // color: Colors.white,
@@ -65,8 +71,7 @@ class _PilesDetailsState extends State<PilesDetails> {
                 width: AppSize.screenWidth! * .9,
                 child: CustomText(
                   text:
-                      'it\'s Mohamed\'s birthday, so we should make a birthday for her, it\'s Mohamed\'s birthday. it\'s Mohamed\'s birthday, so we should make a birthday for her, it\'s Mohamed\'s birthday.',
-                  maxLines: 5,
+                  widget.pile.description??'',   maxLines: 5,
                   color: AppColors.blackLow,
                   textAlign: TextAlign.start,
                   fontSize: AppSize.defaultSize! * 1.7,
@@ -80,20 +85,20 @@ class _PilesDetailsState extends State<PilesDetails> {
               child: CircularPercentIndicator(
                 radius: AppSize.defaultSize! * 8,
                 lineWidth: AppSize.defaultSize! * 2,
-                percent: .7,
+                percent: widget.pile.collectedAmount/widget.pile.totalAmount==0?0.008:widget.pile.collectedAmount/widget.pile.totalAmount,
                 backgroundColor: AppColors.black,
-                center: percentColumn(),
+                center: percentColumn(widget.pile.collectedAmount.toString(),widget.pile.totalAmount.toString()),
                 progressColor: AppColors.green,
               ),
             ),
             SizedBox(
               height: AppSize.defaultSize! * 2.4,
             ),
-            const Row(
+              Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MyPilesDateRow(dateTitle: StringManager.eventDate),
-                MyPilesDateRow(dateTitle: StringManager.eventDeadline),
+                MyPilesDateRow(dateTitle: StringManager.eventDate, dateValue: widget.pile.eventDate.substring(0,10),),
+                MyPilesDateRow(dateTitle: StringManager.eventDeadline, dateValue:   widget.pile.deadline  .substring(0,10),),
               ],
             ),
             SizedBox(
@@ -173,12 +178,12 @@ class _PilesDetailsState extends State<PilesDetails> {
     );
   }
 
-  Widget percentColumn() {
+  Widget percentColumn(String collected,total) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomText(
-          text: 'EGP 2550',
+          text: collected,
           color: AppColors.green,
           fontSize: AppSize.defaultSize! * 1.6,
           fontWeight: FontWeight.w700,
@@ -190,7 +195,7 @@ class _PilesDetailsState extends State<PilesDetails> {
           fontWeight: FontWeight.w700,
         ),
         CustomText(
-          text: 'EGP 4000',
+          text: total,
           color: AppColors.black,
           fontSize: AppSize.defaultSize! * 1.6,
           fontWeight: FontWeight.w700,

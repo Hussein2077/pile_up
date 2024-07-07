@@ -10,6 +10,7 @@ import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/snack_bar.dart';
+import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 
 class CompleteDataScreen extends StatefulWidget {
   const CompleteDataScreen({super.key});
@@ -64,132 +65,157 @@ class _CompleteDataScreenState extends State<CompleteDataScreen> {
       //   }
       // },
       // child:
-      Scaffold(
-        appBar: appBar(context, text: StringManager.completeYourData.tr(),isIcon: false,leading: false),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-
-                Row(
+      BlocConsumer<GetMyProfileBloc, GetMyProfileState>(
+        listener: (context, state) {
+          if (state is EditMyProfileSuccessMessageState) {
+            EasyLoading.dismiss();
+         Navigator.pushNamedAndRemoveUntil(context, Routes.main, (route) => false);
+          } else if (state is EditMyProfileErrorMessageState) {
+            EasyLoading.dismiss();
+            errorSnackBar(context, state.errorMessage);
+          } else if (state is EditMyProfileLoadingState) {
+            EasyLoading.show(status: 'loading...');
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            appBar: appBar(context, text: StringManager.completeYourData.tr(),
+                isIcon: false,
+                leading: false),
+            body: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: AppSize.defaultSize! * 2),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ColumnWithTextField(
-                      text: StringManager.firstName.tr(),
-                      controller: firstNameController,
-                      width: AppSize.screenWidth! * .4,
-                      fontSize: AppSize.defaultSize! * 1.6,
+
+                    Row(
+                      children: [
+                        ColumnWithTextField(
+                          text: StringManager.firstName.tr(),
+                          controller: firstNameController,
+                          width: AppSize.screenWidth! * .4,
+                          fontSize: AppSize.defaultSize! * 1.6,
+                        ),
+                        const Spacer(),
+                        ColumnWithTextField(
+                          text: StringManager.secondName.tr(),
+                          controller: lastNameController,
+                          width: AppSize.screenWidth! * .4,
+                          fontSize: AppSize.defaultSize! * 1.6,
+                        ),
+                      ],
                     ),
-                    const Spacer(),
                     ColumnWithTextField(
-                      text: StringManager.secondName.tr(),
-                      controller: lastNameController,
-                      width: AppSize.screenWidth! * .4,
+                      text: StringManager.email.tr(),
+                      controller: emailController,
                       fontSize: AppSize.defaultSize! * 1.6,
+                      keyboardType: TextInputType.emailAddress,
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        color: AppColors.primaryColor,
+                        size: AppSize.defaultSize! * 2,
+                      ),
                     ),
+                    SizedBox(height: AppSize.defaultSize! * 1.5),
+                    // Row(
+                    //   children: [
+                    //     IconButton(
+                    //       onPressed: () {
+                    //         setState(() {
+                    //           selected = !selected;
+                    //         });
+                    //       },
+                    //       icon: Icon(
+                    //         selected
+                    //             ? Icons.check_circle
+                    //             : Icons.check_circle_outline,
+                    //         color: AppColors.primaryColor,
+                    //         size: AppSize.defaultSize! * 2.5,
+                    //       ),
+                    //     ),
+                    //     Text(
+                    //       'I agree to ',
+                    //       style: TextStyle(
+                    //         color: AppColors.borderColor,
+                    //         fontSize: AppSize.defaultSize! * 1.4,
+                    //       ),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () => Navigator.pushNamed(context, Routes.terms),
+                    //       child: Text(
+                    //         'Privacy Policy ',
+                    //         style: TextStyle(
+                    //           decoration: TextDecoration.underline,
+                    //           decorationColor: AppColors.primaryColor,
+                    //           color: AppColors.primaryColor,
+                    //           fontSize: AppSize.defaultSize! * 1.4,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Text(
+                    //       'and ',
+                    //       style: TextStyle(
+                    //         color: AppColors.borderColor,
+                    //         fontSize: AppSize.defaultSize! * 1.4,
+                    //       ),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () => Navigator.pushNamed(context, Routes.terms),
+                    //       child: Text(
+                    //         'Terms of Use.',
+                    //         style: TextStyle(
+                    //           decoration: TextDecoration.underline,
+                    //           decorationColor: AppColors.primaryColor,
+                    //           color: AppColors.primaryColor,
+                    //           fontSize: AppSize.defaultSize! * 1.4,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    SizedBox(height: AppSize.defaultSize! * 1.5),
+                    MainButton(
+                      text: StringManager.completeYourData.tr(),
+                      fontSize: AppSize.defaultSize! * 1.8,
+                      fontWeight: FontWeight.w600,
+                      onTap: () {
+                        if (validation()) {
+                          BlocProvider.of<GetMyProfileBloc>(context)
+                              .add(EditMyProfileEvent(
+                            firstName: firstNameController
+                                .text
+                            ,
+                            lastName: lastNameController
+                                .text,
+                            email:
+                            emailController.text,
+                          ));
+                        } else {
+                          errorSnackBar(
+                              context, StringManager.pleaseCompleteYourData
+                              .tr());
+                        }
+                      },
+                    ),
+
                   ],
                 ),
-                ColumnWithTextField(
-                  text: StringManager.email.tr(),
-                  controller: emailController,
-                  fontSize: AppSize.defaultSize! * 1.6,
-                  keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icon(
-                    Icons.email_outlined,
-                    color: AppColors.primaryColor,
-                    size: AppSize.defaultSize! * 2,
-                  ),
-                ),
-                SizedBox(height: AppSize.defaultSize! * 1.5),
-                // Row(
-                //   children: [
-                //     IconButton(
-                //       onPressed: () {
-                //         setState(() {
-                //           selected = !selected;
-                //         });
-                //       },
-                //       icon: Icon(
-                //         selected
-                //             ? Icons.check_circle
-                //             : Icons.check_circle_outline,
-                //         color: AppColors.primaryColor,
-                //         size: AppSize.defaultSize! * 2.5,
-                //       ),
-                //     ),
-                //     Text(
-                //       'I agree to ',
-                //       style: TextStyle(
-                //         color: AppColors.borderColor,
-                //         fontSize: AppSize.defaultSize! * 1.4,
-                //       ),
-                //     ),
-                //     InkWell(
-                //       onTap: () => Navigator.pushNamed(context, Routes.terms),
-                //       child: Text(
-                //         'Privacy Policy ',
-                //         style: TextStyle(
-                //           decoration: TextDecoration.underline,
-                //           decorationColor: AppColors.primaryColor,
-                //           color: AppColors.primaryColor,
-                //           fontSize: AppSize.defaultSize! * 1.4,
-                //         ),
-                //       ),
-                //     ),
-                //     Text(
-                //       'and ',
-                //       style: TextStyle(
-                //         color: AppColors.borderColor,
-                //         fontSize: AppSize.defaultSize! * 1.4,
-                //       ),
-                //     ),
-                //     InkWell(
-                //       onTap: () => Navigator.pushNamed(context, Routes.terms),
-                //       child: Text(
-                //         'Terms of Use.',
-                //         style: TextStyle(
-                //           decoration: TextDecoration.underline,
-                //           decorationColor: AppColors.primaryColor,
-                //           color: AppColors.primaryColor,
-                //           fontSize: AppSize.defaultSize! * 1.4,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                SizedBox(height: AppSize.defaultSize! * 1.5),
-                MainButton(
-                  text: StringManager.completeYourData.tr(),
-                  fontSize: AppSize.defaultSize! * 1.8,
-                  fontWeight: FontWeight.w600,
-                  onTap: () {
-                    if (validation()) {
-                      Navigator.pushNamed(context, Routes.main);
-                    } else {
-                      errorSnackBar(
-                          context, StringManager.pleaseCompleteYourData.tr());
-                    }
-                  },
-                ),
-
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       );
-
   }
 
 
-
-
   bool validation() {
- if (firstNameController.text == '') {
+    if (firstNameController.text == '') {
       return false;
     } else if (lastNameController.text == '') {
       return false;
-    }  else {
+    } else {
       return true;
     }
   }

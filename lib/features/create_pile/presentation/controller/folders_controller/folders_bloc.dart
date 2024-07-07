@@ -10,7 +10,7 @@ class GetFoldersBloc extends Bloc<BaseGetFoldersEvent, GetFoldersState> {
   GetPileFoldersUseCase getFoldersUseCase;
 
   GetFoldersBloc({required this.getFoldersUseCase}) : super(GetFoldersInitial()) {
-    on<BaseGetFoldersEvent>((event, emit) async {
+    on<GetFoldersEvent>((event, emit) async {
       emit(const GetFoldersLoadingState());
       final result = await getFoldersUseCase.getPileFolders();
       result.fold(

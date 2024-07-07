@@ -1,6 +1,7 @@
-part of 'get_home_carousel_bloc.dart';
 
-@immutable
+import 'package:equatable/equatable.dart';
+import 'package:pile_up/features/home/data/model/home_carousel_model.dart';
+
 abstract class GetHomeCarouselState extends Equatable {
 const GetHomeCarouselState();
 

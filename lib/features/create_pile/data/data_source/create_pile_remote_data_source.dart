@@ -9,7 +9,8 @@ import 'package:http_parser/http_parser.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 
 abstract class BaseRemotelyDataSourceCreatePile {
-  Future<Map<String, dynamic>> createPile(CreatePile pile);
+  Future<Map<String, dynamic>> createPile(CreateOrUpdatePile pile);
+  Future<Map<String, dynamic>> editPile(CreateOrUpdatePile pile);
 
   Future<List<UserFolder>> getUserFolders();
 
@@ -21,23 +22,23 @@ abstract class BaseRemotelyDataSourceCreatePile {
 
 class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
   @override
-  Future<Map<String, dynamic>> createPile(CreatePile pile) async {
+  Future<Map<String, dynamic>> createPile(CreateOrUpdatePile pile) async {
     Options options = await DioHelper().options();
     FormData formData = FormData.fromMap({
       'title': pile.pileName,
-      'banner': await MultipartFile.fromFile(pile.image.path,
-          filename: pile.image.path.split('/').last.toString(),
+      'banner': pile.image == null ? null : await MultipartFile.fromFile(pile.image!.path,
+          filename: pile.image!.path.split('/').last.toString(),
           contentType: MediaType("image", "jpeg")),
       'total_amount': pile.totalAmount.toString(),
       'amount_per_participant': pile.participationAmount.toString(),
-      'deadline': pile.deadlineDate.substring(0, 10),
-      'event_date': pile.eventDate.substring(0, 10),
+      'deadline': pile.deadlineDate!.substring(0, 10),
+      'event_date': pile.eventDate!.substring(0, 10),
       'description': pile.description,
-      'total_collected_public': pile.totalCollectedPublic ? '1' : '0',
-      'total_required_public': pile.showTotalRequired ? '1' : '0',
-      'payer_list_public': pile.payerListPublic ? '1' : '0',
-      'amount_per_participant_editable': pile.exactAmountOrNot ? '1' : '0',
-      'messages_allowed': pile.allowPayerToLevMsg ? '1' : '0',
+      'total_collected_public': pile.totalCollectedPublic! ? '1' : '0',
+      'total_required_public': pile.showTotalRequired! ? '1' : '0',
+      'payer_list_public': pile.payerListPublic! ? '1' : '0',
+      'amount_per_participant_editable': pile.exactAmountOrNot !? '1' : '0',
+      'messages_allowed': pile.allowPayerToLevMsg! ? '1' : '0',
       'folder_id': pile.folderId.toString(),
       'type_id': pile.typeId.toString(),
     });
@@ -53,6 +54,41 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "get CreatePile");
+    }
+  } @override
+  Future<Map<String, dynamic>>  editPile(CreateOrUpdatePile pile) async {
+    Options options = await DioHelper().options();
+    FormData formData = FormData.fromMap({
+      'title': pile.pileName,
+      'banner':pile.image==null ? null : await MultipartFile.fromFile(pile.image!.path,
+          filename: pile.image!.path.split('/').last.toString(),
+          contentType: MediaType("image", "jpeg")),
+      'total_amount': pile.totalAmount.toString(),
+      'amount_per_participant': pile.participationAmount.toString(),
+      'deadline': pile.deadlineDate?.substring(0, 10),
+      'event_date': pile.eventDate?.substring(0, 10),
+      'description': pile.description,
+      'total_collected_public':( pile.totalCollectedPublic??false) ? '1' : '0',
+      'total_required_public': pile.showTotalRequired??false ? '1' : '0',
+      'payer_list_public': pile.payerListPublic??false     ? '1' : '0',
+      'amount_per_participant_editable': pile.exactAmountOrNot??false ? '1' : '0',
+      'messages_allowed': pile.allowPayerToLevMsg??false ? '1' : '0',
+      'folder_id': pile.folderId.toString(),
+      'type_id': pile.typeId.toString(),
+      'pile_status': pile.pileStatus.toString(),
+    });
+    try {
+      final Response response = await Dio().post(
+        ConstantApi.editPile(pile.pileId.toString()),
+        options: options,
+        data: formData,
+      );
+      Map<String, dynamic> jsonData = response.data;
+      print(response.data);
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "get editPile");
     }
   }
 
@@ -101,7 +137,6 @@ class CreatePileRemotelyDateSource extends BaseRemotelyDataSourceCreatePile {
         ConstantApi.getFolders,
         options: options,
       );
-      log('${response.data} nnjnjnjnjnj');
       List<FolderModel> jsonData = List<FolderModel>.from(
           (response.data['data'] as List).map((e) => FolderModel.fromJson(e)));
       return jsonData;

@@ -24,4 +24,18 @@ class CreatePileSuccessMessageState extends CreatePileState{
   final Map<String, dynamic> internModel ;
 
   const CreatePileSuccessMessageState({ required this.internModel});
+}class EditPileLoadingState extends CreatePileState{
+  const EditPileLoadingState();
+}
+
+class EditPileErrorMessageState extends CreatePileState{
+  final String errorMessage ;
+
+  const EditPileErrorMessageState({required this.errorMessage});
+}
+
+class EditPileSuccessMessageState extends CreatePileState{
+  final Map<String, dynamic> edit ;
+
+  const EditPileSuccessMessageState({ required this.edit});
 }

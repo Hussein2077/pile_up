@@ -13,6 +13,7 @@ import 'package:pile_up/core/service/notification_service.dart';
 import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/translations/translations.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/utils/methods.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/calendar/presentation/controller/calendar/calendar_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
@@ -23,6 +24,7 @@ import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_event.dart';
 import 'package:pile_up/features/home/presentation/controller/get_mwechants/merchants_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_notifications/get_notifications_bloc.dart';
 import 'package:pile_up/features/my_piles/presentation/controller/folders_by_search_controller/folders_by_search_bloc.dart';
@@ -51,6 +53,11 @@ void showNotification({required String title, required String body}) {
     ),
   );
 }
+Future<void> _firebaseMessagingCallbackDispatcher(message) async {
+navigateFromNotification(message);
+}
+String? token;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -58,6 +65,8 @@ void main() async {
   );
   await PushNotifications.init();
   await PushNotifications.localNotiInit();
+  token = await Methods.instance.returnUserToken();
+
 // to handle foreground notifications
    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     String payloadData = jsonEncode(message.data);
@@ -82,9 +91,7 @@ void main() async {
     navigateFromNotification(message);
   });
 
-  FirebaseMessaging.onBackgroundMessage((message) async {
-    navigateFromNotification(message);
-  });
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingCallbackDispatcher);
   await ServerLocator().init();
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
@@ -119,7 +126,7 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<GetMerchantsBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetHomeCarouselBloc>(),
+          create: (context) => getIt<GetHomeCarouselBloc>()..add(GetHomeCarouseEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<CreatePileBloc>(),
@@ -128,7 +135,7 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<GetUserFoldersBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetMyProfileBloc>()..add(GetMyProfileEvent()),
+          create: (context) => getIt<GetMyProfileBloc>()
         ),
         BlocProvider(
           create: (context) => getIt<GetMyWalletBloc>(),
@@ -160,7 +167,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.onBoarding,
+        initialRoute:   (token == null || token == 'noToken') ? Routes.onBoarding : Routes.main,
         builder: EasyLoading.init(),
         navigatorKey: navigatorKey,
         theme: ThemeData(

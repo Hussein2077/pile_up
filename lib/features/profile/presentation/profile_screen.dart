@@ -35,7 +35,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<GetMyProfileBloc>(context).add(GetMyProfileEvent());
     emailController = TextEditingController();
     phoneController = TextEditingController();
     firstNameController = TextEditingController();

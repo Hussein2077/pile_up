@@ -23,6 +23,7 @@ class MyProfileRemotelyDateSource extends BaseRemotelyDataSourceMyProfile {
         options: options,
       );
       MyProfile jsonData = MyProfile.fromJson(response.data["data"]);
+      log('${response.data}njjnnjnjn');
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

@@ -5,9 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/widgets/cached_network_image.dart';
 class PileImage extends StatefulWidget {
-  const PileImage({super.key});
+  const PileImage({super.key, this.imagePath, this.isProfile});
   static File? imageFile;
+  final String? imagePath;
+  final bool? isProfile;
   @override
   State<PileImage> createState() => _PileImageState();
 }
@@ -51,7 +54,8 @@ class _PileImageState extends State<PileImage> {
             Border.all(color: AppColors.greyColor4),
             borderRadius: BorderRadius.circular(
                 AppSize.defaultSize!)),
-        child: PileImage.imageFile != null?
+        child:widget.imagePath != null
+            ? CachedNetworkCustom(url: widget.imagePath!): PileImage.imageFile != null?
         Image.file(
           PileImage.imageFile!,
           // width: AppSize.defaultSize! * 10,

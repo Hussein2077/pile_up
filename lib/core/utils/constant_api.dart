@@ -1,12 +1,14 @@
 class ConstantApi {
-  static const String baseUrl =
-      'https://pileup.hmeitsolutions.com/api/pileup/';
+  static const String baseUrl = 'https://pileup.hmeitsolutions.com/api/pileup/';
   static const String login = "${baseUrl}login";
   static const String getFolders = "${baseUrl}folder";
   static const String getPilesImIn = "${baseUrl}user/pilesImIn";
   static const String getMyProfile = "${baseUrl}user";
-  static const String updateMyProfile  = "${baseUrl}user/update";
+  static const String updateMyProfile = "${baseUrl}user/update";
   static const String getHomeCarousel = "${baseUrl}banners";
+  static const String createPile = "${baseUrl}pile";
+
+  static String editPile(String pileId) => "${baseUrl}pile/$pileId";
 
 /////////////////////////////////////
   static const String myData = "${baseUrl}my-data";
@@ -23,6 +25,6 @@ class ConstantApi {
   static const String getNotifications = "${baseUrl}Notification";
   static const String getCalendar = "${baseUrl}Calendar";
   static const String getPileManagers = "${baseUrl}PilesManagers";
-  //Post
-  static const String createPile = "${baseUrl}pile";
+
+
 }

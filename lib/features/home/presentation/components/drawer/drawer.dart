@@ -4,9 +4,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
+import 'package:pile_up/core/service/navigator_services.dart';
+import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/utils/methods.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/features/home/presentation/components/drawer/widgets/user_row.dart';
+import 'package:pile_up/features/profile/data/model/my_profile_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});
@@ -40,7 +45,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               .scale() // inherits duration from fadeIn
               .move(delay: 300.ms, duration: 600.ms),
           textButtonRow(
-                  onPressed: () {}, text: StringManager.myPiles.tr(), egp: '17')
+                  onPressed: () {}, text: StringManager.myPiles.tr(), egp: MyProfile.getInstance().myPiles.toString())
               .animate()
               .fadeIn() // uses `Animate.defaultDuration`
               .scale() // inherits duration from fadeIn
@@ -48,7 +53,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           textButtonRow(
                   onPressed: () {},
                   text: StringManager.pilesIAm.tr(),
-                  egp: '15')
+                  egp: MyProfile.getInstance().pilesIAmIn.toString())
               .animate()
               .fadeIn() // uses `Animate.defaultDuration`
               .scale() // inherits duration from fadeIn
@@ -101,8 +106,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           SizedBox(height: AppSize.defaultSize!*2.4),
           InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, Routes.login);
+            onTap: () async {
+              await Methods.instance.saveUserToken(authToken: null);
+              SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.clear();
+              Navigator.of(getIt<NavigationService>()
+                  .navigatorKey
+                  .currentContext??context)
+                  .pushNamedAndRemoveUntil(
+                  Routes.login, (Route<dynamic> route) => false);
+
             },
             child: Center(
               child: Row(
