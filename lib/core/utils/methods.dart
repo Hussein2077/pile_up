@@ -1,12 +1,7 @@
 import 'dart:convert';
-import 'dart:html';
-import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:app_links/app_links.dart';
-import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
-import 'package:pile_up/core/service/navigator_services.dart';
-import 'package:pile_up/core/service/service_locator.dart';
 import 'package:pile_up/core/utils/constant_api.dart';
 import 'package:pile_up/features/on_boarding/on_boarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';

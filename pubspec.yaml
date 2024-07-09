@@ -46,7 +46,9 @@ dependencies:
   easy_localization: ^3.0.3
   device_preview: ^1.1.0
   file_picker: ^6.1.1
-  persistent_bottom_nav_bar: ^5.0.2
+  persistent_bottom_nav_bar:
+    git:
+      url: https://github.com/HamzaSamirAmmar/PersistentBottomNavBar.git
   dropdown_button2: ^2.3.9
   easy_refresh: ^3.3.4
   flutter_animate: ^4.5.0
