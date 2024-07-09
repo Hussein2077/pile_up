@@ -1,5 +1,6 @@
 class ConstantApi {
   static const String baseUrl = 'https://pileup.hmeitsolutions.com/api/pileup/';
+  static const String dynamicLinkBaseUrl = 'https://pileup.hmeitsolutions.com';
   static const String login = "${baseUrl}login";
   static const String getFolders = "${baseUrl}folder";
   static const String getPilesImIn = "${baseUrl}user/pilesImIn";

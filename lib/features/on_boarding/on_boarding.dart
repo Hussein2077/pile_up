@@ -35,7 +35,7 @@ List onBoardingList = [
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
-
+  static Uri? dynamicLink;
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
@@ -48,6 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     AppSize().init(context);
+
     return Scaffold(
       body: Column(
         children: [

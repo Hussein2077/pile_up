@@ -7,6 +7,7 @@ import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/utils/methods.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/cached_network_image.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
@@ -18,6 +19,7 @@ import 'package:pile_up/features/create_pile/presentation/componant/my_pile_deta
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/reports_view.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/shared_with_view.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MyPileDetails extends StatefulWidget {
   const MyPileDetails({super.key, required this.pile});
@@ -149,14 +151,22 @@ class _MyPileDetailsState extends State<MyPileDetails>
                                       width: AppSize.defaultSize! * 1.6,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: AppSize.defaultSize! * 1.6),
-                                    child:
-                                        SvgPicture.asset(AssetPath.shareIcon,
-                                          height: AppSize.defaultSize! * 1.6,
-                                          width: AppSize.defaultSize! * 1.6,
-                                        ),
+                                  InkWell(
+                                    onTap: (){
+                                      Methods.instance.sharePile(pileId:  widget.pile.id).then((value) {
+                                        Share.share(value);
+                                      });
+
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: AppSize.defaultSize! * 1.6),
+                                      child:
+                                          SvgPicture.asset(AssetPath.shareIcon,
+                                            height: AppSize.defaultSize! * 1.6,
+                                            width: AppSize.defaultSize! * 1.6,
+                                          ),
+                                    ),
                                   ),
                                 ],
                               ),
