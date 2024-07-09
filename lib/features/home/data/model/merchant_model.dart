@@ -18,7 +18,7 @@ class Merchant {
   });
 
   factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
-    merchantId: json["merchantId"],
+    merchantId: json["id"],
     name: json["name"],
     description: json["description"],
     contactInfo: json["contactInfo"],
@@ -28,7 +28,7 @@ class Merchant {
   );
 
   Map<String, dynamic> toJson() => {
-    "merchantId": merchantId,
+    "id": merchantId,
     "name": name,
     "description": description,
     "contactInfo": contactInfo,

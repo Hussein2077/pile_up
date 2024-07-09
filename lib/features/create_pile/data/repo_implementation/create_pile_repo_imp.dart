@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:pile_up/core/error/failure.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
 import 'package:pile_up/features/create_pile/data/data_source/create_pile_remote_data_source.dart';
+import 'package:pile_up/features/create_pile/data/model/Participant.dart';
 import 'package:pile_up/features/create_pile/data/model/create_pile_model.dart';
 import 'package:pile_up/features/create_pile/data/model/folder_model.dart';
 import 'package:pile_up/features/create_pile/data/model/user_folder_model.dart';
@@ -58,6 +59,14 @@ class CreatePileRepositoryImp extends BaseRepositoryCreatePile{
   Future<Either<List<Pile>, Failure>> getPilesImIn() async {
     try {
       final result = await baseRemotelyDataSourceCreatePile.getPilesImIn();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  } @override
+  Future<Either<List<Participant >, Failure>> getParticipants (int pileId) async {
+    try {
+      final result = await baseRemotelyDataSourceCreatePile.getParticipants(pileId);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

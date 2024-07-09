@@ -156,7 +156,6 @@ class _MyPileDetailsState extends State<MyPileDetails>
                                       Methods.instance.sharePile(pileId:  widget.pile.id).then((value) {
                                         Share.share(value);
                                       });
-
                                     },
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(

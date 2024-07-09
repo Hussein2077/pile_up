@@ -6,9 +6,10 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({super.key, this.height, this.width, });
+  const EmptyWidget({super.key, this.height, this.width, this.text, });
   final double? height;
   final double? width;
+  final String? text;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -17,7 +18,7 @@ class EmptyWidget extends StatelessWidget {
         width:width??AppSize.screenWidth!*.7,
         child: Center(
           child:CustomText(
-            text: StringManager.thereIsNo.tr(),
+            text:text?? StringManager.thereIsNo.tr(),
             fontSize: AppSize.defaultSize!*2,
             fontWeight: FontWeight.w700,
             color: AppColors.primaryColor,

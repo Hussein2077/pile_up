@@ -4,6 +4,7 @@ class ConstantApi {
   static const String login = "${baseUrl}login";
   static const String getFolders = "${baseUrl}folder";
   static const String getPilesImIn = "${baseUrl}user/pilesImIn";
+  static   String getParticipants (String pileId) => "${baseUrl}pile/participants/${pileId}";
   static const String getMyProfile = "${baseUrl}user";
   static const String updateMyProfile = "${baseUrl}user/update";
   static const String getHomeCarousel = "${baseUrl}banners";
@@ -15,7 +16,7 @@ class ConstantApi {
   static const String myData = "${baseUrl}my-data";
   static const String verifyCode = "${baseUrl}Auth/validate-otp";
   static const String getBlogs = "${baseUrl}Blogs";
-  static const String getMerchants = "${baseUrl}Merchants";
+  static const String getMerchants = "https://apis.st-lr.com/api/stlr/showMyChannelsMerchants";
   static const String getVendors = "${baseUrl}Vendors";
   static const String getUserFolders = "${baseUrl}folder";
   static const String getType = "${baseUrl}type";

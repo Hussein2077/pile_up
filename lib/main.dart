@@ -19,6 +19,7 @@ import 'package:pile_up/features/calendar/presentation/controller/calendar/calen
 import 'package:pile_up/features/create_pile/presentation/controller/create_pile/create_pile_carousel_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/folders_controller/folders_event.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/getParticipants/piles_im_in_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
@@ -159,6 +160,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetCalendarBloc>(),
+        ), BlocProvider(
+          create: (context) => getIt<GetParticipantBloc>(),
         ),
       ],
       child: MaterialApp(

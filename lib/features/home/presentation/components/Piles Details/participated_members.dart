@@ -4,9 +4,10 @@ import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
+import 'package:pile_up/features/create_pile/data/model/Participant.dart';
 class ParticipatedMembers extends StatelessWidget {
-  const ParticipatedMembers({super.key});
-
+  const ParticipatedMembers({super.key, required this.participant});
+ final  Participant participant;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,19 +17,19 @@ class ParticipatedMembers extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomText(
-            text: 'May Kenawi',
+            text: '${participant.firstName} ${participant.lastName}',
             color: AppColors.black,
             fontSize: AppSize.defaultSize! * 1.6,
             fontWeight: FontWeight.w500,
           ),   CustomText(
-            text: 'May@gmail.com',
+            text: participant.phoneNumber,
             color: AppColors.greyColor,
             fontSize: AppSize.defaultSize! * 1.2,
           ),
         ],
         ),
         CustomText(
-          text: '100.0 EGP',
+          text: '${participant.participatedAmount} EGP',
           color: AppColors.green,
           fontSize: AppSize.defaultSize! * 1.6,
           fontWeight: FontWeight.w700,
