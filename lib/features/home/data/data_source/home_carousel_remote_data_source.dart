@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
 import 'package:pile_up/core/utils/constant_api.dart';
+import 'package:pile_up/features/home/data/model/address_book_model.dart';
 import 'package:pile_up/features/home/data/model/blog_model.dart';
 import 'package:pile_up/features/home/data/model/home_carousel_model.dart';
 import 'package:pile_up/features/home/data/model/merchant_model.dart';
@@ -13,6 +14,7 @@ abstract class BaseRemotelyDataSourceHomeCarousel {
   Future<List<NotificationModel>> getNotifications();
   Future<List<Merchant>> getMerchants();
   Future<List<BlogModel>> getBlogs();
+  Future<List<AddressBookModel >> getAddressBook();
 
 }
 
@@ -87,6 +89,22 @@ class HomeCarouselRemotelyDateSource extends BaseRemotelyDataSourceHomeCarousel 
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "get Blogs");
+    }
+  }  @override
+  Future<List<AddressBookModel >> getAddressBook () async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getAddressBook,
+        options: options,
+      );
+      List<AddressBookModel>    jsonData = List<AddressBookModel>.from(
+          (response.data["data"] as List).map((e) => AddressBookModel.fromJson(e)));
+       return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "get getAddressBook");
     }
   }
 }

@@ -1,12 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
+import 'package:pile_up/core/widgets/empty_widget.dart';
+import 'package:pile_up/core/widgets/loading_widget.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/getParticipants/piles_im_in_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/getParticipants/piles_im_in_state.dart';
 
 class ReportsView extends StatefulWidget {
   const ReportsView({super.key});
@@ -36,21 +41,44 @@ class _ReportsViewState extends State<ReportsView> {
             height: AppSize.defaultSize!,
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: 20,
-                // physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      reportsRow(
-                          text: 'May Kenawi',
-                          text2: 'may@example.com',
-                          text3: '23/08/2023'),
-                      if (index != 19) const Divider(),
-                    ],
-                  );
-                }),
+            child: BlocBuilder<GetParticipantBloc, GetParticipantState>(
+              builder: (context, state) {
+                if (state is GetParticipantLoadingState) {
+                  return const LoadingWidget();
+                }
+                if (state is GetParticipantSuccessMessageState) {
+                  if (state.internModel.isNotEmpty) {
+                    return ListView.builder(
+                        itemCount: state.internModel.length,
+                        // physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              reportsRow(
+                                  text:
+                                      '${state.internModel[index].firstName} ${state.internModel[index].lastName}',
+                                  text2: state.internModel[index].phoneNumber,
+                                  text3:
+                                      '${state.internModel[index].date.year}-${state.internModel[index].date.month}-${state.internModel[index].date.day}'),
+                              if (index != state.internModel.length - 1)
+                                const Divider(),
+                            ],
+                          );
+                        });
+                  } else {
+                    return const EmptyWidget(
+                      text: 'No Participated Members',
+                    );
+                  }
+                }
+                if (state is GetParticipantErrorMessageState) {
+                  return ErrorWidget(state.errorMessage);
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
           )
         ],
       ),
@@ -146,8 +174,7 @@ class PaymentDetailsDialog extends StatelessWidget {
           left: AppSize.defaultSize! * 1.6,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius:
-          BorderRadius.circular(AppSize.defaultSize! * 2),
+          borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
         ),
         child: Container(
           height: AppSize.screenHeight! * .48,
@@ -185,7 +212,8 @@ class PaymentDetailsDialog extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Name',
+                          Text(
+                            'Name',
                             style: TextStyle(
                               fontSize: AppSize.defaultSize! * 1.6,
                               fontWeight: FontWeight.w400,
@@ -201,13 +229,15 @@ class PaymentDetailsDialog extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
+                        padding:
+                            EdgeInsets.only(top: AppSize.defaultSize! * 1.6),
                         child: const Divider(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Email',
+                          Text(
+                            'Email',
                             style: TextStyle(
                               fontSize: AppSize.defaultSize! * 1.6,
                               fontWeight: FontWeight.w400,
@@ -223,13 +253,15 @@ class PaymentDetailsDialog extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
+                        padding:
+                            EdgeInsets.only(top: AppSize.defaultSize! * 1.6),
                         child: const Divider(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Date',
+                          Text(
+                            'Date',
                             style: TextStyle(
                               fontSize: AppSize.defaultSize! * 1.6,
                               fontWeight: FontWeight.w400,
@@ -245,13 +277,15 @@ class PaymentDetailsDialog extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
+                        padding:
+                            EdgeInsets.only(top: AppSize.defaultSize! * 1.6),
                         child: const Divider(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Amount',
+                          Text(
+                            'Amount',
                             style: TextStyle(
                               fontSize: AppSize.defaultSize! * 1.6,
                               fontWeight: FontWeight.w400,
@@ -267,13 +301,15 @@ class PaymentDetailsDialog extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
+                        padding:
+                            EdgeInsets.only(top: AppSize.defaultSize! * 1.6),
                         child: const Divider(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Method',
+                          Text(
+                            'Method',
                             style: TextStyle(
                               fontSize: AppSize.defaultSize! * 1.6,
                               fontWeight: FontWeight.w400,
@@ -289,13 +325,15 @@ class PaymentDetailsDialog extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
+                        padding:
+                            EdgeInsets.only(top: AppSize.defaultSize! * 1.6),
                         child: const Divider(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Status',
+                          Text(
+                            'Status',
                             style: TextStyle(
                               fontSize: AppSize.defaultSize! * 1.6,
                               fontWeight: FontWeight.w400,

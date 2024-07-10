@@ -8,6 +8,7 @@ import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_w
 import 'package:pile_up/features/create_pile/domain/use_case/edit_pile_uc.dart';
 import 'package:pile_up/features/create_pile/domain/use_case/getParticipants_uc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/getParticipants/piles_im_in_bloc.dart';
+import 'package:pile_up/features/home/domain/use_case/get_address_book_uc.dart';
 
 import 'package:pile_up/features/home/domain/use_case/get_blogs_use_case.dart';
 import 'package:pile_up/features/calendar/data/data_source/calendar_remote_data_source.dart';
@@ -30,6 +31,7 @@ import 'package:pile_up/features/home/data/data_source/home_carousel_remote_data
 import 'package:pile_up/features/home/data/repo_implementation/home_carousel_repo_imp.dart';
 import 'package:pile_up/features/home/domain/repository/home_carousel_base_repo.dart';
 import 'package:pile_up/features/home/domain/use_case/get_home_carousel_use_case.dart';
+import 'package:pile_up/features/home/presentation/controller/get_address_bloc/get_address_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_mwechants/merchants_bloc.dart';
@@ -90,6 +92,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetCalendarBloc(getCalendarUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTypesBloc(getTypesUseCase: getIt()));
     getIt.registerLazySingleton(() => GetParticipantBloc(getParticipantUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetAddressBookBloc( getAddressBookUseCase: getIt()));
 
 //use_case
     getIt.registerFactory(
@@ -113,6 +116,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetPileFoldersUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => EditPileUseCase(baseRepositoryCreatePile: getIt()));
     getIt.registerFactory(() => GetParticipantUseCase(baseRepositoryCreatePile: getIt()));
+    getIt.registerFactory(() => GetAddressBookUseCase(baseRepositoryAddressBook: getIt()));
 
     //remote data source
     getIt.registerLazySingleton<BaseRemotelyDataSourceHomeCarousel>(

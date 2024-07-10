@@ -23,6 +23,7 @@ import 'package:pile_up/features/create_pile/presentation/controller/getParticip
 import 'package:pile_up/features/create_pile/presentation/controller/piles_im_in_controller/piles_im_in_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/types_bloc/types_bloc.dart';
 import 'package:pile_up/features/create_pile/presentation/controller/user_folders/user_folders_bloc.dart';
+import 'package:pile_up/features/home/presentation/controller/get_address_bloc/get_address_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_blogs/get_blogs_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_bloc.dart';
 import 'package:pile_up/features/home/presentation/controller/get_home_carousel/get_home_carousel_event.dart';
@@ -34,8 +35,8 @@ import 'package:pile_up/features/my_wallet/presentation/controller/controller/my
 import 'package:pile_up/features/profile/presentation/controller/my_profile_bloc.dart';
 
 import 'firebase_options.dart';
-final navigatorKey = GlobalKey<NavigatorState>();
 
+final navigatorKey = GlobalKey<NavigatorState>();
 
 // to handle notification on foreground on web platform
 void showNotification({required String title, required String body}) {
@@ -54,9 +55,11 @@ void showNotification({required String title, required String body}) {
     ),
   );
 }
+
 Future<void> _firebaseMessagingCallbackDispatcher(message) async {
-navigateFromNotification(message);
+  navigateFromNotification(message);
 }
+
 String? token;
 
 void main() async {
@@ -69,20 +72,19 @@ void main() async {
   token = await Methods.instance.returnUserToken();
 
 // to handle foreground notifications
-   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     String payloadData = jsonEncode(message.data);
     if (message.notification != null) {
-        PushNotifications.showSimpleNotification(
-            title: message.notification!.title!,
-            body: message.notification!.body!,
-            payload: payloadData);
-      }
-
+      PushNotifications.showSimpleNotification(
+          title: message.notification!.title!,
+          body: message.notification!.body!,
+          payload: payloadData);
+    }
   });
 
   // for handling in terminated state
   final RemoteMessage? message =
-  await FirebaseMessaging.instance.getInitialMessage();
+      await FirebaseMessaging.instance.getInitialMessage();
   if (message != null) {
     log("herrrrreeeeeeeeeeee");
     navigateFromNotification(message);
@@ -105,7 +107,6 @@ void main() async {
       path: 'lib/core/translations/',
       saveLocale: true,
       child: const MyApp()));
-
 }
 
 class MyApp extends StatelessWidget {
@@ -127,7 +128,8 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<GetMerchantsBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetHomeCarouselBloc>()..add(GetHomeCarouseEvent()),
+          create: (context) =>
+              getIt<GetHomeCarouselBloc>()..add(GetHomeCarouseEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<CreatePileBloc>(),
@@ -135,15 +137,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<GetUserFoldersBloc>(),
         ),
-        BlocProvider(
-          create: (context) => getIt<GetMyProfileBloc>()
-        ),
+        BlocProvider(create: (context) => getIt<GetMyProfileBloc>()),
         BlocProvider(
           create: (context) => getIt<GetMyWalletBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt<GetFoldersBloc>()..add(GetFoldersEvent()),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<GetTypesBloc>(),
         ),
         BlocProvider(
@@ -160,8 +161,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GetCalendarBloc>(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<GetParticipantBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetAddressBookBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -170,15 +175,18 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute:   (token == null || token == 'noToken') ? Routes.onBoarding : Routes.main,
+        initialRoute: (token == null || token == 'noToken')
+            ? Routes.onBoarding
+            : Routes.main,
         builder: EasyLoading.init(),
         navigatorKey: navigatorKey,
         theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor:AppColors.green,primaryContainer: Colors.white),
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: AppColors.green, primaryContainer: Colors.white),
             cardColor: Colors.white,
             useMaterial3: true,
             // primaryColor: Colors.white,
-            scaffoldBackgroundColor:AppColors.scaffoldBackground),
+            scaffoldBackgroundColor: AppColors.scaffoldBackground),
       ),
     );
   }

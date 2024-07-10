@@ -26,10 +26,10 @@ class _MyPileDetailsTabBarState extends State<MyPileDetailsTabBar> {
         ),
         padding: EdgeInsets.only(top: AppSize.defaultSize!*1.6),
         tabs: [
-          Padding(
-            padding:   EdgeInsets.only(bottom: AppSize.defaultSize!*.5),
-            child: Text(StringManager.manager.tr()),
-          ),
+          // Padding(
+          //   padding:   EdgeInsets.only(bottom: AppSize.defaultSize!*.5),
+          //   child: Text(StringManager.manager.tr()),
+          // ),
           Padding(
             padding:   EdgeInsets.only(bottom: AppSize.defaultSize!*.5),
             child: Text(StringManager.reports.tr()),

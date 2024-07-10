@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
@@ -18,6 +19,8 @@ import 'package:pile_up/features/create_pile/presentation/componant/my_pile_deta
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/my_pile_details_tab_bar.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/reports_view.dart';
 import 'package:pile_up/features/create_pile/presentation/componant/my_pile_details/widgets/shared_with_view.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/getParticipants/piles_im_in_bloc.dart';
+import 'package:pile_up/features/create_pile/presentation/controller/getParticipants/piles_im_in_event.dart';
 import 'package:pile_up/features/home/presentation/components/Piles%20Details/piles_details.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -35,6 +38,8 @@ class _MyPileDetailsState extends State<MyPileDetails>
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
+    BlocProvider.of< GetParticipantBloc>(context).add(GetParticipantEvent(widget.pile.id));
+
     super.initState();
   }
 
@@ -301,8 +306,8 @@ class _MyPileDetailsState extends State<MyPileDetails>
                   borderRadius: BorderRadius.circular(AppSize.defaultSize!),
                 ),
                 child: DefaultTabController(
-                  initialIndex: 1,
-                  length: 3,
+                  initialIndex: 0,
+                  length: 2,
                   child: Column(
                     // mainAxisSize: MainAxisSize.max,
                     children: [
@@ -315,7 +320,7 @@ class _MyPileDetailsState extends State<MyPileDetails>
                         child: TabBarView(
                             controller: tabController,
                             children: const [
-                              ManagerView(),
+                              // ManagerView(),
                               ReportsView(),
                               SharedWithView(),
                             ]),

@@ -9,6 +9,7 @@ class ConstantApi {
   static const String updateMyProfile = "${baseUrl}user/update";
   static const String getHomeCarousel = "${baseUrl}banners";
   static const String createPile = "${baseUrl}pile";
+  static const String getAddressBook = "${baseUrl}contact";
 
   static String editPile(String pileId) => "${baseUrl}pile/$pileId";
 

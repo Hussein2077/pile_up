@@ -34,7 +34,6 @@ class _PilesDetailsState extends State<PilesDetails> {
 
   @override
   void initState() {
-    BlocProvider.of< GetParticipantBloc>(context).add(GetParticipantEvent(widget.pile.id));
     super.initState();
   }
 
